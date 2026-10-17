@@ -23,10 +23,10 @@ Imagina que contratas a un **ayudante** que hace tres cosas por ti:
 | Cuándo | Qué hace el sistema solo | Qué haces tú |
 |---|---|---|
 | **Cada día a las 07:00** | Lee la prensa, descarta lo que no sirve, apunta los casos nuevos en la hoja. | Nada. |
-| **Cada lunes a las 08:00** | Prepara el informe y los 5 borradores y te los envía por Telegram. | **Leer el mensaje y revisar los borradores** (unos 10 minutos). |
+| **Cada lunes a las 07:30** | Prepara el informe y los 5 borradores y te los envía por Telegram. | **Leer el mensaje y revisar los borradores** (unos 10 minutos). |
 | **Siempre** | Guarda un registro de cada ejecución. | Mirarlo solo si algo parece raro. |
 
-> **Condición:** para que todo esto ocurra, **el ordenador tiene que estar encendido** y el programa **Docker Desktop abierto**. Si el ordenador está apagado a las 07:00, ese día no se lee la prensa (no se pierde nada: al día siguiente se recupera lo atrasado).
+> **Condición:** para que todo esto ocurra, **el ordenador tiene que estar encendido** (o en suspensión con el despertador programado, ver [instalación](instalacion.md#mantener-el-pc-despierto-a-la-hora-de-los-workflows)), con la **sesión de Windows iniciada** (puede estar bloqueada) y **Docker Desktop abierto**. Si a las 07:00 el ordenador no está activo, ese día no se lee la prensa (no se pierde nada: al día siguiente se recupera lo atrasado), pero **el informe del lunes no se recupera**.
 
 ---
 

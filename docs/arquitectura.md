@@ -7,7 +7,7 @@
 | Workflow | Cuándo | Qué hace |
 |---|---|---|
 | [`01_ingesta_diaria`](../workflows/01_ingesta_diaria.json) | Todos los días, 07:00 | Lee los feeds RSS → filtra por fecha y palabras clave → deduplica → descarga el artículo → **IA de extracción** → **IA de clasificación y puntuación** → guarda en la hoja `casos` → registra la ejecución en `log_ejecuciones`. |
-| [`02_informe_semanal`](../workflows/02_informe_semanal.json) | Lunes, 08:00 | Lee los casos de los últimos 7 días → **IA de tendencias** (una sola llamada) → hoja `tendencias` → para los 5 casos mejor puntuados, **IA de redes** (uno por caso) → hoja `borradores_redes` → resumen y borradores por **Telegram**. |
+| [`02_informe_semanal`](../workflows/02_informe_semanal.json) | Lunes, 07:30 | Lee los casos de los últimos 7 días → **IA de tendencias** (una sola llamada) → hoja `tendencias` → para los 5 casos mejor puntuados, **IA de redes** (uno por caso) → hoja `borradores_redes` → resumen y borradores por **Telegram**. |
 | [`03_descubrimiento_semanal`](../workflows/variante_claude/03_descubrimiento_semanal.json) *(opcional, solo con Claude)* | Miércoles, 09:00 | **Búsqueda web** con Claude por región × tipo de innovación, **fuera** de las fuentes de `fuentes.json`; lo encontrado pasa por la misma cola que el workflow 01. |
 
 **Reparto de trabajo.** n8n hace todo lo que no necesita IA (programar, leer feeds, filtrar, deduplicar, descargar, guardar, notificar). El modelo de IA interviene solo en tareas con su prompt corto y salida en JSON estricto, validada contra [`schemas/caso.schema.json`](../schemas/caso.schema.json):

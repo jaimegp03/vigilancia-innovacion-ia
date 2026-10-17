@@ -86,3 +86,23 @@ Los nodos de IA son distintos según el proveedor, así que hay dos juegos de wo
 Para pasar a Claude: crea la credencial de Anthropic, importa los workflows de `workflows/variante_claude/` y úsalos en lugar de los de Gemini (no actives los dos a la vez: escribirían los mismos casos). `config/parametros.json` guarda, por tarea, el modelo de cada proveedor (`modelos.<tarea>.gemini` y `.anthropic`); el campo `proveedor_ia` es solo informativo, porque el proveedor lo fija el workflow que importes.
 
 **Por qué el 03 no está con Gemini:** su búsqueda con Google devuelve enlaces temporales de redirección en lugar de la dirección real del artículo, y harían falta pasos extra (resolver la redirección) que no he podido probar sin una clave real. Si lo necesitas, pásate a Claude.
+
+## Mantener el PC despierto a la hora de los workflows
+
+n8n solo ejecuta un workflow si está encendido a su hora, y **no recupera** las ejecuciones perdidas. Si el PC no está siempre encendido, programa una ventana diaria con el script [`scripts/windows/configurar_horario.ps1`](../scripts/windows/configurar_horario.ps1) (Windows, PowerShell como administrador):
+
+| Hora | Qué ocurre |
+|---|---|
+| 06:45 | El PC despierta de la suspensión y abre Docker Desktop (15 min de margen para que n8n arranque y el reloj se ponga en hora). |
+| 07:00 | Workflow 01 (ingesta diaria, 10–20 min). |
+| Lunes 07:30 | Workflow 02 (informe semanal, ~5 min). |
+| 08:00 | El PC se suspende. |
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts\windows\configurar_horario.ps1
+# otras horas: -HoraDespertar 06:30 -HoraSuspender 08:30   |   deshacer: -Quitar
+```
+
+Requisitos: usar **suspensión (no apagado)**, dejar la **sesión iniciada** (puede estar bloqueada), PC enchufado, y en Docker Desktop activar *Settings → General → Start Docker Desktop when you sign in*. Un reinicio completo (por ejemplo por Windows Update) exige volver a iniciar sesión.
+
+Si cambias las horas de los workflows, edita el nodo **Programador** de cada uno (o los generadores en `scripts/`) y ajusta la ventana en consecuencia. El workflow 03 (solo variante Claude) corre los miércoles a las 09:00, **fuera** de esta ventana.

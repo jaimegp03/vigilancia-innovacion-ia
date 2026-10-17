@@ -35,7 +35,7 @@ function construir({ test, proveedor, vacio = false }) {
   b.nota('Nota · Almacenamiento', '### Bloque de almacenamiento\nPara cambiar a Postgres: sustituir **Leer hoja casos**, **Guardar tendencias** y **Guardar borradores**. Los nodos **Formatear fila…** ya dan filas planas con los nombres de columna.', [1500, -300], 520, 150, 5);
 
   // Disparadores
-  if (!test) add(base('Programador semanal', 'n8n-nodes-base.scheduleTrigger', 1.2, { rule: { interval: [{ field: 'weeks', weeksInterval: 1, triggerAtDay: [1], triggerAtHour: 8 }] } }, [0, -140]));
+  if (!test) add(base('Programador semanal', 'n8n-nodes-base.scheduleTrigger', 1.2, { rule: { interval: [{ field: 'weeks', weeksInterval: 1, triggerAtDay: [1], triggerAtHour: 7, triggerAtMinute: 30 }] } }, [0, -140]));
   add(base('Ejecución manual', 'n8n-nodes-base.manualTrigger', 1, {}, [0, 60]));
   add(base('Leer archivos del proyecto', 'n8n-nodes-base.readWriteFile', 1.1, {
     operation: 'read', fileSelector: '/data/proyecto/{config/*.json,schemas/*.json,prompts/*.md}', options: { dataPropertyName: 'data' },

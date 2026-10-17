@@ -29,7 +29,7 @@ flowchart LR
 | Workflow | Cuándo | Qué hace |
 |---|---|---|
 | [`01_ingesta_diaria`](workflows/01_ingesta_diaria.json) | Diario, 07:00 | Lee feeds → filtra → deduplica → descarga → extrae y puntúa con IA → guarda en la hoja `casos`. |
-| [`02_informe_semanal`](workflows/02_informe_semanal.json) | Lunes, 08:00 | Tendencias de la semana + 5 borradores (LinkedIn y X) → hojas y Telegram. |
+| [`02_informe_semanal`](workflows/02_informe_semanal.json) | Lunes, 07:30 | Tendencias de la semana + 5 borradores (LinkedIn y X) → hojas y Telegram. |
 | [`03_descubrimiento_semanal`](workflows/variante_claude/03_descubrimiento_semanal.json) | Miércoles *(opcional, solo con Claude)* | Búsqueda web de casos fuera de las fuentes fijas. |
 
 Detalles de diseño en [docs/arquitectura.md](docs/arquitectura.md).

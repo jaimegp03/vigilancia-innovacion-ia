@@ -44,7 +44,8 @@
               "triggerAtDay": [
                 1
               ],
-              "triggerAtHour": 8
+              "triggerAtHour": 7,
+              "triggerAtMinute": 30
             }
           ]
         }
