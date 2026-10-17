@@ -1,0 +1,131 @@
+{
+  "fase": 1,
+  "proveedor_ia": "gemini",
+  "gemini_host": "https://generativelanguage.googleapis.com",
+  "sector_foco": null,
+  "ventana_dias": 7,
+  "ventana_dias_primera_ejecucion": 30,
+  "idioma_principal": "es",
+  "idiomas": [
+    "es",
+    "en"
+  ],
+  "palabras_clave_incluir": [
+    "inteligencia artificial",
+    "IA",
+    "IA generativa",
+    "aprendizaje automático",
+    "machine learning",
+    "modelo de lenguaje",
+    "agente de IA",
+    "agentes de IA",
+    "chatbot",
+    "asistente virtual",
+    "copiloto",
+    "visión artificial",
+    "automatización inteligente",
+    "ChatGPT",
+    "OpenAI",
+    "Anthropic",
+    "Claude",
+    "Gemini",
+    "Copilot",
+    "artificial intelligence",
+    "AI",
+    "generative AI",
+    "genAI",
+    "LLM",
+    "large language model",
+    "AI agent",
+    "AI agents",
+    "agentic",
+    "computer vision",
+    "machine-learning"
+  ],
+  "siglas_sensibles_mayusculas": [
+    "IA",
+    "AI",
+    "LLM"
+  ],
+  "palabras_clave_excluir": [
+    "chollo",
+    "chollos",
+    "oferta del día",
+    "ofertas",
+    "descuento",
+    "cupón",
+    "black friday",
+    "sorteo",
+    "horóscopo",
+    "apuestas",
+    "mejores móviles",
+    "reseña del",
+    "deal of the day",
+    "coupon",
+    "horoscope",
+    "best phones",
+    "giveaway"
+  ],
+  "modelos": {
+    "extraccion": {
+      "gemini": "gemini-3.5-flash-lite",
+      "anthropic": "claude-haiku-5-5"
+    },
+    "clasificacion": {
+      "gemini": "gemini-3.1-flash-lite",
+      "anthropic": "claude-sonnet-5-5"
+    },
+    "tendencias": {
+      "gemini": "gemini-3.8-flash",
+      "anthropic": "claude-opus-5-5"
+    },
+    "redes": {
+      "gemini": "gemini-3.8-flash",
+      "anthropic": "claude-sonnet-5-5"
+    },
+    "busqueda": {
+      "gemini": null,
+      "anthropic": "claude-sonnet-5-5"
+    }
+  },
+  "n_objetivo_casos": 40,
+  "pesos_puntuacion": {
+    "impacto": 0.35,
+    "novedad": 0.25,
+    "replicabilidad": 0.2,
+    "evidencia": 0.2
+  },
+  "n_posts_semanales": 5,
+  "texto_minimo_caracteres": 800,
+  "procesamiento": {
+    "tamano_lote": 5,
+    "pausa_entre_lotes_ms": 1500,
+    "timeout_descarga_ms": 20000,
+    "pausas_ia_ms": {
+      "extraccion": 4500,
+      "clasificacion": 4500,
+      "tendencias": 13000,
+      "redes": 13000
+    }
+  },
+  "almacenamiento": "google_sheets",
+  "notificacion": "telegram",
+  "hojas": {
+    "casos": "casos",
+    "tendencias": "tendencias",
+    "borradores_redes": "borradores_redes",
+    "log_ejecuciones": "log_ejecuciones",
+    "descartados": "descartados"
+  },
+  "max_articulos_por_ejecucion": 50,
+  "texto_maximo_caracteres": 6000,
+  "ia": {
+    "max_tokens_extraccion": 4000,
+    "max_tokens_clasificacion": 3000,
+    "max_tokens_tendencias": 12000,
+    "max_tokens_redes": 8000,
+    "max_tokens_busqueda": 4000
+  },
+  "max_casos_tendencias": 120,
+  "relevancia_sector_minima": 3
+}

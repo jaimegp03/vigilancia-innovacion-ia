@@ -1,0 +1,1 @@
+{ caso_json: JSON.stringify(j.caso_prompt, null, 1), fuente: j.fuente, url: j.url }

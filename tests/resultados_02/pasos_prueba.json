@@ -1,0 +1,1120 @@
+{
+  "_nota": "Prueba del 16-oct-2026. Casos de ejemplo FICTICIOS; IA, hojas y Telegram SIMULADOS. Un ítem de muestra por salida (cadenas recortadas).",
+  "nodos": {
+    "Ejecución manual": [
+      [
+        {
+          "n_items": 1,
+          "muestra": [
+            {}
+          ]
+        }
+      ]
+    ],
+    "Leer archivos del proyecto": [
+      [
+        {
+          "n_items": 7,
+          "muestra": [
+            {
+              "mimeType": "text/markdown",
+              "fileType": "text",
+              "fileName": "clasificacion.md",
+              "fileExtension": "md",
+              "fileSize": "2.35 kB"
+            }
+          ]
+        }
+      ]
+    ],
+    "Cargar configuración": [
+      [
+        {
+          "n_items": 1,
+          "muestra": [
+            {
+              "run_id": "i-mvbi49ph",
+              "inicio_iso": "2026-10-16T21:50:22.757Z",
+              "desde": "2026-10-09",
+              "hasta": "2026-10-16"
+            }
+          ]
+        }
+      ]
+    ],
+    "Leer hoja casos": [
+      [
+        {
+          "n_items": 8,
+          "muestra": [
+            {
+              "id": "c-ej-01",
+              "fecha_ingesta": "2026-10-15T21:50:22.774Z",
+              "fuente": "Fuente (ejemplo)",
+              "url": "https://ejemplo.invalid/c-ej-01",
+              "region_fuente": "España",
+              "empresa": "Banco Ejemplo",
+              "sector": "banca_seguros",
+              "pais": "España",
+              "titulo_caso": "(ejemplo) Asistente de IA para consultas de hipotecas",
+              "resumen": "(ejemplo) Caso ficticio para probar el workflow: asistente de ia para consultas de hipotecas.",
+              "tecnologia_ia": "IA generativa; agentes",
+              "tipo_innovacion": "proceso_operaciones",
+              "madurez": "produccion",
+              "metricas": "[{\"descripcion\":\"Ahorro de tiempo\",\"valor\":\"30 %\"}]",
+              "confianza": "media",
+              "categoria": "optimizacion_operaciones",
+              "evidencia": 4,
+              "puntuacion_total": 82,
+              "etiquetas": "ejemplo; prueba"
+            }
+          ]
+        }
+      ]
+    ],
+    "Casos de la semana": [
+      [
+        {
+          "n_items": 1,
+          "muestra": [
+            {
+              "n_semana": 7,
+              "n_prompt": 7,
+              "ids_prompt": [
+                "c-ej-01",
+                "c-ej-02",
+                "c-ej-03",
+                "c-ej-04",
+                "c-ej-05",
+                "c-ej-06",
+                "c-ej-07"
+              ],
+              "casos_prompt": [
+                {
+                  "id": "c-ej-01",
+                  "empresa": "Banco Ejemplo",
+                  "sector": "banca_seguros",
+                  "pais": "España",
+                  "titulo_caso": "(ejemplo) Asistente de IA para consultas de hipotecas",
+                  "resumen": "(ejemplo) Caso ficticio para probar el workflow: asistente de ia para consultas de hipotecas.",
+                  "tecnologia_ia": [
+                    "IA generativa",
+                    "agentes"
+                  ],
+                  "tipo_innovacion": "proceso_operaciones",
+                  "madurez": "produccion",
+                  "metricas": [
+                    {
+                      "descripcion": "Ahorro de tiempo",
+                      "valor": "30 %"
+                    }
+                  ],
+                  "categoria": "optimizacion_operaciones",
+                  "puntuacion_total": 82,
+                  "evidencia": 4,
+                  "etiquetas": [
+                    "ejemplo",
+                    "prueba"
+                  ],
+                  "confianza": "media",
+                  "region": "España"
+                },
+                {
+                  "id": "c-ej-02",
+                  "empresa": "Aseguradora Muestra",
+                  "sector": "banca_seguros",
+                  "pais": "México",
+                  "titulo_caso": "(ejemplo) Triaje automático de siniestros del hogar",
+                  "resumen": "(ejemplo) Caso ficticio para probar el workflow: triaje automático de siniestros del hogar.",
+                  "tecnologia_ia": [
+                    "IA generativa",
+                    "agentes"
+                  ],
+                  "tipo_innovacion": "proceso_operaciones",
+                  "madurez": "produccion",
+                  "metricas": [
+                    {
+                      "descripcion": "Ahorro de tiempo",
+                      "valor": "30 %"
+                    }
+                  ],
+                  "categoria": "optimizacion_operaciones",
+                  "puntuacion_total": 74,
+                  "evidencia": 4,
+                  "etiquetas": [
+                    "ejemplo",
+                    "prueba"
+                  ],
+                  "confianza": "media",
+                  "region": "España"
+                },
+                {
+                  "id": "c-ej-03",
+                  "empresa": "Fábrica Demo",
+                  "sector": "industria_manufactura",
+                  "pais": "Alemania",
+                  "titulo_caso": "(ejemplo) Visión artificial para control de calidad",
+                  "resumen": "(ejemplo) Caso ficticio para probar el workflow: visión artificial para control de calidad.",
+                  "tecnologia_ia": [
+                    "IA generativa",
+                    "agentes"
+                  ],
+                  "tipo_innovacion": "proceso_operaciones",
+                  "madurez": "produccion",
+                  "metricas": [
+                    {
+                      "descripcion": "Ahorro de tiempo",
+                      "valor": "30 %"
+                    }
+                  ],
+                  "categoria": "optimizacion_operaciones",
+                  "puntuacion_total": 71,
+                  "evidencia": 3,
+                  "etiquetas": [
+                    "ejemplo",
+                    "prueba"
+                  ],
+                  "confianza": "media",
+                  "region": "España"
+                },
+                {
+                  "id": "c-ej-04",
+                  "empresa": "Supermercados Prueba",
+                  "sector": "retail_comercio",
+                  "pais": "España",
+                  "titulo_caso": "(ejemplo) Previsión de demanda de frescos con IA",
+                  "resumen": "(ejemplo) Caso ficticio para probar el workflow: previsión de demanda de frescos con ia.",
+                  "tecnologia_ia": [
+                    "IA generativa",
+                    "agentes"
+                  ],
+                  "tipo_innovacion": "proceso_operaciones",
+                  "madurez": "produccion",
+                  "metricas": [
+                    {
+                      "descripcion": "Ahorro de tiempo",
+                      "valor": "30 %"
+                    }
+                  ],
+                  "categoria": "optimizacion_operaciones",
+                  "puntuacion_total": 66,
+                  "evidencia": 3,
+                  "etiquetas": [
+                    "ejemplo",
+                    "prueba"
+                  ],
+                  "confianza": "media",
+                  "region": "España"
+                },
+                {
+                  "id": "c-ej-05",
+                  "empresa": "Hotel Ficticio",
+                  "sector": "turismo_hosteleria",
+                  "pais": "Portugal",
+                  "titulo_caso": "(ejemplo) Agente de reservas multilingüe",
+                  "resumen": "(ejemplo) Caso ficticio para probar el workflow: agente de reservas multilingüe.",
+                  "tecnologia_ia": [
+                    "IA generativa",
+                    "agentes"
+                  ],
+                  "tipo_innovacion": "proceso_operaciones",
+                  "madurez": "produccion",
+                  "metricas": [
+                    {
+                      "descripcion": "Ahorro de tiempo",
+                      "valor": "30 %"
+                    }
+                  ],
+                  "categoria": "optimizacion_operaciones",
+                  "puntuacion_total": 63,
+                  "evidencia": 2,
+                  "etiquetas": [
+                    "ejemplo",
+                    "prueba"
+                  ],
+                  "confianza": "media",
+                  "region": "España"
+                },
+                {
+                  "id": "c-ej-06",
+                  "empresa": "Logística Test",
+                  "sector": "logistica_transporte",
+                  "pais": "Chile",
+                  "titulo_caso": "(ejemplo) Optimización de rutas con IA",
+                  "resumen": "(ejemplo) Caso ficticio para probar el workflow: optimización de rutas con ia.",
+                  "tecnologia_ia": [
+                    "IA generativa",
+                    "agentes"
+                  ],
+                  "tipo_innovacion": "proceso_operaciones",
+                  "madurez": "produccion",
+                  "metricas": [
+                    {
+                      "descripcion": "Ahorro de tiempo",
+                      "valor": "30 %"
+                    }
+                  ],
+                  "categoria": "optimizacion_operaciones",
+                  "puntuacion_total": 58,
+                  "evidencia": 3,
+                  "etiquetas": [
+                    "ejemplo",
+                    "prueba"
+                  ],
+                  "confianza": "media",
+                  "region": "España"
+                },
+                {
+                  "id": "c-ej-07",
+                  "empresa": "Clínica Imaginaria",
+                  "sector": "salud_farma",
+                  "pais": "Colombia",
+                  "titulo_caso": "(ejemplo) Resumen automático de historias clínicas",
+                  "resumen": "(ejemplo) Caso ficticio para probar el workflow: resumen automático de historias clínicas.",
+                  "tecnologia_ia": [
+                    "IA generativa",
+                    "agentes"
+                  ],
+                  "tipo_innovacion": "proceso_operaciones",
+                  "madurez": "produccion",
+                  "metricas": [
+                    {
+                      "descripcion": "Ahorro de tiempo",
+                      "valor": "30 %"
+                    }
+                  ],
+                  "categoria": "optimizacion_operaciones",
+                  "puntuacion_total": 55,
+                  "evidencia": 2,
+                  "etiquetas": [
+                    "ejemplo",
+                    "prueba"
+                  ],
+                  "confianza": "media",
+                  "region": "España"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    ],
+    "¿Hay casos esta semana?": [
+      [
+        {
+          "n_items": 1,
+          "muestra": [
+            {
+              "n_semana": 7,
+              "n_prompt": 7,
+              "ids_prompt": [
+                "c-ej-01",
+                "c-ej-02",
+                "c-ej-03",
+                "c-ej-04",
+                "c-ej-05",
+                "c-ej-06",
+                "c-ej-07"
+              ],
+              "casos_prompt": [
+                {
+                  "id": "c-ej-01",
+                  "empresa": "Banco Ejemplo",
+                  "sector": "banca_seguros",
+                  "pais": "España",
+                  "titulo_caso": "(ejemplo) Asistente de IA para consultas de hipotecas",
+                  "resumen": "(ejemplo) Caso ficticio para probar el workflow: asistente de ia para consultas de hipotecas.",
+                  "tecnologia_ia": [
+                    "IA generativa",
+                    "agentes"
+                  ],
+                  "tipo_innovacion": "proceso_operaciones",
+                  "madurez": "produccion",
+                  "metricas": [
+                    {
+                      "descripcion": "Ahorro de tiempo",
+                      "valor": "30 %"
+                    }
+                  ],
+                  "categoria": "optimizacion_operaciones",
+                  "puntuacion_total": 82,
+                  "evidencia": 4,
+                  "etiquetas": [
+                    "ejemplo",
+                    "prueba"
+                  ],
+                  "confianza": "media",
+                  "region": "España"
+                },
+                {
+                  "id": "c-ej-02",
+                  "empresa": "Aseguradora Muestra",
+                  "sector": "banca_seguros",
+                  "pais": "México",
+                  "titulo_caso": "(ejemplo) Triaje automático de siniestros del hogar",
+                  "resumen": "(ejemplo) Caso ficticio para probar el workflow: triaje automático de siniestros del hogar.",
+                  "tecnologia_ia": [
+                    "IA generativa",
+                    "agentes"
+                  ],
+                  "tipo_innovacion": "proceso_operaciones",
+                  "madurez": "produccion",
+                  "metricas": [
+                    {
+                      "descripcion": "Ahorro de tiempo",
+                      "valor": "30 %"
+                    }
+                  ],
+                  "categoria": "optimizacion_operaciones",
+                  "puntuacion_total": 74,
+                  "evidencia": 4,
+                  "etiquetas": [
+                    "ejemplo",
+                    "prueba"
+                  ],
+                  "confianza": "media",
+                  "region": "España"
+                },
+                {
+                  "id": "c-ej-03",
+                  "empresa": "Fábrica Demo",
+                  "sector": "industria_manufactura",
+                  "pais": "Alemania",
+                  "titulo_caso": "(ejemplo) Visión artificial para control de calidad",
+                  "resumen": "(ejemplo) Caso ficticio para probar el workflow: visión artificial para control de calidad.",
+                  "tecnologia_ia": [
+                    "IA generativa",
+                    "agentes"
+                  ],
+                  "tipo_innovacion": "proceso_operaciones",
+                  "madurez": "produccion",
+                  "metricas": [
+                    {
+                      "descripcion": "Ahorro de tiempo",
+                      "valor": "30 %"
+                    }
+                  ],
+                  "categoria": "optimizacion_operaciones",
+                  "puntuacion_total": 71,
+                  "evidencia": 3,
+                  "etiquetas": [
+                    "ejemplo",
+                    "prueba"
+                  ],
+                  "confianza": "media",
+                  "region": "España"
+                },
+                {
+                  "id": "c-ej-04",
+                  "empresa": "Supermercados Prueba",
+                  "sector": "retail_comercio",
+                  "pais": "España",
+                  "titulo_caso": "(ejemplo) Previsión de demanda de frescos con IA",
+                  "resumen": "(ejemplo) Caso ficticio para probar el workflow: previsión de demanda de frescos con ia.",
+                  "tecnologia_ia": [
+                    "IA generativa",
+                    "agentes"
+                  ],
+                  "tipo_innovacion": "proceso_operaciones",
+                  "madurez": "produccion",
+                  "metricas": [
+                    {
+                      "descripcion": "Ahorro de tiempo",
+                      "valor": "30 %"
+                    }
+                  ],
+                  "categoria": "optimizacion_operaciones",
+                  "puntuacion_total": 66,
+                  "evidencia": 3,
+                  "etiquetas": [
+                    "ejemplo",
+                    "prueba"
+                  ],
+                  "confianza": "media",
+                  "region": "España"
+                },
+                {
+                  "id": "c-ej-05",
+                  "empresa": "Hotel Ficticio",
+                  "sector": "turismo_hosteleria",
+                  "pais": "Portugal",
+                  "titulo_caso": "(ejemplo) Agente de reservas multilingüe",
+                  "resumen": "(ejemplo) Caso ficticio para probar el workflow: agente de reservas multilingüe.",
+                  "tecnologia_ia": [
+                    "IA generativa",
+                    "agentes"
+                  ],
+                  "tipo_innovacion": "proceso_operaciones",
+                  "madurez": "produccion",
+                  "metricas": [
+                    {
+                      "descripcion": "Ahorro de tiempo",
+                      "valor": "30 %"
+                    }
+                  ],
+                  "categoria": "optimizacion_operaciones",
+                  "puntuacion_total": 63,
+                  "evidencia": 2,
+                  "etiquetas": [
+                    "ejemplo",
+                    "prueba"
+                  ],
+                  "confianza": "media",
+                  "region": "España"
+                },
+                {
+                  "id": "c-ej-06",
+                  "empresa": "Logística Test",
+                  "sector": "logistica_transporte",
+                  "pais": "Chile",
+                  "titulo_caso": "(ejemplo) Optimización de rutas con IA",
+                  "resumen": "(ejemplo) Caso ficticio para probar el workflow: optimización de rutas con ia.",
+                  "tecnologia_ia": [
+                    "IA generativa",
+                    "agentes"
+                  ],
+                  "tipo_innovacion": "proceso_operaciones",
+                  "madurez": "produccion",
+                  "metricas": [
+                    {
+                      "descripcion": "Ahorro de tiempo",
+                      "valor": "30 %"
+                    }
+                  ],
+                  "categoria": "optimizacion_operaciones",
+                  "puntuacion_total": 58,
+                  "evidencia": 3,
+                  "etiquetas": [
+                    "ejemplo",
+                    "prueba"
+                  ],
+                  "confianza": "media",
+                  "region": "España"
+                },
+                {
+                  "id": "c-ej-07",
+                  "empresa": "Clínica Imaginaria",
+                  "sector": "salud_farma",
+                  "pais": "Colombia",
+                  "titulo_caso": "(ejemplo) Resumen automático de historias clínicas",
+                  "resumen": "(ejemplo) Caso ficticio para probar el workflow: resumen automático de historias clínicas.",
+                  "tecnologia_ia": [
+                    "IA generativa",
+                    "agentes"
+                  ],
+                  "tipo_innovacion": "proceso_operaciones",
+                  "madurez": "produccion",
+                  "metricas": [
+                    {
+                      "descripcion": "Ahorro de tiempo",
+                      "valor": "30 %"
+                    }
+                  ],
+                  "categoria": "optimizacion_operaciones",
+                  "puntuacion_total": 55,
+                  "evidencia": 2,
+                  "etiquetas": [
+                    "ejemplo",
+                    "prueba"
+                  ],
+                  "confianza": "media",
+                  "region": "España"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "n_items": 0,
+          "muestra": []
+        }
+      ]
+    ],
+    "Preparar prompt tendencias": [
+      [
+        {
+          "n_items": 1,
+          "muestra": [
+            {
+              "n_semana": 7,
+              "n_prompt": 7,
+              "ids_prompt": [
+                "c-ej-01",
+                "c-ej-02",
+                "c-ej-03",
+                "c-ej-04",
+                "c-ej-05",
+                "c-ej-06",
+                "c-ej-07"
+              ],
+              "casos_prompt": [
+                {
+                  "id": "c-ej-01",
+                  "empresa": "Banco Ejemplo",
+                  "sector": "banca_seguros",
+                  "pais": "España",
+                  "titulo_caso": "(ejemplo) Asistente de IA para consultas de hipotecas",
+                  "resumen": "(ejemplo) Caso ficticio para probar el workflow: asistente de ia para consultas de hipotecas.",
+                  "tecnologia_ia": [
+                    "IA generativa",
+                    "agentes"
+                  ],
+                  "tipo_innovacion": "proceso_operaciones",
+                  "madurez": "produccion",
+                  "metricas": [
+                    {
+                      "descripcion": "Ahorro de tiempo",
+                      "valor": "30 %"
+                    }
+                  ],
+                  "categoria": "optimizacion_operaciones",
+                  "puntuacion_total": 82,
+                  "evidencia": 4,
+                  "etiquetas": [
+                    "ejemplo",
+                    "prueba"
+                  ],
+                  "confianza": "media",
+                  "region": "España"
+                },
+                {
+                  "id": "c-ej-02",
+                  "empresa": "Aseguradora Muestra",
+                  "sector": "banca_seguros",
+                  "pais": "México",
+                  "titulo_caso": "(ejemplo) Triaje automático de siniestros del hogar",
+                  "resumen": "(ejemplo) Caso ficticio para probar el workflow: triaje automático de siniestros del hogar.",
+                  "tecnologia_ia": [
+                    "IA generativa",
+                    "agentes"
+                  ],
+                  "tipo_innovacion": "proceso_operaciones",
+                  "madurez": "produccion",
+                  "metricas": [
+                    {
+                      "descripcion": "Ahorro de tiempo",
+                      "valor": "30 %"
+                    }
+                  ],
+                  "categoria": "optimizacion_operaciones",
+                  "puntuacion_total": 74,
+                  "evidencia": 4,
+                  "etiquetas": [
+                    "ejemplo",
+                    "prueba"
+                  ],
+                  "confianza": "media",
+                  "region": "España"
+                },
+                {
+                  "id": "c-ej-03",
+                  "empresa": "Fábrica Demo",
+                  "sector": "industria_manufactura",
+                  "pais": "Alemania",
+                  "titulo_caso": "(ejemplo) Visión artificial para control de calidad",
+                  "resumen": "(ejemplo) Caso ficticio para probar el workflow: visión artificial para control de calidad.",
+                  "tecnologia_ia": [
+                    "IA generativa",
+                    "agentes"
+                  ],
+                  "tipo_innovacion": "proceso_operaciones",
+                  "madurez": "produccion",
+                  "metricas": [
+                    {
+                      "descripcion": "Ahorro de tiempo",
+                      "valor": "30 %"
+                    }
+                  ],
+                  "categoria": "optimizacion_operaciones",
+                  "puntuacion_total": 71,
+                  "evidencia": 3,
+                  "etiquetas": [
+                    "ejemplo",
+                    "prueba"
+                  ],
+                  "confianza": "media",
+                  "region": "España"
+                },
+                {
+                  "id": "c-ej-04",
+                  "empresa": "Supermercados Prueba",
+                  "sector": "retail_comercio",
+                  "pais": "España",
+                  "titulo_caso": "(ejemplo) Previsión de demanda de frescos con IA",
+                  "resumen": "(ejemplo) Caso ficticio para probar el workflow: previsión de demanda de frescos con ia.",
+                  "tecnologia_ia": [
+                    "IA generativa",
+                    "agentes"
+                  ],
+                  "tipo_innovacion": "proceso_operaciones",
+                  "madurez": "produccion",
+                  "metricas": [
+                    {
+                      "descripcion": "Ahorro de tiempo",
+                      "valor": "30 %"
+                    }
+                  ],
+                  "categoria": "optimizacion_operaciones",
+                  "puntuacion_total": 66,
+                  "evidencia": 3,
+                  "etiquetas": [
+                    "ejemplo",
+                    "prueba"
+                  ],
+                  "confianza": "media",
+                  "region": "España"
+                },
+                {
+                  "id": "c-ej-05",
+                  "empresa": "Hotel Ficticio",
+                  "sector": "turismo_hosteleria",
+                  "pais": "Portugal",
+                  "titulo_caso": "(ejemplo) Agente de reservas multilingüe",
+                  "resumen": "(ejemplo) Caso ficticio para probar el workflow: agente de reservas multilingüe.",
+                  "tecnologia_ia": [
+                    "IA generativa",
+                    "agentes"
+                  ],
+                  "tipo_innovacion": "proceso_operaciones",
+                  "madurez": "produccion",
+                  "metricas": [
+                    {
+                      "descripcion": "Ahorro de tiempo",
+                      "valor": "30 %"
+                    }
+                  ],
+                  "categoria": "optimizacion_operaciones",
+                  "puntuacion_total": 63,
+                  "evidencia": 2,
+                  "etiquetas": [
+                    "ejemplo",
+                    "prueba"
+                  ],
+                  "confianza": "media",
+                  "region": "España"
+                },
+                {
+                  "id": "c-ej-06",
+                  "empresa": "Logística Test",
+                  "sector": "logistica_transporte",
+                  "pais": "Chile",
+                  "titulo_caso": "(ejemplo) Optimización de rutas con IA",
+                  "resumen": "(ejemplo) Caso ficticio para probar el workflow: optimización de rutas con ia.",
+                  "tecnologia_ia": [
+                    "IA generativa",
+                    "agentes"
+                  ],
+                  "tipo_innovacion": "proceso_operaciones",
+                  "madurez": "produccion",
+                  "metricas": [
+                    {
+                      "descripcion": "Ahorro de tiempo",
+                      "valor": "30 %"
+                    }
+                  ],
+                  "categoria": "optimizacion_operaciones",
+                  "puntuacion_total": 58,
+                  "evidencia": 3,
+                  "etiquetas": [
+                    "ejemplo",
+                    "prueba"
+                  ],
+                  "confianza": "media",
+                  "region": "España"
+                },
+                {
+                  "id": "c-ej-07",
+                  "empresa": "Clínica Imaginaria",
+                  "sector": "salud_farma",
+                  "pais": "Colombia",
+                  "titulo_caso": "(ejemplo) Resumen automático de historias clínicas",
+                  "resumen": "(ejemplo) Caso ficticio para probar el workflow: resumen automático de historias clínicas.",
+                  "tecnologia_ia": [
+                    "IA generativa",
+                    "agentes"
+                  ],
+                  "tipo_innovacion": "proceso_operaciones",
+                  "madurez": "produccion",
+                  "metricas": [
+                    {
+                      "descripcion": "Ahorro de tiempo",
+                      "valor": "30 %"
+                    }
+                  ],
+                  "categoria": "optimizacion_operaciones",
+                  "puntuacion_total": 55,
+                  "evidencia": 2,
+                  "etiquetas": [
+                    "ejemplo",
+                    "prueba"
+                  ],
+                  "confianza": "media",
+                  "region": "España"
+                }
+              ],
+              "prompt_user": "Semana del 2026-10-09 al 2026-10-16. Número de casos: 7.\nSector foco: ninguno\n\nCasos:\n[{\"id\":\"c-ej-01\",\"empresa\":\"Banco Ejemplo\",\"sector\":\"banca_seguros\",\"pais\":\"España\",\"titulo_caso\":\"(ejemplo) Asistente de IA para consultas de hipotecas\",\"resumen\":\"(ejemplo)…[4083 car.]"
+            }
+          ]
+        }
+      ]
+    ],
+    "IA · Tendencias": [
+      [
+        {
+          "n_items": 1,
+          "muestra": [
+            {
+              "content": [
+                {
+                  "type": "text",
+                  "text": "{\"periodo\":{\"desde\":\"2000-01-01\",\"hasta\":\"2000-01-07\"},\"n_casos_analizados\":999,\"resumen_ejecutivo\":\"(simulado) Resumen de prueba generado por el mock, no por Claude.\",\"tendencias\":[{\"titulo\":\"(simulado) Agentes en banca y seguros\",\"descripcion\":\"Descripción d…[942 car.]"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    ],
+    "Validar tendencias": [
+      [
+        {
+          "n_items": 1,
+          "muestra": [
+            {
+              "estado": "ok",
+              "tendencias": {
+                "periodo": {
+                  "desde": "2026-10-09",
+                  "hasta": "2026-10-16"
+                },
+                "n_casos_analizados": 7,
+                "resumen_ejecutivo": "(simulado) Resumen de prueba generado por el mock, no por Claude.",
+                "tendencias": [
+                  {
+                    "titulo": "(simulado) Agentes en banca y seguros",
+                    "descripcion": "Descripción de prueba.",
+                    "fuerza": "media",
+                    "casos_ids": [
+                      "c-ej-01",
+                      "c-ej-02",
+                      "c-ej-03"
+                    ],
+                    "sectores": [
+                      "banca_seguros"
+                    ],
+                    "regiones": [
+                      "España"
+                    ],
+                    "implicacion": "Implicación de prueba."
+                  }
+                ],
+                "casos_destacados": [
+                  {
+                    "id": "c-ej-01",
+                    "por_que": "Mayor puntuación (simulado)."
+                  }
+                ],
+                "sectores_mas_activos": [
+                  {
+                    "sector": "banca_seguros",
+                    "n_casos": 2
+                  }
+                ],
+                "tecnologias_mas_citadas": [
+                  {
+                    "tecnologia": "IA generativa",
+                    "n_casos": 7
+                  }
+                ],
+                "cautelas": [
+                  "(simulado) Datos de ejemplo."
+                ],
+                "limitaciones": null
+              },
+              "errores": [],
+              "ajustes": [
+                "Tendencia \"(simulado) Tendencia con un solo caso real\": se quitaron 1 ids inexistentes",
+                "Tendencia \"(simulado) Tendencia con un solo caso real\" eliminada: menos de 2 casos válidos"
+              ]
+            }
+          ]
+        }
+      ]
+    ],
+    "Formatear fila tendencias": [
+      [
+        {
+          "n_items": 1,
+          "muestra": [
+            {
+              "semana_desde": "2026-10-09",
+              "semana_hasta": "2026-10-16",
+              "fecha_generacion": "2026-10-16T21:50:22.876Z",
+              "estado": "ok",
+              "n_casos": 7,
+              "resumen_ejecutivo": "(simulado) Resumen de prueba generado por el mock, no por Claude.",
+              "tendencias": "[{\"titulo\":\"(simulado) Agentes en banca y seguros\",\"descripcion\":\"Descripción de prueba.\",\"fuerza\":\"media\",\"casos_ids\":[\"c-ej-01\",\"c-ej-02\",\"c-ej-03\"],\"sectores\":[\"banca_seguros\"],\"regiones\":[\"España\"],\"implicacion\":\"Implicación de prueba.\"}]",
+              "casos_destacados": "[{\"id\":\"c-ej-01\",\"por_que\":\"Mayor puntuación (simulado).\"}]",
+              "sectores_mas_activos": "[{\"sector\":\"banca_seguros\",\"n_casos\":2}]",
+              "tecnologias_mas_citadas": "[{\"tecnologia\":\"IA generativa\",\"n_casos\":7}]",
+              "cautelas": "[\"(simulado) Datos de ejemplo.\"]",
+              "limitaciones": "",
+              "modelo": "claude-opus-5-5",
+              "avisos": "Tendencia \"(simulado) Tendencia con un solo caso real\": se quitaron 1 ids inexistentes | Tendencia \"(simulado) Tendencia con un solo caso real\" eliminada: menos de 2 casos válidos"
+            }
+          ]
+        }
+      ]
+    ],
+    "Guardar tendencias": [
+      [
+        {
+          "n_items": 1,
+          "muestra": [
+            {
+              "semana_desde": "2026-10-09",
+              "semana_hasta": "2026-10-16",
+              "fecha_generacion": "2026-10-16T21:50:22.876Z",
+              "estado": "ok",
+              "n_casos": 7,
+              "resumen_ejecutivo": "(simulado) Resumen de prueba generado por el mock, no por Claude.",
+              "tendencias": "[{\"titulo\":\"(simulado) Agentes en banca y seguros\",\"descripcion\":\"Descripción de prueba.\",\"fuerza\":\"media\",\"casos_ids\":[\"c-ej-01\",\"c-ej-02\",\"c-ej-03\"],\"sectores\":[\"banca_seguros\"],\"regiones\":[\"España\"],\"implicacion\":\"Implicación de prueba.\"}]",
+              "casos_destacados": "[{\"id\":\"c-ej-01\",\"por_que\":\"Mayor puntuación (simulado).\"}]",
+              "sectores_mas_activos": "[{\"sector\":\"banca_seguros\",\"n_casos\":2}]",
+              "tecnologias_mas_citadas": "[{\"tecnologia\":\"IA generativa\",\"n_casos\":7}]",
+              "cautelas": "[\"(simulado) Datos de ejemplo.\"]",
+              "limitaciones": "",
+              "modelo": "claude-opus-5-5",
+              "avisos": "Tendencia \"(simulado) Tendencia con un solo caso real\": se quitaron 1 ids inexistentes | Tendencia \"(simulado) Tendencia con un solo caso real\" eliminada: menos de 2 casos válidos"
+            }
+          ]
+        }
+      ]
+    ],
+    "Seleccionar top casos": [
+      [
+        {
+          "n_items": 5,
+          "muestra": [
+            {
+              "id": "c-ej-01",
+              "posicion": 1,
+              "titulo_caso": "(ejemplo) Asistente de IA para consultas de hipotecas",
+              "fuente": "Fuente (ejemplo)",
+              "url": "https://ejemplo.invalid/c-ej-01",
+              "puntuacion_total": 82,
+              "caso_prompt": {
+                "id": "c-ej-01",
+                "empresa": "Banco Ejemplo",
+                "sector": "banca_seguros",
+                "pais": "España",
+                "titulo_caso": "(ejemplo) Asistente de IA para consultas de hipotecas",
+                "resumen": "(ejemplo) Caso ficticio para probar el workflow: asistente de ia para consultas de hipotecas.",
+                "tecnologia_ia": [
+                  "IA generativa",
+                  "agentes"
+                ],
+                "tipo_innovacion": "proceso_operaciones",
+                "madurez": "produccion",
+                "metricas": [
+                  {
+                    "descripcion": "Ahorro de tiempo",
+                    "valor": "30 %"
+                  }
+                ],
+                "categoria": "optimizacion_operaciones",
+                "puntuacion_total": 82,
+                "evidencia": 4,
+                "etiquetas": [
+                  "ejemplo",
+                  "prueba"
+                ],
+                "confianza": "media"
+              }
+            }
+          ]
+        }
+      ]
+    ],
+    "Preparar prompt redes": [
+      [
+        {
+          "n_items": 5,
+          "muestra": [
+            {
+              "id": "c-ej-01",
+              "posicion": 1,
+              "titulo_caso": "(ejemplo) Asistente de IA para consultas de hipotecas",
+              "fuente": "Fuente (ejemplo)",
+              "url": "https://ejemplo.invalid/c-ej-01",
+              "puntuacion_total": 82,
+              "caso_prompt": {
+                "id": "c-ej-01",
+                "empresa": "Banco Ejemplo",
+                "sector": "banca_seguros",
+                "pais": "España",
+                "titulo_caso": "(ejemplo) Asistente de IA para consultas de hipotecas",
+                "resumen": "(ejemplo) Caso ficticio para probar el workflow: asistente de ia para consultas de hipotecas.",
+                "tecnologia_ia": [
+                  "IA generativa",
+                  "agentes"
+                ],
+                "tipo_innovacion": "proceso_operaciones",
+                "madurez": "produccion",
+                "metricas": [
+                  {
+                    "descripcion": "Ahorro de tiempo",
+                    "valor": "30 %"
+                  }
+                ],
+                "categoria": "optimizacion_operaciones",
+                "puntuacion_total": 82,
+                "evidencia": 4,
+                "etiquetas": [
+                  "ejemplo",
+                  "prueba"
+                ],
+                "confianza": "media"
+              },
+              "prompt_user": "Caso:\n{\n \"id\": \"c-ej-01\",\n \"empresa\": \"Banco Ejemplo\",\n \"sector\": \"banca_seguros\",\n \"pais\": \"España\",\n \"titulo_caso\": \"(ejemplo) Asistente de IA para consultas de hipotecas\",\n \"resumen\": \"(ejemplo) Caso ficticio para probar el workflow: asistente de ia para co…[706 car.]"
+            }
+          ]
+        }
+      ]
+    ],
+    "IA · Redes": [
+      [
+        {
+          "n_items": 5,
+          "muestra": [
+            {
+              "content": [
+                {
+                  "type": "text",
+                  "text": "{\"caso_id\":\"c-ej-01\",\"linkedin\":{\"texto\":\"(simulado) Borrador de LinkedIn sobre: (ejemplo) Asistente de IA para consultas de hipotecas. Fuente: https://ejemplo.invalid/c-ej-01\",\"hashtags\":[\"#IA\",\"#Innovación\"]},\"x\":{\"texto\":\"(simulado) Borrador de X. https://e…[395 car.]"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    ],
+    "Validar redes": [
+      [
+        {
+          "n_items": 5,
+          "muestra": [
+            {
+              "id": "c-ej-01",
+              "posicion": 1,
+              "titulo_caso": "(ejemplo) Asistente de IA para consultas de hipotecas",
+              "fuente": "Fuente (ejemplo)",
+              "url": "https://ejemplo.invalid/c-ej-01",
+              "puntuacion_total": 82,
+              "borrador": {
+                "caso_id": "c-ej-01",
+                "linkedin": {
+                  "texto": "(simulado) Borrador de LinkedIn sobre: (ejemplo) Asistente de IA para consultas de hipotecas. Fuente: https://ejemplo.invalid/c-ej-01",
+                  "hashtags": [
+                    "#IA",
+                    "#Innovación"
+                  ]
+                },
+                "x": {
+                  "texto": "(simulado) Borrador de X. https://ejemplo.invalid/c-ej-01",
+                  "hashtags": [
+                    "#IA"
+                  ]
+                },
+                "idea_visual": "(simulado) Gráfico de barras con la mejora declarada.",
+                "avisos_revision": []
+              },
+              "estado": "pendiente_revision",
+              "errores": []
+            }
+          ]
+        }
+      ]
+    ],
+    "Formatear fila borrador": [
+      [
+        {
+          "n_items": 5,
+          "muestra": [
+            {
+              "semana_hasta": "2026-10-16",
+              "fecha_generacion": "2026-10-16T21:50:22.946Z",
+              "caso_id": "c-ej-01",
+              "titulo_caso": "(ejemplo) Asistente de IA para consultas de hipotecas",
+              "fuente": "Fuente (ejemplo)",
+              "url": "https://ejemplo.invalid/c-ej-01",
+              "puntuacion_total": 82,
+              "estado": "pendiente_revision",
+              "linkedin_texto": "(simulado) Borrador de LinkedIn sobre: (ejemplo) Asistente de IA para consultas de hipotecas. Fuente: https://ejemplo.invalid/c-ej-01",
+              "linkedin_hashtags": "#IA #Innovación",
+              "x_texto": "(simulado) Borrador de X. https://ejemplo.invalid/c-ej-01",
+              "x_hashtags": "#IA",
+              "idea_visual": "(simulado) Gráfico de barras con la mejora declarada.",
+              "avisos_revision": "",
+              "errores": "",
+              "modelo": "claude-sonnet-5-5"
+            }
+          ]
+        }
+      ]
+    ],
+    "Guardar borradores": [
+      [
+        {
+          "n_items": 5,
+          "muestra": [
+            {
+              "semana_hasta": "2026-10-16",
+              "fecha_generacion": "2026-10-16T21:50:22.946Z",
+              "caso_id": "c-ej-01",
+              "titulo_caso": "(ejemplo) Asistente de IA para consultas de hipotecas",
+              "fuente": "Fuente (ejemplo)",
+              "url": "https://ejemplo.invalid/c-ej-01",
+              "puntuacion_total": 82,
+              "estado": "pendiente_revision",
+              "linkedin_texto": "(simulado) Borrador de LinkedIn sobre: (ejemplo) Asistente de IA para consultas de hipotecas. Fuente: https://ejemplo.invalid/c-ej-01",
+              "linkedin_hashtags": "#IA #Innovación",
+              "x_texto": "(simulado) Borrador de X. https://ejemplo.invalid/c-ej-01",
+              "x_hashtags": "#IA",
+              "idea_visual": "(simulado) Gráfico de barras con la mejora declarada.",
+              "avisos_revision": "",
+              "errores": "",
+              "modelo": "claude-sonnet-5-5"
+            }
+          ]
+        }
+      ]
+    ],
+    "Preparar mensajes Telegram": [
+      [
+        {
+          "n_items": 6,
+          "muestra": [
+            {
+              "texto": "<b>Vigilancia IA · informe semanal</b>\nSemana 2026-10-09 → 2026-10-16 · 7 casos nuevos\n\n(simulado) Resumen de prueba generado por el mock, no por Claude.\n\n<b>Tendencias</b>\n1. (simulado) Agentes en banca y seguros <i>(media, 3 casos)</i>\n\n<b>Casos mejor puntua…[1004 car.]"
+            }
+          ]
+        }
+      ]
+    ],
+    "Enviar a Telegram": [
+      [
+        {
+          "n_items": 6,
+          "muestra": [
+            {
+              "texto": "<b>Vigilancia IA · informe semanal</b>\nSemana 2026-10-09 → 2026-10-16 · 7 casos nuevos\n\n(simulado) Resumen de prueba generado por el mock, no por Claude.\n\n<b>Tendencias</b>\n1. (simulado) Agentes en banca y seguros <i>(media, 3 casos)</i>\n\n<b>Casos mejor puntua…[1004 car.]",
+              "simulado": true,
+              "longitud": 1004
+            }
+          ]
+        }
+      ]
+    ]
+  }
+}

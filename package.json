@@ -1,0 +1,15 @@
+{
+  "name": "vigilancia-innovacion-ia",
+  "version": "1.0.0",
+  "description": "Vigilancia continua de innovación con IA: workflows de n8n que recogen noticias, extraen casos de uso de IA y generan informes semanales y borradores para redes.",
+  "private": true,
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "generar": "node scripts/generar_workflow_01.js && node scripts/generar_workflow_02.js && node scripts/generar_workflow_03.js",
+    "test": "node tests/unit_nodos_01.js && node tests/unit_nodos_02.js && node tests/unit_esquema.js",
+    "comprobar": "node scripts/comprobar_sintaxis.js"
+  }
+}

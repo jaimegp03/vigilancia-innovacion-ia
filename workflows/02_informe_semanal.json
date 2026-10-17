@@ -1,0 +1,681 @@
+{
+  "id": "vigilancia-02-informe",
+  "name": "02 Informe semanal",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "## 02 · Informe semanal\nLee los casos de la semana → **IA de tendencias** (una sola llamada) → guarda en \"tendencias\" → top 5 casos → **IA de redes** (uno por caso) → guarda en \"borradores_redes\" → resumen por **Telegram**.\n\nLos borradores NO se publican: siempre quedan pendientes de revisión humana.",
+        "height": 200,
+        "width": 560,
+        "color": 4
+      },
+      "id": "c0001-0000-4000-8000-000000000001",
+      "name": "Nota · Cabecera",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -60,
+        -420
+      ]
+    },
+    {
+      "parameters": {
+        "content": "### Bloque de almacenamiento\nPara cambiar a Postgres: sustituir **Leer hoja casos**, **Guardar tendencias** y **Guardar borradores**. Los nodos **Formatear fila…** ya dan filas planas con los nombres de columna.",
+        "height": 150,
+        "width": 520,
+        "color": 5
+      },
+      "id": "c0002-0000-4000-8000-000000000002",
+      "name": "Nota · Almacenamiento",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1500,
+        -300
+      ]
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "weeks",
+              "weeksInterval": 1,
+              "triggerAtDay": [
+                1
+              ],
+              "triggerAtHour": 8
+            }
+          ]
+        }
+      },
+      "id": "c0003-0000-4000-8000-000000000003",
+      "name": "Programador semanal",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        -140
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "c0004-0000-4000-8000-000000000004",
+      "name": "Ejecución manual",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        60
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "read",
+        "fileSelector": "/data/proyecto/{config/*.json,schemas/*.json,prompts/*.md}",
+        "options": {
+          "dataPropertyName": "data"
+        }
+      },
+      "id": "c0005-0000-4000-8000-000000000005",
+      "name": "Leer archivos del proyecto",
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1.1,
+      "position": [
+        240,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Entrada: un ítem por archivo leído de /data/proyecto (config/*.json, schemas/*.json, prompts/*.md).\nconst archivos = {};\nconst entrada = $input.all();\nfor (let i = 0; i < entrada.length; i++) {\n  const bin = entrada[i].binary && entrada[i].binary.data;\n  if (!bin) continue;\n  const buf = await this.helpers.getBinaryDataBuffer(i, 'data');\n  archivos[bin.fileName] = buf.toString('utf8');\n}\nfor (const nombre of ['parametros.json', 'caso.schema.json', 'tendencias.md', 'redes.md']) {\n  if (!(nombre in archivos)) throw new Error(`Falta el archivo ${nombre} en /data/proyecto. Revisa los volúmenes de docker-compose.yml.`);\n}\n\nconst parametros = JSON.parse(archivos['parametros.json']);\nconst PROVEEDOR = 'gemini'; // proveedor de IA con el que se generó este workflow\nparametros.proveedor_ia = PROVEEDOR;\nfor (const t of Object.keys(parametros.modelos)) parametros.modelos[t] = parametros.modelos[t][PROVEEDOR];\nconst dia = d => d.toISOString().slice(0, 10);\nconst hoy = new Date();\n\nreturn [{\n  json: {\n    run_id: 'i-' + Date.now().toString(36),\n    inicio_iso: hoy.toISOString(),\n    desde: dia(new Date(hoy.getTime() - parametros.ventana_dias * 86400000)),\n    hasta: dia(hoy),\n    parametros,\n    schema: JSON.parse(archivos['caso.schema.json']),\n    prompts: { tendencias: archivos['tendencias.md'], redes: archivos['redes.md'] },\n  },\n}];\n"
+      },
+      "id": "c0006-0000-4000-8000-000000000006",
+      "name": "Cargar configuración",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        480,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "authentication": "serviceAccount",
+        "operation": "read",
+        "documentId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "={{ $env.GOOGLE_SHEET_ID }}"
+        },
+        "sheetName": {
+          "__rl": true,
+          "mode": "name",
+          "value": "={{ $('Cargar configuración').first().json.parametros.hojas.casos }}"
+        },
+        "options": {}
+      },
+      "id": "c0007-0000-4000-8000-000000000007",
+      "name": "Leer hoja casos",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        720,
+        0
+      ],
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "jsCode": "// Filas de la hoja \"casos\" → casos de los últimos 7 días en formato compacto (una sola salida).\nconst cfg = $('Cargar configuración').first().json;\nconst p = cfg.parametros;\nconst limite = Date.now() - p.ventana_dias * 86400000;\nconst num = v => { const n = Number(v); return isNaN(n) ? null : n; };\nconst lista = v => String(v || '').split(';').map(s => s.trim()).filter(Boolean);\nconst json = v => { try { return JSON.parse(v); } catch (e) { return []; } };\n\nconst vistos = new Set();\nconst casos = $input.all()\n  .map(i => i.json)\n  .filter(r => r.id && r.titulo_caso)\n  .filter(r => { const t = Date.parse(r.fecha_ingesta); return !isNaN(t) && t >= limite; })\n  .filter(r => (vistos.has(r.id) ? false : vistos.add(r.id)))\n  // Modo sectorial: solo casos del sector foco o con relevancia suficiente para él. En fase 1 (sector_foco = null) no filtra nada.\n  .filter(r => !p.sector_foco || r.sector === p.sector_foco || (num(r.relevancia_sector) || 0) >= p.relevancia_sector_minima)\n  .map(r => ({\n    id: r.id, empresa: r.empresa || null, sector: r.sector || null, pais: r.pais || null,\n    titulo_caso: r.titulo_caso, resumen: r.resumen || null, tecnologia_ia: lista(r.tecnologia_ia),\n    tipo_innovacion: r.tipo_innovacion || null, madurez: r.madurez || null, metricas: json(r.metricas),\n    categoria: r.categoria || null, puntuacion_total: num(r.puntuacion_total), evidencia: num(r.evidencia), relevancia_sector: num(r.relevancia_sector),\n    etiquetas: lista(r.etiquetas), confianza: r.confianza || null,\n    fuente: r.fuente, url: r.url, region_fuente: r.region_fuente || null,\n  }))\n  .sort((a, b) => (b.puntuacion_total || 0) - (a.puntuacion_total || 0) || (b.evidencia || 0) - (a.evidencia || 0));\n\n// Al modelo de tendencias solo se le pasa lo necesario (sin URL) y con un tope para controlar coste.\nconst paraPrompt = casos.slice(0, p.max_casos_tendencias).map(({ url, fuente, region_fuente, ...resto }) => ({ ...resto, region: region_fuente }));\nreturn [{\n  json: {\n    n_semana: casos.length,\n    n_prompt: paraPrompt.length,\n    ids_prompt: paraPrompt.map(c => c.id),\n    casos_prompt: paraPrompt,\n    casos_todos: casos,\n  },\n}];\n"
+      },
+      "id": "c0008-0000-4000-8000-000000000008",
+      "name": "Casos de la semana",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        960,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "c0009-0000-4000-8000-000000000009",
+              "leftValue": "={{ $json.n_semana > 0 }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "c0010-0000-4000-8000-000000000010",
+      "name": "¿Hay casos esta semana?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1200,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const cfg = $('Cargar configuración').first().json;\nconst MESES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];\nconst f = iso => { const [a, m, d] = iso.split('-').map(Number); return `${d} de ${MESES[m - 1]} de ${a}`; };\nlet hoja = '';\ntry { hoja = `https://docs.google.com/spreadsheets/d/${$env.GOOGLE_SHEET_ID}/edit`; } catch (e) { hoja = ''; }\nconst texto = [\n  '📊 <b>VIGILANCIA IA · Informe semanal</b>',\n  `🗓 <i>${f(cfg.desde)} → ${f(cfg.hasta)}</i>`,\n  '',\n  '━━━━━━━━━━━━━━━━━━',\n  '',\n  `😴 Esta semana no hay casos nuevos en la hoja «${cfg.parametros.hojas.casos}».`,\n  '',\n  '🔎 <b>Qué revisar</b>',\n  '• La hoja <i>log_ejecuciones</i>: ¿ha corrido bien el workflow 01 cada día?',\n  '• Si hubo errores de cuota de la IA, los artículos se reintentan al día siguiente.',\n  ...(hoja ? ['', `📄 <a href=\"${hoja}\">Abrir la hoja de cálculo</a>`] : []),\n].join('\\n');\nreturn [{ json: { texto } }];\n"
+      },
+      "id": "c0011-0000-4000-8000-000000000011",
+      "name": "Mensaje: sin casos",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1440,
+        220
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Monta el mensaje de sistema y el de usuario a partir del archivo prompts/tendencias.md\nconst cfg = $('Cargar configuración').first().json;\n\nfunction partir(md) {\n  const limpio = md.replace(/<!--[\\s\\S]*?-->/g, '');\n  const iSys = limpio.indexOf('## SYSTEM');\n  const iUsr = limpio.indexOf('## USER');\n  if (iSys < 0 || iUsr < 0) throw new Error('El prompt debe tener las secciones \"## SYSTEM\" y \"## USER\"');\n  return { sistema: limpio.slice(iSys + 9, iUsr).trim(), usuario: limpio.slice(iUsr + 7).trim() };\n}\n// Una sola pasada: lo que se inserta no se vuelve a interpretar como marcador.\nconst rellenar = (t, v) => t.replace(/\\{\\{(\\w+)\\}\\}/g, (m, k) => (v[k] === undefined || v[k] === null ? '' : String(v[k])));\n\nconst { sistema, usuario } = partir(cfg.prompts.tendencias);\nreturn $input.all().map(it => {\n  const j = it.json;\n  const vars = { desde: cfg.desde, hasta: cfg.hasta, n_casos: j.n_prompt, sector_foco: cfg.parametros.sector_foco || 'ninguno', casos_json: JSON.stringify(j.casos_prompt) };\n  return { json: { ...j, prompt_system: sistema, prompt_user: rellenar(usuario, vars) } };\n});\n"
+      },
+      "id": "c0012-0000-4000-8000-000000000012",
+      "name": "Preparar prompt tendencias",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1440,
+        -120
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Cargar configuración').first().json.parametros.gemini_host + '/v1beta/models/' + $('Cargar configuración').first().json.parametros.modelos.tendencias + ':generateContent' }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googlePalmApi",
+        "sendBody": true,
+        "contentType": "json",
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ systemInstruction: { parts: [{ text: $json.prompt_system }] }, contents: [{ role: 'user', parts: [{ text: $json.prompt_user }] }], generationConfig: { maxOutputTokens: $('Cargar configuración').first().json.parametros.ia.max_tokens_tendencias, responseMimeType: 'application/json' } }) }}",
+        "options": {
+          "timeout": 180000,
+          "batching": {
+            "batch": {
+              "batchSize": 1,
+              "batchInterval": "={{ $('Cargar configuración').first().json.parametros.procesamiento.pausas_ia_ms.tendencias }}"
+            }
+          }
+        }
+      },
+      "id": "c0013-0000-4000-8000-000000000013",
+      "name": "IA · Tendencias",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1680,
+        -120
+      ],
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 5000,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Parsea y valida el informe de tendencias contra schemas/caso.schema.json → $defs/tendencias\n// y comprueba que solo cita ids de casos que se le enviaron.\n// Validador mínimo de JSON Schema (sin dependencias) para usar igual en local y dentro de un nodo Code de n8n.\n// Soporta: $ref local (#/$defs/...), type (string o lista), enum, required, properties,\n// additionalProperties:false, items, minimum, maximum, maxLength, maxItems, oneOf.\n// Uso local: node scripts/validar_esquema.js <extraccion|clasificacion|metadatos> <fichero.json>\n\nfunction resolver(raiz, ref) {\n  return ref.replace(/^#\\//, '').split('/').reduce((o, k) => o[k], raiz);\n}\n\nfunction tipoDe(v) {\n  if (v === null) return 'null';\n  if (Array.isArray(v)) return 'array';\n  if (Number.isInteger(v)) return 'integer';\n  return typeof v; // string, number, boolean, object\n}\n\nfunction coincideTipo(v, t) {\n  const real = tipoDe(v);\n  return real === t || (t === 'number' && real === 'integer');\n}\n\nfunction validar(raiz, esquema, valor, ruta, errores) {\n  if (esquema.$ref) return validar(raiz, resolver(raiz, esquema.$ref), valor, ruta, errores);\n\n  if (esquema.oneOf) {\n    const aciertos = esquema.oneOf.filter(s => {\n      const e = [];\n      validar(raiz, s, valor, ruta, e);\n      return e.length === 0;\n    });\n    if (aciertos.length !== 1) errores.push(`${ruta}: no cumple exactamente una de las opciones permitidas`);\n    return;\n  }\n\n  if (esquema.type) {\n    const tipos = Array.isArray(esquema.type) ? esquema.type : [esquema.type];\n    if (!tipos.some(t => coincideTipo(valor, t))) {\n      errores.push(`${ruta}: tipo ${tipoDe(valor)} no permitido (esperado ${tipos.join('|')})`);\n      return;\n    }\n  }\n  if (esquema.enum && !esquema.enum.includes(valor)) errores.push(`${ruta}: valor \"${valor}\" fuera de la lista permitida`);\n  if (typeof valor === 'number') {\n    if (esquema.minimum !== undefined && valor < esquema.minimum) errores.push(`${ruta}: ${valor} < ${esquema.minimum}`);\n    if (esquema.maximum !== undefined && valor > esquema.maximum) errores.push(`${ruta}: ${valor} > ${esquema.maximum}`);\n  }\n  if (typeof valor === 'string' && esquema.maxLength !== undefined && valor.length > esquema.maxLength) {\n    errores.push(`${ruta}: ${valor.length} caracteres (máx. ${esquema.maxLength})`);\n  }\n  if (Array.isArray(valor)) {\n    if (esquema.maxItems !== undefined && valor.length > esquema.maxItems) errores.push(`${ruta}: ${valor.length} elementos (máx. ${esquema.maxItems})`);\n    if (esquema.items) valor.forEach((x, i) => validar(raiz, esquema.items, x, `${ruta}[${i}]`, errores));\n  }\n  if (tipoDe(valor) === 'object') {\n    (esquema.required || []).forEach(k => { if (!(k in valor)) errores.push(`${ruta}.${k}: campo obligatorio ausente`); });\n    const props = esquema.properties || {};\n    for (const k of Object.keys(valor)) {\n      if (props[k]) validar(raiz, props[k], valor[k], `${ruta}.${k}`, errores);\n      else if (esquema.additionalProperties === false) errores.push(`${ruta}.${k}: campo no permitido`);\n    }\n  }\n}\n\n// Los modelos de IA se pasan de longitud con frecuencia (p. ej. 205 caracteres donde el esquema admite 200). Eso no es un fallo\n// de contenido, así que antes de validar se recortan en el sitio los textos y listas que exceden maxLength / maxItems.\nfunction recortarExcesos(raiz, esquema, valor) {\n  if (!esquema || valor === null || typeof valor !== 'object') return valor;\n  if (esquema.$ref) return recortarExcesos(raiz, resolver(raiz, esquema.$ref), valor);\n  if (esquema.oneOf) {\n    const rama = esquema.oneOf.find(s => !s.type || coincideTipo(valor, s.type) || s.$ref);\n    return rama ? recortarExcesos(raiz, rama, valor) : valor;\n  }\n  if (Array.isArray(valor)) {\n    if (esquema.maxItems !== undefined && valor.length > esquema.maxItems) valor.length = esquema.maxItems;\n    valor.forEach((x, i) => {\n      if (esquema.items && typeof x === 'string' && esquema.items.maxLength !== undefined && x.length > esquema.items.maxLength) {\n        valor[i] = x.slice(0, esquema.items.maxLength - 1) + '…';\n      } else if (esquema.items) recortarExcesos(raiz, esquema.items, x);\n    });\n    return valor;\n  }\n  const props = esquema.properties || {};\n  for (const k of Object.keys(valor)) {\n    const s = props[k];\n    if (!s) continue;\n    const v = valor[k];\n    if (typeof v === 'string' && s.maxLength !== undefined && v.length > s.maxLength) valor[k] = v.slice(0, s.maxLength - 1) + '…';\n    else recortarExcesos(raiz, s, v);\n  }\n  return valor;\n}\n\n// Devuelve { ok, errores } validando `dato` contra $defs[nombreDef] del esquema (tras recortar textos demasiado largos).\nfunction validarContraDef(esquema, nombreDef, dato) {\n  const errores = [];\n  recortarExcesos(esquema, esquema.$defs[nombreDef], dato);\n  validar(esquema, esquema.$defs[nombreDef], dato, nombreDef, errores);\n  // Regla de coherencia que el esquema no expresa: es_caso=false exige motivo.\n  if (nombreDef === 'extraccion' && dato && dato.es_caso === false && !dato.motivo_no_caso) {\n    errores.push('extraccion.motivo_no_caso: obligatorio cuando es_caso=false');\n  }\n  return { ok: errores.length === 0, errores };\n}\n\n\n// Lectura de la respuesta de la IA, igual para Gemini y Claude (y para el nodo nativo o la llamada HTTP).\nfunction textoIA(j) {\n  if (!j) return '';\n  // Claude (nodo Anthropic): content = [{ type: 'text', text }]\n  if (Array.isArray(j.content)) return j.content.filter(c => c.type === 'text').map(c => c.text).join('');\n  // Gemini (llamada HTTP o nodo con \"Simplify\" desactivado): candidates[0].content.parts[].text\n  if (Array.isArray(j.candidates) && j.candidates[0]) {\n    const partes = (j.candidates[0].content && j.candidates[0].content.parts) || [];\n    return partes.filter(p => typeof p.text === 'string' && !p.thought).map(p => p.text).join('');\n  }\n  // Gemini (nodo con \"Simplify\" activado): content = { parts: [...] }\n  if (j.content && Array.isArray(j.content.parts)) return j.content.parts.filter(p => typeof p.text === 'string' && !p.thought).map(p => p.text).join('');\n  if (typeof j.mergedResponse === 'string') return j.mergedResponse;\n  return '';\n}\n\n// Por qué terminó la respuesta (para avisar de un corte por límite de tokens).\nfunction finIA(j) {\n  if (!j) return '';\n  if (j.stop_reason) return String(j.stop_reason);\n  if (Array.isArray(j.candidates) && j.candidates[0] && j.candidates[0].finishReason) return String(j.candidates[0].finishReason);\n  return j.finishReason ? String(j.finishReason) : '';\n}\n\n// Mensaje del error de la API cuando no hay respuesta (cuota agotada, sobrecarga, clave inválida…).\nfunction errorIA(j) {\n  const e = j && j.error;\n  if (!e) return '';\n  const m = typeof e === 'string' ? e : (e.message || JSON.stringify(e));\n  const d = e && e.description ? ' — ' + e.description : ''; // p. ej. \"API key not valid\"\n  return (String(m) + d).slice(0, 260);\n}\n\n// Texto de la respuesta o, si no hay, el motivo. Los errores de API empiezan siempre por \"Sin respuesta del modelo\".\nfunction leerIA(j, errores) {\n  const t = textoIA(j);\n  if (!t) errores.push('Sin respuesta del modelo' + (errorIA(j) ? ': ' + errorIA(j) : ''));\n  else if (/MAX_TOKENS|max_tokens/.test(finIA(j))) errores.push('Respuesta cortada por el límite de tokens (sube max_tokens en parametros.json)');\n  return t;\n}\n\nconst cfg = $('Cargar configuración').first().json;\nconst semana = $('Casos de la semana').first().json;\n\nfunction extraerJson(t) {\n  const s = t.replace(/```(?:json)?/gi, '');\n  const a = s.indexOf('{');\n  const b = s.lastIndexOf('}');\n  return a >= 0 && b > a ? s.slice(a, b + 1) : s;\n}\n\nconst it = $input.first();\nconst errores = [];\nconst ajustes = [];\nconst texto = leerIA(it && it.json, errores);\nlet obj = null;\nif (texto) {\n  try { obj = JSON.parse(extraerJson(texto)); } catch (e) { errores.push('JSON no parseable: ' + e.message); }\n}\n\nif (obj) {\n  errores.push(...validarContraDef(cfg.schema, 'tendencias', obj).errores);\n  if (errores.length === 0) {\n    const validos = new Set(semana.ids_prompt);\n    // Se descartan ids inventados; una tendencia necesita al menos 2 casos reales.\n    obj.tendencias = obj.tendencias.filter(t => {\n      const antes = t.casos_ids.length;\n      t.casos_ids = t.casos_ids.filter(id => validos.has(id));\n      if (t.casos_ids.length < antes) ajustes.push(`Tendencia \"${t.titulo}\": se quitaron ${antes - t.casos_ids.length} ids inexistentes`);\n      if (t.casos_ids.length < 2) { ajustes.push(`Tendencia \"${t.titulo}\" eliminada: menos de 2 casos válidos`); return false; }\n      return true;\n    });\n    obj.casos_destacados = obj.casos_destacados.filter(c => validos.has(c.id));\n    obj.periodo = { desde: cfg.desde, hasta: cfg.hasta };\n    obj.n_casos_analizados = semana.n_prompt;\n  }\n}\n\nreturn [{\n  json: {\n    estado: errores.length ? 'invalida' : 'ok',\n    tendencias: errores.length ? null : obj,\n    errores,\n    ajustes,\n    respuesta_cruda: errores.length ? texto.slice(0, 1500) : undefined,\n  },\n}];\n"
+      },
+      "id": "c0014-0000-4000-8000-000000000014",
+      "name": "Validar tendencias",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1920,
+        -120
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// ALMACENAMIENTO · fila de la hoja \"tendencias\" (una por semana).\n// \"tendencias_texto\" es la versión legible; las columnas en JSON se conservan (ocultas en la hoja) por si otro sistema las lee.\nconst cfg = $('Cargar configuración').first().json;\nconst semana = $('Casos de la semana').first().json;\nconst j = $input.first().json;\nconst t = j.tendencias;\nconst js = v => JSON.stringify(v || []);\nconst FUERZA = { alta: '🔴 alta', media: '🟠 media', emergente: '🟡 emergente' };\nconst texto = t && t.tendencias.length\n  ? t.tendencias.map((x, i) => `${i + 1}. ${x.titulo} — ${FUERZA[x.fuerza] || x.fuerza}, ${x.casos_ids.length} casos${x.implicacion ? '\\n    → ' + x.implicacion : ''}`).join('\\n')\n  : (t ? 'Sin tendencias con 2 o más casos esta semana.' : '');\nreturn [{\n  json: {\n    semana_desde: cfg.desde,\n    semana_hasta: cfg.hasta,\n    estado: j.estado,\n    n_casos: semana.n_prompt,\n    resumen_ejecutivo: t ? t.resumen_ejecutivo : '',\n    tendencias_texto: texto,\n    cautelas: t && t.cautelas ? t.cautelas.join('\\n') : '',\n    limitaciones: (t && t.limitaciones) || '',\n    avisos: [...j.errores, ...j.ajustes].join(' | ').slice(0, 500),\n    tendencias: js(t && t.tendencias),\n    casos_destacados: js(t && t.casos_destacados),\n    sectores_mas_activos: js(t && t.sectores_mas_activos),\n    tecnologias_mas_citadas: js(t && t.tecnologias_mas_citadas),\n    modelo: cfg.parametros.modelos.tendencias,\n    fecha_generacion: new Date().toISOString(),\n  },\n}];\n"
+      },
+      "id": "c0015-0000-4000-8000-000000000015",
+      "name": "Formatear fila tendencias",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2160,
+        -120
+      ]
+    },
+    {
+      "parameters": {
+        "authentication": "serviceAccount",
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "={{ $env.GOOGLE_SHEET_ID }}"
+        },
+        "sheetName": {
+          "__rl": true,
+          "mode": "name",
+          "value": "={{ $('Cargar configuración').first().json.parametros.hojas.tendencias }}"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": null,
+          "matchingColumns": [],
+          "schema": []
+        },
+        "options": {}
+      },
+      "id": "c0016-0000-4000-8000-000000000016",
+      "name": "Guardar tendencias",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        2400,
+        -120
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Los casos mejor puntuados de la semana (ya vienen ordenados por puntuación y evidencia).\nconst cfg = $('Cargar configuración').first().json;\nconst semana = $('Casos de la semana').first().json;\nreturn semana.casos_todos.slice(0, cfg.parametros.n_posts_semanales).map((c, i) => {\n  const { url, fuente, region_fuente, ...paraPrompt } = c;\n  return { json: { id: c.id, posicion: i + 1, titulo_caso: c.titulo_caso, fuente, url, puntuacion_total: c.puntuacion_total, caso_prompt: paraPrompt } };\n});\n"
+      },
+      "id": "c0017-0000-4000-8000-000000000017",
+      "name": "Seleccionar top casos",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2640,
+        -120
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Monta el mensaje de sistema y el de usuario a partir del archivo prompts/redes.md\nconst cfg = $('Cargar configuración').first().json;\n\nfunction partir(md) {\n  const limpio = md.replace(/<!--[\\s\\S]*?-->/g, '');\n  const iSys = limpio.indexOf('## SYSTEM');\n  const iUsr = limpio.indexOf('## USER');\n  if (iSys < 0 || iUsr < 0) throw new Error('El prompt debe tener las secciones \"## SYSTEM\" y \"## USER\"');\n  return { sistema: limpio.slice(iSys + 9, iUsr).trim(), usuario: limpio.slice(iUsr + 7).trim() };\n}\n// Una sola pasada: lo que se inserta no se vuelve a interpretar como marcador.\nconst rellenar = (t, v) => t.replace(/\\{\\{(\\w+)\\}\\}/g, (m, k) => (v[k] === undefined || v[k] === null ? '' : String(v[k])));\n\nconst { sistema, usuario } = partir(cfg.prompts.redes);\nreturn $input.all().map(it => {\n  const j = it.json;\n  const vars = { caso_json: JSON.stringify(j.caso_prompt, null, 1), fuente: j.fuente, url: j.url };\n  return { json: { ...j, prompt_system: sistema, prompt_user: rellenar(usuario, vars) } };\n});\n"
+      },
+      "id": "c0018-0000-4000-8000-000000000018",
+      "name": "Preparar prompt redes",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2880,
+        -120
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Cargar configuración').first().json.parametros.gemini_host + '/v1beta/models/' + $('Cargar configuración').first().json.parametros.modelos.redes + ':generateContent' }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googlePalmApi",
+        "sendBody": true,
+        "contentType": "json",
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ systemInstruction: { parts: [{ text: $json.prompt_system }] }, contents: [{ role: 'user', parts: [{ text: $json.prompt_user }] }], generationConfig: { maxOutputTokens: $('Cargar configuración').first().json.parametros.ia.max_tokens_redes, responseMimeType: 'application/json' } }) }}",
+        "options": {
+          "timeout": 180000,
+          "batching": {
+            "batch": {
+              "batchSize": 1,
+              "batchInterval": "={{ $('Cargar configuración').first().json.parametros.procesamiento.pausas_ia_ms.redes }}"
+            }
+          }
+        }
+      },
+      "id": "c0019-0000-4000-8000-000000000019",
+      "name": "IA · Redes",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        3120,
+        -120
+      ],
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 5000,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Valida cada borrador contra schemas/caso.schema.json → $defs/borrador_redes y comprueba que cita la URL de la fuente.\n// Un borrador con fallos se guarda igualmente (estado \"revisar_formato\") para que una persona lo corrija.\n// Validador mínimo de JSON Schema (sin dependencias) para usar igual en local y dentro de un nodo Code de n8n.\n// Soporta: $ref local (#/$defs/...), type (string o lista), enum, required, properties,\n// additionalProperties:false, items, minimum, maximum, maxLength, maxItems, oneOf.\n// Uso local: node scripts/validar_esquema.js <extraccion|clasificacion|metadatos> <fichero.json>\n\nfunction resolver(raiz, ref) {\n  return ref.replace(/^#\\//, '').split('/').reduce((o, k) => o[k], raiz);\n}\n\nfunction tipoDe(v) {\n  if (v === null) return 'null';\n  if (Array.isArray(v)) return 'array';\n  if (Number.isInteger(v)) return 'integer';\n  return typeof v; // string, number, boolean, object\n}\n\nfunction coincideTipo(v, t) {\n  const real = tipoDe(v);\n  return real === t || (t === 'number' && real === 'integer');\n}\n\nfunction validar(raiz, esquema, valor, ruta, errores) {\n  if (esquema.$ref) return validar(raiz, resolver(raiz, esquema.$ref), valor, ruta, errores);\n\n  if (esquema.oneOf) {\n    const aciertos = esquema.oneOf.filter(s => {\n      const e = [];\n      validar(raiz, s, valor, ruta, e);\n      return e.length === 0;\n    });\n    if (aciertos.length !== 1) errores.push(`${ruta}: no cumple exactamente una de las opciones permitidas`);\n    return;\n  }\n\n  if (esquema.type) {\n    const tipos = Array.isArray(esquema.type) ? esquema.type : [esquema.type];\n    if (!tipos.some(t => coincideTipo(valor, t))) {\n      errores.push(`${ruta}: tipo ${tipoDe(valor)} no permitido (esperado ${tipos.join('|')})`);\n      return;\n    }\n  }\n  if (esquema.enum && !esquema.enum.includes(valor)) errores.push(`${ruta}: valor \"${valor}\" fuera de la lista permitida`);\n  if (typeof valor === 'number') {\n    if (esquema.minimum !== undefined && valor < esquema.minimum) errores.push(`${ruta}: ${valor} < ${esquema.minimum}`);\n    if (esquema.maximum !== undefined && valor > esquema.maximum) errores.push(`${ruta}: ${valor} > ${esquema.maximum}`);\n  }\n  if (typeof valor === 'string' && esquema.maxLength !== undefined && valor.length > esquema.maxLength) {\n    errores.push(`${ruta}: ${valor.length} caracteres (máx. ${esquema.maxLength})`);\n  }\n  if (Array.isArray(valor)) {\n    if (esquema.maxItems !== undefined && valor.length > esquema.maxItems) errores.push(`${ruta}: ${valor.length} elementos (máx. ${esquema.maxItems})`);\n    if (esquema.items) valor.forEach((x, i) => validar(raiz, esquema.items, x, `${ruta}[${i}]`, errores));\n  }\n  if (tipoDe(valor) === 'object') {\n    (esquema.required || []).forEach(k => { if (!(k in valor)) errores.push(`${ruta}.${k}: campo obligatorio ausente`); });\n    const props = esquema.properties || {};\n    for (const k of Object.keys(valor)) {\n      if (props[k]) validar(raiz, props[k], valor[k], `${ruta}.${k}`, errores);\n      else if (esquema.additionalProperties === false) errores.push(`${ruta}.${k}: campo no permitido`);\n    }\n  }\n}\n\n// Los modelos de IA se pasan de longitud con frecuencia (p. ej. 205 caracteres donde el esquema admite 200). Eso no es un fallo\n// de contenido, así que antes de validar se recortan en el sitio los textos y listas que exceden maxLength / maxItems.\nfunction recortarExcesos(raiz, esquema, valor) {\n  if (!esquema || valor === null || typeof valor !== 'object') return valor;\n  if (esquema.$ref) return recortarExcesos(raiz, resolver(raiz, esquema.$ref), valor);\n  if (esquema.oneOf) {\n    const rama = esquema.oneOf.find(s => !s.type || coincideTipo(valor, s.type) || s.$ref);\n    return rama ? recortarExcesos(raiz, rama, valor) : valor;\n  }\n  if (Array.isArray(valor)) {\n    if (esquema.maxItems !== undefined && valor.length > esquema.maxItems) valor.length = esquema.maxItems;\n    valor.forEach((x, i) => {\n      if (esquema.items && typeof x === 'string' && esquema.items.maxLength !== undefined && x.length > esquema.items.maxLength) {\n        valor[i] = x.slice(0, esquema.items.maxLength - 1) + '…';\n      } else if (esquema.items) recortarExcesos(raiz, esquema.items, x);\n    });\n    return valor;\n  }\n  const props = esquema.properties || {};\n  for (const k of Object.keys(valor)) {\n    const s = props[k];\n    if (!s) continue;\n    const v = valor[k];\n    if (typeof v === 'string' && s.maxLength !== undefined && v.length > s.maxLength) valor[k] = v.slice(0, s.maxLength - 1) + '…';\n    else recortarExcesos(raiz, s, v);\n  }\n  return valor;\n}\n\n// Devuelve { ok, errores } validando `dato` contra $defs[nombreDef] del esquema (tras recortar textos demasiado largos).\nfunction validarContraDef(esquema, nombreDef, dato) {\n  const errores = [];\n  recortarExcesos(esquema, esquema.$defs[nombreDef], dato);\n  validar(esquema, esquema.$defs[nombreDef], dato, nombreDef, errores);\n  // Regla de coherencia que el esquema no expresa: es_caso=false exige motivo.\n  if (nombreDef === 'extraccion' && dato && dato.es_caso === false && !dato.motivo_no_caso) {\n    errores.push('extraccion.motivo_no_caso: obligatorio cuando es_caso=false');\n  }\n  return { ok: errores.length === 0, errores };\n}\n\n\n// Lectura de la respuesta de la IA, igual para Gemini y Claude (y para el nodo nativo o la llamada HTTP).\nfunction textoIA(j) {\n  if (!j) return '';\n  // Claude (nodo Anthropic): content = [{ type: 'text', text }]\n  if (Array.isArray(j.content)) return j.content.filter(c => c.type === 'text').map(c => c.text).join('');\n  // Gemini (llamada HTTP o nodo con \"Simplify\" desactivado): candidates[0].content.parts[].text\n  if (Array.isArray(j.candidates) && j.candidates[0]) {\n    const partes = (j.candidates[0].content && j.candidates[0].content.parts) || [];\n    return partes.filter(p => typeof p.text === 'string' && !p.thought).map(p => p.text).join('');\n  }\n  // Gemini (nodo con \"Simplify\" activado): content = { parts: [...] }\n  if (j.content && Array.isArray(j.content.parts)) return j.content.parts.filter(p => typeof p.text === 'string' && !p.thought).map(p => p.text).join('');\n  if (typeof j.mergedResponse === 'string') return j.mergedResponse;\n  return '';\n}\n\n// Por qué terminó la respuesta (para avisar de un corte por límite de tokens).\nfunction finIA(j) {\n  if (!j) return '';\n  if (j.stop_reason) return String(j.stop_reason);\n  if (Array.isArray(j.candidates) && j.candidates[0] && j.candidates[0].finishReason) return String(j.candidates[0].finishReason);\n  return j.finishReason ? String(j.finishReason) : '';\n}\n\n// Mensaje del error de la API cuando no hay respuesta (cuota agotada, sobrecarga, clave inválida…).\nfunction errorIA(j) {\n  const e = j && j.error;\n  if (!e) return '';\n  const m = typeof e === 'string' ? e : (e.message || JSON.stringify(e));\n  const d = e && e.description ? ' — ' + e.description : ''; // p. ej. \"API key not valid\"\n  return (String(m) + d).slice(0, 260);\n}\n\n// Texto de la respuesta o, si no hay, el motivo. Los errores de API empiezan siempre por \"Sin respuesta del modelo\".\nfunction leerIA(j, errores) {\n  const t = textoIA(j);\n  if (!t) errores.push('Sin respuesta del modelo' + (errorIA(j) ? ': ' + errorIA(j) : ''));\n  else if (/MAX_TOKENS|max_tokens/.test(finIA(j))) errores.push('Respuesta cortada por el límite de tokens (sube max_tokens en parametros.json)');\n  return t;\n}\n\nconst cfg = $('Cargar configuración').first().json;\n\nfunction extraerJson(t) {\n  const s = t.replace(/```(?:json)?/gi, '');\n  const a = s.indexOf('{');\n  const b = s.lastIndexOf('}');\n  return a >= 0 && b > a ? s.slice(a, b + 1) : s;\n}\n\nreturn $input.all().map((it, k) => {\n  const base = $('Preparar prompt redes').itemMatching(k).json;\n  const errores = [];\n  const texto = leerIA(it.json, errores);\n  let obj = null;\n  if (texto) {\n    try { obj = JSON.parse(extraerJson(texto)); } catch (e) { errores.push('JSON no parseable: ' + e.message); }\n  }\n  if (obj) {\n    // Si un texto se pasa de longitud, se acorta la parte escrita pero se conserva la URL de la fuente al final\n    // (el recorte genérico del validador la cortaría y el borrador saldría marcado \"falta la URL\").\n    for (const [red, limite] of [['linkedin', 1200], ['x', 270]]) {\n      const r = obj[red];\n      if (!r || typeof r.texto !== 'string' || r.texto.length <= limite || !r.texto.includes(base.url)) continue;\n      const i = r.texto.lastIndexOf(base.url);\n      const cola = r.texto.slice(i);\n      if (cola.length < limite - 10) r.texto = r.texto.slice(0, i).trimEnd().slice(0, limite - cola.length - 2).trimEnd() + '… ' + cola;\n    }\n    errores.push(...validarContraDef(cfg.schema, 'borrador_redes', obj).errores);\n    if (obj.caso_id !== base.id) { errores.push(`caso_id \"${obj.caso_id}\" no coincide con \"${base.id}\"`); obj.caso_id = base.id; }\n    for (const red of ['linkedin', 'x']) {\n      if (obj[red] && typeof obj[red].texto === 'string' && !obj[red].texto.includes(base.url)) errores.push(`${red}: falta la URL de la fuente`);\n    }\n  }\n  return {\n    json: {\n      id: base.id, posicion: base.posicion, titulo_caso: base.titulo_caso, fuente: base.fuente, url: base.url,\n      puntuacion_total: base.puntuacion_total,\n      borrador: obj, estado: errores.length ? 'revisar_formato' : 'pendiente_revision', errores,\n      respuesta_cruda: errores.length ? texto.slice(0, 1500) : undefined,\n    },\n  };\n});\n"
+      },
+      "id": "c0020-0000-4000-8000-000000000020",
+      "name": "Validar redes",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3360,
+        -120
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// ALMACENAMIENTO · fila de la hoja \"borradores_redes\" (una por caso). Siempre es un borrador pendiente de revisión humana.\n// El orden de las claves es el de lectura recomendado en la hoja.\nconst cfg = $('Cargar configuración').first().json;\nreturn $input.all().map(it => {\n  const j = it.json;\n  const b = j.borrador || {};\n  const li = b.linkedin || {};\n  const x = b.x || {};\n  return {\n    json: {\n      estado: j.estado,\n      semana_hasta: cfg.hasta,\n      titulo_caso: j.titulo_caso,\n      puntuacion_total: j.puntuacion_total,\n      fuente: j.fuente,\n      explicacion_sencilla: b.explicacion_sencilla || '',\n      por_que_importa: b.por_que_importa || '',\n      linkedin_texto: li.texto || '',\n      x_texto: x.texto || '',\n      idea_visual: b.idea_visual || '',\n      avisos_revision: (b.avisos_revision || []).join(' | '),\n      errores: j.errores.join(' | ').slice(0, 500),\n      url: j.url,\n      linkedin_hashtags: (li.hashtags || []).join(' '),\n      x_hashtags: (x.hashtags || []).join(' '),\n      caso_id: j.id,\n      modelo: cfg.parametros.modelos.redes,\n      fecha_generacion: new Date().toISOString(),\n    },\n  };\n});\n"
+      },
+      "id": "c0021-0000-4000-8000-000000000021",
+      "name": "Formatear fila borrador",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3600,
+        -120
+      ]
+    },
+    {
+      "parameters": {
+        "authentication": "serviceAccount",
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "={{ $env.GOOGLE_SHEET_ID }}"
+        },
+        "sheetName": {
+          "__rl": true,
+          "mode": "name",
+          "value": "={{ $('Cargar configuración').first().json.parametros.hojas.borradores_redes }}"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": null,
+          "matchingColumns": [],
+          "schema": []
+        },
+        "options": {}
+      },
+      "id": "c0022-0000-4000-8000-000000000022",
+      "name": "Guardar borradores",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        3840,
+        -120
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Mensajes de Telegram (HTML): 1 resumen del informe + 1 por borrador. Telegram admite 4096 caracteres por mensaje.\n// Formato pensado para leerse de un vistazo: secciones con emoji, citas para los textos copiables y barras de puntuación.\nconst cfg = $('Cargar configuración').first().json;\nconst semana = $('Casos de la semana').first().json;\nconst tend = $('Validar tendencias').first().json;\nconst borradores = $('Validar redes').all().map(i => i.json);\n\nconst esc = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');\nconst attr = s => esc(s).replace(/\"/g, '&quot;');\nconst corta = (s, n) => (String(s).length > n ? String(s).slice(0, n - 1).trimEnd() + '…' : String(s));\nconst LINEA = '━━━━━━━━━━━━━━━━━━';\nconst MESES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];\nconst NUM = ['1️⃣', '2️⃣', '3️⃣', '4️⃣', '5️⃣', '6️⃣', '7️⃣', '8️⃣', '9️⃣', '🔟'];\nconst MEDALLA = ['🥇', '🥈', '🥉', '4️⃣', '5️⃣', '6️⃣', '7️⃣', '8️⃣', '9️⃣', '🔟'];\nconst FUERZA = { alta: '🔴 alta', media: '🟠 media', emergente: '🟡 emergente' };\n\nconst barra = p => { const n = Math.max(0, Math.min(10, Math.round((Number(p) || 0) / 10))); return '▰'.repeat(n) + '▱'.repeat(10 - n); };\nconst fecha = iso => { const [a, m, d] = iso.split('-').map(Number); return { d, m, a }; };\nfunction periodo(desde, hasta) {\n  const x = fecha(desde), y = fecha(hasta);\n  if (x.a === y.a && x.m === y.m) return `${x.d} → ${y.d} de ${MESES[y.m - 1]} de ${y.a}`;\n  if (x.a === y.a) return `${x.d} de ${MESES[x.m - 1]} → ${y.d} de ${MESES[y.m - 1]} de ${y.a}`;\n  return `${x.d} ${MESES[x.m - 1]} ${x.a} → ${y.d} ${MESES[y.m - 1]} ${y.a}`;\n}\nlet hoja = '';\ntry { hoja = `https://docs.google.com/spreadsheets/d/${$env.GOOGLE_SHEET_ID}/edit`; } catch (e) { hoja = ''; }\nconst enlaceHoja = hoja ? `📄 <a href=\"${attr(hoja)}\">Abrir la hoja de cálculo</a>` : '';\nconst cabecera = ['📊 <b>VIGILANCIA IA · Informe semanal</b>', `🗓 <i>${esc(periodo(cfg.desde, cfg.hasta))}</i>`];\n\n// ---------- Mensaje 1: el informe ----------\n// Se construye por bloques completos y, si no cabe en 4096 caracteres, se van quitando detalles opcionales\n// (nunca se corta el texto a la mitad: eso dejaría etiquetas HTML sin cerrar y Telegram rechazaría el mensaje).\nconst una = s => String(s == null ? '' : s).replace(/\\s+/g, ' ').trim();\nconst primeraFrase = s => { const t = una(s); const i = t.search(/[.!?](\\s|$)/); return i > 20 ? t.slice(0, i + 1) : t; };\nfunction informe({ implicaciones, cautelas, lineasCasos, resumenMax, tituloMax, maxTendencias }) {\n  const l = [...cabecera, `📥 <b>${semana.n_semana}</b> casos nuevos esta semana`, '', LINEA, ''];\n  if (tend.estado === 'ok') {\n    const t = tend.tendencias;\n    l.push('📝 <b>EN RESUMEN</b>', `<blockquote>${esc(corta(una(t.resumen_ejecutivo), resumenMax))}</blockquote>`, '');\n    l.push('🔥 <b>TENDENCIAS</b>');\n    if (!t.tendencias.length) l.push('<i>Esta semana no hay tendencias con 2 o más casos.</i>');\n    t.tendencias.slice(0, maxTendencias).forEach((x, i) => {\n      l.push(`${NUM[i] || (i + 1) + '.'} <b>${esc(corta(una(x.titulo), tituloMax))}</b>`);\n      l.push(`      📈 Fuerza ${FUERZA[x.fuerza] || esc(x.fuerza)} · ${x.casos_ids.length} casos`);\n      if (implicaciones && x.implicacion) l.push(`      💡 <i>${esc(corta(una(x.implicacion), 200))}</i>`);\n    });\n    if (t.tendencias.length > maxTendencias) l.push(`<i>…y ${t.tendencias.length - maxTendencias} más en la hoja.</i>`);\n    if (cautelas && t.cautelas && t.cautelas.length) l.push('', `🧐 <i>Ojo: ${esc(corta(una(t.cautelas[0]), 200))}</i>`);\n    if (cautelas && t.limitaciones) l.push('', `ℹ️ <i>${esc(corta(una(t.limitaciones), 200))}</i>`);\n  } else {\n    l.push('⚠️ <b>No se pudo generar el informe de tendencias</b>', `<i>${esc(corta(una(tend.errores.join('; ')), 300))}</i>`);\n  }\n  l.push('', LINEA, '', '🏆 <b>CASOS DESTACADOS</b>');\n  borradores.forEach((b, i) => {\n    l.push(`${MEDALLA[i] || (i + 1) + '.'} <a href=\"${attr(b.url)}\">${esc(corta(una(b.titulo_caso), 110))}</a>`);\n    l.push(`      🏷 ${esc(b.fuente)} · ${barra(b.puntuacion_total)} <b>${b.puntuacion_total ?? '?'}</b>/100`);\n    if (lineasCasos && b.borrador && b.borrador.explicacion_sencilla) l.push(`      💬 <i>${esc(corta(primeraFrase(b.borrador.explicacion_sencilla), 150))}</i>`);\n  });\n  const revisar = borradores.filter(b => b.estado !== 'pendiente_revision').length;\n  l.push('', LINEA, '', '✍️ <b>BORRADORES PARA REDES</b>', `${borradores.length} listos para revisar ⬇️ <i>(en los siguientes mensajes)</i>`);\n  if (revisar) l.push(`⚠️ <b>${revisar}</b> con avisos de formato: míralos con cuidado`);\n  l.push('🔒 <i>No se publica nada automáticamente.</i>');\n  if (enlaceHoja) l.push('', enlaceHoja);\n  return l.join('\\n');\n}\n// De más a menos detalle. Lo que primero se sacrifica son las implicaciones de cada tendencia; la línea sencilla de cada caso es lo último que se quita.\nconst NIVELES = [\n  { implicaciones: true, cautelas: true, lineasCasos: true, resumenMax: 700, tituloMax: 110, maxTendencias: 8 },\n  { implicaciones: false, cautelas: true, lineasCasos: true, resumenMax: 600, tituloMax: 100, maxTendencias: 8 },\n  { implicaciones: false, cautelas: false, lineasCasos: true, resumenMax: 450, tituloMax: 90, maxTendencias: 6 },\n  { implicaciones: false, cautelas: false, lineasCasos: false, resumenMax: 300, tituloMax: 70, maxTendencias: 4 },\n];\nlet textoInforme = '';\nfor (const nivel of NIVELES) { textoInforme = informe(nivel); if (textoInforme.length <= 3900) break; }\n\n// Último recurso: si algún mensaje quedase con etiquetas sin cerrar, se envía sin formato en lugar de fallar.\nconst equilibrado = s => ['b', 'i', 'blockquote'].every(e => (s.match(new RegExp('<' + e + '>', 'g')) || []).length === (s.match(new RegExp('</' + e + '>', 'g')) || []).length);\nconst seguro = s => (s.length <= 4096 && equilibrado(s) ? s : s.replace(new RegExp('</?(b|i|blockquote|a)( [^>]*)?>', 'g'), '').slice(0, 4090));\n\nconst mensajes = [{ json: { texto: seguro(textoInforme) } }];\n\n// ---------- Mensajes siguientes: un borrador por mensaje ----------\nborradores.forEach((b, i) => {\n  const cab = [`✍️ <b>BORRADOR ${i + 1} de ${borradores.length}</b>`, LINEA, `📌 <b>${esc(corta(b.titulo_caso, 140))}</b>`, `🏷 ${esc(b.fuente)} · ${barra(b.puntuacion_total)} <b>${b.puntuacion_total ?? '?'}</b>/100`, `🔗 <a href=\"${attr(b.url)}\">Ver el artículo original</a>`, ''];\n  const d = b.borrador;\n  if (!d) {\n    mensajes.push({ json: { texto: seguro([...cab, '❌ <b>No se pudo generar este borrador</b>', `<i>${esc(corta(b.errores.join('; '), 300))}</i>`].join('\\n')) } });\n    return;\n  }\n  const hl = (d.linkedin.hashtags || []).join(' ');\n  const hx = (d.x.hashtags || []).join(' ');\n  const avisos = [...(d.avisos_revision || []), ...b.errores];\n  // Apartado sencillo: qué dice la noticia, en lenguaje cotidiano, y por qué importa (solo si la IA lo ha escrito).\n  const sencillo = [];\n  if (d.explicacion_sencilla) sencillo.push('🧩 <b>EN PALABRAS SENCILLAS</b>', `<blockquote>${esc(corta(d.explicacion_sencilla, 600))}</blockquote>`);\n  if (d.por_que_importa) sencillo.push(`🎯 <b>Por qué importa:</b> <i>${esc(corta(d.por_que_importa, 300))}</i>`);\n  if (sencillo.length) sencillo.push('');\n  cab.push(...sencillo);\n  const pie = ['', '🖼 <b>Imagen sugerida</b>', `<i>${esc(corta(d.idea_visual, 300))}</i>`];\n  if (avisos.length) pie.push('', '⚠️ <b>Antes de publicar, revisa:</b>', ...avisos.slice(0, 5).map(a => `• ${esc(corta(a, 200))}`));\n  // Reserva de espacio: lo que sobra de los 4000 caracteres es para los textos (no se corta nunca una etiqueta HTML).\n  const fijo = [...cab, '💼 <b>LinkedIn</b>', '', '', '𝕏 <b>X</b>', '', ...pie].join('\\n').length + 80;\n  const margen = Math.max(400, 4000 - fijo);\n  const tl = corta(d.linkedin.texto, Math.floor(margen * 0.75));\n  const tx = corta(d.x.texto, Math.floor(margen * 0.25));\n  const m = [...cab,\n    '💼 <b>LinkedIn</b>', `<blockquote>${esc(tl)}${hl ? '\\n\\n' + esc(hl) : ''}</blockquote>`, '',\n    '𝕏 <b>X</b>', `<blockquote>${esc(tx)}${hx ? '\\n' + esc(hx) : ''}</blockquote>`,\n    ...pie];\n  mensajes.push({ json: { texto: seguro(m.join('\\n')) } });\n});\nreturn mensajes;\n"
+      },
+      "id": "c0023-0000-4000-8000-000000000023",
+      "name": "Preparar mensajes Telegram",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        4080,
+        -120
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "operation": "sendMessage",
+        "chatId": "={{ $env.TELEGRAM_CHAT_ID }}",
+        "text": "={{ $json.texto }}",
+        "additionalFields": {
+          "parse_mode": "HTML",
+          "appendAttribution": false,
+          "disable_web_page_preview": true
+        }
+      },
+      "id": "c0024-0000-4000-8000-000000000024",
+      "name": "Enviar a Telegram",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        4320,
+        0
+      ]
+    }
+  ],
+  "connections": {
+    "Programador semanal": {
+      "main": [
+        [
+          {
+            "node": "Leer archivos del proyecto",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ejecución manual": {
+      "main": [
+        [
+          {
+            "node": "Leer archivos del proyecto",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Leer archivos del proyecto": {
+      "main": [
+        [
+          {
+            "node": "Cargar configuración",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Cargar configuración": {
+      "main": [
+        [
+          {
+            "node": "Leer hoja casos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Leer hoja casos": {
+      "main": [
+        [
+          {
+            "node": "Casos de la semana",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Casos de la semana": {
+      "main": [
+        [
+          {
+            "node": "¿Hay casos esta semana?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Hay casos esta semana?": {
+      "main": [
+        [
+          {
+            "node": "Preparar prompt tendencias",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Mensaje: sin casos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Preparar prompt tendencias": {
+      "main": [
+        [
+          {
+            "node": "IA · Tendencias",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IA · Tendencias": {
+      "main": [
+        [
+          {
+            "node": "Validar tendencias",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validar tendencias": {
+      "main": [
+        [
+          {
+            "node": "Formatear fila tendencias",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Formatear fila tendencias": {
+      "main": [
+        [
+          {
+            "node": "Guardar tendencias",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Guardar tendencias": {
+      "main": [
+        [
+          {
+            "node": "Seleccionar top casos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Seleccionar top casos": {
+      "main": [
+        [
+          {
+            "node": "Preparar prompt redes",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Preparar prompt redes": {
+      "main": [
+        [
+          {
+            "node": "IA · Redes",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IA · Redes": {
+      "main": [
+        [
+          {
+            "node": "Validar redes",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validar redes": {
+      "main": [
+        [
+          {
+            "node": "Formatear fila borrador",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Formatear fila borrador": {
+      "main": [
+        [
+          {
+            "node": "Guardar borradores",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Guardar borradores": {
+      "main": [
+        [
+          {
+            "node": "Preparar mensajes Telegram",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Preparar mensajes Telegram": {
+      "main": [
+        [
+          {
+            "node": "Enviar a Telegram",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mensaje: sin casos": {
+      "main": [
+        [
+          {
+            "node": "Enviar a Telegram",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Europe/Madrid",
+    "executionTimeout": 1800
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": false
+  },
+  "active": false
+}

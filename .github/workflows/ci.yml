@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  pruebas:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [20, 22]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Pruebas unitarias
+        run: npm test
+      - name: Sintaxis de los workflows y JSON
+        run: node scripts/comprobar_sintaxis.js $(find workflows tests -name "*.json" -not -path "tests/esquema/*" -not -path "tests/resultados*")
+      - name: JSON de configuración válido
+        run: |
+          for f in config/*.json schemas/*.json; do node -e "JSON.parse(require('fs').readFileSync('$f','utf8'))" && echo "ok $f"; done
+      - name: Los workflows generados coinciden con el código fuente
+        run: |
+          npm run generar
+          git diff --exit-code

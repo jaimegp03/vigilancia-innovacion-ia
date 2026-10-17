@@ -1,0 +1,1 @@
+{ desde: cfg.desde, hasta: cfg.hasta, n_casos: j.n_prompt, sector_foco: cfg.parametros.sector_foco || 'ninguno', casos_json: JSON.stringify(j.casos_prompt) }

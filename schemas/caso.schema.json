@@ -1,0 +1,645 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "caso.schema.json",
+  "title": "Caso de innovación con IA",
+  "description": "Un caso = metadatos del artículo (los pone n8n) + extracción (Haiku) + clasificación (Sonnet). Cada bloque se valida por separado con su $def.",
+  "type": "object",
+  "required": [
+    "metadatos",
+    "extraccion",
+    "clasificacion"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "metadatos": {
+      "$ref": "#/$defs/metadatos"
+    },
+    "extraccion": {
+      "$ref": "#/$defs/extraccion"
+    },
+    "clasificacion": {
+      "$ref": "#/$defs/clasificacion"
+    }
+  },
+  "$defs": {
+    "sector": {
+      "type": "string",
+      "enum": [
+        "banca_seguros",
+        "automocion",
+        "turismo_hosteleria",
+        "construccion_inmobiliario",
+        "gran_consumo_alimentacion",
+        "retail_comercio",
+        "salud_farma",
+        "energia_utilities",
+        "industria_manufactura",
+        "logistica_transporte",
+        "telecomunicaciones",
+        "educacion",
+        "sector_publico",
+        "medios_marketing",
+        "agricultura",
+        "tecnologia_software",
+        "otros"
+      ]
+    },
+    "metadatos": {
+      "type": "object",
+      "required": [
+        "id",
+        "url",
+        "titular",
+        "fuente",
+        "fecha_publicacion",
+        "idioma",
+        "acceso",
+        "fecha_ingesta"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Hash estable de la URL normalizada (lo calcula n8n)"
+        },
+        "url": {
+          "type": "string"
+        },
+        "url_normalizada": {
+          "type": "string"
+        },
+        "titular": {
+          "type": "string"
+        },
+        "fuente": {
+          "type": "string"
+        },
+        "tipo_fuente": {
+          "type": "string",
+          "enum": [
+            "revista",
+            "medio_economico",
+            "consultora",
+            "nota_prensa",
+            "busqueda_web"
+          ]
+        },
+        "region_fuente": {
+          "type": "string"
+        },
+        "fecha_publicacion": {
+          "type": "string",
+          "description": "ISO 8601"
+        },
+        "idioma": {
+          "type": "string",
+          "enum": [
+            "es",
+            "en"
+          ]
+        },
+        "acceso": {
+          "type": "string",
+          "enum": [
+            "completo",
+            "parcial"
+          ],
+          "description": "parcial = solo titular y resumen (paywall o texto muy corto)"
+        },
+        "fecha_ingesta": {
+          "type": "string",
+          "description": "ISO 8601"
+        },
+        "modelo_extraccion": {
+          "type": "string"
+        },
+        "modelo_clasificacion": {
+          "type": "string"
+        },
+        "origen": {
+          "type": "string",
+          "enum": [
+            "rss",
+            "busqueda_web"
+          ],
+          "description": "Workflow que encontró el artículo: 01 (rss) o 03 (busqueda_web)"
+        },
+        "consulta": {
+          "type": "string",
+          "description": "Consulta de búsqueda que lo encontró (solo workflow 03)"
+        }
+      }
+    },
+    "extraccion": {
+      "type": "object",
+      "description": "Salida del prompt de extracción. Todo en español y con palabras propias, sin copiar frases del artículo.",
+      "required": [
+        "es_caso",
+        "motivo_no_caso",
+        "empresa",
+        "sector",
+        "pais",
+        "titulo_caso",
+        "resumen",
+        "tecnologia_ia",
+        "tipo_innovacion",
+        "madurez",
+        "resultado",
+        "metricas",
+        "confianza"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "es_caso": {
+          "type": "boolean",
+          "description": "true solo si hay una organización identificable usando IA de forma concreta"
+        },
+        "motivo_no_caso": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 200,
+          "description": "Obligatorio si es_caso=false; null si es_caso=true"
+        },
+        "empresa": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 120
+        },
+        "sector": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/sector"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "pais": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 80,
+          "description": "País principal del caso, en español"
+        },
+        "titulo_caso": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 140,
+          "description": "Título propio, no el titular del medio"
+        },
+        "resumen": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 600,
+          "description": "2-3 frases en palabras propias"
+        },
+        "tecnologia_ia": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 60
+          },
+          "maxItems": 6,
+          "description": "Ej.: IA generativa, visión artificial, agentes, predicción"
+        },
+        "tipo_innovacion": {
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "producto_servicio",
+                "proceso_operaciones",
+                "atencion_cliente",
+                "marketing_ventas",
+                "analitica_prediccion",
+                "generacion_contenido",
+                "investigacion_desarrollo",
+                "seguridad_riesgo",
+                "otros"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "madurez": {
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "anuncio",
+                "piloto",
+                "produccion",
+                "escalado",
+                "no_indicado"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "resultado": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 300,
+          "description": "Impacto declarado, en palabras propias"
+        },
+        "metricas": {
+          "type": "array",
+          "maxItems": 5,
+          "items": {
+            "type": "object",
+            "required": [
+              "descripcion",
+              "valor"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "descripcion": {
+                "type": "string",
+                "maxLength": 100
+              },
+              "valor": {
+                "type": "string",
+                "maxLength": 40,
+                "description": "Tal como aparece: '30 %', '2 M€', '12 semanas'"
+              }
+            }
+          }
+        },
+        "confianza": {
+          "type": "string",
+          "enum": [
+            "alta",
+            "media",
+            "baja"
+          ],
+          "description": "baja si solo hay titular y resumen"
+        }
+      }
+    },
+    "clasificacion": {
+      "type": "object",
+      "description": "Salida del prompt de clasificación. La puntuación_total la calcula n8n a partir de las cuatro puntuaciones y los pesos de parametros.json.",
+      "required": [
+        "categoria",
+        "novedad",
+        "impacto",
+        "replicabilidad",
+        "evidencia",
+        "relevancia_sector",
+        "etiquetas",
+        "justificacion"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "categoria": {
+          "type": "string",
+          "enum": [
+            "productividad_interna",
+            "experiencia_cliente",
+            "nuevo_producto_servicio",
+            "optimizacion_operaciones",
+            "ventas_marketing",
+            "riesgo_cumplimiento",
+            "id_y_descubrimiento",
+            "otros"
+          ]
+        },
+        "novedad": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "impacto": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "replicabilidad": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "evidencia": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "relevancia_sector": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 5,
+          "description": "Solo si hay sector_foco; null en fase 1"
+        },
+        "etiquetas": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 40
+          },
+          "maxItems": 6
+        },
+        "justificacion": {
+          "type": "string",
+          "maxLength": 300
+        },
+        "puntuacion_total": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Calculada por n8n, no por el modelo"
+        }
+      }
+    },
+    "tendencias": {
+      "type": "object",
+      "description": "Salida del prompt de tendencias semanales (una por semana).",
+      "required": [
+        "periodo",
+        "n_casos_analizados",
+        "resumen_ejecutivo",
+        "tendencias",
+        "casos_destacados",
+        "sectores_mas_activos",
+        "tecnologias_mas_citadas",
+        "cautelas",
+        "limitaciones"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "periodo": {
+          "type": "object",
+          "required": [
+            "desde",
+            "hasta"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "desde": {
+              "type": "string",
+              "maxLength": 10
+            },
+            "hasta": {
+              "type": "string",
+              "maxLength": 10
+            }
+          }
+        },
+        "n_casos_analizados": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "resumen_ejecutivo": {
+          "type": "string",
+          "maxLength": 1200
+        },
+        "tendencias": {
+          "type": "array",
+          "maxItems": 8,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "titulo",
+              "descripcion",
+              "fuerza",
+              "casos_ids",
+              "sectores",
+              "regiones",
+              "implicacion"
+            ],
+            "properties": {
+              "titulo": {
+                "type": "string",
+                "maxLength": 120
+              },
+              "descripcion": {
+                "type": "string",
+                "maxLength": 700
+              },
+              "fuerza": {
+                "type": "string",
+                "enum": [
+                  "alta",
+                  "media",
+                  "emergente"
+                ]
+              },
+              "casos_ids": {
+                "type": "array",
+                "maxItems": 40,
+                "items": {
+                  "type": "string",
+                  "maxLength": 40
+                }
+              },
+              "sectores": {
+                "type": "array",
+                "maxItems": 8,
+                "items": {
+                  "type": "string",
+                  "maxLength": 60
+                }
+              },
+              "regiones": {
+                "type": "array",
+                "maxItems": 8,
+                "items": {
+                  "type": "string",
+                  "maxLength": 60
+                }
+              },
+              "implicacion": {
+                "type": "string",
+                "maxLength": 400
+              }
+            }
+          }
+        },
+        "casos_destacados": {
+          "type": "array",
+          "maxItems": 3,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "por_que"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "maxLength": 40
+              },
+              "por_que": {
+                "type": "string",
+                "maxLength": 400
+              }
+            }
+          }
+        },
+        "sectores_mas_activos": {
+          "type": "array",
+          "maxItems": 10,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "sector",
+              "n_casos"
+            ],
+            "properties": {
+              "sector": {
+                "type": "string",
+                "maxLength": 60
+              },
+              "n_casos": {
+                "type": "integer",
+                "minimum": 0
+              }
+            }
+          }
+        },
+        "tecnologias_mas_citadas": {
+          "type": "array",
+          "maxItems": 10,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "tecnologia",
+              "n_casos"
+            ],
+            "properties": {
+              "tecnologia": {
+                "type": "string",
+                "maxLength": 80
+              },
+              "n_casos": {
+                "type": "integer",
+                "minimum": 0
+              }
+            }
+          }
+        },
+        "cautelas": {
+          "type": "array",
+          "maxItems": 8,
+          "items": {
+            "type": "string",
+            "maxLength": 300
+          }
+        },
+        "limitaciones": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 400
+        }
+      }
+    },
+    "borrador_redes": {
+      "type": "object",
+      "description": "Salida del prompt de redes (un borrador por caso). Siempre se publica tras revisión humana.",
+      "required": [
+        "caso_id",
+        "linkedin",
+        "x",
+        "idea_visual",
+        "avisos_revision"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "caso_id": {
+          "type": "string",
+          "maxLength": 40
+        },
+        "linkedin": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "texto",
+            "hashtags"
+          ],
+          "properties": {
+            "texto": {
+              "type": "string",
+              "maxLength": 1200
+            },
+            "hashtags": {
+              "type": "array",
+              "maxItems": 4,
+              "items": {
+                "type": "string",
+                "maxLength": 40
+              }
+            }
+          }
+        },
+        "x": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "texto",
+            "hashtags"
+          ],
+          "properties": {
+            "texto": {
+              "type": "string",
+              "maxLength": 270
+            },
+            "hashtags": {
+              "type": "array",
+              "maxItems": 4,
+              "items": {
+                "type": "string",
+                "maxLength": 40
+              }
+            }
+          }
+        },
+        "explicacion_sencilla": {
+          "type": "string",
+          "maxLength": 600,
+          "description": "Explicación en lenguaje cotidiano de qué dice la noticia (para quien revisa, no para publicar)"
+        },
+        "por_que_importa": {
+          "type": "string",
+          "maxLength": 300,
+          "description": "Una frase sobre por qué importa la noticia"
+        },
+        "idea_visual": {
+          "type": "string",
+          "maxLength": 300
+        },
+        "avisos_revision": {
+          "type": "array",
+          "maxItems": 6,
+          "items": {
+            "type": "string",
+            "maxLength": 200
+          }
+        }
+      }
+    }
+  }
+}

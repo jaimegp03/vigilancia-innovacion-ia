@@ -1,0 +1,21 @@
+# Secretos y configuración local
+.env
+*.pem
+*service-account*.json
+*credenciales*.json
+
+# Dependencias y registros
+node_modules/
+*.log
+
+# Salidas temporales de las pruebas
+salida*.txt
+*.mock.json
+g_prueba.json*
+wf_prueba.json
+
+# Sistema operativo / editores
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

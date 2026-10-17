@@ -1,0 +1,174 @@
+{
+  "_comentario": "Consultas del workflow 03. Cada ejecución toma \"consultas_por_ejecucion\" combinaciones región × tipo de innovación, rotando por semana del año hasta recorrerlas todas.",
+  "consultas_por_ejecucion": 6,
+  "max_busquedas_por_consulta": 3,
+  "max_candidatos_por_consulta": 6,
+  "regiones": [
+    {
+      "clave": "espana",
+      "nombre": "España",
+      "idioma": "es",
+      "es": "en España",
+      "en": "in Spain"
+    },
+    {
+      "clave": "latinoamerica",
+      "nombre": "Latinoamérica",
+      "idioma": "es",
+      "es": "en Latinoamérica",
+      "en": "in Latin America"
+    },
+    {
+      "clave": "estados_unidos",
+      "nombre": "Estados Unidos",
+      "idioma": "en",
+      "es": "en Estados Unidos",
+      "en": "in the United States"
+    },
+    {
+      "clave": "europa",
+      "nombre": "Europa",
+      "idioma": "en",
+      "es": "en Europa",
+      "en": "in Europe"
+    },
+    {
+      "clave": "asia",
+      "nombre": "Asia",
+      "idioma": "en",
+      "es": "en Asia (China, Japón, Corea, India)",
+      "en": "in Asia (China, Japan, South Korea, India)"
+    },
+    {
+      "clave": "oriente_medio_africa",
+      "nombre": "Oriente Medio y África",
+      "idioma": "en",
+      "es": "en Oriente Medio y África",
+      "en": "in the Middle East and Africa"
+    }
+  ],
+  "tipos": [
+    {
+      "clave": "atencion_cliente",
+      "es": "atención al cliente",
+      "en": "customer service"
+    },
+    {
+      "clave": "operaciones",
+      "es": "operaciones y cadena de suministro",
+      "en": "operations and supply chain"
+    },
+    {
+      "clave": "producto_servicio",
+      "es": "nuevos productos y servicios",
+      "en": "new products and services"
+    },
+    {
+      "clave": "marketing_ventas",
+      "es": "marketing y ventas",
+      "en": "marketing and sales"
+    },
+    {
+      "clave": "riesgo_cumplimiento",
+      "es": "riesgo, fraude y cumplimiento",
+      "en": "risk, fraud and compliance"
+    },
+    {
+      "clave": "productividad_interna",
+      "es": "productividad interna y agentes de IA",
+      "en": "internal productivity and AI agents"
+    },
+    {
+      "clave": "generacion_contenido",
+      "es": "generación de contenido",
+      "en": "content generation"
+    },
+    {
+      "clave": "investigacion_desarrollo",
+      "es": "investigación y desarrollo",
+      "en": "research and development"
+    }
+  ],
+  "sectores": {
+    "banca_seguros": {
+      "es": "banca y seguros",
+      "en": "banking and insurance"
+    },
+    "automocion": {
+      "es": "automoción",
+      "en": "automotive"
+    },
+    "turismo_hosteleria": {
+      "es": "turismo y hostelería",
+      "en": "tourism and hospitality"
+    },
+    "construccion_inmobiliario": {
+      "es": "construcción e inmobiliario",
+      "en": "construction and real estate"
+    },
+    "gran_consumo_alimentacion": {
+      "es": "gran consumo y alimentación",
+      "en": "consumer goods and food"
+    },
+    "retail_comercio": {
+      "es": "comercio y retail",
+      "en": "retail"
+    },
+    "salud_farma": {
+      "es": "salud y farma",
+      "en": "healthcare and pharma"
+    },
+    "energia_utilities": {
+      "es": "energía y utilities",
+      "en": "energy and utilities"
+    },
+    "industria_manufactura": {
+      "es": "industria y manufactura",
+      "en": "manufacturing"
+    },
+    "logistica_transporte": {
+      "es": "logística y transporte",
+      "en": "logistics and transport"
+    },
+    "telecomunicaciones": {
+      "es": "telecomunicaciones",
+      "en": "telecommunications"
+    },
+    "educacion": {
+      "es": "educación",
+      "en": "education"
+    },
+    "sector_publico": {
+      "es": "sector público",
+      "en": "public sector"
+    },
+    "medios_marketing": {
+      "es": "medios y publicidad",
+      "en": "media and advertising"
+    },
+    "agricultura": {
+      "es": "agricultura",
+      "en": "agriculture"
+    },
+    "tecnologia_software": {
+      "es": "tecnología y software",
+      "en": "technology and software"
+    }
+  },
+  "plantillas": {
+    "es": "casos reales de empresas que usan inteligencia artificial en {tipo} {region}{sector}, noticias de las últimas dos semanas",
+    "en": "real company case studies using artificial intelligence for {tipo} {region}{sector}, news from the last two weeks"
+  },
+  "excluir_dominios": [
+    "youtube.com",
+    "linkedin.com",
+    "facebook.com",
+    "x.com",
+    "twitter.com",
+    "reddit.com",
+    "medium.com",
+    "wikipedia.org",
+    "pinterest.com",
+    "tiktok.com"
+  ]
+}

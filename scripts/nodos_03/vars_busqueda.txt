@@ -1,0 +1,1 @@
+{ consulta: j.consulta, region: j.region, tipo: j.tipo, sector: j.sector, idioma: j.idioma, max_candidatos: cfg.descubrimiento.max_candidatos_por_consulta, fecha_hoy: new Date().toISOString().slice(0, 10) }

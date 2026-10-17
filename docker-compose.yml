@@ -1,0 +1,33 @@
+services:
+  n8n:
+    image: docker.n8n.io/n8nio/n8n:2.43.7 # versión con la que se probó el proyecto; actualízala con calma (docker compose pull)
+    container_name: n8n-vigilancia-ia
+    restart: unless-stopped
+    ports:
+      - "${N8N_PORT:-5678}:5678"
+    environment:
+      - N8N_HOST=${N8N_HOST:-localhost}
+      - N8N_PORT=5678
+      - N8N_PROTOCOL=${N8N_PROTOCOL:-http}
+      - WEBHOOK_URL=${WEBHOOK_URL:-http://localhost:5678/}
+      - GENERIC_TIMEZONE=${GENERIC_TIMEZONE:-Europe/Madrid}
+      - TZ=${GENERIC_TIMEZONE:-Europe/Madrid}
+      - N8N_ENCRYPTION_KEY=${N8N_ENCRYPTION_KEY}
+      # Los workflows leen config/, prompts/ y schemas/ desde esta ruta
+      - N8N_RESTRICT_FILE_ACCESS_TO=/data/proyecto
+      # Permite usar $env.GOOGLE_SHEET_ID y $env.TELEGRAM_CHAT_ID en los workflows
+      - N8N_BLOCK_ENV_ACCESS_IN_NODE=false
+      - GOOGLE_SHEET_ID=${GOOGLE_SHEET_ID}
+      - TELEGRAM_CHAT_ID=${TELEGRAM_CHAT_ID}
+      - EXECUTIONS_DATA_PRUNE=true
+      - EXECUTIONS_DATA_MAX_AGE=336
+    volumes:
+      - n8n_data:/home/node/.n8n
+      # Configuración, prompts y esquemas del proyecto (solo lectura)
+      - ./config:/data/proyecto/config:ro
+      - ./prompts:/data/proyecto/prompts:ro
+      - ./schemas:/data/proyecto/schemas:ro
+      - ./workflows:/data/proyecto/workflows:ro
+
+volumes:
+  n8n_data:
