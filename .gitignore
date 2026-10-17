@@ -19,3 +19,6 @@ wf_prueba.json
 Thumbs.db
 .vscode/
 .idea/
+
+# Configuración personal del PC (no forma parte del proyecto)
+scripts/windows/
