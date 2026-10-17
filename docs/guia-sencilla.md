@@ -22,7 +22,7 @@ Imagina que contratas a un **ayudante** que hace tres cosas por ti:
 
 | Cuándo | Qué hace el sistema solo | Qué haces tú |
 |---|---|---|
-| **Cada día a las 07:00** | Lee la prensa, descarta lo que no sirve, apunta los casos nuevos en la hoja. | Nada. |
+| **Cada día a las 07:00** | Lee la prensa, descarta lo que no sirve, apunta los casos nuevos en la hoja y **te avisa por Telegram** con un resumen del día. | Nada (echa un vistazo al aviso si quieres). |
 | **Cada lunes a las 07:30** | Prepara el informe y los 5 borradores y te los envía por Telegram. | **Leer el mensaje y revisar los borradores** (unos 10 minutos). |
 | **Siempre** | Guarda un registro de cada ejecución. | Mirarlo solo si algo parece raro. |
 

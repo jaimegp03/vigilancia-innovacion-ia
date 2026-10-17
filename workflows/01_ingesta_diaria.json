@@ -896,6 +896,41 @@
         8640,
         0
       ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// AVISO · mensaje diario de Telegram con el resultado de la ejecución (HTML; máx. 4096 caracteres).\nconst esc = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');\nconst attr = s => esc(s).replace(/\"/g, '&quot;');\nconst corta = (s, n) => { s = String(s == null ? '' : s).replace(/\\s+/g, ' ').trim(); return s.length > n ? s.slice(0, n - 1).trimEnd() + '…' : s; };\nconst barra = p => { const n = Math.max(0, Math.min(10, Math.round((Number(p) || 0) / 10))); return '▰'.repeat(n) + '▱'.repeat(10 - n); };\nconst seguro = f => { try { return f(); } catch (e) { return []; } };\n\nconst r = $('Resumen de ejecución').first().json;\nconst casos = seguro(() => $('Formatear fila caso').all()).map(i => i.json).filter(c => c && c.titulo_caso)\n  .sort((a, b) => (b.puntuacion_total || 0) - (a.puntuacion_total || 0));\nlet hoja = '';\ntry { hoja = `https://docs.google.com/spreadsheets/d/${$env.GOOGLE_SHEET_ID}/edit`; } catch (e) { hoja = ''; }\n\nconst fecha = new Date().toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'Europe/Madrid' });\nconst analizados = (r.extraidos_ok || 0) + (r.extraccion_invalida || 0);\n\nconst l = ['📰 <b>VIGILANCIA IA · Resumen del día</b>', `🗓 <i>${esc(fecha)}</i>`, ''];\nif (casos.length) {\n  l.push(`✅ <b>${casos.length} ${casos.length === 1 ? 'caso nuevo' : 'casos nuevos'}</b> guardados en la hoja`, '');\n  casos.slice(0, 8).forEach((c, i) => {\n    l.push(`${i + 1}. <a href=\"${attr(c.url)}\">${esc(corta(c.titulo_caso, 100))}</a>`);\n    l.push(`      🏷 ${esc(c.empresa)} · ${esc(c.fuente)} · ${barra(c.puntuacion_total)} <b>${c.puntuacion_total ?? '?'}</b>/100`);\n    if (c.resumen) l.push(`      💬 <i>${esc(corta(c.resumen, 140))}</i>`);\n  });\n  if (casos.length > 8) l.push('', `…y ${casos.length - 8} más en la hoja.`);\n} else {\n  l.push('😴 <b>Hoy no ha entrado ningún caso nuevo.</b>', '<i>Es normal algunos días: la prensa habla mucho de IA, pero pocos artículos describen un caso real.</i>');\n}\n\nl.push('', '📊 <b>Cómo ha ido</b>');\nl.push(`• Fuentes revisadas: ${r.fuentes_activas}${r.fuentes_con_error ? ` (⚠️ ${r.fuentes_con_error} con error)` : ''}`);\nl.push(`• Artículos analizados con IA: ${analizados}${r.no_son_caso ? ` · descartados por no ser un caso real: ${r.no_son_caso}` : ''}`);\nif (r.recortados_por_tope) l.push(`• ⏳ ${r.recortados_por_tope} artículos esperan turno (tope diario)`);\nif (r.errores) l.push('', `⚠️ <i>${esc(corta(r.errores, 300))}</i>`);\nif (hoja) l.push('', `🔗 <a href=\"${attr(hoja)}\">Abrir la hoja</a>`);\n\nlet texto = l.join('\\n');\nif (texto.length > 4096) texto = texto.replace(new RegExp('</?(b|i|a)( [^>]*)?>', 'g'), '').slice(0, 4090);\nreturn [{ json: { texto } }];\n"
+      },
+      "id": "c0052-0000-4000-8000-000000000052",
+      "name": "Preparar aviso Telegram",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        8640,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "operation": "sendMessage",
+        "chatId": "={{ $env.TELEGRAM_CHAT_ID }}",
+        "text": "={{ $json.texto }}",
+        "additionalFields": {
+          "parse_mode": "HTML",
+          "appendAttribution": false,
+          "disable_web_page_preview": true
+        }
+      },
+      "id": "c0053-0000-4000-8000-000000000053",
+      "name": "Enviar aviso a Telegram",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        8880,
+        200
+      ],
+      "onError": "continueRegularOutput"
     }
   ],
   "connections": {
@@ -1402,6 +1437,22 @@
         [
           {
             "node": "Marcar primera ejecución",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Preparar aviso Telegram",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Preparar aviso Telegram": {
+      "main": [
+        [
+          {
+            "node": "Enviar aviso a Telegram",
             "type": "main",
             "index": 0
           }

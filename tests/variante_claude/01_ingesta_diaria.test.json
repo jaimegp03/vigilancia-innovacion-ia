@@ -9,7 +9,7 @@
         "width": 520,
         "color": 3
       },
-      "id": "c0153-0000-4000-8000-000000000153",
+      "id": "c0159-0000-4000-8000-000000000159",
       "name": "Nota · Cabecera",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
@@ -25,7 +25,7 @@
         "width": 560,
         "color": 5
       },
-      "id": "c0154-0000-4000-8000-000000000154",
+      "id": "c0160-0000-4000-8000-000000000160",
       "name": "Nota · Almacenamiento",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
@@ -36,7 +36,7 @@
     },
     {
       "parameters": {},
-      "id": "c0155-0000-4000-8000-000000000155",
+      "id": "c0161-0000-4000-8000-000000000161",
       "name": "Ejecución manual",
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
@@ -53,7 +53,7 @@
           "dataPropertyName": "data"
         }
       },
-      "id": "c0156-0000-4000-8000-000000000156",
+      "id": "c0162-0000-4000-8000-000000000162",
       "name": "Leer archivos del proyecto",
       "type": "n8n-nodes-base.readWriteFile",
       "typeVersion": 1.1,
@@ -66,7 +66,7 @@
       "parameters": {
         "jsCode": "// Entrada: un ítem por archivo leído de /data/proyecto (config/*.json, schemas/*.json, prompts/*.md).\nconst archivos = {};\nconst entrada = $input.all();\nfor (let i = 0; i < entrada.length; i++) {\n  const bin = entrada[i].binary && entrada[i].binary.data;\n  if (!bin) continue;\n  const buf = await this.helpers.getBinaryDataBuffer(i, 'data');\n  archivos[bin.fileName] = buf.toString('utf8');\n}\nfor (const nombre of ['parametros.json', 'fuentes.json', 'caso.schema.json', 'extraccion.md', 'clasificacion.md']) {\n  if (!(nombre in archivos)) throw new Error(`Falta el archivo ${nombre} en /data/proyecto. Revisa los volúmenes de docker-compose.yml.`);\n}\n\nconst parametros = JSON.parse(archivos['parametros.json']);\nparametros.max_articulos_por_ejecucion = 5; // PRUEBA: solo 5 artículos\nconst PROVEEDOR = 'anthropic'; // proveedor de IA con el que se generó este workflow\nparametros.proveedor_ia = PROVEEDOR;\nfor (const t of Object.keys(parametros.modelos)) parametros.modelos[t] = parametros.modelos[t][PROVEEDOR];\nconst fuentes = JSON.parse(archivos['fuentes.json']).fuentes\n  .filter(f => f.activa && parametros.idiomas.includes(f.idioma));\n\n// Primera ejecución: ventana ampliada (30 días). La marca se guarda al terminar con éxito.\nconst sd = $getWorkflowStaticData('global');\nconst primera = !sd.primera_ejecucion_hecha;\n\nreturn [{\n  json: {\n    run_id: 'r-' + Date.now().toString(36),\n    inicio_iso: new Date().toISOString(),\n    primera_ejecucion: primera,\n    ventana_dias: primera ? parametros.ventana_dias_primera_ejecucion : parametros.ventana_dias,\n    parametros,\n    schema: JSON.parse(archivos['caso.schema.json']),\n    prompts: { extraccion: archivos['extraccion.md'], clasificacion: archivos['clasificacion.md'] },\n    fuentes,\n  },\n}];\n"
       },
-      "id": "c0157-0000-4000-8000-000000000157",
+      "id": "c0163-0000-4000-8000-000000000163",
       "name": "Cargar configuración",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -79,7 +79,7 @@
       "parameters": {
         "jsCode": "// SIMULADO: hoja \"casos\" vacía\nreturn [{ json: {} }];"
       },
-      "id": "c0158-0000-4000-8000-000000000158",
+      "id": "c0164-0000-4000-8000-000000000164",
       "name": "Leer hoja casos",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -93,7 +93,7 @@
       "parameters": {
         "jsCode": "// Una sola salida con las URLs ya guardadas como casos (la hoja puede estar vacía).\nconst urls = $input.all().map(i => i.json.url_normalizada).filter(Boolean);\nreturn [{ json: { urls } }];\n"
       },
-      "id": "c0159-0000-4000-8000-000000000159",
+      "id": "c0165-0000-4000-8000-000000000165",
       "name": "URLs conocidas (casos)",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -106,7 +106,7 @@
       "parameters": {
         "jsCode": "// SIMULADO: hoja \"descartados\" vacía\nreturn [{ json: {} }];"
       },
-      "id": "c0160-0000-4000-8000-000000000160",
+      "id": "c0166-0000-4000-8000-000000000166",
       "name": "Leer hoja descartados",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -120,7 +120,7 @@
       "parameters": {
         "jsCode": "// Une las URLs de \"casos\" y de \"descartados\": un artículo descartado no se vuelve a pagar al día siguiente.\nconst casos = $('URLs conocidas (casos)').first().json.urls;\nconst descartadas = $input.all().map(i => i.json.url_normalizada).filter(Boolean);\nreturn [{\n  json: {\n    n_casos: casos.length,\n    n_descartados: descartadas.length,\n    urls: [...new Set([...casos, ...descartadas])],\n  },\n}];\n"
       },
-      "id": "c0161-0000-4000-8000-000000000161",
+      "id": "c0167-0000-4000-8000-000000000167",
       "name": "URLs conocidas (descartados)",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -133,7 +133,7 @@
       "parameters": {
         "jsCode": "// Un ítem por fuente activa; el nodo RSS Read los procesa de uno en uno (concurrencia 1).\nconst cfg = $('Cargar configuración').first().json;\nreturn cfg.fuentes.map((f, idx) => ({ json: { ...f, idx } }));\n"
       },
-      "id": "c0162-0000-4000-8000-000000000162",
+      "id": "c0168-0000-4000-8000-000000000168",
       "name": "Preparar fuentes",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -147,7 +147,7 @@
         "url": "={{ $json.feed_url }}",
         "options": {}
       },
-      "id": "c0163-0000-4000-8000-000000000163",
+      "id": "c0169-0000-4000-8000-000000000169",
       "name": "Leer feed RSS",
       "type": "n8n-nodes-base.rssFeedRead",
       "typeVersion": 1.2,
@@ -161,7 +161,7 @@
       "parameters": {
         "jsCode": "// Convierte los ítems del RSS (de todas las fuentes) en artículos con un formato común.\nconst MARCAS = /^(utm_|fbclid|gclid|mc_cid|mc_eid|ocid|xtor|cmp|ref$|ref_|source$|spm|igshid)/i;\n\nfunction quitarHtml(s) {\n  return String(s || '')\n    .replace(/<script[\\s\\S]*?<\\/script>|<style[\\s\\S]*?<\\/style>/gi, ' ')\n    .replace(/<[^>]+>/g, ' ')\n    .replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>')\n    .replace(/&quot;/g, '\"').replace(/&#0?39;|&apos;/g, \"'\").replace(/&hellip;/g, '…')\n    .replace(/&#(\\d+);/g, (m, n) => String.fromCharCode(Number(n)))\n    .replace(/\\s+/g, ' ').trim();\n}\n\n// El global URL no existe en el sandbox de los nodos Code de n8n: se analiza la URL con una expresión regular.\nfunction partesUrl(u) {\n  const m = String(u || '').trim().match(/^https?:\\/\\/([^\\/?#:]+)(?::\\d+)?([^?#]*)(?:\\?([^#]*))?/i);\n  return m ? { host: m[1].toLowerCase().replace(/^www\\./, ''), ruta: m[2] || '', consulta: m[3] || '' } : null;\n}\n\nfunction hostDe(u) {\n  const p = partesUrl(u);\n  return p ? p.host : '';\n}\n\n// Misma noticia con distinto utm_*, www, fragmento o barra final → misma clave.\nfunction normalizarUrl(u) {\n  const p = partesUrl(u);\n  if (!p) return String(u || '').trim().toLowerCase();\n  const params = p.consulta.split('&').filter(x => x && !MARCAS.test(x.split('=')[0])).sort();\n  return p.host + p.ruta.replace(/\\/+$/, '') + (params.length ? '?' + params.join('&') : '');\n}\n\nfunction fechaIso(v) {\n  const t = Date.parse(v || '');\n  return isNaN(t) ? null : new Date(t).toISOString();\n}\n\n// Hash estable (cyrb53) de la URL normalizada; sirve como id del caso.\nfunction hash(s) {\n  let h1 = 0xdeadbeef, h2 = 0x41c6ce57;\n  for (let i = 0; i < s.length; i++) {\n    const c = s.charCodeAt(i);\n    h1 = Math.imul(h1 ^ c, 2654435761);\n    h2 = Math.imul(h2 ^ c, 1597334677);\n  }\n  h1 = Math.imul(h1 ^ (h1 >>> 16), 2246822507) ^ Math.imul(h2 ^ (h2 >>> 13), 3266489909);\n  h2 = Math.imul(h2 ^ (h2 >>> 16), 2246822507) ^ Math.imul(h1 ^ (h1 >>> 13), 3266489909);\n  return 'c' + (4294967296 * (2097151 & h2) + (h1 >>> 0)).toString(36);\n}\n\n\nconst salida = [];\nconst entrada = $input.all();\nfor (let k = 0; k < entrada.length; k++) {\n  const it = entrada[k];\n  if (!it.json.link) continue;\n  // itemMatching recorre la trazabilidad de ítems hasta la fuente que originó este artículo\n  const f = $('Preparar fuentes').itemMatching(k).json;\n  const bruto = it.json.contentSnippet || it.json.content || it.json['content:encoded'] || it.json.summary || '';\n  salida.push({\n    json: {\n      fuente: f.nombre,\n      tipo_fuente: f.tipo,\n      region_fuente: f.region,\n      idioma: f.idioma,\n      acceso_fuente: f.acceso,\n      titular: quitarHtml(it.json.title),\n      url: it.json.link.trim(),\n      url_normalizada: normalizarUrl(it.json.link),\n      fecha_publicacion: fechaIso(it.json.isoDate || it.json.pubDate),\n      resumen_feed: quitarHtml(bruto).slice(0, 800),\n      origen: 'rss',\n    },\n  });\n}\nreturn salida;\n"
       },
-      "id": "c0164-0000-4000-8000-000000000164",
+      "id": "c0170-0000-4000-8000-000000000170",
       "name": "Normalizar artículos",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -175,7 +175,7 @@
       "parameters": {
         "jsCode": "// Salida de error del nodo RSS Read: se registra y el flujo sigue con las demás fuentes.\nreturn $input.all().map((it, k) => {\n  const f = $('Preparar fuentes').itemMatching(k).json;\n  const err = it.json.error;\n  const msg = typeof err === 'string' ? err : (err && (err.message || JSON.stringify(err))) || 'error desconocido';\n  return { json: { fuente: f.nombre, feed_url: f.feed_url, error: String(msg).slice(0, 200) } };\n});\n"
       },
-      "id": "c0165-0000-4000-8000-000000000165",
+      "id": "c0171-0000-4000-8000-000000000171",
       "name": "Errores de feed",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -188,7 +188,7 @@
       "parameters": {
         "jsCode": "// Se queda con los artículos publicados dentro de la ventana (7 días; 30 en la primera ejecución).\nconst cfg = $('Cargar configuración').first().json;\nconst ahora = Date.now();\nconst limite = ahora - cfg.ventana_dias * 86400000;\nreturn $input.all()\n  .filter(i => i.json.url)\n  .filter(i => {\n    const t = Date.parse(i.json.fecha_publicacion);\n    return !isNaN(t) && t >= limite && t <= ahora + 86400000;\n  })\n  .map(i => ({ json: i.json }));\n"
       },
-      "id": "c0166-0000-4000-8000-000000000166",
+      "id": "c0172-0000-4000-8000-000000000172",
       "name": "Filtrar por fecha",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -202,7 +202,7 @@
       "parameters": {
         "jsCode": "// Incluir: titular o resumen del feed contiene alguna palabra clave. Excluir: el TITULAR contiene alguna palabra de exclusión.\nconst p = $('Cargar configuración').first().json.parametros;\nconst sensibles = new Set(p.siglas_sensibles_mayusculas || []);\nconst sinAcentos = s => s.normalize('NFD').replace(/\\p{Diacritic}/gu, '');\nconst escapar = s => s.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&');\nconst LIMITE_I = '(?<![\\\\p{L}\\\\p{N}])';\nconst LIMITE_D = '(?![\\\\p{L}\\\\p{N}])';\n\nfunction construir(term) {\n  return sensibles.has(term)\n    ? { regex: new RegExp(LIMITE_I + escapar(term) + LIMITE_D, 'u'), literal: true }\n    : { regex: new RegExp(LIMITE_I + escapar(sinAcentos(term.toLowerCase())) + LIMITE_D, 'u'), literal: false };\n}\nconst incluir = p.palabras_clave_incluir.map(construir);\nconst excluir = p.palabras_clave_excluir.map(construir);\nconst coincide = (lista, texto) => {\n  const norm = sinAcentos(texto.toLowerCase());\n  return lista.some(k => k.regex.test(k.literal ? texto : norm));\n};\n\nreturn $input.all()\n  .filter(i => i.json.url)\n  .filter(i => {\n    const texto = `${i.json.titular} ${i.json.resumen_feed}`;\n    return coincide(incluir, texto) && !coincide(excluir, i.json.titular);\n  })\n  .map(i => ({ json: i.json }));\n"
       },
-      "id": "c0167-0000-4000-8000-000000000167",
+      "id": "c0173-0000-4000-8000-000000000173",
       "name": "Filtrar por palabras clave",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -216,7 +216,7 @@
       "parameters": {
         "jsCode": "// Descarta URLs ya vistas (hojas \"casos\" y \"descartados\") y repetidas dentro de esta misma ejecución.\nconst conocidas = new Set($('URLs conocidas (descartados)').first().json.urls);\n\nconst MARCAS = /^(utm_|fbclid|gclid|mc_cid|mc_eid|ocid|xtor|cmp|ref$|ref_|source$|spm|igshid)/i;\n\nfunction quitarHtml(s) {\n  return String(s || '')\n    .replace(/<script[\\s\\S]*?<\\/script>|<style[\\s\\S]*?<\\/style>/gi, ' ')\n    .replace(/<[^>]+>/g, ' ')\n    .replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>')\n    .replace(/&quot;/g, '\"').replace(/&#0?39;|&apos;/g, \"'\").replace(/&hellip;/g, '…')\n    .replace(/&#(\\d+);/g, (m, n) => String.fromCharCode(Number(n)))\n    .replace(/\\s+/g, ' ').trim();\n}\n\n// El global URL no existe en el sandbox de los nodos Code de n8n: se analiza la URL con una expresión regular.\nfunction partesUrl(u) {\n  const m = String(u || '').trim().match(/^https?:\\/\\/([^\\/?#:]+)(?::\\d+)?([^?#]*)(?:\\?([^#]*))?/i);\n  return m ? { host: m[1].toLowerCase().replace(/^www\\./, ''), ruta: m[2] || '', consulta: m[3] || '' } : null;\n}\n\nfunction hostDe(u) {\n  const p = partesUrl(u);\n  return p ? p.host : '';\n}\n\n// Misma noticia con distinto utm_*, www, fragmento o barra final → misma clave.\nfunction normalizarUrl(u) {\n  const p = partesUrl(u);\n  if (!p) return String(u || '').trim().toLowerCase();\n  const params = p.consulta.split('&').filter(x => x && !MARCAS.test(x.split('=')[0])).sort();\n  return p.host + p.ruta.replace(/\\/+$/, '') + (params.length ? '?' + params.join('&') : '');\n}\n\nfunction fechaIso(v) {\n  const t = Date.parse(v || '');\n  return isNaN(t) ? null : new Date(t).toISOString();\n}\n\n// Hash estable (cyrb53) de la URL normalizada; sirve como id del caso.\nfunction hash(s) {\n  let h1 = 0xdeadbeef, h2 = 0x41c6ce57;\n  for (let i = 0; i < s.length; i++) {\n    const c = s.charCodeAt(i);\n    h1 = Math.imul(h1 ^ c, 2654435761);\n    h2 = Math.imul(h2 ^ c, 1597334677);\n  }\n  h1 = Math.imul(h1 ^ (h1 >>> 16), 2246822507) ^ Math.imul(h2 ^ (h2 >>> 13), 3266489909);\n  h2 = Math.imul(h2 ^ (h2 >>> 16), 2246822507) ^ Math.imul(h1 ^ (h1 >>> 13), 3266489909);\n  return 'c' + (4294967296 * (2097151 & h2) + (h1 >>> 0)).toString(36);\n}\n\n\nconst vistas = new Set();\nreturn $input.all()\n  .filter(i => i.json.url)\n  .sort((a, b) => Date.parse(b.json.fecha_publicacion) - Date.parse(a.json.fecha_publicacion))\n  .filter(i => {\n    const u = i.json.url_normalizada;\n    if (conocidas.has(u) || vistas.has(u)) return false;\n    vistas.add(u);\n    return true;\n  })\n  .map(i => ({ json: { ...i.json, id: hash(i.json.url_normalizada) } }));\n"
       },
-      "id": "c0168-0000-4000-8000-000000000168",
+      "id": "c0174-0000-4000-8000-000000000174",
       "name": "Deduplicar",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -230,7 +230,7 @@
       "parameters": {
         "jsCode": "// Tope diario de artículos para controlar coste. Los más recientes van primero; el resto se verá en las siguientes ejecuciones.\nconst max = $('Cargar configuración').first().json.parametros.max_articulos_por_ejecucion;\nconst items = $input.all().filter(i => i.json.url);\nif (items.length === 0) return [{ json: { vacio: true } }]; // marca para que el flujo pase directo al registro\nreturn items.slice(0, max).map(i => ({ json: i.json }));\n"
       },
-      "id": "c0169-0000-4000-8000-000000000169",
+      "id": "c0175-0000-4000-8000-000000000175",
       "name": "Limitar lote diario",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -250,7 +250,7 @@
           },
           "conditions": [
             {
-              "id": "c0170-0000-4000-8000-000000000170",
+              "id": "c0176-0000-4000-8000-000000000176",
               "leftValue": "={{ !$json.vacio }}",
               "rightValue": "",
               "operator": {
@@ -264,7 +264,7 @@
         },
         "options": {}
       },
-      "id": "c0171-0000-4000-8000-000000000171",
+      "id": "c0177-0000-4000-8000-000000000177",
       "name": "¿Hay artículos nuevos?",
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
@@ -306,7 +306,7 @@
           }
         }
       },
-      "id": "c0172-0000-4000-8000-000000000172",
+      "id": "c0178-0000-4000-8000-000000000178",
       "name": "Descargar artículo",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
@@ -320,7 +320,7 @@
       "parameters": {
         "jsCode": "// Convierte el HTML descargado en texto limpio. Si hay paywall, error o poco texto: solo titular + resumen y acceso \"parcial\".\nconst p = $('Cargar configuración').first().json.parametros;\nconst MIN = p.texto_minimo_caracteres;\nconst MAX = p.texto_maximo_caracteres;\nconst PAYWALL = /suscr[ií]bete para|solo para suscriptores|contenido exclusivo para|inicia sesi[oó]n para (seguir|continuar|leer)|subscribe to (continue|read)|already a subscriber|sign in to (continue|read)|create a free account to (continue|read)/i;\n\nconst ENTIDADES = { nbsp: ' ', amp: '&', lt: '<', gt: '>', quot: '\"', apos: \"'\", hellip: '…', mdash: '—', ndash: '–', laquo: '«', raquo: '»', iexcl: '¡', iquest: '¿', aacute: 'á', eacute: 'é', iacute: 'í', oacute: 'ó', uacute: 'ú', ntilde: 'ñ', Aacute: 'Á', Eacute: 'É', Iacute: 'Í', Oacute: 'Ó', Uacute: 'Ú', Ntilde: 'Ñ', uuml: 'ü', rsquo: '’', lsquo: '‘', rdquo: '”', ldquo: '“' };\nconst decodificar = s => s\n  .replace(/&#x([0-9a-f]+);/gi, (m, h) => String.fromCharCode(parseInt(h, 16)))\n  .replace(/&#(\\d+);/g, (m, n) => String.fromCharCode(Number(n)))\n  .replace(/&([a-zA-Z]+);/g, (m, n) => (n in ENTIDADES ? ENTIDADES[n] : m));\nconst limpiar = s => decodificar(s.replace(/<[^>]+>/g, ' ')).replace(/\\s+/g, ' ').trim();\n\nfunction textoDeHtml(html) {\n  let b = (html.match(/<article[\\s\\S]*<\\/article>/i) || html.match(/<main[\\s\\S]*<\\/main>/i) || [html])[0];\n  b = b.replace(/<(script|style|nav|aside|footer|header|form|figure|figcaption|svg|noscript|iframe|button)[\\s\\S]*?<\\/\\1>/gi, ' ');\n  const partes = [];\n  const vistos = new Set();\n  for (const m of b.matchAll(/<(p|h2|h3)[^>]*>([\\s\\S]*?)<\\/\\1>/gi)) {\n    const t = limpiar(m[2]);\n    const minimo = m[1].toLowerCase() === 'p' ? 40 : 10;\n    if (t.length >= minimo && !vistos.has(t)) { vistos.add(t); partes.push(t); }\n  }\n  return partes.join('\\n');\n}\n\nreturn $input.all().map((it, k) => {\n  const base = $('Limitar lote diario').itemMatching(k).json;\n  const codigo = it.json.statusCode;\n  const cuerpo = typeof it.json.data === 'string' ? it.json.data : it.json.body; // el nodo HTTP devuelve el HTML en 'data'\n  const html = typeof cuerpo === 'string' ? cuerpo.slice(0, 1500000) : '';\n  const ok = !it.json.error && codigo >= 200 && codigo < 300 && html.length > 0;\n  let texto = ok ? textoDeHtml(html) : '';\n  let motivo = null;\n  if (!ok) motivo = it.json.error ? 'error de descarga' : `HTTP ${codigo || 'sin respuesta'}`;\n  else if (texto.length < MIN) motivo = 'texto demasiado corto';\n  else if (PAYWALL.test(html) && texto.length < MIN * 3) motivo = 'paywall';\n\n  const parcial = motivo !== null;\n  if (parcial) texto = `${base.titular}\\n${base.resumen_feed}`.trim();\n  return {\n    json: {\n      ...base,\n      acceso: parcial ? 'parcial' : 'completo',\n      motivo_acceso_parcial: motivo,\n      texto: texto.slice(0, MAX),\n      texto_chars: texto.length,\n    },\n  };\n});\n"
       },
-      "id": "c0173-0000-4000-8000-000000000173",
+      "id": "c0179-0000-4000-8000-000000000179",
       "name": "Extraer texto limpio",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -333,7 +333,7 @@
       "parameters": {
         "jsCode": "// Monta el mensaje de sistema y el de usuario a partir del archivo prompts/extraccion.md\nconst cfg = $('Cargar configuración').first().json;\n\nfunction partir(md) {\n  const limpio = md.replace(/<!--[\\s\\S]*?-->/g, '');\n  const iSys = limpio.indexOf('## SYSTEM');\n  const iUsr = limpio.indexOf('## USER');\n  if (iSys < 0 || iUsr < 0) throw new Error('El prompt debe tener las secciones \"## SYSTEM\" y \"## USER\"');\n  return { sistema: limpio.slice(iSys + 9, iUsr).trim(), usuario: limpio.slice(iUsr + 7).trim() };\n}\n// Una sola pasada: lo que se inserta no se vuelve a interpretar como marcador.\nconst rellenar = (t, v) => t.replace(/\\{\\{(\\w+)\\}\\}/g, (m, k) => (v[k] === undefined || v[k] === null ? '' : String(v[k])));\n\nconst { sistema, usuario } = partir(cfg.prompts.extraccion);\nreturn $input.all().map(it => {\n  const j = it.json;\n  const vars = { fuente: j.fuente, fecha_publicacion: (j.fecha_publicacion || \"\").slice(0, 10), idioma: j.idioma, acceso: j.acceso, titular: j.titular, texto: j.texto };\n  return { json: { ...j, prompt_system: sistema, prompt_user: rellenar(usuario, vars) } };\n});\n"
       },
-      "id": "c0174-0000-4000-8000-000000000174",
+      "id": "c0180-0000-4000-8000-000000000180",
       "name": "Preparar prompt extracción",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -346,7 +346,7 @@
       "parameters": {
         "jsCode": "// SIMULADO (sin clave de API): imita la respuesta del modelo de IA.\n// Posición 1 → responde sin JSON (fuerza el reintento); posición 2 → \"no es un caso\"; el resto → caso válido.\nreturn $input.all().map((it, k) => {\n  const j = it.json;\n  const noCaso = { es_caso: false, motivo_no_caso: 'Artículo de opinión sin caso concreto (simulado)', empresa: null, sector: null, pais: null, titulo_caso: null, resumen: null, tecnologia_ia: [], tipo_innovacion: null, madurez: null, resultado: null, metricas: [], confianza: 'baja' };\n  const texto = k === 1 ? 'Aquí tienes el análisis en prosa, sin JSON.' : JSON.stringify(k === 2 ? noCaso : { es_caso: true, motivo_no_caso: null, empresa: '(simulado) ' + j.fuente, sector: 'tecnologia_software', pais: 'España', titulo_caso: '(simulado) ' + j.titular.slice(0, 100), resumen: '(simulado) Texto de prueba generado por el mock, no por Claude.', tecnologia_ia: ['IA generativa'], tipo_innovacion: 'producto_servicio', madurez: 'anuncio', resultado: null, metricas: [], confianza: j.acceso === 'parcial' ? 'baja' : 'media' });\n  return { json: { content: [{ type: 'text', text: texto }] }, pairedItem: { item: k } };\n});"
       },
-      "id": "c0175-0000-4000-8000-000000000175",
+      "id": "c0181-0000-4000-8000-000000000181",
       "name": "IA · Extracción",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -359,7 +359,7 @@
       "parameters": {
         "jsCode": "// Lee la respuesta del modelo, la parsea y la valida contra schemas/caso.schema.json → $defs/extraccion.\n// Validador mínimo de JSON Schema (sin dependencias) para usar igual en local y dentro de un nodo Code de n8n.\n// Soporta: $ref local (#/$defs/...), type (string o lista), enum, required, properties,\n// additionalProperties:false, items, minimum, maximum, maxLength, maxItems, oneOf.\n// Uso local: node scripts/validar_esquema.js <extraccion|clasificacion|metadatos> <fichero.json>\n\nfunction resolver(raiz, ref) {\n  return ref.replace(/^#\\//, '').split('/').reduce((o, k) => o[k], raiz);\n}\n\nfunction tipoDe(v) {\n  if (v === null) return 'null';\n  if (Array.isArray(v)) return 'array';\n  if (Number.isInteger(v)) return 'integer';\n  return typeof v; // string, number, boolean, object\n}\n\nfunction coincideTipo(v, t) {\n  const real = tipoDe(v);\n  return real === t || (t === 'number' && real === 'integer');\n}\n\nfunction validar(raiz, esquema, valor, ruta, errores) {\n  if (esquema.$ref) return validar(raiz, resolver(raiz, esquema.$ref), valor, ruta, errores);\n\n  if (esquema.oneOf) {\n    const aciertos = esquema.oneOf.filter(s => {\n      const e = [];\n      validar(raiz, s, valor, ruta, e);\n      return e.length === 0;\n    });\n    if (aciertos.length !== 1) errores.push(`${ruta}: no cumple exactamente una de las opciones permitidas`);\n    return;\n  }\n\n  if (esquema.type) {\n    const tipos = Array.isArray(esquema.type) ? esquema.type : [esquema.type];\n    if (!tipos.some(t => coincideTipo(valor, t))) {\n      errores.push(`${ruta}: tipo ${tipoDe(valor)} no permitido (esperado ${tipos.join('|')})`);\n      return;\n    }\n  }\n  if (esquema.enum && !esquema.enum.includes(valor)) errores.push(`${ruta}: valor \"${valor}\" fuera de la lista permitida`);\n  if (typeof valor === 'number') {\n    if (esquema.minimum !== undefined && valor < esquema.minimum) errores.push(`${ruta}: ${valor} < ${esquema.minimum}`);\n    if (esquema.maximum !== undefined && valor > esquema.maximum) errores.push(`${ruta}: ${valor} > ${esquema.maximum}`);\n  }\n  if (typeof valor === 'string' && esquema.maxLength !== undefined && valor.length > esquema.maxLength) {\n    errores.push(`${ruta}: ${valor.length} caracteres (máx. ${esquema.maxLength})`);\n  }\n  if (Array.isArray(valor)) {\n    if (esquema.maxItems !== undefined && valor.length > esquema.maxItems) errores.push(`${ruta}: ${valor.length} elementos (máx. ${esquema.maxItems})`);\n    if (esquema.items) valor.forEach((x, i) => validar(raiz, esquema.items, x, `${ruta}[${i}]`, errores));\n  }\n  if (tipoDe(valor) === 'object') {\n    (esquema.required || []).forEach(k => { if (!(k in valor)) errores.push(`${ruta}.${k}: campo obligatorio ausente`); });\n    const props = esquema.properties || {};\n    for (const k of Object.keys(valor)) {\n      if (props[k]) validar(raiz, props[k], valor[k], `${ruta}.${k}`, errores);\n      else if (esquema.additionalProperties === false) errores.push(`${ruta}.${k}: campo no permitido`);\n    }\n  }\n}\n\n// Los modelos de IA se pasan de longitud con frecuencia (p. ej. 205 caracteres donde el esquema admite 200). Eso no es un fallo\n// de contenido, así que antes de validar se recortan en el sitio los textos y listas que exceden maxLength / maxItems.\nfunction recortarExcesos(raiz, esquema, valor) {\n  if (!esquema || valor === null || typeof valor !== 'object') return valor;\n  if (esquema.$ref) return recortarExcesos(raiz, resolver(raiz, esquema.$ref), valor);\n  if (esquema.oneOf) {\n    const rama = esquema.oneOf.find(s => !s.type || coincideTipo(valor, s.type) || s.$ref);\n    return rama ? recortarExcesos(raiz, rama, valor) : valor;\n  }\n  if (Array.isArray(valor)) {\n    if (esquema.maxItems !== undefined && valor.length > esquema.maxItems) valor.length = esquema.maxItems;\n    valor.forEach((x, i) => {\n      if (esquema.items && typeof x === 'string' && esquema.items.maxLength !== undefined && x.length > esquema.items.maxLength) {\n        valor[i] = x.slice(0, esquema.items.maxLength - 1) + '…';\n      } else if (esquema.items) recortarExcesos(raiz, esquema.items, x);\n    });\n    return valor;\n  }\n  const props = esquema.properties || {};\n  for (const k of Object.keys(valor)) {\n    const s = props[k];\n    if (!s) continue;\n    const v = valor[k];\n    if (typeof v === 'string' && s.maxLength !== undefined && v.length > s.maxLength) valor[k] = v.slice(0, s.maxLength - 1) + '…';\n    else recortarExcesos(raiz, s, v);\n  }\n  return valor;\n}\n\n// Devuelve { ok, errores } validando `dato` contra $defs[nombreDef] del esquema (tras recortar textos demasiado largos).\nfunction validarContraDef(esquema, nombreDef, dato) {\n  const errores = [];\n  recortarExcesos(esquema, esquema.$defs[nombreDef], dato);\n  validar(esquema, esquema.$defs[nombreDef], dato, nombreDef, errores);\n  // Regla de coherencia que el esquema no expresa: es_caso=false exige motivo.\n  if (nombreDef === 'extraccion' && dato && dato.es_caso === false && !dato.motivo_no_caso) {\n    errores.push('extraccion.motivo_no_caso: obligatorio cuando es_caso=false');\n  }\n  return { ok: errores.length === 0, errores };\n}\n\n\n// Lectura de la respuesta de la IA, igual para Gemini y Claude (y para el nodo nativo o la llamada HTTP).\nfunction textoIA(j) {\n  if (!j) return '';\n  // Claude (nodo Anthropic): content = [{ type: 'text', text }]\n  if (Array.isArray(j.content)) return j.content.filter(c => c.type === 'text').map(c => c.text).join('');\n  // Gemini (llamada HTTP o nodo con \"Simplify\" desactivado): candidates[0].content.parts[].text\n  if (Array.isArray(j.candidates) && j.candidates[0]) {\n    const partes = (j.candidates[0].content && j.candidates[0].content.parts) || [];\n    return partes.filter(p => typeof p.text === 'string' && !p.thought).map(p => p.text).join('');\n  }\n  // Gemini (nodo con \"Simplify\" activado): content = { parts: [...] }\n  if (j.content && Array.isArray(j.content.parts)) return j.content.parts.filter(p => typeof p.text === 'string' && !p.thought).map(p => p.text).join('');\n  if (typeof j.mergedResponse === 'string') return j.mergedResponse;\n  return '';\n}\n\n// Por qué terminó la respuesta (para avisar de un corte por límite de tokens).\nfunction finIA(j) {\n  if (!j) return '';\n  if (j.stop_reason) return String(j.stop_reason);\n  if (Array.isArray(j.candidates) && j.candidates[0] && j.candidates[0].finishReason) return String(j.candidates[0].finishReason);\n  return j.finishReason ? String(j.finishReason) : '';\n}\n\n// Mensaje del error de la API cuando no hay respuesta (cuota agotada, sobrecarga, clave inválida…).\nfunction errorIA(j) {\n  const e = j && j.error;\n  if (!e) return '';\n  const m = typeof e === 'string' ? e : (e.message || JSON.stringify(e));\n  const d = e && e.description ? ' — ' + e.description : ''; // p. ej. \"API key not valid\"\n  return (String(m) + d).slice(0, 260);\n}\n\n// Texto de la respuesta o, si no hay, el motivo. Los errores de API empiezan siempre por \"Sin respuesta del modelo\".\nfunction leerIA(j, errores) {\n  const t = textoIA(j);\n  if (!t) errores.push('Sin respuesta del modelo' + (errorIA(j) ? ': ' + errorIA(j) : ''));\n  else if (/MAX_TOKENS|max_tokens/.test(finIA(j))) errores.push('Respuesta cortada por el límite de tokens (sube max_tokens en parametros.json)');\n  return t;\n}\n\nconst cfg = $('Cargar configuración').first().json;\nconst NODO_PREVIO = 'Preparar prompt extracción';\n\nfunction extraerJson(t) {\n  const s = t.replace(/```(?:json)?/gi, '');\n  const a = s.indexOf('{');\n  const b = s.lastIndexOf('}');\n  return a >= 0 && b > a ? s.slice(a, b + 1) : s;\n}\n\nreturn $input.all().map((it, k) => {\n  const base = $(NODO_PREVIO).itemMatching(k).json;\n  const errores = [];\n  const texto = leerIA(it.json, errores);\n  let obj = null;\n  if (texto) {\n    try { obj = JSON.parse(extraerJson(texto)); } catch (e) { errores.push('JSON no parseable: ' + e.message); }\n  }\n  if (obj) errores.push(...validarContraDef(cfg.schema, 'extraccion', obj).errores);\n  const valido = errores.length === 0;\n  return {\n    json: {\n      ...base,\n      extraccion: valido ? obj : null,\n      valido,\n      errores_validacion: errores,\n      respuesta_cruda: valido ? undefined : texto.slice(0, 1500),\n      intento: 1,\n    },\n  };\n});\n"
       },
-      "id": "c0176-0000-4000-8000-000000000176",
+      "id": "c0182-0000-4000-8000-000000000182",
       "name": "Validar extracción",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -379,7 +379,7 @@
           },
           "conditions": [
             {
-              "id": "c0177-0000-4000-8000-000000000177",
+              "id": "c0183-0000-4000-8000-000000000183",
               "leftValue": "={{ $json.valido }}",
               "rightValue": "",
               "operator": {
@@ -393,7 +393,7 @@
         },
         "options": {}
       },
-      "id": "c0178-0000-4000-8000-000000000178",
+      "id": "c0184-0000-4000-8000-000000000184",
       "name": "¿Extracción válida?",
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
@@ -406,7 +406,7 @@
       "parameters": {
         "jsCode": "// Segundo (y último) intento: se reenvía el mismo prompt indicando qué falló en la respuesta anterior.\nreturn $input.all().map(it => {\n  const j = it.json;\n  const fallos = (j.errores_validacion || []).slice(0, 8).map(e => '- ' + e).join('\\n');\n  return {\n    json: {\n      ...j,\n      prompt_user: j.prompt_user + '\\n\\nTu respuesta anterior no cumplía el formato:\\n' + fallos +\n        '\\n\\nDevuelve de nuevo SOLO el objeto JSON corregido, con exactamente los campos y valores permitidos.',\n    },\n  };\n});\n"
       },
-      "id": "c0179-0000-4000-8000-000000000179",
+      "id": "c0185-0000-4000-8000-000000000185",
       "name": "Preparar reintento extracción",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -419,7 +419,7 @@
       "parameters": {
         "jsCode": "// SIMULADO: el reintento devuelve un caso válido.\nreturn $input.all().map((it, k) => {\n  const j = it.json;\n  return { json: { content: [{ type: 'text', text: JSON.stringify({ es_caso: true, motivo_no_caso: null, empresa: '(simulado) ' + j.fuente, sector: 'tecnologia_software', pais: 'España', titulo_caso: '(simulado) ' + j.titular.slice(0, 100), resumen: '(simulado) Texto de prueba generado por el mock, no por Claude.', tecnologia_ia: ['IA generativa'], tipo_innovacion: 'producto_servicio', madurez: 'anuncio', resultado: null, metricas: [], confianza: j.acceso === 'parcial' ? 'baja' : 'media' }) }] }, pairedItem: { item: k } };\n});"
       },
-      "id": "c0180-0000-4000-8000-000000000180",
+      "id": "c0186-0000-4000-8000-000000000186",
       "name": "IA · Extracción (reintento)",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -432,7 +432,7 @@
       "parameters": {
         "jsCode": "// Lee la respuesta del modelo, la parsea y la valida contra schemas/caso.schema.json → $defs/extraccion.\n// Validador mínimo de JSON Schema (sin dependencias) para usar igual en local y dentro de un nodo Code de n8n.\n// Soporta: $ref local (#/$defs/...), type (string o lista), enum, required, properties,\n// additionalProperties:false, items, minimum, maximum, maxLength, maxItems, oneOf.\n// Uso local: node scripts/validar_esquema.js <extraccion|clasificacion|metadatos> <fichero.json>\n\nfunction resolver(raiz, ref) {\n  return ref.replace(/^#\\//, '').split('/').reduce((o, k) => o[k], raiz);\n}\n\nfunction tipoDe(v) {\n  if (v === null) return 'null';\n  if (Array.isArray(v)) return 'array';\n  if (Number.isInteger(v)) return 'integer';\n  return typeof v; // string, number, boolean, object\n}\n\nfunction coincideTipo(v, t) {\n  const real = tipoDe(v);\n  return real === t || (t === 'number' && real === 'integer');\n}\n\nfunction validar(raiz, esquema, valor, ruta, errores) {\n  if (esquema.$ref) return validar(raiz, resolver(raiz, esquema.$ref), valor, ruta, errores);\n\n  if (esquema.oneOf) {\n    const aciertos = esquema.oneOf.filter(s => {\n      const e = [];\n      validar(raiz, s, valor, ruta, e);\n      return e.length === 0;\n    });\n    if (aciertos.length !== 1) errores.push(`${ruta}: no cumple exactamente una de las opciones permitidas`);\n    return;\n  }\n\n  if (esquema.type) {\n    const tipos = Array.isArray(esquema.type) ? esquema.type : [esquema.type];\n    if (!tipos.some(t => coincideTipo(valor, t))) {\n      errores.push(`${ruta}: tipo ${tipoDe(valor)} no permitido (esperado ${tipos.join('|')})`);\n      return;\n    }\n  }\n  if (esquema.enum && !esquema.enum.includes(valor)) errores.push(`${ruta}: valor \"${valor}\" fuera de la lista permitida`);\n  if (typeof valor === 'number') {\n    if (esquema.minimum !== undefined && valor < esquema.minimum) errores.push(`${ruta}: ${valor} < ${esquema.minimum}`);\n    if (esquema.maximum !== undefined && valor > esquema.maximum) errores.push(`${ruta}: ${valor} > ${esquema.maximum}`);\n  }\n  if (typeof valor === 'string' && esquema.maxLength !== undefined && valor.length > esquema.maxLength) {\n    errores.push(`${ruta}: ${valor.length} caracteres (máx. ${esquema.maxLength})`);\n  }\n  if (Array.isArray(valor)) {\n    if (esquema.maxItems !== undefined && valor.length > esquema.maxItems) errores.push(`${ruta}: ${valor.length} elementos (máx. ${esquema.maxItems})`);\n    if (esquema.items) valor.forEach((x, i) => validar(raiz, esquema.items, x, `${ruta}[${i}]`, errores));\n  }\n  if (tipoDe(valor) === 'object') {\n    (esquema.required || []).forEach(k => { if (!(k in valor)) errores.push(`${ruta}.${k}: campo obligatorio ausente`); });\n    const props = esquema.properties || {};\n    for (const k of Object.keys(valor)) {\n      if (props[k]) validar(raiz, props[k], valor[k], `${ruta}.${k}`, errores);\n      else if (esquema.additionalProperties === false) errores.push(`${ruta}.${k}: campo no permitido`);\n    }\n  }\n}\n\n// Los modelos de IA se pasan de longitud con frecuencia (p. ej. 205 caracteres donde el esquema admite 200). Eso no es un fallo\n// de contenido, así que antes de validar se recortan en el sitio los textos y listas que exceden maxLength / maxItems.\nfunction recortarExcesos(raiz, esquema, valor) {\n  if (!esquema || valor === null || typeof valor !== 'object') return valor;\n  if (esquema.$ref) return recortarExcesos(raiz, resolver(raiz, esquema.$ref), valor);\n  if (esquema.oneOf) {\n    const rama = esquema.oneOf.find(s => !s.type || coincideTipo(valor, s.type) || s.$ref);\n    return rama ? recortarExcesos(raiz, rama, valor) : valor;\n  }\n  if (Array.isArray(valor)) {\n    if (esquema.maxItems !== undefined && valor.length > esquema.maxItems) valor.length = esquema.maxItems;\n    valor.forEach((x, i) => {\n      if (esquema.items && typeof x === 'string' && esquema.items.maxLength !== undefined && x.length > esquema.items.maxLength) {\n        valor[i] = x.slice(0, esquema.items.maxLength - 1) + '…';\n      } else if (esquema.items) recortarExcesos(raiz, esquema.items, x);\n    });\n    return valor;\n  }\n  const props = esquema.properties || {};\n  for (const k of Object.keys(valor)) {\n    const s = props[k];\n    if (!s) continue;\n    const v = valor[k];\n    if (typeof v === 'string' && s.maxLength !== undefined && v.length > s.maxLength) valor[k] = v.slice(0, s.maxLength - 1) + '…';\n    else recortarExcesos(raiz, s, v);\n  }\n  return valor;\n}\n\n// Devuelve { ok, errores } validando `dato` contra $defs[nombreDef] del esquema (tras recortar textos demasiado largos).\nfunction validarContraDef(esquema, nombreDef, dato) {\n  const errores = [];\n  recortarExcesos(esquema, esquema.$defs[nombreDef], dato);\n  validar(esquema, esquema.$defs[nombreDef], dato, nombreDef, errores);\n  // Regla de coherencia que el esquema no expresa: es_caso=false exige motivo.\n  if (nombreDef === 'extraccion' && dato && dato.es_caso === false && !dato.motivo_no_caso) {\n    errores.push('extraccion.motivo_no_caso: obligatorio cuando es_caso=false');\n  }\n  return { ok: errores.length === 0, errores };\n}\n\n\n// Lectura de la respuesta de la IA, igual para Gemini y Claude (y para el nodo nativo o la llamada HTTP).\nfunction textoIA(j) {\n  if (!j) return '';\n  // Claude (nodo Anthropic): content = [{ type: 'text', text }]\n  if (Array.isArray(j.content)) return j.content.filter(c => c.type === 'text').map(c => c.text).join('');\n  // Gemini (llamada HTTP o nodo con \"Simplify\" desactivado): candidates[0].content.parts[].text\n  if (Array.isArray(j.candidates) && j.candidates[0]) {\n    const partes = (j.candidates[0].content && j.candidates[0].content.parts) || [];\n    return partes.filter(p => typeof p.text === 'string' && !p.thought).map(p => p.text).join('');\n  }\n  // Gemini (nodo con \"Simplify\" activado): content = { parts: [...] }\n  if (j.content && Array.isArray(j.content.parts)) return j.content.parts.filter(p => typeof p.text === 'string' && !p.thought).map(p => p.text).join('');\n  if (typeof j.mergedResponse === 'string') return j.mergedResponse;\n  return '';\n}\n\n// Por qué terminó la respuesta (para avisar de un corte por límite de tokens).\nfunction finIA(j) {\n  if (!j) return '';\n  if (j.stop_reason) return String(j.stop_reason);\n  if (Array.isArray(j.candidates) && j.candidates[0] && j.candidates[0].finishReason) return String(j.candidates[0].finishReason);\n  return j.finishReason ? String(j.finishReason) : '';\n}\n\n// Mensaje del error de la API cuando no hay respuesta (cuota agotada, sobrecarga, clave inválida…).\nfunction errorIA(j) {\n  const e = j && j.error;\n  if (!e) return '';\n  const m = typeof e === 'string' ? e : (e.message || JSON.stringify(e));\n  const d = e && e.description ? ' — ' + e.description : ''; // p. ej. \"API key not valid\"\n  return (String(m) + d).slice(0, 260);\n}\n\n// Texto de la respuesta o, si no hay, el motivo. Los errores de API empiezan siempre por \"Sin respuesta del modelo\".\nfunction leerIA(j, errores) {\n  const t = textoIA(j);\n  if (!t) errores.push('Sin respuesta del modelo' + (errorIA(j) ? ': ' + errorIA(j) : ''));\n  else if (/MAX_TOKENS|max_tokens/.test(finIA(j))) errores.push('Respuesta cortada por el límite de tokens (sube max_tokens en parametros.json)');\n  return t;\n}\n\nconst cfg = $('Cargar configuración').first().json;\nconst NODO_PREVIO = 'Preparar reintento extracción';\n\nfunction extraerJson(t) {\n  const s = t.replace(/```(?:json)?/gi, '');\n  const a = s.indexOf('{');\n  const b = s.lastIndexOf('}');\n  return a >= 0 && b > a ? s.slice(a, b + 1) : s;\n}\n\nreturn $input.all().map((it, k) => {\n  const base = $(NODO_PREVIO).itemMatching(k).json;\n  const errores = [];\n  const texto = leerIA(it.json, errores);\n  let obj = null;\n  if (texto) {\n    try { obj = JSON.parse(extraerJson(texto)); } catch (e) { errores.push('JSON no parseable: ' + e.message); }\n  }\n  if (obj) errores.push(...validarContraDef(cfg.schema, 'extraccion', obj).errores);\n  const valido = errores.length === 0;\n  return {\n    json: {\n      ...base,\n      extraccion: valido ? obj : null,\n      valido,\n      errores_validacion: errores,\n      respuesta_cruda: valido ? undefined : texto.slice(0, 1500),\n      intento: 2,\n    },\n  };\n});\n"
       },
-      "id": "c0181-0000-4000-8000-000000000181",
+      "id": "c0187-0000-4000-8000-000000000187",
       "name": "Validar extracción (reintento)",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -452,7 +452,7 @@
           },
           "conditions": [
             {
-              "id": "c0182-0000-4000-8000-000000000182",
+              "id": "c0188-0000-4000-8000-000000000188",
               "leftValue": "={{ $json.valido }}",
               "rightValue": "",
               "operator": {
@@ -466,7 +466,7 @@
         },
         "options": {}
       },
-      "id": "c0183-0000-4000-8000-000000000183",
+      "id": "c0189-0000-4000-8000-000000000189",
       "name": "¿Reintento válido?",
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
@@ -479,7 +479,7 @@
       "parameters": {
         "numberInputs": 2
       },
-      "id": "c0184-0000-4000-8000-000000000184",
+      "id": "c0190-0000-4000-8000-000000000190",
       "name": "Unir extracciones válidas",
       "type": "n8n-nodes-base.merge",
       "typeVersion": 3.2,
@@ -492,7 +492,7 @@
       "parameters": {
         "jsCode": "// Marca el artículo para la hoja \"descartados\". Datos mínimos: no se guarda el texto del artículo.\n// Si la causa es un fallo de la API de IA (sin respuesta), el artículo se \"omite\": no se guarda y se reintentará en la siguiente ejecución.\nreturn $input.all().map(it => {\n  const j = it.json;\n  const motivo = 'Extracción inválida tras reintento: ' + (j.errores_validacion || []).join('; ');\n  const falloApi = (j.errores_validacion || []).some(e => e.startsWith('Sin respuesta del modelo'));\n  return {\n    json: {\n      id: j.id, url: j.url, url_normalizada: j.url_normalizada, titular: j.titular, fuente: j.fuente,\n      acceso: j.acceso, destino: falloApi ? 'omitidos' : 'descartados', etapa: 'extraccion', motivo: String(motivo).slice(0, 300),\n    },\n  };\n});\n"
       },
-      "id": "c0185-0000-4000-8000-000000000185",
+      "id": "c0191-0000-4000-8000-000000000191",
       "name": "Descartar: extracción inválida",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -512,7 +512,7 @@
           },
           "conditions": [
             {
-              "id": "c0186-0000-4000-8000-000000000186",
+              "id": "c0192-0000-4000-8000-000000000192",
               "leftValue": "={{ $json.extraccion.es_caso }}",
               "rightValue": "",
               "operator": {
@@ -526,7 +526,7 @@
         },
         "options": {}
       },
-      "id": "c0187-0000-4000-8000-000000000187",
+      "id": "c0193-0000-4000-8000-000000000193",
       "name": "¿Es un caso?",
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
@@ -539,7 +539,7 @@
       "parameters": {
         "jsCode": "// Marca el artículo para la hoja \"descartados\". Datos mínimos: no se guarda el texto del artículo.\n// Si la causa es un fallo de la API de IA (sin respuesta), el artículo se \"omite\": no se guarda y se reintentará en la siguiente ejecución.\nreturn $input.all().map(it => {\n  const j = it.json;\n  const motivo = j.extraccion.motivo_no_caso || 'No es un caso de innovación con IA';\n  const falloApi = (j.errores_validacion || []).some(e => e.startsWith('Sin respuesta del modelo'));\n  return {\n    json: {\n      id: j.id, url: j.url, url_normalizada: j.url_normalizada, titular: j.titular, fuente: j.fuente,\n      acceso: j.acceso, destino: falloApi ? 'omitidos' : 'descartados', etapa: 'es_caso', motivo: String(motivo).slice(0, 300),\n    },\n  };\n});\n"
       },
-      "id": "c0188-0000-4000-8000-000000000188",
+      "id": "c0194-0000-4000-8000-000000000194",
       "name": "Descartar: no es un caso",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -552,7 +552,7 @@
       "parameters": {
         "jsCode": "// Monta el mensaje de sistema y el de usuario a partir del archivo prompts/clasificacion.md\nconst cfg = $('Cargar configuración').first().json;\n\nfunction partir(md) {\n  const limpio = md.replace(/<!--[\\s\\S]*?-->/g, '');\n  const iSys = limpio.indexOf('## SYSTEM');\n  const iUsr = limpio.indexOf('## USER');\n  if (iSys < 0 || iUsr < 0) throw new Error('El prompt debe tener las secciones \"## SYSTEM\" y \"## USER\"');\n  return { sistema: limpio.slice(iSys + 9, iUsr).trim(), usuario: limpio.slice(iUsr + 7).trim() };\n}\n// Una sola pasada: lo que se inserta no se vuelve a interpretar como marcador.\nconst rellenar = (t, v) => t.replace(/\\{\\{(\\w+)\\}\\}/g, (m, k) => (v[k] === undefined || v[k] === null ? '' : String(v[k])));\n\nconst { sistema, usuario } = partir(cfg.prompts.clasificacion);\nreturn $input.all().map(it => {\n  const j = it.json;\n  const vars = { sector_foco: cfg.parametros.sector_foco || 'ninguno', extraccion_json: JSON.stringify(j.extraccion, null, 1) };\n  return { json: { ...j, prompt_system: sistema, prompt_user: rellenar(usuario, vars) } };\n});\n"
       },
-      "id": "c0189-0000-4000-8000-000000000189",
+      "id": "c0195-0000-4000-8000-000000000195",
       "name": "Preparar prompt clasificación",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -565,7 +565,7 @@
       "parameters": {
         "jsCode": "// SIMULADO (sin clave de API). El último artículo recibe una puntuación fuera de rango para probar el descarte.\nconst n = $input.all().length;\nreturn $input.all().map((it, k) => {\n  const cls = { categoria: 'otros', novedad: 3, impacto: 3, replicabilidad: 3, evidencia: 2, relevancia_sector: null, etiquetas: ['simulado', 'prueba'], justificacion: '(simulado) Puntuación de prueba generada por el mock, no por Claude.' };\n  if (n > 2 && k === n - 1) cls.impacto = 9;\n  return { json: { content: [{ type: 'text', text: JSON.stringify(cls) }] }, pairedItem: { item: k } };\n});"
       },
-      "id": "c0190-0000-4000-8000-000000000190",
+      "id": "c0196-0000-4000-8000-000000000196",
       "name": "IA · Clasificación",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -578,7 +578,7 @@
       "parameters": {
         "jsCode": "// Valida la clasificación, calcula la puntuación total (pesos en parametros.json) y construye el caso final.\n// Validador mínimo de JSON Schema (sin dependencias) para usar igual en local y dentro de un nodo Code de n8n.\n// Soporta: $ref local (#/$defs/...), type (string o lista), enum, required, properties,\n// additionalProperties:false, items, minimum, maximum, maxLength, maxItems, oneOf.\n// Uso local: node scripts/validar_esquema.js <extraccion|clasificacion|metadatos> <fichero.json>\n\nfunction resolver(raiz, ref) {\n  return ref.replace(/^#\\//, '').split('/').reduce((o, k) => o[k], raiz);\n}\n\nfunction tipoDe(v) {\n  if (v === null) return 'null';\n  if (Array.isArray(v)) return 'array';\n  if (Number.isInteger(v)) return 'integer';\n  return typeof v; // string, number, boolean, object\n}\n\nfunction coincideTipo(v, t) {\n  const real = tipoDe(v);\n  return real === t || (t === 'number' && real === 'integer');\n}\n\nfunction validar(raiz, esquema, valor, ruta, errores) {\n  if (esquema.$ref) return validar(raiz, resolver(raiz, esquema.$ref), valor, ruta, errores);\n\n  if (esquema.oneOf) {\n    const aciertos = esquema.oneOf.filter(s => {\n      const e = [];\n      validar(raiz, s, valor, ruta, e);\n      return e.length === 0;\n    });\n    if (aciertos.length !== 1) errores.push(`${ruta}: no cumple exactamente una de las opciones permitidas`);\n    return;\n  }\n\n  if (esquema.type) {\n    const tipos = Array.isArray(esquema.type) ? esquema.type : [esquema.type];\n    if (!tipos.some(t => coincideTipo(valor, t))) {\n      errores.push(`${ruta}: tipo ${tipoDe(valor)} no permitido (esperado ${tipos.join('|')})`);\n      return;\n    }\n  }\n  if (esquema.enum && !esquema.enum.includes(valor)) errores.push(`${ruta}: valor \"${valor}\" fuera de la lista permitida`);\n  if (typeof valor === 'number') {\n    if (esquema.minimum !== undefined && valor < esquema.minimum) errores.push(`${ruta}: ${valor} < ${esquema.minimum}`);\n    if (esquema.maximum !== undefined && valor > esquema.maximum) errores.push(`${ruta}: ${valor} > ${esquema.maximum}`);\n  }\n  if (typeof valor === 'string' && esquema.maxLength !== undefined && valor.length > esquema.maxLength) {\n    errores.push(`${ruta}: ${valor.length} caracteres (máx. ${esquema.maxLength})`);\n  }\n  if (Array.isArray(valor)) {\n    if (esquema.maxItems !== undefined && valor.length > esquema.maxItems) errores.push(`${ruta}: ${valor.length} elementos (máx. ${esquema.maxItems})`);\n    if (esquema.items) valor.forEach((x, i) => validar(raiz, esquema.items, x, `${ruta}[${i}]`, errores));\n  }\n  if (tipoDe(valor) === 'object') {\n    (esquema.required || []).forEach(k => { if (!(k in valor)) errores.push(`${ruta}.${k}: campo obligatorio ausente`); });\n    const props = esquema.properties || {};\n    for (const k of Object.keys(valor)) {\n      if (props[k]) validar(raiz, props[k], valor[k], `${ruta}.${k}`, errores);\n      else if (esquema.additionalProperties === false) errores.push(`${ruta}.${k}: campo no permitido`);\n    }\n  }\n}\n\n// Los modelos de IA se pasan de longitud con frecuencia (p. ej. 205 caracteres donde el esquema admite 200). Eso no es un fallo\n// de contenido, así que antes de validar se recortan en el sitio los textos y listas que exceden maxLength / maxItems.\nfunction recortarExcesos(raiz, esquema, valor) {\n  if (!esquema || valor === null || typeof valor !== 'object') return valor;\n  if (esquema.$ref) return recortarExcesos(raiz, resolver(raiz, esquema.$ref), valor);\n  if (esquema.oneOf) {\n    const rama = esquema.oneOf.find(s => !s.type || coincideTipo(valor, s.type) || s.$ref);\n    return rama ? recortarExcesos(raiz, rama, valor) : valor;\n  }\n  if (Array.isArray(valor)) {\n    if (esquema.maxItems !== undefined && valor.length > esquema.maxItems) valor.length = esquema.maxItems;\n    valor.forEach((x, i) => {\n      if (esquema.items && typeof x === 'string' && esquema.items.maxLength !== undefined && x.length > esquema.items.maxLength) {\n        valor[i] = x.slice(0, esquema.items.maxLength - 1) + '…';\n      } else if (esquema.items) recortarExcesos(raiz, esquema.items, x);\n    });\n    return valor;\n  }\n  const props = esquema.properties || {};\n  for (const k of Object.keys(valor)) {\n    const s = props[k];\n    if (!s) continue;\n    const v = valor[k];\n    if (typeof v === 'string' && s.maxLength !== undefined && v.length > s.maxLength) valor[k] = v.slice(0, s.maxLength - 1) + '…';\n    else recortarExcesos(raiz, s, v);\n  }\n  return valor;\n}\n\n// Devuelve { ok, errores } validando `dato` contra $defs[nombreDef] del esquema (tras recortar textos demasiado largos).\nfunction validarContraDef(esquema, nombreDef, dato) {\n  const errores = [];\n  recortarExcesos(esquema, esquema.$defs[nombreDef], dato);\n  validar(esquema, esquema.$defs[nombreDef], dato, nombreDef, errores);\n  // Regla de coherencia que el esquema no expresa: es_caso=false exige motivo.\n  if (nombreDef === 'extraccion' && dato && dato.es_caso === false && !dato.motivo_no_caso) {\n    errores.push('extraccion.motivo_no_caso: obligatorio cuando es_caso=false');\n  }\n  return { ok: errores.length === 0, errores };\n}\n\n\n// Lectura de la respuesta de la IA, igual para Gemini y Claude (y para el nodo nativo o la llamada HTTP).\nfunction textoIA(j) {\n  if (!j) return '';\n  // Claude (nodo Anthropic): content = [{ type: 'text', text }]\n  if (Array.isArray(j.content)) return j.content.filter(c => c.type === 'text').map(c => c.text).join('');\n  // Gemini (llamada HTTP o nodo con \"Simplify\" desactivado): candidates[0].content.parts[].text\n  if (Array.isArray(j.candidates) && j.candidates[0]) {\n    const partes = (j.candidates[0].content && j.candidates[0].content.parts) || [];\n    return partes.filter(p => typeof p.text === 'string' && !p.thought).map(p => p.text).join('');\n  }\n  // Gemini (nodo con \"Simplify\" activado): content = { parts: [...] }\n  if (j.content && Array.isArray(j.content.parts)) return j.content.parts.filter(p => typeof p.text === 'string' && !p.thought).map(p => p.text).join('');\n  if (typeof j.mergedResponse === 'string') return j.mergedResponse;\n  return '';\n}\n\n// Por qué terminó la respuesta (para avisar de un corte por límite de tokens).\nfunction finIA(j) {\n  if (!j) return '';\n  if (j.stop_reason) return String(j.stop_reason);\n  if (Array.isArray(j.candidates) && j.candidates[0] && j.candidates[0].finishReason) return String(j.candidates[0].finishReason);\n  return j.finishReason ? String(j.finishReason) : '';\n}\n\n// Mensaje del error de la API cuando no hay respuesta (cuota agotada, sobrecarga, clave inválida…).\nfunction errorIA(j) {\n  const e = j && j.error;\n  if (!e) return '';\n  const m = typeof e === 'string' ? e : (e.message || JSON.stringify(e));\n  const d = e && e.description ? ' — ' + e.description : ''; // p. ej. \"API key not valid\"\n  return (String(m) + d).slice(0, 260);\n}\n\n// Texto de la respuesta o, si no hay, el motivo. Los errores de API empiezan siempre por \"Sin respuesta del modelo\".\nfunction leerIA(j, errores) {\n  const t = textoIA(j);\n  if (!t) errores.push('Sin respuesta del modelo' + (errorIA(j) ? ': ' + errorIA(j) : ''));\n  else if (/MAX_TOKENS|max_tokens/.test(finIA(j))) errores.push('Respuesta cortada por el límite de tokens (sube max_tokens en parametros.json)');\n  return t;\n}\n\nconst cfg = $('Cargar configuración').first().json;\nconst p = cfg.parametros;\nconst NODO_PREVIO = 'Preparar prompt clasificación';\n\nfunction extraerJson(t) {\n  const s = t.replace(/```(?:json)?/gi, '');\n  const a = s.indexOf('{');\n  const b = s.lastIndexOf('}');\n  return a >= 0 && b > a ? s.slice(a, b + 1) : s;\n}\n\nreturn $input.all().map((it, k) => {\n  const base = $(NODO_PREVIO).itemMatching(k).json;\n  const errores = [];\n  const texto = leerIA(it.json, errores);\n  let cls = null;\n  if (texto) {\n    try { cls = JSON.parse(extraerJson(texto)); } catch (e) { errores.push('JSON no parseable: ' + e.message); }\n  }\n  if (cls) errores.push(...validarContraDef(cfg.schema, 'clasificacion', cls).errores);\n\n  if (errores.length) {\n    // Un fallo de la API (cuota, sobrecarga…) no es culpa del artículo: se \"omite\" sin guardarlo, para reintentarlo en la siguiente ejecución.\n    const falloApi = errores.some(e => e.startsWith('Sin respuesta del modelo'));\n    return {\n      json: {\n        id: base.id, url: base.url, url_normalizada: base.url_normalizada, titular: base.titular, fuente: base.fuente,\n        acceso: base.acceso, destino: falloApi ? 'omitidos' : 'descartados', etapa: 'clasificacion',\n        motivo: ('Clasificación inválida: ' + errores.join('; ')).slice(0, 300),\n      },\n    };\n  }\n\n  const w = p.pesos_puntuacion;\n  const suma = Object.keys(w).reduce((s, c) => s + w[c] * cls[c], 0);\n  const pesos = Object.values(w).reduce((s, x) => s + x, 0);\n  cls.puntuacion_total = Math.round((suma / pesos) / 5 * 100);\n\n  return {\n    json: {\n      destino: 'casos',\n      caso: {\n        metadatos: {\n          id: base.id, url: base.url, url_normalizada: base.url_normalizada, titular: base.titular,\n          fuente: base.fuente, tipo_fuente: base.tipo_fuente, region_fuente: base.region_fuente,\n          fecha_publicacion: base.fecha_publicacion, idioma: base.idioma, acceso: base.acceso,\n          origen: base.origen || 'rss', ...(base.consulta ? { consulta: base.consulta } : {}),\n          fecha_ingesta: new Date().toISOString(),\n          modelo_extraccion: p.modelos.extraccion, modelo_clasificacion: p.modelos.clasificacion,\n        },\n        extraccion: base.extraccion,\n        clasificacion: cls,\n      },\n    },\n  };\n});\n"
       },
-      "id": "c0191-0000-4000-8000-000000000191",
+      "id": "c0197-0000-4000-8000-000000000197",
       "name": "Validar clasificación",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -591,7 +591,7 @@
       "parameters": {
         "numberInputs": 3
       },
-      "id": "c0192-0000-4000-8000-000000000192",
+      "id": "c0198-0000-4000-8000-000000000198",
       "name": "Unir resultados",
       "type": "n8n-nodes-base.merge",
       "typeVersion": 3.2,
@@ -611,7 +611,7 @@
           },
           "conditions": [
             {
-              "id": "c0193-0000-4000-8000-000000000193",
+              "id": "c0199-0000-4000-8000-000000000199",
               "leftValue": "={{ $json.destino === 'casos' }}",
               "rightValue": "",
               "operator": {
@@ -625,7 +625,7 @@
         },
         "options": {}
       },
-      "id": "c0194-0000-4000-8000-000000000194",
+      "id": "c0200-0000-4000-8000-000000000200",
       "name": "¿Se guarda como caso?",
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
@@ -638,7 +638,7 @@
       "parameters": {
         "jsCode": "// ALMACENAMIENTO · fila plana de la hoja \"casos\" (mismas columnas si cambias a Postgres).\n// El orden de las claves es el de lectura recomendado en la hoja: primero lo importante, al final lo técnico.\nreturn $input.all().map(it => {\n  const { metadatos: m, extraccion: e, clasificacion: c } = it.json.caso;\n  return {\n    json: {\n      puntuacion_total: c.puntuacion_total,\n      titulo_caso: e.titulo_caso,\n      empresa: e.empresa,\n      sector: e.sector,\n      pais: e.pais,\n      categoria: c.categoria,\n      resumen: e.resumen,\n      resultado: e.resultado,\n      tecnologia_ia: (e.tecnologia_ia || []).join('; '),\n      tipo_innovacion: e.tipo_innovacion,\n      madurez: e.madurez,\n      novedad: c.novedad,\n      impacto: c.impacto,\n      replicabilidad: c.replicabilidad,\n      evidencia: c.evidencia,\n      relevancia_sector: c.relevancia_sector,\n      confianza: e.confianza,\n      etiquetas: (c.etiquetas || []).join('; '),\n      justificacion: c.justificacion,\n      fuente: m.fuente,\n      titular: m.titular,\n      url: m.url,\n      fecha_publicacion: m.fecha_publicacion,\n      fecha_ingesta: m.fecha_ingesta,\n      idioma: m.idioma,\n      acceso: m.acceso,\n      origen: m.origen,\n      metricas: JSON.stringify(e.metricas || []),\n      consulta: m.consulta || '',\n      tipo_fuente: m.tipo_fuente,\n      region_fuente: m.region_fuente,\n      id: m.id,\n      url_normalizada: m.url_normalizada,\n      modelo_extraccion: m.modelo_extraccion,\n      modelo_clasificacion: m.modelo_clasificacion,\n    },\n  };\n});\n"
       },
-      "id": "c0195-0000-4000-8000-000000000195",
+      "id": "c0201-0000-4000-8000-000000000201",
       "name": "Formatear fila caso",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -651,7 +651,7 @@
       "parameters": {
         "jsCode": "// SIMULADO (solo pruebas): en producción escribe en la hoja \"casos\"\nreturn $input.all().map((it, k) => ({ json: it.json, pairedItem: { item: k } }));"
       },
-      "id": "c0196-0000-4000-8000-000000000196",
+      "id": "c0202-0000-4000-8000-000000000202",
       "name": "Guardar caso",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -664,7 +664,7 @@
       "parameters": {
         "jsCode": "// ALMACENAMIENTO · fila de la hoja \"descartados\". Los artículos \"omitidos\" (fallo de la API de IA) no se guardan: se reintentarán.\nreturn $input.all()\n  .filter(it => it.json.destino === 'descartados')\n  .map(it => ({\n    json: {\n      fecha: new Date().toISOString(),\n      fuente: it.json.fuente,\n      titular: it.json.titular,\n      etapa: it.json.etapa,\n      motivo: it.json.motivo,\n      url: it.json.url,\n      acceso: it.json.acceso,\n      id: it.json.id,\n      url_normalizada: it.json.url_normalizada,\n    },\n  }));\n"
       },
-      "id": "c0197-0000-4000-8000-000000000197",
+      "id": "c0203-0000-4000-8000-000000000203",
       "name": "Formatear fila descartado",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -677,7 +677,7 @@
       "parameters": {
         "jsCode": "// SIMULADO (solo pruebas): en producción escribe en la hoja \"descartados\"\nreturn $input.all().map((it, k) => ({ json: it.json, pairedItem: { item: k } }));"
       },
-      "id": "c0198-0000-4000-8000-000000000198",
+      "id": "c0204-0000-4000-8000-000000000204",
       "name": "Guardar descartado",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -690,7 +690,7 @@
       "parameters": {
         "numberInputs": 4
       },
-      "id": "c0199-0000-4000-8000-000000000199",
+      "id": "c0205-0000-4000-8000-000000000205",
       "name": "Unir y registrar",
       "type": "n8n-nodes-base.merge",
       "typeVersion": 3.2,
@@ -703,7 +703,7 @@
       "parameters": {
         "jsCode": "// ALMACENAMIENTO · construye la fila de la hoja \"log_ejecuciones\" con los contadores de la ejecución.\nconst cfg = $('Cargar configuración').first().json;\nconst seguro = f => { try { return f(); } catch (e) { return []; } };\nconst n = nodo => seguro(() => $(nodo).all()).filter(i => i.json && i.json.url).length;\n\nconst leidos = n('Normalizar artículos');\nconst tras_fecha = n('Filtrar por fecha');\nconst tras_palabras = n('Filtrar por palabras clave');\nconst tras_dedup = n('Deduplicar');\nconst a_procesar = n('Limitar lote diario');\nconst errores_feed = seguro(() => $('Errores de feed').all()).filter(i => i.json && i.json.feed_url);\nconst descargados = seguro(() => $('Extraer texto limpio').all()).filter(i => i.json && i.json.url);\nconst finales = seguro(() => $('Unir resultados').all()).filter(i => i.json && i.json.destino);\n\nconst por_etapa = e => finales.filter(i => i.json.destino === 'descartados' && i.json.etapa === e).length;\nconst guardados = finales.filter(i => i.json.destino === 'casos').length;\nconst omitidos = finales.filter(i => i.json.destino === 'omitidos').length;\nconst fin = new Date();\n\nconst fila = {\n    run_id: cfg.run_id,\n    workflow: '01_ingesta_diaria',\n    fecha_inicio: cfg.inicio_iso,\n    fecha_fin: fin.toISOString(),\n    duracion_s: Math.round((fin - new Date(cfg.inicio_iso)) / 1000),\n    ventana_dias: cfg.ventana_dias,\n    fuentes_activas: cfg.fuentes.length,\n    fuentes_con_error: errores_feed.length,\n    consultas_busqueda: 0,\n    filtrados_dominio_conocido: 0,\n    articulos_leidos: leidos,\n    filtrados_fecha: leidos - tras_fecha,\n    filtrados_palabras_clave: tras_fecha - tras_palabras,\n    duplicados: tras_palabras - tras_dedup,\n    recortados_por_tope: tras_dedup - a_procesar,\n    descargados_completos: descargados.filter(i => i.json.acceso === 'completo').length,\n    descargados_parciales: descargados.filter(i => i.json.acceso === 'parcial').length,\n    extraidos_ok: guardados + por_etapa('es_caso') + por_etapa('clasificacion'),\n    no_son_caso: por_etapa('es_caso'),\n    extraccion_invalida: por_etapa('extraccion'),\n    clasificacion_invalida: por_etapa('clasificacion'),\n    casos_guardados: guardados,\n    errores: [...(errores_feed.slice(0, 10).map(e => `${e.json.fuente}: ${e.json.error}`)), ...(omitidos ? [`${omitidos} artículos omitidos por fallo de la API de IA (se reintentarán en la siguiente ejecución)`] : [])].join(' | '),\n};\n// Orden de columnas pensado para leer la hoja: primero lo importante, al final lo técnico.\nconst ORDEN = [\"fecha_inicio\",\"workflow\",\"casos_guardados\",\"articulos_leidos\",\"filtrados_fecha\",\"filtrados_palabras_clave\",\"duplicados\",\"recortados_por_tope\",\"descargados_completos\",\"descargados_parciales\",\"extraidos_ok\",\"no_son_caso\",\"extraccion_invalida\",\"clasificacion_invalida\",\"fuentes_activas\",\"fuentes_con_error\",\"consultas_busqueda\",\"filtrados_dominio_conocido\",\"ventana_dias\",\"duracion_s\",\"errores\",\"fecha_fin\",\"run_id\"];\nreturn [{ json: Object.fromEntries(ORDEN.map(k => [k, fila[k]])) }];\n"
       },
-      "id": "c0200-0000-4000-8000-000000000200",
+      "id": "c0206-0000-4000-8000-000000000206",
       "name": "Resumen de ejecución",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -716,7 +716,7 @@
       "parameters": {
         "jsCode": "// SIMULADO (solo pruebas): en producción escribe en la hoja \"log_ejecuciones\"\nreturn $input.all().map((it, k) => ({ json: it.json, pairedItem: { item: k } }));"
       },
-      "id": "c0201-0000-4000-8000-000000000201",
+      "id": "c0207-0000-4000-8000-000000000207",
       "name": "Guardar log",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -729,13 +729,39 @@
       "parameters": {
         "jsCode": "// Tras registrar con éxito, las siguientes ejecuciones usan la ventana normal (7 días).\n$getWorkflowStaticData('global').primera_ejecucion_hecha = true;\nreturn $input.all();"
       },
-      "id": "c0202-0000-4000-8000-000000000202",
+      "id": "c0208-0000-4000-8000-000000000208",
       "name": "Marcar primera ejecución",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
         8640,
         0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// AVISO · mensaje diario de Telegram con el resultado de la ejecución (HTML; máx. 4096 caracteres).\nconst esc = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');\nconst attr = s => esc(s).replace(/\"/g, '&quot;');\nconst corta = (s, n) => { s = String(s == null ? '' : s).replace(/\\s+/g, ' ').trim(); return s.length > n ? s.slice(0, n - 1).trimEnd() + '…' : s; };\nconst barra = p => { const n = Math.max(0, Math.min(10, Math.round((Number(p) || 0) / 10))); return '▰'.repeat(n) + '▱'.repeat(10 - n); };\nconst seguro = f => { try { return f(); } catch (e) { return []; } };\n\nconst r = $('Resumen de ejecución').first().json;\nconst casos = seguro(() => $('Formatear fila caso').all()).map(i => i.json).filter(c => c && c.titulo_caso)\n  .sort((a, b) => (b.puntuacion_total || 0) - (a.puntuacion_total || 0));\nlet hoja = '';\ntry { hoja = `https://docs.google.com/spreadsheets/d/${$env.GOOGLE_SHEET_ID}/edit`; } catch (e) { hoja = ''; }\n\nconst fecha = new Date().toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'Europe/Madrid' });\nconst analizados = (r.extraidos_ok || 0) + (r.extraccion_invalida || 0);\n\nconst l = ['📰 <b>VIGILANCIA IA · Resumen del día</b>', `🗓 <i>${esc(fecha)}</i>`, ''];\nif (casos.length) {\n  l.push(`✅ <b>${casos.length} ${casos.length === 1 ? 'caso nuevo' : 'casos nuevos'}</b> guardados en la hoja`, '');\n  casos.slice(0, 8).forEach((c, i) => {\n    l.push(`${i + 1}. <a href=\"${attr(c.url)}\">${esc(corta(c.titulo_caso, 100))}</a>`);\n    l.push(`      🏷 ${esc(c.empresa)} · ${esc(c.fuente)} · ${barra(c.puntuacion_total)} <b>${c.puntuacion_total ?? '?'}</b>/100`);\n    if (c.resumen) l.push(`      💬 <i>${esc(corta(c.resumen, 140))}</i>`);\n  });\n  if (casos.length > 8) l.push('', `…y ${casos.length - 8} más en la hoja.`);\n} else {\n  l.push('😴 <b>Hoy no ha entrado ningún caso nuevo.</b>', '<i>Es normal algunos días: la prensa habla mucho de IA, pero pocos artículos describen un caso real.</i>');\n}\n\nl.push('', '📊 <b>Cómo ha ido</b>');\nl.push(`• Fuentes revisadas: ${r.fuentes_activas}${r.fuentes_con_error ? ` (⚠️ ${r.fuentes_con_error} con error)` : ''}`);\nl.push(`• Artículos analizados con IA: ${analizados}${r.no_son_caso ? ` · descartados por no ser un caso real: ${r.no_son_caso}` : ''}`);\nif (r.recortados_por_tope) l.push(`• ⏳ ${r.recortados_por_tope} artículos esperan turno (tope diario)`);\nif (r.errores) l.push('', `⚠️ <i>${esc(corta(r.errores, 300))}</i>`);\nif (hoja) l.push('', `🔗 <a href=\"${attr(hoja)}\">Abrir la hoja</a>`);\n\nlet texto = l.join('\\n');\nif (texto.length > 4096) texto = texto.replace(new RegExp('</?(b|i|a)( [^>]*)?>', 'g'), '').slice(0, 4090);\nreturn [{ json: { texto } }];\n"
+      },
+      "id": "c0209-0000-4000-8000-000000000209",
+      "name": "Preparar aviso Telegram",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        8640,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// SIMULADO (solo pruebas): en producción envía el resumen del día por Telegram (modo HTML)\nreturn $input.all().map((it, k) => ({ json: it.json, pairedItem: { item: k } }));"
+      },
+      "id": "c0210-0000-4000-8000-000000000210",
+      "name": "Enviar aviso a Telegram",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        8880,
+        200
       ]
     }
   ],
@@ -1232,6 +1258,22 @@
         [
           {
             "node": "Marcar primera ejecución",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Preparar aviso Telegram",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Preparar aviso Telegram": {
+      "main": [
+        [
+          {
+            "node": "Enviar aviso a Telegram",
             "type": "main",
             "index": 0
           }

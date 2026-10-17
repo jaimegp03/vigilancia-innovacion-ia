@@ -64,6 +64,13 @@ function construir({ test, proveedor }) {
   // ---------- Descarga, IA, guardado y registro (común con el workflow 03) ----------
   anadirCola(b, { test, leerResumen: () => leer('resumen_ejecucion.js'), marcarPrimera: true });
 
+  // ---------- Aviso diario por Telegram (si falla, no afecta a la ejecución) ----------
+  code('Preparar aviso Telegram', leer('aviso_telegram.js'), [8640, 200]);
+  conectar('Guardar log', 'Preparar aviso Telegram');
+  if (test) b.simulado('Enviar aviso a Telegram', 'en producción envía el resumen del día por Telegram (modo HTML)', [8880, 200]);
+  else b.telegram('Enviar aviso a Telegram', [8880, 200], { onError: 'continueRegularOutput' });
+  conectar('Preparar aviso Telegram', 'Enviar aviso a Telegram');
+
   return {
     id: (test ? 'vigilancia-01-test' : 'vigilancia-01-ingesta') + sufijo,
     name: (test ? '01 Ingesta diaria (PRUEBA, IA simulada)' : '01 Ingesta diaria') + etiqueta,
