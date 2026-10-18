@@ -1,0 +1,1 @@
+{ nombre_publicacion: cfg.parametros.publicacion.nombre, fecha: cfg.fecha, n_casos: j.n_dia, casos_json: JSON.stringify(j.casos_prompt) }

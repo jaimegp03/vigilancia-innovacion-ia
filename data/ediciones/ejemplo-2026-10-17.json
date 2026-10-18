@@ -1,0 +1,275 @@
+{
+  "fecha": "2026-10-17",
+  "numero_edicion": 6,
+  "es_ejemplo": true,
+  "portada": {
+    "id": "ej-24-2026-10-17",
+    "titular": "Una escuela ficticia prueba un asistente de lectura que adapta textos al nivel del alumno",
+    "entradilla": "Un piloto con 200 estudiantes mide la mejora de comprensión lectora.",
+    "resumen": "La Escuela Faro, centro de ficción, comparó dos grupos de estudiantes, uno con asistente de lectura adaptado y otro sin él. El grupo con asistente mejoró algo más en comprensión, aunque la diferencia es pequeña y la muestra limitada.",
+    "impacto": "Un piloto honesto con resultados modestos: buen ejemplo de cómo debería evaluarse.",
+    "sector": "educacion",
+    "tipo_innovacion": "producto_servicio",
+    "empresa": "Escuela Faro",
+    "pais": "Costa Rica",
+    "madurez": "piloto",
+    "tipo_afirmacion": "hecho_confirmado",
+    "puntuacion": 3,
+    "puntuacion_100": 59,
+    "confianza": "media",
+    "medio": "Cuaderno de Demostración",
+    "fecha_publicacion": "2026-10-17",
+    "url": null
+  },
+  "destacadas": [
+    {
+      "id": "ej-27-2026-10-17",
+      "titular": "Un periódico ficticio usa IA para transcribir plenos municipales y editar los resúmenes",
+      "entradilla": "Las crónicas se publican antes y siempre las revisa un periodista.",
+      "resumen": "Diario del Valle, medio inventado, transcribe con IA las sesiones plenarias y genera un borrador de crónica. Un periodista comprueba cada dato antes de publicar, y el periódico lo indica a sus lectores.",
+      "impacto": "Muestra cómo usar la IA en una redacción sin renunciar al control editorial.",
+      "sector": "medios_marketing",
+      "tipo_innovacion": "generacion_contenido",
+      "empresa": "Diario del Valle",
+      "pais": "España",
+      "madurez": "produccion",
+      "tipo_afirmacion": "hecho_confirmado",
+      "puntuacion": 3,
+      "puntuacion_100": 68,
+      "confianza": "alta",
+      "medio": "Diario Muestra de Economía",
+      "fecha_publicacion": "2026-10-17",
+      "url": null
+    }
+  ],
+  "secciones_por_sector": [
+    {
+      "sector": "agricultura",
+      "noticias": [
+        {
+          "id": "ej-05-2026-10-17",
+          "titular": "Una cooperativa agraria ficticia ajusta el riego con predicción meteorológica y sensores",
+          "entradilla": "El sistema recomienda cuánta agua usar cada día en cada parcela.",
+          "resumen": "La Cooperativa Vega Norte, entidad imaginaria, combina sensores de humedad del suelo con previsiones del tiempo para recomendar el riego parcela a parcela. Los socios dicen haber reducido el consumo de agua, sin aportar todavía cifras auditadas.",
+          "impacto": "Interesante para zonas con escasez de agua, a falta de resultados verificables.",
+          "sector": "agricultura",
+          "tipo_innovacion": "analitica_prediccion",
+          "empresa": "Cooperativa Vega Norte",
+          "pais": "México",
+          "madurez": "piloto",
+          "tipo_afirmacion": "afirmacion_empresa",
+          "puntuacion": 3,
+          "puntuacion_100": 58,
+          "confianza": "media",
+          "medio": "Revista Ejemplo Tech",
+          "fecha_publicacion": "2026-10-17",
+          "url": null
+        },
+        {
+          "id": "ej-28-2026-10-17",
+          "titular": "Una granja ficticia monitoriza la salud del ganado con cámaras y modelos de IA",
+          "entradilla": "El sistema detecta cojeras y cambios de comportamiento a tiempo.",
+          "resumen": "Granja Tres Cerros, explotación inventada, instala cámaras en sus establos y un modelo que señala animales con posibles problemas. El propietario dice que permite tratar antes, sin datos que lo respalden aún.",
+          "impacto": "Un uso práctico de visión artificial en el campo, pendiente de confirmación.",
+          "sector": "agricultura",
+          "tipo_innovacion": "proceso_operaciones",
+          "empresa": "Granja Tres Cerros",
+          "pais": "Argentina",
+          "madurez": "piloto",
+          "tipo_afirmacion": "afirmacion_empresa",
+          "puntuacion": 3,
+          "puntuacion_100": 56,
+          "confianza": "media",
+          "medio": "Cuaderno de Demostración",
+          "fecha_publicacion": "2026-10-17",
+          "url": null
+        }
+      ]
+    },
+    {
+      "sector": "banca_seguros",
+      "noticias": [
+        {
+          "id": "ej-01-2026-10-17",
+          "titular": "Una aseguradora ficticia resuelve el 60 % de los partes de siniestro sin intervención humana",
+          "entradilla": "Aurea Seguros usa un agente de IA que lee fotos y documentos y propone una resolución en minutos.",
+          "resumen": "La compañía inventada Aurea Seguros ha desplegado un agente que revisa fotografías del daño, contrasta la póliza y propone una indemnización. Un tramitador revisa solo los casos dudosos. Según la propia empresa, el tiempo medio de resolución bajó de cinco días a unas pocas horas.",
+          "impacto": "Si la cifra se confirma, reduce costes y mejora la experiencia del cliente, pero conviene esperar datos independientes.",
+          "sector": "banca_seguros",
+          "tipo_innovacion": "atencion_cliente",
+          "empresa": "Aurea Seguros",
+          "pais": "España",
+          "madurez": "produccion",
+          "tipo_afirmacion": "afirmacion_empresa",
+          "puntuacion": 4,
+          "puntuacion_100": 88,
+          "confianza": "alta",
+          "medio": "Diario Muestra de Economía",
+          "fecha_publicacion": "2026-10-17",
+          "url": null
+        }
+      ]
+    },
+    {
+      "sector": "turismo_hosteleria",
+      "noticias": [
+        {
+          "id": "ej-11-2026-10-17",
+          "titular": "Una cadena hotelera ficticia atiende a sus huéspedes por mensajería con un asistente de IA",
+          "entradilla": "Reservas, dudas y peticiones de habitación se resuelven por chat a cualquier hora.",
+          "resumen": "Brisa Hoteles, cadena imaginaria, ha activado un asistente que responde por mensajería en varios idiomas y deriva a recepción cuando no sabe contestar. La empresa asegura que libera tiempo de recepción en temporada alta.",
+          "impacto": "Mejora la atención 24 horas con costes contenidos, siempre que la derivación a personas funcione.",
+          "sector": "turismo_hosteleria",
+          "tipo_innovacion": "atencion_cliente",
+          "empresa": "Brisa Hoteles",
+          "pais": "República Dominicana",
+          "madurez": "produccion",
+          "tipo_afirmacion": "afirmacion_empresa",
+          "puntuacion": 3,
+          "puntuacion_100": 66,
+          "confianza": "media",
+          "medio": "Gaceta Ficticia de Innovación",
+          "fecha_publicacion": "2026-10-17",
+          "url": null
+        }
+      ]
+    },
+    {
+      "sector": "retail_comercio",
+      "noticias": [
+        {
+          "id": "ej-14-2026-10-17",
+          "titular": "Una cadena de farmacias ficticia personaliza recomendaciones con IA en su app",
+          "entradilla": "La aplicación sugiere productos según el historial, sin datos de salud sensibles.",
+          "resumen": "Farmacias Candil, marca inventada, incorpora recomendaciones personalizadas en su aplicación. La empresa afirma que aumentan la venta cruzada, y asegura que no utiliza datos de salud, aunque no detalla cómo lo garantiza.",
+          "impacto": "La personalización comercial en un sector sensible exige transparencia sobre los datos usados.",
+          "sector": "retail_comercio",
+          "tipo_innovacion": "marketing_ventas",
+          "empresa": "Farmacias Candil",
+          "pais": "España",
+          "madurez": "produccion",
+          "tipo_afirmacion": "afirmacion_empresa",
+          "puntuacion": 3,
+          "puntuacion_100": 52,
+          "confianza": "media",
+          "medio": "Cuaderno de Demostración",
+          "fecha_publicacion": "2026-10-17",
+          "url": null
+        }
+      ]
+    },
+    {
+      "sector": "educacion",
+      "noticias": [
+        {
+          "id": "ej-07-2026-10-17",
+          "titular": "Una academia online ficticia ofrece un tutor de IA que explica cada ejercicio paso a paso",
+          "entradilla": "El asistente adapta el ritmo y las explicaciones al nivel de cada estudiante.",
+          "resumen": "Academia Brújula, plataforma de ficción, ha incorporado un tutor basado en un modelo de lenguaje que corrige ejercicios y ofrece pistas en lugar de respuestas directas. La empresa afirma que sube la finalización de cursos; no hay estudio independiente.",
+          "impacto": "La personalización a escala es la gran promesa de la IA en educación, pero falta evidencia externa.",
+          "sector": "educacion",
+          "tipo_innovacion": "producto_servicio",
+          "empresa": "Academia Brújula",
+          "pais": "Argentina",
+          "madurez": "produccion",
+          "tipo_afirmacion": "afirmacion_empresa",
+          "puntuacion": 4,
+          "puntuacion_100": 71,
+          "confianza": "media",
+          "medio": "Gaceta Ficticia de Innovación",
+          "fecha_publicacion": "2026-10-17",
+          "url": null
+        }
+      ]
+    }
+  ],
+  "cifras": {
+    "casos_totales": 9,
+    "puntuacion_media": 3.1,
+    "por_sector": [
+      {
+        "sector": "retail_comercio",
+        "casos": 2
+      },
+      {
+        "sector": "educacion",
+        "casos": 2
+      },
+      {
+        "sector": "agricultura",
+        "casos": 2
+      },
+      {
+        "sector": "banca_seguros",
+        "casos": 1
+      },
+      {
+        "sector": "turismo_hosteleria",
+        "casos": 1
+      },
+      {
+        "sector": "medios_marketing",
+        "casos": 1
+      }
+    ],
+    "por_tipo": [
+      {
+        "tipo_innovacion": "producto_servicio",
+        "casos": 2
+      },
+      {
+        "tipo_innovacion": "proceso_operaciones",
+        "casos": 2
+      },
+      {
+        "tipo_innovacion": "atencion_cliente",
+        "casos": 2
+      },
+      {
+        "tipo_innovacion": "marketing_ventas",
+        "casos": 1
+      },
+      {
+        "tipo_innovacion": "analitica_prediccion",
+        "casos": 1
+      },
+      {
+        "tipo_innovacion": "generacion_contenido",
+        "casos": 1
+      }
+    ],
+    "por_afirmacion": [
+      {
+        "tipo_afirmacion": "hecho_confirmado",
+        "casos": 2
+      },
+      {
+        "tipo_afirmacion": "afirmacion_empresa",
+        "casos": 7
+      }
+    ]
+  },
+  "senales_debiles": [
+    {
+      "id": "ej-18-2026-10-17",
+      "titular": "Una cadena ficticia dice que la IA reducirá sus mermas, pero aún sin datos",
+      "entradilla": "La compañía presenta un piloto de previsión de demanda en tres tiendas.",
+      "resumen": "Colmena Retail, marca imaginaria, anuncia un piloto en tres tiendas para ajustar pedidos de frescos. No ha publicado resultados y solo se conoce el comunicado de lanzamiento.",
+      "impacto": "Idea razonable, pero por ahora es una señal débil sin evidencia.",
+      "sector": "retail_comercio",
+      "tipo_innovacion": "proceso_operaciones",
+      "empresa": "Colmena Retail",
+      "pais": "Colombia",
+      "madurez": "piloto",
+      "tipo_afirmacion": "afirmacion_empresa",
+      "puntuacion": 2,
+      "puntuacion_100": 47,
+      "confianza": "baja",
+      "medio": "Cuaderno de Demostración",
+      "fecha_publicacion": "2026-10-17",
+      "url": null
+    }
+  ],
+  "analisis": "Más pilotos que despliegues, y varios con evidencia modesta. Es una buena noticia para el rigor: los centros educativos empiezan a medir con grupos de comparación antes de ampliar.",
+  "modelo_editor": "ejemplo"
+}

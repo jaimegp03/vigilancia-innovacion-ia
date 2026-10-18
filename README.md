@@ -24,18 +24,22 @@ flowchart LR
     G --> H[IA: 5 borradores para redes]
     H --> I[Telegram]
     H --> F
+    F --> W[Editor jefe IA]
+    W --> X[Web diaria tipo periódico]
 ```
 
 | Workflow | Cuándo | Qué hace |
 |---|---|---|
 | [`01_ingesta_diaria`](workflows/01_ingesta_diaria.json) | Diario, 07:00 | Lee feeds → filtra → deduplica → descarga → extrae y puntúa con IA → guarda en la hoja `casos` → **aviso por Telegram** con los casos del día. |
 | [`02_informe_semanal`](workflows/02_informe_semanal.json) | Lunes, 07:30 | Tendencias de la semana + 5 borradores (LinkedIn y X) → hojas y Telegram. |
+| [`04_edicion_diaria`](workflows/04_edicion_diaria.json) | Diario, 07:40 | Los casos del día → **editor jefe (IA)** → edición en JSON → genera `web/index.html`, una web tipo periódico con archivo de ediciones → aviso por Telegram. |
 | [`03_descubrimiento_semanal`](workflows/variante_claude/03_descubrimiento_semanal.json) | Miércoles *(opcional, solo con Claude)* | Búsqueda web de casos fuera de las fuentes fijas. |
 
 Detalles de diseño en [docs/arquitectura.md](docs/arquitectura.md).
 
 ## Características
 
+- **Web diaria tipo periódico:** un único `index.html` autocontenido (sin servidores ni internet) con portada, cifras, sectores, señales débiles y archivo. Ver [docs/web.md](docs/web.md).
 - **Gratis por defecto:** Google Gemini (capa gratuita). Variante de pago con Claude en [`workflows/variante_claude/`](workflows/variante_claude/).
 - **Todo por configuración:** fuentes ([`config/fuentes.json`](config/fuentes.json)), modelos, pesos y límites ([`config/parametros.json`](config/parametros.json)), prompts ([`prompts/`](prompts/)). Cambiarlos no exige reimportar nada.
 - **Salida JSON validada** contra un [esquema](schemas/caso.schema.json) con reintento y registro de descartes.
@@ -61,6 +65,7 @@ Después crea las credenciales (Gemini, Google Sheets, Telegram) e importa los w
 |---|---|
 | [Guía sencilla](docs/guia-sencilla.md) | Para quien no es técnico: qué hace, rutina semanal, glosario. |
 | [Instalación](docs/instalacion.md) | Credenciales, hojas de Google, importación y activación, elección de IA. |
+| [La web](docs/web.md) | Edición diaria, cómo generarla y abrirla, nombre y eslogan, publicación opcional en GitHub Pages. |
 | [Configuración](docs/configuracion.md) | Modo sectorial, fuentes, modelos, formato de hojas y mensajes, Postgres. |
 | [Arquitectura](docs/arquitectura.md) | Qué hace cada pieza y por qué se diseñó así. |
 | [Pruebas](docs/pruebas.md) | Cómo ejecutar los tests y qué se ha verificado. |
@@ -71,11 +76,13 @@ Después crea las credenciales (Gemini, Google Sheets, Telegram) e importa los w
 ```
 config/              fuentes, parámetros y consultas de descubrimiento
 prompts/             un prompt por tarea de IA
-schemas/             esquema JSON de casos, tendencias y borradores
+schemas/             esquemas JSON: casos, tendencias, borradores y ediciones
 workflows/           workflows de n8n listos para importar (Gemini)
   variante_claude/   los mismos con Claude (incluye el 03)
   utilidades/        formato de las hojas de Google Sheets (un solo uso)
 plantilla_sheets/    cabeceras CSV de las 5 hojas
+web/                 plantilla y generador de la web diaria (build.mjs)
+data/ediciones/      ediciones diarias en JSON (en git, solo las de ejemplo)
 scripts/             generadores de workflows, nodos de código y utilidades
 tests/               pruebas unitarias y workflows de prueba con IA simulada
 docs/                documentación

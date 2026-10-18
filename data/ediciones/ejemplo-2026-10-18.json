@@ -1,0 +1,357 @@
+{
+  "fecha": "2026-10-18",
+  "numero_edicion": 7,
+  "es_ejemplo": true,
+  "portada": {
+    "id": "ej-29-2026-10-18",
+    "titular": "Un fabricante de coches ficticio acelera el diseño de piezas con simulación asistida por IA",
+    "entradilla": "Reduce el número de prototipos físicos necesarios.",
+    "resumen": "Torre Alta Motors, firma inventada, emplea modelos que sugieren geometrías y predicen su resistencia antes de fabricarlas. Las comunicaciones a inversores, verificables, hablan de menos prototipos y ciclos de desarrollo más cortos.",
+    "impacto": "Acorta el camino de la idea al producto en una industria muy competitiva.",
+    "sector": "automocion",
+    "tipo_innovacion": "investigacion_desarrollo",
+    "empresa": "Torre Alta Motors",
+    "pais": "Alemania",
+    "madurez": "escalado",
+    "tipo_afirmacion": "hecho_confirmado",
+    "puntuacion": 4,
+    "puntuacion_100": 83,
+    "confianza": "alta",
+    "medio": "Revista Ejemplo Tech",
+    "fecha_publicacion": "2026-10-18",
+    "url": null
+  },
+  "destacadas": [
+    {
+      "id": "ej-08-2026-10-18",
+      "titular": "Un ayuntamiento ficticio responde trámites por chat en cuatro idiomas",
+      "entradilla": "El asistente resuelve dudas frecuentes y reduce las colas en ventanilla.",
+      "resumen": "El Ayuntamiento de Villaclara, municipio inventado, ha puesto en marcha un asistente conversacional para consultas de padrón, tasas y licencias. Los datos municipales muestran menos llamadas repetidas y más trámites iniciados en línea.",
+      "impacto": "Reduce la brecha entre la administración y la ciudadanía si se mantiene una vía humana alternativa.",
+      "sector": "sector_publico",
+      "tipo_innovacion": "atencion_cliente",
+      "empresa": "Ayuntamiento de Villaclara",
+      "pais": "España",
+      "madurez": "produccion",
+      "tipo_afirmacion": "hecho_confirmado",
+      "puntuacion": 4,
+      "puntuacion_100": 73,
+      "confianza": "alta",
+      "medio": "Diario Muestra de Economía",
+      "fecha_publicacion": "2026-10-18",
+      "url": null
+    },
+    {
+      "id": "ej-15-2026-10-18",
+      "titular": "Una empresa de software ficticia acelera sus pruebas con un asistente que genera código de test",
+      "entradilla": "Los ingenieros revisan el código generado antes de integrarlo.",
+      "resumen": "Taller Nube, empresa de ficción, utiliza un asistente de programación para escribir pruebas automáticas. Según la compañía, los equipos cubren más código con el mismo tiempo, y cada propuesta pasa por revisión humana.",
+      "impacto": "Un uso consolidado de la IA generativa en ingeniería de software, con revisión humana.",
+      "sector": "tecnologia_software",
+      "tipo_innovacion": "generacion_contenido",
+      "empresa": "Taller Nube",
+      "pais": "Uruguay",
+      "madurez": "produccion",
+      "tipo_afirmacion": "afirmacion_empresa",
+      "puntuacion": 3,
+      "puntuacion_100": 69,
+      "confianza": "alta",
+      "medio": "Gaceta Ficticia de Innovación",
+      "fecha_publicacion": "2026-10-18",
+      "url": null
+    },
+    {
+      "id": "ej-23-2026-10-18",
+      "titular": "Un puerto ficticio asigna muelles con un sistema de IA que reduce esperas de buques",
+      "entradilla": "La asignación se recalcula cada vez que cambia la llegada de un barco.",
+      "resumen": "Puerto Catorce, terminal inventada, prueba un sistema que reasigna muelles y grúas en tiempo real. La autoridad portuaria dice que los buques esperan menos, a falta de una evaluación externa.",
+      "impacto": "Los cuellos de botella portuarios son un problema global; cualquier mejora cuenta.",
+      "sector": "logistica_transporte",
+      "tipo_innovacion": "proceso_operaciones",
+      "empresa": "Puerto Catorce",
+      "pais": "Panamá",
+      "madurez": "piloto",
+      "tipo_afirmacion": "afirmacion_empresa",
+      "puntuacion": 3,
+      "puntuacion_100": 63,
+      "confianza": "media",
+      "medio": "Diario Muestra de Economía",
+      "fecha_publicacion": "2026-10-18",
+      "url": null
+    }
+  ],
+  "secciones_por_sector": [
+    {
+      "sector": "banca_seguros",
+      "noticias": [
+        {
+          "id": "ej-20-2026-10-18",
+          "titular": "Un banco ficticio anticipa impagos con meses de antelación y ofrece soluciones al cliente",
+          "entradilla": "El modelo identifica señales de dificultad y propone un plan antes del retraso.",
+          "resumen": "Banco Meridiano, entidad inventada, utiliza un modelo de riesgo que alerta de posibles impagos y activa un contacto proactivo con el cliente. Los datos del informe anual, auditados, muestran una caída de la morosidad en la cartera piloto.",
+          "impacto": "Combina gestión del riesgo con trato más humano, con resultados auditados.",
+          "sector": "banca_seguros",
+          "tipo_innovacion": "analitica_prediccion",
+          "empresa": "Banco Meridiano",
+          "pais": "España",
+          "madurez": "produccion",
+          "tipo_afirmacion": "hecho_confirmado",
+          "puntuacion": 4,
+          "puntuacion_100": 81,
+          "confianza": "alta",
+          "medio": "Diario Muestra de Economía",
+          "fecha_publicacion": "2026-10-18",
+          "url": null
+        }
+      ]
+    },
+    {
+      "sector": "construccion_inmobiliario",
+      "noticias": [
+        {
+          "id": "ej-12-2026-10-18",
+          "titular": "Una constructora ficticia usa IA para estimar retrasos de obra desde fotos de dron",
+          "entradilla": "Compara el avance real con el plan y alerta de desviaciones.",
+          "resumen": "Obras Tramontana, constructora inventada, sobrevuela sus obras con drones y compara las imágenes con el calendario. En un piloto de dos proyectos, el sistema detectó desviaciones antes que la revisión periódica.",
+          "impacto": "Un buen ejemplo de IA para control de proyectos, aún en fase piloto.",
+          "sector": "construccion_inmobiliario",
+          "tipo_innovacion": "analitica_prediccion",
+          "empresa": "Obras Tramontana",
+          "pais": "España",
+          "madurez": "piloto",
+          "tipo_afirmacion": "hecho_confirmado",
+          "puntuacion": 3,
+          "puntuacion_100": 55,
+          "confianza": "media",
+          "medio": "Diario Muestra de Economía",
+          "fecha_publicacion": "2026-10-18",
+          "url": null
+        }
+      ]
+    },
+    {
+      "sector": "salud_farma",
+      "noticias": [
+        {
+          "id": "ej-02-2026-10-18",
+          "titular": "Un hospital ficticio anticipa ingresos en urgencias con seis horas de margen",
+          "entradilla": "El modelo predice la afluencia y ayuda a organizar turnos y camas antes de que llegue la punta.",
+          "resumen": "El Hospital Valle Hondo, organización inventada para esta demostración, entrena un modelo con tres años de historial de urgencias, calendario y datos meteorológicos. Tras un piloto de tres meses en un servicio, el equipo de gestión ajustó turnos con antelación y redujo las esperas en horas punta.",
+          "impacto": "Muestra un uso de la IA que no sustituye al personal sino que mejora su planificación.",
+          "sector": "salud_farma",
+          "tipo_innovacion": "analitica_prediccion",
+          "empresa": "Hospital Valle Hondo",
+          "pais": "Chile",
+          "madurez": "piloto",
+          "tipo_afirmacion": "hecho_confirmado",
+          "puntuacion": 4,
+          "puntuacion_100": 82,
+          "confianza": "alta",
+          "medio": "Revista Ejemplo Tech",
+          "fecha_publicacion": "2026-10-18",
+          "url": null
+        }
+      ]
+    },
+    {
+      "sector": "energia_utilities",
+      "noticias": [
+        {
+          "id": "ej-22-2026-10-18",
+          "titular": "Una red eléctrica ficticia equilibra oferta y demanda con previsión solar por IA",
+          "entradilla": "Mejora la previsión de producción fotovoltaica hora a hora.",
+          "resumen": "Energía del Sur, operador imaginario, utiliza un modelo con imágenes de satélite y datos de estaciones para prever la producción solar. Los informes regulatorios muestran menos desvíos y menor uso de centrales de respaldo.",
+          "impacto": "Una mejor previsión es clave para integrar más renovables en la red.",
+          "sector": "energia_utilities",
+          "tipo_innovacion": "analitica_prediccion",
+          "empresa": "Energía del Sur",
+          "pais": "Marruecos",
+          "madurez": "escalado",
+          "tipo_afirmacion": "hecho_confirmado",
+          "puntuacion": 4,
+          "puntuacion_100": 85,
+          "confianza": "alta",
+          "medio": "Gaceta Ficticia de Innovación",
+          "fecha_publicacion": "2026-10-18",
+          "url": null
+        }
+      ]
+    },
+    {
+      "sector": "logistica_transporte",
+      "noticias": [
+        {
+          "id": "ej-13-2026-10-18",
+          "titular": "Un operador logístico ficticio recorta kilómetros en vacío con optimización de rutas",
+          "entradilla": "Su planificador reparte entregas con un modelo que aprende de cada jornada.",
+          "resumen": "Ruta Verde, operador de ficción, usa un algoritmo de optimización con aprendizaje automático para asignar paquetes a repartidores. Los informes internos, revisados por un tercero, muestran menos kilómetros en vacío y menor consumo de combustible.",
+          "impacto": "Combina ahorro de costes y menor huella de carbono con resultados verificados.",
+          "sector": "logistica_transporte",
+          "tipo_innovacion": "proceso_operaciones",
+          "empresa": "Ruta Verde",
+          "pais": "México",
+          "madurez": "escalado",
+          "tipo_afirmacion": "hecho_confirmado",
+          "puntuacion": 4,
+          "puntuacion_100": 84,
+          "confianza": "alta",
+          "medio": "Revista Ejemplo Tech",
+          "fecha_publicacion": "2026-10-18",
+          "url": null
+        }
+      ]
+    },
+    {
+      "sector": "telecomunicaciones",
+      "noticias": [
+        {
+          "id": "ej-17-2026-10-18",
+          "titular": "Una operadora ficticia reduce llamadas al soporte con un asistente que diagnostica fallos de red",
+          "entradilla": "El chat detecta incidencias en la zona del cliente antes de que este llame.",
+          "resumen": "Telefonía Estrella, operadora de ficción, cruza los datos de red con las consultas de clientes para responder con el estado de la incidencia. La empresa informa de menos llamadas repetidas al servicio de atención.",
+          "impacto": "Reducir la fricción antes de que el cliente se queje es el objetivo de la atención proactiva.",
+          "sector": "telecomunicaciones",
+          "tipo_innovacion": "atencion_cliente",
+          "empresa": "Telefonía Estrella",
+          "pais": "Chile",
+          "madurez": "escalado",
+          "tipo_afirmacion": "afirmacion_empresa",
+          "puntuacion": 4,
+          "puntuacion_100": 77,
+          "confianza": "media",
+          "medio": "Revista Ejemplo Tech",
+          "fecha_publicacion": "2026-10-18",
+          "url": null
+        }
+      ]
+    }
+  ],
+  "cifras": {
+    "casos_totales": 12,
+    "puntuacion_media": 3.5,
+    "por_sector": [
+      {
+        "sector": "construccion_inmobiliario",
+        "casos": 2
+      },
+      {
+        "sector": "logistica_transporte",
+        "casos": 2
+      },
+      {
+        "sector": "banca_seguros",
+        "casos": 1
+      },
+      {
+        "sector": "automocion",
+        "casos": 1
+      },
+      {
+        "sector": "salud_farma",
+        "casos": 1
+      },
+      {
+        "sector": "energia_utilities",
+        "casos": 1
+      },
+      {
+        "sector": "telecomunicaciones",
+        "casos": 1
+      },
+      {
+        "sector": "sector_publico",
+        "casos": 1
+      },
+      {
+        "sector": "medios_marketing",
+        "casos": 1
+      },
+      {
+        "sector": "tecnologia_software",
+        "casos": 1
+      }
+    ],
+    "por_tipo": [
+      {
+        "tipo_innovacion": "analitica_prediccion",
+        "casos": 4
+      },
+      {
+        "tipo_innovacion": "proceso_operaciones",
+        "casos": 2
+      },
+      {
+        "tipo_innovacion": "atencion_cliente",
+        "casos": 2
+      },
+      {
+        "tipo_innovacion": "generacion_contenido",
+        "casos": 2
+      },
+      {
+        "tipo_innovacion": "investigacion_desarrollo",
+        "casos": 1
+      },
+      {
+        "tipo_innovacion": "seguridad_riesgo",
+        "casos": 1
+      }
+    ],
+    "por_afirmacion": [
+      {
+        "tipo_afirmacion": "hecho_confirmado",
+        "casos": 7
+      },
+      {
+        "tipo_afirmacion": "afirmacion_empresa",
+        "casos": 3
+      },
+      {
+        "tipo_afirmacion": "opinion",
+        "casos": 2
+      }
+    ]
+  },
+  "senales_debiles": [
+    {
+      "id": "ej-10-2026-10-18",
+      "titular": "Una agencia ficticia asegura que producirá campañas completas solo con IA",
+      "entradilla": "La agencia lo anuncia como una visión de futuro, sin mostrar resultados todavía.",
+      "resumen": "Estudio Sombra, agencia inventada, ha dicho que pronto generará campañas enteras sin equipo creativo. Por ahora es solo un anuncio de intenciones, sin cliente ni métricas, y varios analistas lo ven como una estrategia de marketing propia.",
+      "impacto": "Señal a vigilar, pero todavía sin pruebas.",
+      "sector": "medios_marketing",
+      "tipo_innovacion": "generacion_contenido",
+      "empresa": "Estudio Sombra",
+      "pais": "Reino Unido",
+      "madurez": "anuncio",
+      "tipo_afirmacion": "opinion",
+      "puntuacion": 2,
+      "puntuacion_100": 38,
+      "confianza": "baja",
+      "medio": "Revista Ejemplo Tech",
+      "fecha_publicacion": "2026-10-18",
+      "url": null
+    },
+    {
+      "id": "ej-26-2026-10-18",
+      "titular": "Una inmobiliaria ficticia opina que las tasaciones automáticas sustituirán a los tasadores",
+      "entradilla": "Es un artículo de opinión sin caso demostrado.",
+      "resumen": "Una directiva de la inmobiliaria inventada Constructora Pico sostiene en una entrevista que las tasaciones automáticas desplazarán a los profesionales. No aporta datos ni ejemplos de implantación.",
+      "impacto": "Conviene tratarlo como opinión y no como evidencia.",
+      "sector": "construccion_inmobiliario",
+      "tipo_innovacion": "seguridad_riesgo",
+      "empresa": "Constructora Pico",
+      "pais": "Chile",
+      "madurez": "anuncio",
+      "tipo_afirmacion": "opinion",
+      "puntuacion": 2,
+      "puntuacion_100": 41,
+      "confianza": "baja",
+      "medio": "Gaceta Ficticia de Innovación",
+      "fecha_publicacion": "2026-10-18",
+      "url": null
+    }
+  ],
+  "analisis": "Jornada variada, con industria y sector público al frente. Se repite el patrón: los mejores casos combinan datos propios, un proceso concreto y revisión humana.",
+  "modelo_editor": "ejemplo"
+}

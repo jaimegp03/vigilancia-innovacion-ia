@@ -1,0 +1,275 @@
+{
+  "fecha": "2026-10-13",
+  "numero_edicion": 2,
+  "es_ejemplo": true,
+  "portada": {
+    "id": "ej-13-2026-10-13",
+    "titular": "Un operador logístico ficticio recorta kilómetros en vacío con optimización de rutas",
+    "entradilla": "Su planificador reparte entregas con un modelo que aprende de cada jornada.",
+    "resumen": "Ruta Verde, operador de ficción, usa un algoritmo de optimización con aprendizaje automático para asignar paquetes a repartidores. Los informes internos, revisados por un tercero, muestran menos kilómetros en vacío y menor consumo de combustible.",
+    "impacto": "Combina ahorro de costes y menor huella de carbono con resultados verificados.",
+    "sector": "logistica_transporte",
+    "tipo_innovacion": "proceso_operaciones",
+    "empresa": "Ruta Verde",
+    "pais": "México",
+    "madurez": "escalado",
+    "tipo_afirmacion": "hecho_confirmado",
+    "puntuacion": 4,
+    "puntuacion_100": 84,
+    "confianza": "alta",
+    "medio": "Revista Ejemplo Tech",
+    "fecha_publicacion": "2026-10-13",
+    "url": null
+  },
+  "destacadas": [
+    {
+      "id": "ej-02-2026-10-13",
+      "titular": "Un hospital ficticio anticipa ingresos en urgencias con seis horas de margen",
+      "entradilla": "El modelo predice la afluencia y ayuda a organizar turnos y camas antes de que llegue la punta.",
+      "resumen": "El Hospital Valle Hondo, organización inventada para esta demostración, entrena un modelo con tres años de historial de urgencias, calendario y datos meteorológicos. Tras un piloto de tres meses en un servicio, el equipo de gestión ajustó turnos con antelación y redujo las esperas en horas punta.",
+      "impacto": "Muestra un uso de la IA que no sustituye al personal sino que mejora su planificación.",
+      "sector": "salud_farma",
+      "tipo_innovacion": "analitica_prediccion",
+      "empresa": "Hospital Valle Hondo",
+      "pais": "Chile",
+      "madurez": "piloto",
+      "tipo_afirmacion": "hecho_confirmado",
+      "puntuacion": 4,
+      "puntuacion_100": 82,
+      "confianza": "alta",
+      "medio": "Revista Ejemplo Tech",
+      "fecha_publicacion": "2026-10-13",
+      "url": null
+    },
+    {
+      "id": "ej-07-2026-10-13",
+      "titular": "Una academia online ficticia ofrece un tutor de IA que explica cada ejercicio paso a paso",
+      "entradilla": "El asistente adapta el ritmo y las explicaciones al nivel de cada estudiante.",
+      "resumen": "Academia Brújula, plataforma de ficción, ha incorporado un tutor basado en un modelo de lenguaje que corrige ejercicios y ofrece pistas en lugar de respuestas directas. La empresa afirma que sube la finalización de cursos; no hay estudio independiente.",
+      "impacto": "La personalización a escala es la gran promesa de la IA en educación, pero falta evidencia externa.",
+      "sector": "educacion",
+      "tipo_innovacion": "producto_servicio",
+      "empresa": "Academia Brújula",
+      "pais": "Argentina",
+      "madurez": "produccion",
+      "tipo_afirmacion": "afirmacion_empresa",
+      "puntuacion": 4,
+      "puntuacion_100": 71,
+      "confianza": "media",
+      "medio": "Gaceta Ficticia de Innovación",
+      "fecha_publicacion": "2026-10-13",
+      "url": null
+    }
+  ],
+  "secciones_por_sector": [
+    {
+      "sector": "banca_seguros",
+      "noticias": [
+        {
+          "id": "ej-20-2026-10-13",
+          "titular": "Un banco ficticio anticipa impagos con meses de antelación y ofrece soluciones al cliente",
+          "entradilla": "El modelo identifica señales de dificultad y propone un plan antes del retraso.",
+          "resumen": "Banco Meridiano, entidad inventada, utiliza un modelo de riesgo que alerta de posibles impagos y activa un contacto proactivo con el cliente. Los datos del informe anual, auditados, muestran una caída de la morosidad en la cartera piloto.",
+          "impacto": "Combina gestión del riesgo con trato más humano, con resultados auditados.",
+          "sector": "banca_seguros",
+          "tipo_innovacion": "analitica_prediccion",
+          "empresa": "Banco Meridiano",
+          "pais": "España",
+          "madurez": "produccion",
+          "tipo_afirmacion": "hecho_confirmado",
+          "puntuacion": 4,
+          "puntuacion_100": 81,
+          "confianza": "alta",
+          "medio": "Diario Muestra de Economía",
+          "fecha_publicacion": "2026-10-13",
+          "url": null
+        }
+      ]
+    },
+    {
+      "sector": "construccion_inmobiliario",
+      "noticias": [
+        {
+          "id": "ej-12-2026-10-13",
+          "titular": "Una constructora ficticia usa IA para estimar retrasos de obra desde fotos de dron",
+          "entradilla": "Compara el avance real con el plan y alerta de desviaciones.",
+          "resumen": "Obras Tramontana, constructora inventada, sobrevuela sus obras con drones y compara las imágenes con el calendario. En un piloto de dos proyectos, el sistema detectó desviaciones antes que la revisión periódica.",
+          "impacto": "Un buen ejemplo de IA para control de proyectos, aún en fase piloto.",
+          "sector": "construccion_inmobiliario",
+          "tipo_innovacion": "analitica_prediccion",
+          "empresa": "Obras Tramontana",
+          "pais": "España",
+          "madurez": "piloto",
+          "tipo_afirmacion": "hecho_confirmado",
+          "puntuacion": 3,
+          "puntuacion_100": 55,
+          "confianza": "media",
+          "medio": "Diario Muestra de Economía",
+          "fecha_publicacion": "2026-10-13",
+          "url": null
+        }
+      ]
+    },
+    {
+      "sector": "telecomunicaciones",
+      "noticias": [
+        {
+          "id": "ej-17-2026-10-13",
+          "titular": "Una operadora ficticia reduce llamadas al soporte con un asistente que diagnostica fallos de red",
+          "entradilla": "El chat detecta incidencias en la zona del cliente antes de que este llame.",
+          "resumen": "Telefonía Estrella, operadora de ficción, cruza los datos de red con las consultas de clientes para responder con el estado de la incidencia. La empresa informa de menos llamadas repetidas al servicio de atención.",
+          "impacto": "Reducir la fricción antes de que el cliente se queje es el objetivo de la atención proactiva.",
+          "sector": "telecomunicaciones",
+          "tipo_innovacion": "atencion_cliente",
+          "empresa": "Telefonía Estrella",
+          "pais": "Chile",
+          "madurez": "escalado",
+          "tipo_afirmacion": "afirmacion_empresa",
+          "puntuacion": 4,
+          "puntuacion_100": 77,
+          "confianza": "media",
+          "medio": "Revista Ejemplo Tech",
+          "fecha_publicacion": "2026-10-13",
+          "url": null
+        }
+      ]
+    },
+    {
+      "sector": "educacion",
+      "noticias": [
+        {
+          "id": "ej-24-2026-10-13",
+          "titular": "Una escuela ficticia prueba un asistente de lectura que adapta textos al nivel del alumno",
+          "entradilla": "Un piloto con 200 estudiantes mide la mejora de comprensión lectora.",
+          "resumen": "La Escuela Faro, centro de ficción, comparó dos grupos de estudiantes, uno con asistente de lectura adaptado y otro sin él. El grupo con asistente mejoró algo más en comprensión, aunque la diferencia es pequeña y la muestra limitada.",
+          "impacto": "Un piloto honesto con resultados modestos: buen ejemplo de cómo debería evaluarse.",
+          "sector": "educacion",
+          "tipo_innovacion": "producto_servicio",
+          "empresa": "Escuela Faro",
+          "pais": "Costa Rica",
+          "madurez": "piloto",
+          "tipo_afirmacion": "hecho_confirmado",
+          "puntuacion": 3,
+          "puntuacion_100": 59,
+          "confianza": "media",
+          "medio": "Cuaderno de Demostración",
+          "fecha_publicacion": "2026-10-13",
+          "url": null
+        }
+      ]
+    },
+    {
+      "sector": "agricultura",
+      "noticias": [
+        {
+          "id": "ej-05-2026-10-13",
+          "titular": "Una cooperativa agraria ficticia ajusta el riego con predicción meteorológica y sensores",
+          "entradilla": "El sistema recomienda cuánta agua usar cada día en cada parcela.",
+          "resumen": "La Cooperativa Vega Norte, entidad imaginaria, combina sensores de humedad del suelo con previsiones del tiempo para recomendar el riego parcela a parcela. Los socios dicen haber reducido el consumo de agua, sin aportar todavía cifras auditadas.",
+          "impacto": "Interesante para zonas con escasez de agua, a falta de resultados verificables.",
+          "sector": "agricultura",
+          "tipo_innovacion": "analitica_prediccion",
+          "empresa": "Cooperativa Vega Norte",
+          "pais": "México",
+          "madurez": "piloto",
+          "tipo_afirmacion": "afirmacion_empresa",
+          "puntuacion": 3,
+          "puntuacion_100": 58,
+          "confianza": "media",
+          "medio": "Revista Ejemplo Tech",
+          "fecha_publicacion": "2026-10-13",
+          "url": null
+        }
+      ]
+    }
+  ],
+  "cifras": {
+    "casos_totales": 9,
+    "puntuacion_media": 3.4,
+    "por_sector": [
+      {
+        "sector": "educacion",
+        "casos": 2
+      },
+      {
+        "sector": "banca_seguros",
+        "casos": 1
+      },
+      {
+        "sector": "construccion_inmobiliario",
+        "casos": 1
+      },
+      {
+        "sector": "retail_comercio",
+        "casos": 1
+      },
+      {
+        "sector": "salud_farma",
+        "casos": 1
+      },
+      {
+        "sector": "logistica_transporte",
+        "casos": 1
+      },
+      {
+        "sector": "telecomunicaciones",
+        "casos": 1
+      },
+      {
+        "sector": "agricultura",
+        "casos": 1
+      }
+    ],
+    "por_tipo": [
+      {
+        "tipo_innovacion": "analitica_prediccion",
+        "casos": 4
+      },
+      {
+        "tipo_innovacion": "producto_servicio",
+        "casos": 2
+      },
+      {
+        "tipo_innovacion": "proceso_operaciones",
+        "casos": 2
+      },
+      {
+        "tipo_innovacion": "atencion_cliente",
+        "casos": 1
+      }
+    ],
+    "por_afirmacion": [
+      {
+        "tipo_afirmacion": "hecho_confirmado",
+        "casos": 5
+      },
+      {
+        "tipo_afirmacion": "afirmacion_empresa",
+        "casos": 4
+      }
+    ]
+  },
+  "senales_debiles": [
+    {
+      "id": "ej-18-2026-10-13",
+      "titular": "Una cadena ficticia dice que la IA reducirá sus mermas, pero aún sin datos",
+      "entradilla": "La compañía presenta un piloto de previsión de demanda en tres tiendas.",
+      "resumen": "Colmena Retail, marca imaginaria, anuncia un piloto en tres tiendas para ajustar pedidos de frescos. No ha publicado resultados y solo se conoce el comunicado de lanzamiento.",
+      "impacto": "Idea razonable, pero por ahora es una señal débil sin evidencia.",
+      "sector": "retail_comercio",
+      "tipo_innovacion": "proceso_operaciones",
+      "empresa": "Colmena Retail",
+      "pais": "Colombia",
+      "madurez": "piloto",
+      "tipo_afirmacion": "afirmacion_empresa",
+      "puntuacion": 2,
+      "puntuacion_100": 47,
+      "confianza": "baja",
+      "medio": "Cuaderno de Demostración",
+      "fecha_publicacion": "2026-10-13",
+      "url": null
+    }
+  ],
+  "analisis": "Hoy dominan los pilotos: mucho ensayo y poca producción. Los casos más sólidos son los que miden contra un grupo de control. Los anuncios sin datos, como los de las agencias creativas, quedan como señales a vigilar.",
+  "modelo_editor": "ejemplo"
+}

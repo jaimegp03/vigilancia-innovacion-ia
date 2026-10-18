@@ -1,0 +1,342 @@
+{
+  "fecha": "2026-10-15",
+  "numero_edicion": 4,
+  "es_ejemplo": true,
+  "portada": {
+    "id": "ej-17-2026-10-15",
+    "titular": "Una operadora ficticia reduce llamadas al soporte con un asistente que diagnostica fallos de red",
+    "entradilla": "El chat detecta incidencias en la zona del cliente antes de que este llame.",
+    "resumen": "Telefonía Estrella, operadora de ficción, cruza los datos de red con las consultas de clientes para responder con el estado de la incidencia. La empresa informa de menos llamadas repetidas al servicio de atención.",
+    "impacto": "Reducir la fricción antes de que el cliente se queje es el objetivo de la atención proactiva.",
+    "sector": "telecomunicaciones",
+    "tipo_innovacion": "atencion_cliente",
+    "empresa": "Telefonía Estrella",
+    "pais": "Chile",
+    "madurez": "escalado",
+    "tipo_afirmacion": "afirmacion_empresa",
+    "puntuacion": 4,
+    "puntuacion_100": 77,
+    "confianza": "media",
+    "medio": "Revista Ejemplo Tech",
+    "fecha_publicacion": "2026-10-15",
+    "url": null
+  },
+  "destacadas": [
+    {
+      "id": "ej-21-2026-10-15",
+      "titular": "Un hospital ficticio genera borradores de informes de alta con IA para que los revisen los médicos",
+      "entradilla": "Los médicos corrigen un texto ya redactado en lugar de escribirlo desde cero.",
+      "resumen": "El Hospital Costa Azul, centro inventado, utiliza un asistente que redacta borradores de informes de alta a partir de la historia clínica. El equipo asegura que ahorra tiempo administrativo; cada informe lo firma un facultativo.",
+      "impacto": "Libera tiempo clínico si la revisión humana es rigurosa.",
+      "sector": "salud_farma",
+      "tipo_innovacion": "generacion_contenido",
+      "empresa": "Hospital Costa Azul",
+      "pais": "España",
+      "madurez": "produccion",
+      "tipo_afirmacion": "afirmacion_empresa",
+      "puntuacion": 4,
+      "puntuacion_100": 72,
+      "confianza": "media",
+      "medio": "Revista Ejemplo Tech",
+      "fecha_publicacion": "2026-10-15",
+      "url": null
+    },
+    {
+      "id": "ej-11-2026-10-15",
+      "titular": "Una cadena hotelera ficticia atiende a sus huéspedes por mensajería con un asistente de IA",
+      "entradilla": "Reservas, dudas y peticiones de habitación se resuelven por chat a cualquier hora.",
+      "resumen": "Brisa Hoteles, cadena imaginaria, ha activado un asistente que responde por mensajería en varios idiomas y deriva a recepción cuando no sabe contestar. La empresa asegura que libera tiempo de recepción en temporada alta.",
+      "impacto": "Mejora la atención 24 horas con costes contenidos, siempre que la derivación a personas funcione.",
+      "sector": "turismo_hosteleria",
+      "tipo_innovacion": "atencion_cliente",
+      "empresa": "Brisa Hoteles",
+      "pais": "República Dominicana",
+      "madurez": "produccion",
+      "tipo_afirmacion": "afirmacion_empresa",
+      "puntuacion": 3,
+      "puntuacion_100": 66,
+      "confianza": "media",
+      "medio": "Gaceta Ficticia de Innovación",
+      "fecha_publicacion": "2026-10-15",
+      "url": null
+    },
+    {
+      "id": "ej-08-2026-10-15",
+      "titular": "Un ayuntamiento ficticio responde trámites por chat en cuatro idiomas",
+      "entradilla": "El asistente resuelve dudas frecuentes y reduce las colas en ventanilla.",
+      "resumen": "El Ayuntamiento de Villaclara, municipio inventado, ha puesto en marcha un asistente conversacional para consultas de padrón, tasas y licencias. Los datos municipales muestran menos llamadas repetidas y más trámites iniciados en línea.",
+      "impacto": "Reduce la brecha entre la administración y la ciudadanía si se mantiene una vía humana alternativa.",
+      "sector": "sector_publico",
+      "tipo_innovacion": "atencion_cliente",
+      "empresa": "Ayuntamiento de Villaclara",
+      "pais": "España",
+      "madurez": "produccion",
+      "tipo_afirmacion": "hecho_confirmado",
+      "puntuacion": 4,
+      "puntuacion_100": 73,
+      "confianza": "alta",
+      "medio": "Diario Muestra de Economía",
+      "fecha_publicacion": "2026-10-15",
+      "url": null
+    }
+  ],
+  "secciones_por_sector": [
+    {
+      "sector": "banca_seguros",
+      "noticias": [
+        {
+          "id": "ej-09-2026-10-15",
+          "titular": "Una aseguradora ficticia detecta fraudes en reclamaciones con análisis de patrones",
+          "entradilla": "El modelo marca expedientes sospechosos para que los revise un investigador.",
+          "resumen": "Seguros Faro, compañía de ficción, prueba un sistema que puntúa el riesgo de fraude de cada reclamación. La empresa dice que los casos marcados tienen más probabilidad de ser irregulares, pero no ha explicado cuántos falsos positivos genera.",
+          "impacto": "La detección de fraude funciona, pero los falsos positivos son el punto delicado.",
+          "sector": "banca_seguros",
+          "tipo_innovacion": "seguridad_riesgo",
+          "empresa": "Seguros Faro",
+          "pais": "Perú",
+          "madurez": "piloto",
+          "tipo_afirmacion": "afirmacion_empresa",
+          "puntuacion": 3,
+          "puntuacion_100": 61,
+          "confianza": "media",
+          "medio": "Cuaderno de Demostración",
+          "fecha_publicacion": "2026-10-15",
+          "url": null
+        }
+      ]
+    },
+    {
+      "sector": "gran_consumo_alimentacion",
+      "noticias": [
+        {
+          "id": "ej-25-2026-10-15",
+          "titular": "Un fabricante de alimentos ficticio ajusta su producción con predicción de demanda por IA",
+          "entradilla": "Evita sobreproducción de frescos y reduce el desperdicio.",
+          "resumen": "Mercado Atlántico, empresa inventada, integra datos de ventas, clima y festivos para decidir cuánto producir cada semana. Afirma que el desperdicio de producto bajó de forma notable, sin facilitar la cifra exacta.",
+          "impacto": "Menos desperdicio supone ahorro y sostenibilidad, aunque falta transparencia en los números.",
+          "sector": "gran_consumo_alimentacion",
+          "tipo_innovacion": "analitica_prediccion",
+          "empresa": "Mercado Atlántico",
+          "pais": "Portugal",
+          "madurez": "produccion",
+          "tipo_afirmacion": "afirmacion_empresa",
+          "puntuacion": 4,
+          "puntuacion_100": 78,
+          "confianza": "media",
+          "medio": "Revista Ejemplo Tech",
+          "fecha_publicacion": "2026-10-15",
+          "url": null
+        }
+      ]
+    },
+    {
+      "sector": "retail_comercio",
+      "noticias": [
+        {
+          "id": "ej-14-2026-10-15",
+          "titular": "Una cadena de farmacias ficticia personaliza recomendaciones con IA en su app",
+          "entradilla": "La aplicación sugiere productos según el historial, sin datos de salud sensibles.",
+          "resumen": "Farmacias Candil, marca inventada, incorpora recomendaciones personalizadas en su aplicación. La empresa afirma que aumentan la venta cruzada, y asegura que no utiliza datos de salud, aunque no detalla cómo lo garantiza.",
+          "impacto": "La personalización comercial en un sector sensible exige transparencia sobre los datos usados.",
+          "sector": "retail_comercio",
+          "tipo_innovacion": "marketing_ventas",
+          "empresa": "Farmacias Candil",
+          "pais": "España",
+          "madurez": "produccion",
+          "tipo_afirmacion": "afirmacion_empresa",
+          "puntuacion": 3,
+          "puntuacion_100": 52,
+          "confianza": "media",
+          "medio": "Cuaderno de Demostración",
+          "fecha_publicacion": "2026-10-15",
+          "url": null
+        }
+      ]
+    },
+    {
+      "sector": "salud_farma",
+      "noticias": [
+        {
+          "id": "ej-02-2026-10-15",
+          "titular": "Un hospital ficticio anticipa ingresos en urgencias con seis horas de margen",
+          "entradilla": "El modelo predice la afluencia y ayuda a organizar turnos y camas antes de que llegue la punta.",
+          "resumen": "El Hospital Valle Hondo, organización inventada para esta demostración, entrena un modelo con tres años de historial de urgencias, calendario y datos meteorológicos. Tras un piloto de tres meses en un servicio, el equipo de gestión ajustó turnos con antelación y redujo las esperas en horas punta.",
+          "impacto": "Muestra un uso de la IA que no sustituye al personal sino que mejora su planificación.",
+          "sector": "salud_farma",
+          "tipo_innovacion": "analitica_prediccion",
+          "empresa": "Hospital Valle Hondo",
+          "pais": "Chile",
+          "madurez": "piloto",
+          "tipo_afirmacion": "hecho_confirmado",
+          "puntuacion": 4,
+          "puntuacion_100": 82,
+          "confianza": "alta",
+          "medio": "Revista Ejemplo Tech",
+          "fecha_publicacion": "2026-10-15",
+          "url": null
+        }
+      ]
+    },
+    {
+      "sector": "industria_manufactura",
+      "noticias": [
+        {
+          "id": "ej-04-2026-10-15",
+          "titular": "Una fábrica textil ficticia prueba visión artificial para detectar defectos en tela",
+          "entradilla": "Cámaras y un modelo revisan cada metro de tejido y marcan las imperfecciones.",
+          "resumen": "Textiles Marenostrum, marca inventada, ha instalado cámaras en una línea de tejeduría. La empresa asegura que el sistema detecta más defectos que la inspección manual, aunque aún no ha publicado la metodología de la comparación.",
+          "impacto": "Un caso típico de visión artificial industrial: útil, pero con datos todavía sin contrastar.",
+          "sector": "industria_manufactura",
+          "tipo_innovacion": "proceso_operaciones",
+          "empresa": "Textiles Marenostrum",
+          "pais": "España",
+          "madurez": "piloto",
+          "tipo_afirmacion": "afirmacion_empresa",
+          "puntuacion": 3,
+          "puntuacion_100": 64,
+          "confianza": "media",
+          "medio": "Cuaderno de Demostración",
+          "fecha_publicacion": "2026-10-15",
+          "url": null
+        }
+      ]
+    },
+    {
+      "sector": "agricultura",
+      "noticias": [
+        {
+          "id": "ej-28-2026-10-15",
+          "titular": "Una granja ficticia monitoriza la salud del ganado con cámaras y modelos de IA",
+          "entradilla": "El sistema detecta cojeras y cambios de comportamiento a tiempo.",
+          "resumen": "Granja Tres Cerros, explotación inventada, instala cámaras en sus establos y un modelo que señala animales con posibles problemas. El propietario dice que permite tratar antes, sin datos que lo respalden aún.",
+          "impacto": "Un uso práctico de visión artificial en el campo, pendiente de confirmación.",
+          "sector": "agricultura",
+          "tipo_innovacion": "proceso_operaciones",
+          "empresa": "Granja Tres Cerros",
+          "pais": "Argentina",
+          "madurez": "piloto",
+          "tipo_afirmacion": "afirmacion_empresa",
+          "puntuacion": 3,
+          "puntuacion_100": 56,
+          "confianza": "media",
+          "medio": "Cuaderno de Demostración",
+          "fecha_publicacion": "2026-10-15",
+          "url": null
+        }
+      ]
+    }
+  ],
+  "cifras": {
+    "casos_totales": 11,
+    "puntuacion_media": 3.2,
+    "por_sector": [
+      {
+        "sector": "salud_farma",
+        "casos": 2
+      },
+      {
+        "sector": "banca_seguros",
+        "casos": 1
+      },
+      {
+        "sector": "turismo_hosteleria",
+        "casos": 1
+      },
+      {
+        "sector": "gran_consumo_alimentacion",
+        "casos": 1
+      },
+      {
+        "sector": "retail_comercio",
+        "casos": 1
+      },
+      {
+        "sector": "industria_manufactura",
+        "casos": 1
+      },
+      {
+        "sector": "telecomunicaciones",
+        "casos": 1
+      },
+      {
+        "sector": "educacion",
+        "casos": 1
+      },
+      {
+        "sector": "sector_publico",
+        "casos": 1
+      },
+      {
+        "sector": "agricultura",
+        "casos": 1
+      }
+    ],
+    "por_tipo": [
+      {
+        "tipo_innovacion": "atencion_cliente",
+        "casos": 3
+      },
+      {
+        "tipo_innovacion": "proceso_operaciones",
+        "casos": 2
+      },
+      {
+        "tipo_innovacion": "analitica_prediccion",
+        "casos": 2
+      },
+      {
+        "tipo_innovacion": "marketing_ventas",
+        "casos": 1
+      },
+      {
+        "tipo_innovacion": "generacion_contenido",
+        "casos": 1
+      },
+      {
+        "tipo_innovacion": "investigacion_desarrollo",
+        "casos": 1
+      },
+      {
+        "tipo_innovacion": "seguridad_riesgo",
+        "casos": 1
+      }
+    ],
+    "por_afirmacion": [
+      {
+        "tipo_afirmacion": "hecho_confirmado",
+        "casos": 2
+      },
+      {
+        "tipo_afirmacion": "afirmacion_empresa",
+        "casos": 8
+      },
+      {
+        "tipo_afirmacion": "opinion",
+        "casos": 1
+      }
+    ]
+  },
+  "senales_debiles": [
+    {
+      "id": "ej-19-2026-10-15",
+      "titular": "Un instituto ficticio defiende que la IA transformará la evaluación universitaria",
+      "entradilla": "Es un artículo de opinión sin caso concreto que lo respalde.",
+      "resumen": "Un investigador del Instituto Norte, entidad inventada, plantea en una tribuna que la IA cambiará los exámenes universitarios. No describe ninguna implantación real ni resultados, solo una visión personal.",
+      "impacto": "Útil como contexto del debate, no como caso de uso.",
+      "sector": "educacion",
+      "tipo_innovacion": "investigacion_desarrollo",
+      "empresa": "Instituto Norte",
+      "pais": "Alemania",
+      "madurez": "anuncio",
+      "tipo_afirmacion": "opinion",
+      "puntuacion": 2,
+      "puntuacion_100": 33,
+      "confianza": "baja",
+      "medio": "Gaceta Ficticia de Innovación",
+      "fecha_publicacion": "2026-10-15",
+      "url": null
+    }
+  ],
+  "analisis": "La atención al cliente sigue siendo el terreno más maduro: asistentes que ya resuelven consultas reales en banca, telecomunicaciones y turismo. La diferencia está en quién garantiza la derivación a una persona cuando el asistente no sabe.",
+  "modelo_editor": "ejemplo"
+}

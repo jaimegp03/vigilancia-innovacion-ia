@@ -67,6 +67,17 @@ Todo se guarda en una hoja de Google llamada **"Vigilancia IA"**, con 5 pestaña
 
 ---
 
+## 4 bis. La web «Tecnoticias e Innovación IA»
+
+Cada mañana, después de leer la prensa, el sistema monta una **edición** como la de un periódico con las noticias del día y la guarda en un único archivo: **`web/index.html`** (dentro de la carpeta del proyecto). **Ábrelo con doble clic**: no necesita internet.
+
+- Arriba verás la **portada** y las noticias destacadas; más abajo, las **cifras del día**, las noticias **por sectores** (pasa el ratón por una para ampliarla) y las **señales débiles** (noticias poco fiables, a vigilar).
+- Cada noticia tiene su **nota de 1 a 5**, una etiqueta que dice si es un **hecho confirmado**, una **afirmación de la empresa** o una **opinión**, y el **enlace a la fuente**.
+- En **Archivo** puedes abrir cualquier edición anterior y buscar por empresa, país o sector.
+- También te llega un aviso por Telegram cuando la edición está lista.
+
+Por ahora la web es **solo tuya** (en tu ordenador); no se publica en internet salvo que tú lo decidas (ver [la web](web.md)).
+
 ## 5. ¿Qué es un caso y por qué hay noticias descartadas?
 
 Un **caso** es una noticia donde **una empresa concreta usa la IA para algo concreto** (por ejemplo: "Kone da un asistente de IA a sus técnicos").

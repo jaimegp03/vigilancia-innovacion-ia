@@ -1,0 +1,317 @@
+{
+  "fecha": "2026-10-12",
+  "numero_edicion": 1,
+  "es_ejemplo": true,
+  "portada": {
+    "id": "ej-01-2026-10-12",
+    "titular": "Una aseguradora ficticia resuelve el 60 % de los partes de siniestro sin intervención humana",
+    "entradilla": "Aurea Seguros usa un agente de IA que lee fotos y documentos y propone una resolución en minutos.",
+    "resumen": "La compañía inventada Aurea Seguros ha desplegado un agente que revisa fotografías del daño, contrasta la póliza y propone una indemnización. Un tramitador revisa solo los casos dudosos. Según la propia empresa, el tiempo medio de resolución bajó de cinco días a unas pocas horas.",
+    "impacto": "Si la cifra se confirma, reduce costes y mejora la experiencia del cliente, pero conviene esperar datos independientes.",
+    "sector": "banca_seguros",
+    "tipo_innovacion": "atencion_cliente",
+    "empresa": "Aurea Seguros",
+    "pais": "España",
+    "madurez": "produccion",
+    "tipo_afirmacion": "afirmacion_empresa",
+    "puntuacion": 4,
+    "puntuacion_100": 88,
+    "confianza": "alta",
+    "medio": "Diario Muestra de Economía",
+    "fecha_publicacion": "2026-10-12",
+    "url": null
+  },
+  "destacadas": [
+    {
+      "id": "ej-06-2026-10-12",
+      "titular": "Un metro ficticio reparte mejor sus trenes con previsión de demanda en tiempo real",
+      "entradilla": "La red ajusta frecuencias según la afluencia prevista en cada estación.",
+      "resumen": "Metro Alturas, red inventada, usa un modelo que combina datos de validaciones, eventos y clima para ajustar las frecuencias de paso. La operadora informa de menos aglomeraciones en hora punta y de un ahorro energético moderado.",
+      "impacto": "Un ejemplo claro de IA aplicada a la operación diaria de un servicio público.",
+      "sector": "logistica_transporte",
+      "tipo_innovacion": "analitica_prediccion",
+      "empresa": "Metro Alturas",
+      "pais": "Colombia",
+      "madurez": "produccion",
+      "tipo_afirmacion": "hecho_confirmado",
+      "puntuacion": 4,
+      "puntuacion_100": 79,
+      "confianza": "alta",
+      "medio": "Diario Muestra de Economía",
+      "fecha_publicacion": "2026-10-12",
+      "url": null
+    },
+    {
+      "id": "ej-03-2026-10-12",
+      "titular": "Una eléctrica ficticia predice averías en aerogeneradores con semanas de antelación",
+      "entradilla": "Sensores y un modelo de aprendizaje automático avisan del desgaste de componentes antes del fallo.",
+      "resumen": "Lumbre Energía, empresa de ficción, analiza vibraciones y temperatura de sus turbinas para anticipar averías de rodamientos. El sistema ya cubre toda su flota eólica y permite programar el mantenimiento en jornadas de poco viento.",
+      "impacto": "El mantenimiento predictivo es uno de los usos de IA con retorno más fácil de medir.",
+      "sector": "energia_utilities",
+      "tipo_innovacion": "proceso_operaciones",
+      "empresa": "Lumbre Energía",
+      "pais": "Portugal",
+      "madurez": "escalado",
+      "tipo_afirmacion": "hecho_confirmado",
+      "puntuacion": 4,
+      "puntuacion_100": 76,
+      "confianza": "media",
+      "medio": "Gaceta Ficticia de Innovación",
+      "fecha_publicacion": "2026-10-12",
+      "url": null
+    },
+    {
+      "id": "ej-09-2026-10-12",
+      "titular": "Una aseguradora ficticia detecta fraudes en reclamaciones con análisis de patrones",
+      "entradilla": "El modelo marca expedientes sospechosos para que los revise un investigador.",
+      "resumen": "Seguros Faro, compañía de ficción, prueba un sistema que puntúa el riesgo de fraude de cada reclamación. La empresa dice que los casos marcados tienen más probabilidad de ser irregulares, pero no ha explicado cuántos falsos positivos genera.",
+      "impacto": "La detección de fraude funciona, pero los falsos positivos son el punto delicado.",
+      "sector": "banca_seguros",
+      "tipo_innovacion": "seguridad_riesgo",
+      "empresa": "Seguros Faro",
+      "pais": "Perú",
+      "madurez": "piloto",
+      "tipo_afirmacion": "afirmacion_empresa",
+      "puntuacion": 3,
+      "puntuacion_100": 61,
+      "confianza": "media",
+      "medio": "Cuaderno de Demostración",
+      "fecha_publicacion": "2026-10-12",
+      "url": null
+    }
+  ],
+  "secciones_por_sector": [
+    {
+      "sector": "industria_manufactura",
+      "noticias": [
+        {
+          "id": "ej-16-2026-10-12",
+          "titular": "Una fábrica ficticia detecta el uso incorrecto de equipos de protección con cámaras",
+          "entradilla": "El sistema avisa en el momento y no guarda imágenes identificables.",
+          "resumen": "Fábrica Cinco Ríos, planta inventada, instala cámaras con un modelo que reconoce si un operario lleva casco y guantes. El aviso se envía al responsable de turno y las imágenes se procesan en el propio equipo sin almacenarse.",
+          "impacto": "Mejora la seguridad laboral y ofrece un enfoque respetuoso con la privacidad.",
+          "sector": "industria_manufactura",
+          "tipo_innovacion": "seguridad_riesgo",
+          "empresa": "Fábrica Cinco Ríos",
+          "pais": "Brasil",
+          "madurez": "piloto",
+          "tipo_afirmacion": "hecho_confirmado",
+          "puntuacion": 4,
+          "puntuacion_100": 74,
+          "confianza": "alta",
+          "medio": "Diario Muestra de Economía",
+          "fecha_publicacion": "2026-10-12",
+          "url": null
+        },
+        {
+          "id": "ej-04-2026-10-12",
+          "titular": "Una fábrica textil ficticia prueba visión artificial para detectar defectos en tela",
+          "entradilla": "Cámaras y un modelo revisan cada metro de tejido y marcan las imperfecciones.",
+          "resumen": "Textiles Marenostrum, marca inventada, ha instalado cámaras en una línea de tejeduría. La empresa asegura que el sistema detecta más defectos que la inspección manual, aunque aún no ha publicado la metodología de la comparación.",
+          "impacto": "Un caso típico de visión artificial industrial: útil, pero con datos todavía sin contrastar.",
+          "sector": "industria_manufactura",
+          "tipo_innovacion": "proceso_operaciones",
+          "empresa": "Textiles Marenostrum",
+          "pais": "España",
+          "madurez": "piloto",
+          "tipo_afirmacion": "afirmacion_empresa",
+          "puntuacion": 3,
+          "puntuacion_100": 64,
+          "confianza": "media",
+          "medio": "Cuaderno de Demostración",
+          "fecha_publicacion": "2026-10-12",
+          "url": null
+        }
+      ]
+    },
+    {
+      "sector": "construccion_inmobiliario",
+      "noticias": [
+        {
+          "id": "ej-12-2026-10-12",
+          "titular": "Una constructora ficticia usa IA para estimar retrasos de obra desde fotos de dron",
+          "entradilla": "Compara el avance real con el plan y alerta de desviaciones.",
+          "resumen": "Obras Tramontana, constructora inventada, sobrevuela sus obras con drones y compara las imágenes con el calendario. En un piloto de dos proyectos, el sistema detectó desviaciones antes que la revisión periódica.",
+          "impacto": "Un buen ejemplo de IA para control de proyectos, aún en fase piloto.",
+          "sector": "construccion_inmobiliario",
+          "tipo_innovacion": "analitica_prediccion",
+          "empresa": "Obras Tramontana",
+          "pais": "España",
+          "madurez": "piloto",
+          "tipo_afirmacion": "hecho_confirmado",
+          "puntuacion": 3,
+          "puntuacion_100": 55,
+          "confianza": "media",
+          "medio": "Diario Muestra de Economía",
+          "fecha_publicacion": "2026-10-12",
+          "url": null
+        }
+      ]
+    },
+    {
+      "sector": "salud_farma",
+      "noticias": [
+        {
+          "id": "ej-21-2026-10-12",
+          "titular": "Un hospital ficticio genera borradores de informes de alta con IA para que los revisen los médicos",
+          "entradilla": "Los médicos corrigen un texto ya redactado en lugar de escribirlo desde cero.",
+          "resumen": "El Hospital Costa Azul, centro inventado, utiliza un asistente que redacta borradores de informes de alta a partir de la historia clínica. El equipo asegura que ahorra tiempo administrativo; cada informe lo firma un facultativo.",
+          "impacto": "Libera tiempo clínico si la revisión humana es rigurosa.",
+          "sector": "salud_farma",
+          "tipo_innovacion": "generacion_contenido",
+          "empresa": "Hospital Costa Azul",
+          "pais": "España",
+          "madurez": "produccion",
+          "tipo_afirmacion": "afirmacion_empresa",
+          "puntuacion": 4,
+          "puntuacion_100": 72,
+          "confianza": "media",
+          "medio": "Revista Ejemplo Tech",
+          "fecha_publicacion": "2026-10-12",
+          "url": null
+        }
+      ]
+    },
+    {
+      "sector": "logistica_transporte",
+      "noticias": [
+        {
+          "id": "ej-13-2026-10-12",
+          "titular": "Un operador logístico ficticio recorta kilómetros en vacío con optimización de rutas",
+          "entradilla": "Su planificador reparte entregas con un modelo que aprende de cada jornada.",
+          "resumen": "Ruta Verde, operador de ficción, usa un algoritmo de optimización con aprendizaje automático para asignar paquetes a repartidores. Los informes internos, revisados por un tercero, muestran menos kilómetros en vacío y menor consumo de combustible.",
+          "impacto": "Combina ahorro de costes y menor huella de carbono con resultados verificados.",
+          "sector": "logistica_transporte",
+          "tipo_innovacion": "proceso_operaciones",
+          "empresa": "Ruta Verde",
+          "pais": "México",
+          "madurez": "escalado",
+          "tipo_afirmacion": "hecho_confirmado",
+          "puntuacion": 4,
+          "puntuacion_100": 84,
+          "confianza": "alta",
+          "medio": "Revista Ejemplo Tech",
+          "fecha_publicacion": "2026-10-12",
+          "url": null
+        }
+      ]
+    },
+    {
+      "sector": "medios_marketing",
+      "noticias": [
+        {
+          "id": "ej-27-2026-10-12",
+          "titular": "Un periódico ficticio usa IA para transcribir plenos municipales y editar los resúmenes",
+          "entradilla": "Las crónicas se publican antes y siempre las revisa un periodista.",
+          "resumen": "Diario del Valle, medio inventado, transcribe con IA las sesiones plenarias y genera un borrador de crónica. Un periodista comprueba cada dato antes de publicar, y el periódico lo indica a sus lectores.",
+          "impacto": "Muestra cómo usar la IA en una redacción sin renunciar al control editorial.",
+          "sector": "medios_marketing",
+          "tipo_innovacion": "generacion_contenido",
+          "empresa": "Diario del Valle",
+          "pais": "España",
+          "madurez": "produccion",
+          "tipo_afirmacion": "hecho_confirmado",
+          "puntuacion": 3,
+          "puntuacion_100": 68,
+          "confianza": "alta",
+          "medio": "Diario Muestra de Economía",
+          "fecha_publicacion": "2026-10-12",
+          "url": null
+        }
+      ]
+    }
+  ],
+  "cifras": {
+    "casos_totales": 11,
+    "puntuacion_media": 3.5,
+    "por_sector": [
+      {
+        "sector": "banca_seguros",
+        "casos": 2
+      },
+      {
+        "sector": "industria_manufactura",
+        "casos": 2
+      },
+      {
+        "sector": "logistica_transporte",
+        "casos": 2
+      },
+      {
+        "sector": "medios_marketing",
+        "casos": 2
+      },
+      {
+        "sector": "construccion_inmobiliario",
+        "casos": 1
+      },
+      {
+        "sector": "salud_farma",
+        "casos": 1
+      },
+      {
+        "sector": "energia_utilities",
+        "casos": 1
+      }
+    ],
+    "por_tipo": [
+      {
+        "tipo_innovacion": "proceso_operaciones",
+        "casos": 3
+      },
+      {
+        "tipo_innovacion": "generacion_contenido",
+        "casos": 3
+      },
+      {
+        "tipo_innovacion": "analitica_prediccion",
+        "casos": 2
+      },
+      {
+        "tipo_innovacion": "seguridad_riesgo",
+        "casos": 2
+      },
+      {
+        "tipo_innovacion": "atencion_cliente",
+        "casos": 1
+      }
+    ],
+    "por_afirmacion": [
+      {
+        "tipo_afirmacion": "hecho_confirmado",
+        "casos": 6
+      },
+      {
+        "tipo_afirmacion": "afirmacion_empresa",
+        "casos": 4
+      },
+      {
+        "tipo_afirmacion": "opinion",
+        "casos": 1
+      }
+    ]
+  },
+  "senales_debiles": [
+    {
+      "id": "ej-10-2026-10-12",
+      "titular": "Una agencia ficticia asegura que producirá campañas completas solo con IA",
+      "entradilla": "La agencia lo anuncia como una visión de futuro, sin mostrar resultados todavía.",
+      "resumen": "Estudio Sombra, agencia inventada, ha dicho que pronto generará campañas enteras sin equipo creativo. Por ahora es solo un anuncio de intenciones, sin cliente ni métricas, y varios analistas lo ven como una estrategia de marketing propia.",
+      "impacto": "Señal a vigilar, pero todavía sin pruebas.",
+      "sector": "medios_marketing",
+      "tipo_innovacion": "generacion_contenido",
+      "empresa": "Estudio Sombra",
+      "pais": "Reino Unido",
+      "madurez": "anuncio",
+      "tipo_afirmacion": "opinion",
+      "puntuacion": 2,
+      "puntuacion_100": 38,
+      "confianza": "baja",
+      "medio": "Revista Ejemplo Tech",
+      "fecha_publicacion": "2026-10-12",
+      "url": null
+    }
+  ],
+  "analisis": "La jornada gira en torno a la IA que trabaja en segundo plano: predicción de demanda, mantenimiento y logística. Lo llamativo no es la tecnología, sino que varios casos ya reportan resultados verificados. Aun así, la mayoría de las cifras de ahorro vienen de las propias empresas, y conviene leerlas con prudencia.",
+  "modelo_editor": "ejemplo"
+}

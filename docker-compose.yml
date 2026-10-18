@@ -17,6 +17,8 @@ services:
       - N8N_RESTRICT_FILE_ACCESS_TO=/data/proyecto
       # Permite usar $env.GOOGLE_SHEET_ID y $env.TELEGRAM_CHAT_ID en los workflows
       - N8N_BLOCK_ENV_ACCESS_IN_NODE=false
+      # Activa el nodo "Execute Command" (desactivado por defecto): el workflow 04 lo usa para ejecutar web/build.mjs
+      - NODES_EXCLUDE=[]
       - GOOGLE_SHEET_ID=${GOOGLE_SHEET_ID}
       - TELEGRAM_CHAT_ID=${TELEGRAM_CHAT_ID}
       - EXECUTIONS_DATA_PRUNE=true
@@ -28,6 +30,10 @@ services:
       - ./prompts:/data/proyecto/prompts:ro
       - ./schemas:/data/proyecto/schemas:ro
       - ./workflows:/data/proyecto/workflows:ro
+      # Edición diaria (workflow 04): scripts de validación en solo lectura; data/ y web/ con escritura
+      - ./scripts:/data/proyecto/scripts:ro
+      - ./data:/data/proyecto/data
+      - ./web:/data/proyecto/web
 
 volumes:
   n8n_data:

@@ -1,0 +1,298 @@
+{
+  "fecha": "2026-10-16",
+  "numero_edicion": 5,
+  "es_ejemplo": true,
+  "portada": {
+    "id": "ej-22-2026-10-16",
+    "titular": "Una red eléctrica ficticia equilibra oferta y demanda con previsión solar por IA",
+    "entradilla": "Mejora la previsión de producción fotovoltaica hora a hora.",
+    "resumen": "Energía del Sur, operador imaginario, utiliza un modelo con imágenes de satélite y datos de estaciones para prever la producción solar. Los informes regulatorios muestran menos desvíos y menor uso de centrales de respaldo.",
+    "impacto": "Una mejor previsión es clave para integrar más renovables en la red.",
+    "sector": "energia_utilities",
+    "tipo_innovacion": "analitica_prediccion",
+    "empresa": "Energía del Sur",
+    "pais": "Marruecos",
+    "madurez": "escalado",
+    "tipo_afirmacion": "hecho_confirmado",
+    "puntuacion": 4,
+    "puntuacion_100": 85,
+    "confianza": "alta",
+    "medio": "Gaceta Ficticia de Innovación",
+    "fecha_publicacion": "2026-10-16",
+    "url": null
+  },
+  "destacadas": [
+    {
+      "id": "ej-29-2026-10-16",
+      "titular": "Un fabricante de coches ficticio acelera el diseño de piezas con simulación asistida por IA",
+      "entradilla": "Reduce el número de prototipos físicos necesarios.",
+      "resumen": "Torre Alta Motors, firma inventada, emplea modelos que sugieren geometrías y predicen su resistencia antes de fabricarlas. Las comunicaciones a inversores, verificables, hablan de menos prototipos y ciclos de desarrollo más cortos.",
+      "impacto": "Acorta el camino de la idea al producto en una industria muy competitiva.",
+      "sector": "automocion",
+      "tipo_innovacion": "investigacion_desarrollo",
+      "empresa": "Torre Alta Motors",
+      "pais": "Alemania",
+      "madurez": "escalado",
+      "tipo_afirmacion": "hecho_confirmado",
+      "puntuacion": 4,
+      "puntuacion_100": 83,
+      "confianza": "alta",
+      "medio": "Revista Ejemplo Tech",
+      "fecha_publicacion": "2026-10-16",
+      "url": null
+    },
+    {
+      "id": "ej-23-2026-10-16",
+      "titular": "Un puerto ficticio asigna muelles con un sistema de IA que reduce esperas de buques",
+      "entradilla": "La asignación se recalcula cada vez que cambia la llegada de un barco.",
+      "resumen": "Puerto Catorce, terminal inventada, prueba un sistema que reasigna muelles y grúas en tiempo real. La autoridad portuaria dice que los buques esperan menos, a falta de una evaluación externa.",
+      "impacto": "Los cuellos de botella portuarios son un problema global; cualquier mejora cuenta.",
+      "sector": "logistica_transporte",
+      "tipo_innovacion": "proceso_operaciones",
+      "empresa": "Puerto Catorce",
+      "pais": "Panamá",
+      "madurez": "piloto",
+      "tipo_afirmacion": "afirmacion_empresa",
+      "puntuacion": 3,
+      "puntuacion_100": 63,
+      "confianza": "media",
+      "medio": "Diario Muestra de Economía",
+      "fecha_publicacion": "2026-10-16",
+      "url": null
+    },
+    {
+      "id": "ej-25-2026-10-16",
+      "titular": "Un fabricante de alimentos ficticio ajusta su producción con predicción de demanda por IA",
+      "entradilla": "Evita sobreproducción de frescos y reduce el desperdicio.",
+      "resumen": "Mercado Atlántico, empresa inventada, integra datos de ventas, clima y festivos para decidir cuánto producir cada semana. Afirma que el desperdicio de producto bajó de forma notable, sin facilitar la cifra exacta.",
+      "impacto": "Menos desperdicio supone ahorro y sostenibilidad, aunque falta transparencia en los números.",
+      "sector": "gran_consumo_alimentacion",
+      "tipo_innovacion": "analitica_prediccion",
+      "empresa": "Mercado Atlántico",
+      "pais": "Portugal",
+      "madurez": "produccion",
+      "tipo_afirmacion": "afirmacion_empresa",
+      "puntuacion": 4,
+      "puntuacion_100": 78,
+      "confianza": "media",
+      "medio": "Revista Ejemplo Tech",
+      "fecha_publicacion": "2026-10-16",
+      "url": null
+    }
+  ],
+  "secciones_por_sector": [
+    {
+      "sector": "energia_utilities",
+      "noticias": [
+        {
+          "id": "ej-03-2026-10-16",
+          "titular": "Una eléctrica ficticia predice averías en aerogeneradores con semanas de antelación",
+          "entradilla": "Sensores y un modelo de aprendizaje automático avisan del desgaste de componentes antes del fallo.",
+          "resumen": "Lumbre Energía, empresa de ficción, analiza vibraciones y temperatura de sus turbinas para anticipar averías de rodamientos. El sistema ya cubre toda su flota eólica y permite programar el mantenimiento en jornadas de poco viento.",
+          "impacto": "El mantenimiento predictivo es uno de los usos de IA con retorno más fácil de medir.",
+          "sector": "energia_utilities",
+          "tipo_innovacion": "proceso_operaciones",
+          "empresa": "Lumbre Energía",
+          "pais": "Portugal",
+          "madurez": "escalado",
+          "tipo_afirmacion": "hecho_confirmado",
+          "puntuacion": 4,
+          "puntuacion_100": 76,
+          "confianza": "media",
+          "medio": "Gaceta Ficticia de Innovación",
+          "fecha_publicacion": "2026-10-16",
+          "url": null
+        }
+      ]
+    },
+    {
+      "sector": "logistica_transporte",
+      "noticias": [
+        {
+          "id": "ej-06-2026-10-16",
+          "titular": "Un metro ficticio reparte mejor sus trenes con previsión de demanda en tiempo real",
+          "entradilla": "La red ajusta frecuencias según la afluencia prevista en cada estación.",
+          "resumen": "Metro Alturas, red inventada, usa un modelo que combina datos de validaciones, eventos y clima para ajustar las frecuencias de paso. La operadora informa de menos aglomeraciones en hora punta y de un ahorro energético moderado.",
+          "impacto": "Un ejemplo claro de IA aplicada a la operación diaria de un servicio público.",
+          "sector": "logistica_transporte",
+          "tipo_innovacion": "analitica_prediccion",
+          "empresa": "Metro Alturas",
+          "pais": "Colombia",
+          "madurez": "produccion",
+          "tipo_afirmacion": "hecho_confirmado",
+          "puntuacion": 4,
+          "puntuacion_100": 79,
+          "confianza": "alta",
+          "medio": "Diario Muestra de Economía",
+          "fecha_publicacion": "2026-10-16",
+          "url": null
+        }
+      ]
+    },
+    {
+      "sector": "educacion",
+      "noticias": [
+        {
+          "id": "ej-24-2026-10-16",
+          "titular": "Una escuela ficticia prueba un asistente de lectura que adapta textos al nivel del alumno",
+          "entradilla": "Un piloto con 200 estudiantes mide la mejora de comprensión lectora.",
+          "resumen": "La Escuela Faro, centro de ficción, comparó dos grupos de estudiantes, uno con asistente de lectura adaptado y otro sin él. El grupo con asistente mejoró algo más en comprensión, aunque la diferencia es pequeña y la muestra limitada.",
+          "impacto": "Un piloto honesto con resultados modestos: buen ejemplo de cómo debería evaluarse.",
+          "sector": "educacion",
+          "tipo_innovacion": "producto_servicio",
+          "empresa": "Escuela Faro",
+          "pais": "Costa Rica",
+          "madurez": "piloto",
+          "tipo_afirmacion": "hecho_confirmado",
+          "puntuacion": 3,
+          "puntuacion_100": 59,
+          "confianza": "media",
+          "medio": "Cuaderno de Demostración",
+          "fecha_publicacion": "2026-10-16",
+          "url": null
+        }
+      ]
+    },
+    {
+      "sector": "medios_marketing",
+      "noticias": [
+        {
+          "id": "ej-27-2026-10-16",
+          "titular": "Un periódico ficticio usa IA para transcribir plenos municipales y editar los resúmenes",
+          "entradilla": "Las crónicas se publican antes y siempre las revisa un periodista.",
+          "resumen": "Diario del Valle, medio inventado, transcribe con IA las sesiones plenarias y genera un borrador de crónica. Un periodista comprueba cada dato antes de publicar, y el periódico lo indica a sus lectores.",
+          "impacto": "Muestra cómo usar la IA en una redacción sin renunciar al control editorial.",
+          "sector": "medios_marketing",
+          "tipo_innovacion": "generacion_contenido",
+          "empresa": "Diario del Valle",
+          "pais": "España",
+          "madurez": "produccion",
+          "tipo_afirmacion": "hecho_confirmado",
+          "puntuacion": 3,
+          "puntuacion_100": 68,
+          "confianza": "alta",
+          "medio": "Diario Muestra de Economía",
+          "fecha_publicacion": "2026-10-16",
+          "url": null
+        }
+      ]
+    },
+    {
+      "sector": "tecnologia_software",
+      "noticias": [
+        {
+          "id": "ej-15-2026-10-16",
+          "titular": "Una empresa de software ficticia acelera sus pruebas con un asistente que genera código de test",
+          "entradilla": "Los ingenieros revisan el código generado antes de integrarlo.",
+          "resumen": "Taller Nube, empresa de ficción, utiliza un asistente de programación para escribir pruebas automáticas. Según la compañía, los equipos cubren más código con el mismo tiempo, y cada propuesta pasa por revisión humana.",
+          "impacto": "Un uso consolidado de la IA generativa en ingeniería de software, con revisión humana.",
+          "sector": "tecnologia_software",
+          "tipo_innovacion": "generacion_contenido",
+          "empresa": "Taller Nube",
+          "pais": "Uruguay",
+          "madurez": "produccion",
+          "tipo_afirmacion": "afirmacion_empresa",
+          "puntuacion": 3,
+          "puntuacion_100": 69,
+          "confianza": "alta",
+          "medio": "Gaceta Ficticia de Innovación",
+          "fecha_publicacion": "2026-10-16",
+          "url": null
+        }
+      ]
+    }
+  ],
+  "cifras": {
+    "casos_totales": 10,
+    "puntuacion_media": 3.5,
+    "por_sector": [
+      {
+        "sector": "energia_utilities",
+        "casos": 2
+      },
+      {
+        "sector": "logistica_transporte",
+        "casos": 2
+      },
+      {
+        "sector": "automocion",
+        "casos": 1
+      },
+      {
+        "sector": "gran_consumo_alimentacion",
+        "casos": 1
+      },
+      {
+        "sector": "educacion",
+        "casos": 1
+      },
+      {
+        "sector": "sector_publico",
+        "casos": 1
+      },
+      {
+        "sector": "medios_marketing",
+        "casos": 1
+      },
+      {
+        "sector": "tecnologia_software",
+        "casos": 1
+      }
+    ],
+    "por_tipo": [
+      {
+        "tipo_innovacion": "analitica_prediccion",
+        "casos": 4
+      },
+      {
+        "tipo_innovacion": "proceso_operaciones",
+        "casos": 2
+      },
+      {
+        "tipo_innovacion": "generacion_contenido",
+        "casos": 2
+      },
+      {
+        "tipo_innovacion": "producto_servicio",
+        "casos": 1
+      },
+      {
+        "tipo_innovacion": "investigacion_desarrollo",
+        "casos": 1
+      }
+    ],
+    "por_afirmacion": [
+      {
+        "tipo_afirmacion": "hecho_confirmado",
+        "casos": 6
+      },
+      {
+        "tipo_afirmacion": "afirmacion_empresa",
+        "casos": 4
+      }
+    ]
+  },
+  "senales_debiles": [
+    {
+      "id": "ej-30-2026-10-16",
+      "titular": "Un centro público ficticio promete reducir listas de espera con IA, sin resultados aún",
+      "entradilla": "Se presenta el proyecto, pero todavía no hay datos.",
+      "resumen": "El Centro Ágora, organismo de ficción, ha presentado un proyecto de predicción de citas perdidas para llenar mejor la agenda. Por ahora solo hay una presentación del plan, sin resultados.",
+      "impacto": "Señal débil: el objetivo es útil, pero aún no se puede valorar.",
+      "sector": "sector_publico",
+      "tipo_innovacion": "analitica_prediccion",
+      "empresa": "Centro Ágora",
+      "pais": "Colombia",
+      "madurez": "piloto",
+      "tipo_afirmacion": "afirmacion_empresa",
+      "puntuacion": 2,
+      "puntuacion_100": 49,
+      "confianza": "baja",
+      "medio": "Gaceta Ficticia de Innovación",
+      "fecha_publicacion": "2026-10-16",
+      "url": null
+    }
+  ],
+  "analisis": "Energía y logística marcan el día con casos de escala y resultados medibles. El mensaje de fondo: donde hay datos abundantes y un objetivo claro, la IA ya compite en retorno con cualquier otra inversión.",
+  "modelo_editor": "ejemplo"
+}
