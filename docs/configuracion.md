@@ -6,7 +6,7 @@
 
 Todo se hace en [`config/parametros.json`](../config/parametros.json):
 
-1. `"fase": 2` y `"sector_foco": "banca_seguros"` (en lugar de `null`). Valores válidos: `banca_seguros`, `automocion`, `turismo_hosteleria`, `construccion_inmobiliario`, `gran_consumo_alimentacion`, `retail_comercio`, `salud_farma`, `energia_utilities`, `industria_manufactura`, `logistica_transporte`, `telecomunicaciones`, `educacion`, `sector_publico`, `medios_marketing`, `agricultura`, `tecnologia_software`, `otros`.
+1. `"fase": 2` y `"sector_foco": "banca_seguros"` (en lugar de `null`). Valores válidos: `banca_seguros`, `automocion`, `turismo_hosteleria`, `construccion_inmobiliario`, `gran_consumo_alimentacion`, `retail_comercio`, `salud_farma`, `energia_utilities`, `industria_manufactura`, `logistica_transporte`, `telecomunicaciones`, `educacion`, `sector_publico`, `medios_marketing`, `agricultura`, `tecnologia_software`, `aeroespacial_defensa`, `ciencia_id`, `deporte_ocio`, `servicios_profesionales`, `otros`.
 2. Opcional: añade a `palabras_clave_incluir` términos del sector (por ejemplo "seguros", "banca", "fintech") para afinar el filtro previo.
 
 Qué cambia:

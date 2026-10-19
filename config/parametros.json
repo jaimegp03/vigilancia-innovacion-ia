@@ -76,11 +76,11 @@
       "anthropic": "claude-sonnet-5-5"
     },
     "tendencias": {
-      "gemini": "gemini-3.8-flash",
+      "gemini": "gemini-3.5-flash",
       "anthropic": "claude-opus-5-5"
     },
     "redes": {
-      "gemini": "gemini-3.8-flash",
+      "gemini": "gemini-3.5-flash",
       "anthropic": "claude-sonnet-5-5"
     },
     "busqueda": {
@@ -88,7 +88,7 @@
       "anthropic": "claude-sonnet-5-5"
     },
     "editor": {
-      "gemini": "gemini-3.8-flash",
+      "gemini": "gemini-3.6-flash",
       "anthropic": "claude-sonnet-5-5"
     }
   },
@@ -130,7 +130,7 @@
     "max_tokens_tendencias": 12000,
     "max_tokens_redes": 8000,
     "max_tokens_busqueda": 4000,
-    "max_tokens_editor": 12000
+    "max_tokens_editor": 20000
   },
   "max_casos_tendencias": 120,
   "relevancia_sector_minima": 3,
@@ -139,7 +139,8 @@
     "nombre_corto": "Tecnoticias IA",
     "slug": "tecnoticias-innovacion-ia",
     "eslogan": "Casos reales de innovación en todo el mundo, cada día",
-    "primera_edicion": "2026-10-17"
+    "primera_edicion": "2026-10-17",
+    "contacto": null
   },
   "web": {
     "destino": "local",
@@ -149,6 +150,7 @@
     "indexable": false,
     "ediciones_embebidas": 90,
     "ruta_salida": "web/index.html",
-    "fecha_edicion_forzada": null
+    "fecha_edicion_forzada": null,
+    "silencioso": false
   }
 }

@@ -7,115 +7,582 @@
   "$defs": {
     "sector": {
       "type": "string",
-      "enum": ["banca_seguros", "automocion", "turismo_hosteleria", "construccion_inmobiliario", "gran_consumo_alimentacion", "retail_comercio", "salud_farma", "energia_utilities", "industria_manufactura", "logistica_transporte", "telecomunicaciones", "educacion", "sector_publico", "medios_marketing", "agricultura", "tecnologia_software", "otros"]
+      "enum": [
+        "banca_seguros",
+        "automocion",
+        "turismo_hosteleria",
+        "construccion_inmobiliario",
+        "gran_consumo_alimentacion",
+        "retail_comercio",
+        "salud_farma",
+        "energia_utilities",
+        "industria_manufactura",
+        "logistica_transporte",
+        "telecomunicaciones",
+        "educacion",
+        "sector_publico",
+        "medios_marketing",
+        "agricultura",
+        "tecnologia_software",
+        "aeroespacial_defensa",
+        "ciencia_id",
+        "deporte_ocio",
+        "servicios_profesionales",
+        "otros"
+      ]
     },
     "tipo_innovacion": {
       "type": "string",
-      "enum": ["producto_servicio", "proceso_operaciones", "atencion_cliente", "marketing_ventas", "analitica_prediccion", "generacion_contenido", "investigacion_desarrollo", "seguridad_riesgo", "otros"]
+      "enum": [
+        "producto_servicio",
+        "proceso_operaciones",
+        "atencion_cliente",
+        "marketing_ventas",
+        "analitica_prediccion",
+        "generacion_contenido",
+        "investigacion_desarrollo",
+        "seguridad_riesgo",
+        "otros"
+      ]
     },
     "madurez": {
       "type": "string",
-      "enum": ["anuncio", "piloto", "produccion", "escalado", "no_indicado"]
+      "enum": [
+        "anuncio",
+        "piloto",
+        "produccion",
+        "escalado",
+        "no_indicado"
+      ]
     },
     "tipo_afirmacion": {
       "type": "string",
-      "enum": ["hecho_confirmado", "afirmacion_empresa", "opinion"],
+      "enum": [
+        "hecho_confirmado",
+        "afirmacion_empresa",
+        "opinion"
+      ],
       "description": "hecho_confirmado: verificable o confirmado por terceros; afirmacion_empresa: lo dice la propia empresa sin verificación independiente; opinion: valoración o análisis del medio."
     },
     "noticia": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["id", "titular", "entradilla", "resumen", "impacto", "sector", "tipo_afirmacion", "puntuacion", "medio", "fecha_publicacion"],
+      "required": [
+        "id",
+        "titular",
+        "entradilla",
+        "resumen",
+        "impacto",
+        "sector",
+        "tipo_afirmacion",
+        "puntuacion",
+        "medio",
+        "fecha_publicacion"
+      ],
       "properties": {
-        "id": { "type": "string", "maxLength": 80 },
-        "titular": { "type": "string", "maxLength": 140, "description": "Informativo, no sensacionalista." },
-        "entradilla": { "type": "string", "maxLength": 320, "description": "Una o dos frases con palabras propias." },
-        "resumen": { "type": "string", "maxLength": 700, "description": "Resumen del caso con palabras propias (viene de la extracción)." },
-        "impacto": { "type": "string", "maxLength": 320, "description": "Por qué importa, en una o dos frases." },
-        "sector": { "$ref": "#/$defs/sector" },
-        "tipo_innovacion": { "oneOf": [{ "$ref": "#/$defs/tipo_innovacion" }, { "type": "null" }] },
-        "empresa": { "type": ["string", "null"], "maxLength": 120 },
-        "pais": { "type": ["string", "null"], "maxLength": 80 },
-        "madurez": { "oneOf": [{ "$ref": "#/$defs/madurez" }, { "type": "null" }] },
-        "tipo_afirmacion": { "$ref": "#/$defs/tipo_afirmacion" },
-        "puntuacion": { "type": "integer", "minimum": 1, "maximum": 5, "description": "Escala 1-5 (puntuación total 0-100 dividida entre 20 y redondeada)." },
-        "puntuacion_100": { "type": ["integer", "null"], "minimum": 0, "maximum": 100 },
-        "confianza": { "type": ["string", "null"], "enum": ["alta", "media", "baja", null] },
-        "medio": { "type": "string", "maxLength": 120 },
-        "fecha_publicacion": { "type": "string", "maxLength": 40 },
-        "url": { "type": ["string", "null"], "maxLength": 600, "description": "Enlace a la fuente. Solo puede ser null en ediciones de ejemplo." }
+        "id": {
+          "type": "string",
+          "maxLength": 80
+        },
+        "titular": {
+          "type": "string",
+          "maxLength": 140,
+          "description": "Informativo, no sensacionalista."
+        },
+        "entradilla": {
+          "type": "string",
+          "maxLength": 320,
+          "description": "Una o dos frases con palabras propias."
+        },
+        "resumen": {
+          "type": "string",
+          "maxLength": 700,
+          "description": "Resumen del caso con palabras propias (viene de la extracción)."
+        },
+        "impacto": {
+          "type": "string",
+          "maxLength": 320,
+          "description": "Por qué importa, en una o dos frases."
+        },
+        "sector": {
+          "$ref": "#/$defs/sector"
+        },
+        "tipo_innovacion": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/tipo_innovacion"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "empresa": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 120
+        },
+        "pais": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 80
+        },
+        "madurez": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/madurez"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "tipo_afirmacion": {
+          "$ref": "#/$defs/tipo_afirmacion"
+        },
+        "puntuacion": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5,
+          "description": "Escala 1-5 (puntuación total 0-100 dividida entre 20 y redondeada)."
+        },
+        "puntuacion_100": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 100
+        },
+        "confianza": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "alta",
+            "media",
+            "baja",
+            null
+          ]
+        },
+        "medio": {
+          "type": "string",
+          "maxLength": 120
+        },
+        "fecha_publicacion": {
+          "type": "string",
+          "maxLength": 40
+        },
+        "url": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 600,
+          "description": "Enlace a la fuente. Solo puede ser null en ediciones de ejemplo."
+        },
+        "tipo_fuente": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/tipo_fuente"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "otras_fuentes": {
+          "type": "array",
+          "maxItems": 8,
+          "items": {
+            "$ref": "#/$defs/otra_fuente"
+          },
+          "description": "Otros medios que cuentan la misma historia."
+        },
+        "novedad": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1,
+          "maximum": 5
+        },
+        "evidencia": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1,
+          "maximum": 5
+        },
+        "vigilar": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 240,
+          "description": "Qué conviene vigilar para confirmar o descartar el caso."
+        }
       }
     },
     "seccion_sector": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["sector", "noticias"],
+      "required": [
+        "sector",
+        "noticias"
+      ],
       "properties": {
-        "sector": { "$ref": "#/$defs/sector" },
-        "noticias": { "type": "array", "maxItems": 40, "items": { "$ref": "#/$defs/noticia" } }
+        "sector": {
+          "$ref": "#/$defs/sector"
+        },
+        "noticias": {
+          "type": "array",
+          "maxItems": 40,
+          "items": {
+            "$ref": "#/$defs/noticia"
+          }
+        }
       }
     },
     "cifras": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["casos_totales", "puntuacion_media", "por_sector", "por_tipo", "por_afirmacion"],
+      "required": [
+        "casos_totales",
+        "puntuacion_media",
+        "por_sector",
+        "por_tipo",
+        "por_afirmacion"
+      ],
       "properties": {
-        "casos_totales": { "type": "integer", "minimum": 0 },
-        "puntuacion_media": { "type": "number", "minimum": 0, "maximum": 5 },
+        "casos_totales": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "puntuacion_media": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 5
+        },
         "por_sector": {
-          "type": "array", "maxItems": 20,
-          "items": { "type": "object", "additionalProperties": false, "required": ["sector", "casos"], "properties": { "sector": { "$ref": "#/$defs/sector" }, "casos": { "type": "integer", "minimum": 0 } } }
+          "type": "array",
+          "maxItems": 20,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "sector",
+              "casos"
+            ],
+            "properties": {
+              "sector": {
+                "$ref": "#/$defs/sector"
+              },
+              "casos": {
+                "type": "integer",
+                "minimum": 0
+              }
+            }
+          }
         },
         "por_tipo": {
-          "type": "array", "maxItems": 12,
-          "items": { "type": "object", "additionalProperties": false, "required": ["tipo_innovacion", "casos"], "properties": { "tipo_innovacion": { "$ref": "#/$defs/tipo_innovacion" }, "casos": { "type": "integer", "minimum": 0 } } }
+          "type": "array",
+          "maxItems": 12,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "tipo_innovacion",
+              "casos"
+            ],
+            "properties": {
+              "tipo_innovacion": {
+                "$ref": "#/$defs/tipo_innovacion"
+              },
+              "casos": {
+                "type": "integer",
+                "minimum": 0
+              }
+            }
+          }
         },
         "por_afirmacion": {
-          "type": "array", "maxItems": 4,
-          "items": { "type": "object", "additionalProperties": false, "required": ["tipo_afirmacion", "casos"], "properties": { "tipo_afirmacion": { "$ref": "#/$defs/tipo_afirmacion" }, "casos": { "type": "integer", "minimum": 0 } } }
+          "type": "array",
+          "maxItems": 4,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "tipo_afirmacion",
+              "casos"
+            ],
+            "properties": {
+              "tipo_afirmacion": {
+                "$ref": "#/$defs/tipo_afirmacion"
+              },
+              "casos": {
+                "type": "integer",
+                "minimum": 0
+              }
+            }
+          }
+        },
+        "medios_distintos": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "paises_distintos": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "por_madurez": {
+          "type": "array",
+          "maxItems": 6,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "madurez",
+              "casos"
+            ],
+            "properties": {
+              "madurez": {
+                "$ref": "#/$defs/madurez"
+              },
+              "casos": {
+                "type": "integer",
+                "minimum": 0
+              }
+            }
+          }
+        },
+        "puntuacion_media_100": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
         }
       }
     },
     "edicion": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["fecha", "numero_edicion", "es_ejemplo", "portada", "destacadas", "secciones_por_sector", "cifras", "senales_debiles", "analisis"],
+      "required": [
+        "fecha",
+        "numero_edicion",
+        "es_ejemplo",
+        "portada",
+        "destacadas",
+        "secciones_por_sector",
+        "cifras",
+        "senales_debiles",
+        "analisis"
+      ],
       "properties": {
-        "fecha": { "type": "string", "maxLength": 10, "description": "AAAA-MM-DD" },
-        "numero_edicion": { "type": "integer", "minimum": 1 },
-        "es_ejemplo": { "type": "boolean", "description": "true solo en las ediciones de demostración, que nunca se publican." },
-        "portada": { "$ref": "#/$defs/noticia" },
-        "destacadas": { "type": "array", "maxItems": 5, "items": { "$ref": "#/$defs/noticia" } },
-        "secciones_por_sector": { "type": "array", "maxItems": 20, "items": { "$ref": "#/$defs/seccion_sector" } },
-        "cifras": { "$ref": "#/$defs/cifras" },
-        "senales_debiles": { "type": "array", "maxItems": 8, "items": { "$ref": "#/$defs/noticia" } },
-        "analisis": { "type": "string", "maxLength": 1400, "description": "Qué significa hoy: un párrafo de análisis del editor." },
-        "modelo_editor": { "type": ["string", "null"], "maxLength": 80 }
+        "fecha": {
+          "type": "string",
+          "maxLength": 10,
+          "description": "AAAA-MM-DD"
+        },
+        "numero_edicion": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "es_ejemplo": {
+          "type": "boolean",
+          "description": "true solo en las ediciones de demostración, que nunca se publican."
+        },
+        "portada": {
+          "$ref": "#/$defs/noticia"
+        },
+        "destacadas": {
+          "type": "array",
+          "maxItems": 5,
+          "items": {
+            "$ref": "#/$defs/noticia"
+          }
+        },
+        "secciones_por_sector": {
+          "type": "array",
+          "maxItems": 20,
+          "items": {
+            "$ref": "#/$defs/seccion_sector"
+          }
+        },
+        "cifras": {
+          "$ref": "#/$defs/cifras"
+        },
+        "senales_debiles": {
+          "type": "array",
+          "maxItems": 6,
+          "items": {
+            "$ref": "#/$defs/noticia"
+          }
+        },
+        "analisis": {
+          "type": "string",
+          "maxLength": 1400,
+          "description": "Qué significa hoy: un párrafo de análisis del editor."
+        },
+        "modelo_editor": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 80
+        },
+        "claves": {
+          "type": "array",
+          "maxItems": 3,
+          "items": {
+            "type": "string",
+            "maxLength": 220
+          },
+          "description": "Lo esencial del día en tres frases."
+        },
+        "generada_en": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 40
+        }
       }
     },
     "editor_salida": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["portada_id", "destacadas_ids", "senales_debiles_ids", "analisis", "noticias"],
+      "required": [
+        "portada_id",
+        "destacadas_ids",
+        "analisis",
+        "claves",
+        "noticias"
+      ],
       "properties": {
-        "portada_id": { "type": "string", "maxLength": 80 },
-        "destacadas_ids": { "type": "array", "maxItems": 5, "items": { "type": "string", "maxLength": 80 } },
-        "senales_debiles_ids": { "type": "array", "maxItems": 8, "items": { "type": "string", "maxLength": 80 } },
-        "analisis": { "type": "string", "maxLength": 1400 },
+        "portada_id": {
+          "type": "string",
+          "maxLength": 80
+        },
+        "destacadas_ids": {
+          "type": "array",
+          "maxItems": 5,
+          "items": {
+            "type": "string",
+            "maxLength": 80
+          }
+        },
+        "senales_debiles_ids": {
+          "type": "array",
+          "maxItems": 8,
+          "items": {
+            "type": "string",
+            "maxLength": 80
+          }
+        },
+        "analisis": {
+          "type": "string",
+          "maxLength": 1400
+        },
         "noticias": {
-          "type": "array", "maxItems": 60,
+          "type": "array",
+          "maxItems": 60,
           "items": {
             "type": "object",
             "additionalProperties": false,
-            "required": ["caso_id", "titular", "entradilla", "impacto", "tipo_afirmacion"],
+            "required": [
+              "caso_id",
+              "titular",
+              "entradilla",
+              "impacto",
+              "tipo_afirmacion"
+            ],
             "properties": {
-              "caso_id": { "type": "string", "maxLength": 80 },
-              "titular": { "type": "string", "maxLength": 140 },
-              "entradilla": { "type": "string", "maxLength": 320 },
-              "impacto": { "type": "string", "maxLength": 320 },
-              "tipo_afirmacion": { "$ref": "#/$defs/tipo_afirmacion" }
+              "caso_id": {
+                "type": "string",
+                "maxLength": 80
+              },
+              "titular": {
+                "type": "string",
+                "maxLength": 140
+              },
+              "entradilla": {
+                "type": "string",
+                "maxLength": 320
+              },
+              "impacto": {
+                "type": "string",
+                "maxLength": 320
+              },
+              "tipo_afirmacion": {
+                "$ref": "#/$defs/tipo_afirmacion"
+              },
+              "vigilar": {
+                "type": "string",
+                "maxLength": 240
+              }
             }
           }
+        },
+        "claves": {
+          "type": "array",
+          "maxItems": 3,
+          "items": {
+            "type": "string",
+            "maxLength": 220
+          }
+        },
+        "historias_repetidas": {
+          "type": "array",
+          "maxItems": 15,
+          "items": {
+            "type": "array",
+            "maxItems": 8,
+            "items": {
+              "type": "string",
+              "maxLength": 80
+            }
+          },
+          "description": "Grupos de casos que cuentan la misma historia (mismo hecho, varios medios)."
+        }
+      }
+    },
+    "tipo_fuente": {
+      "type": "string",
+      "enum": [
+        "revista",
+        "medio_economico",
+        "consultora",
+        "nota_prensa"
+      ],
+      "description": "Naturaleza de la fuente: nota_prensa = comunicado o blog de la propia empresa."
+    },
+    "otra_fuente": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "medio"
+      ],
+      "properties": {
+        "medio": {
+          "type": "string",
+          "maxLength": 120
+        },
+        "url": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 600
+        },
+        "fecha_publicacion": {
+          "type": "string",
+          "maxLength": 40
         }
       }
     }

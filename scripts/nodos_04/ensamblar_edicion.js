@@ -8,7 +8,7 @@ const salida = $input.first().json.salida;
 
 const edicion = ensamblarEdicion({
   casos: dia.casos_todos, salida, fecha: cfg.fecha, numero: cfg.numero_edicion, esEjemplo: false,
-  modelo: cfg.parametros.modelos.editor,
+  modelo: cfg.parametros.modelos.editor, generadaEn: new Date().toISOString(),
 });
 const r = validarContraDef(cfg.schema_edicion, 'edicion', edicion);
 const errores = [...r.errores];
@@ -21,7 +21,7 @@ const binario = await this.helpers.prepareBinaryData(Buffer.from(JSON.stringify(
 return [{
   json: {
     fecha: cfg.fecha, nombre_archivo: nombre, numero_edicion: edicion.numero_edicion, n_noticias: edicion.cifras.casos_totales,
-    puntuacion_media: edicion.cifras.puntuacion_media, n_senales: edicion.senales_debiles.length, portada: edicion.portada.titular,
+    puntuacion_media: edicion.cifras.puntuacion_media, n_senales: edicion.senales_debiles.length, n_fuentes: edicion.cifras.medios_distintos, portada: edicion.portada.titular,
     ajustes: $input.first().json.ajustes || [],
   },
   binary: { data: binario },

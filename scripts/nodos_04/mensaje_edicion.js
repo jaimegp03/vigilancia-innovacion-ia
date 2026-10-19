@@ -2,6 +2,7 @@
 const cfg = $('Cargar configuración').first().json;
 const ed = $('Ensamblar edición').first().json;
 const web = cfg.parametros.web || {};
+if (web.silencioso) return []; // reconstrucciones de ediciones pasadas: sin aviso por Telegram
 const esc = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 const fecha = new Date(cfg.fecha + 'T12:00:00Z').toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
 let publicada = false;

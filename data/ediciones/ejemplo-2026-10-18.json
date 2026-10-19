@@ -2,6 +2,12 @@
   "fecha": "2026-10-18",
   "numero_edicion": 7,
   "es_ejemplo": true,
+  "generada_en": "2026-10-18T07:40:00.000Z",
+  "claves": [
+    "Industria y sector público ocupan la portada.",
+    "Los mejores casos combinan datos propios, un proceso concreto y revisión humana.",
+    "Un fabricante de coches reduce prototipos con simulación asistida por IA."
+  ],
   "portada": {
     "id": "ej-29-2026-10-18",
     "titular": "Un fabricante de coches ficticio acelera el diseño de piezas con simulación asistida por IA",
@@ -16,10 +22,21 @@
     "tipo_afirmacion": "hecho_confirmado",
     "puntuacion": 4,
     "puntuacion_100": 83,
+    "novedad": 4,
+    "evidencia": 4,
+    "vigilar": null,
     "confianza": "alta",
     "medio": "Revista Ejemplo Tech",
+    "tipo_fuente": "revista",
     "fecha_publicacion": "2026-10-18",
-    "url": null
+    "url": null,
+    "otras_fuentes": [
+      {
+        "medio": "Gaceta Ficticia de Innovación",
+        "url": null,
+        "fecha_publicacion": "2026-10-18"
+      }
+    ]
   },
   "destacadas": [
     {
@@ -36,8 +53,12 @@
       "tipo_afirmacion": "hecho_confirmado",
       "puntuacion": 4,
       "puntuacion_100": 73,
+      "novedad": 3,
+      "evidencia": 4,
+      "vigilar": null,
       "confianza": "alta",
       "medio": "Diario Muestra de Economía",
+      "tipo_fuente": "medio_economico",
       "fecha_publicacion": "2026-10-18",
       "url": null
     },
@@ -55,8 +76,12 @@
       "tipo_afirmacion": "afirmacion_empresa",
       "puntuacion": 3,
       "puntuacion_100": 69,
+      "novedad": 3,
+      "evidencia": 2,
+      "vigilar": null,
       "confianza": "alta",
       "medio": "Gaceta Ficticia de Innovación",
+      "tipo_fuente": "revista",
       "fecha_publicacion": "2026-10-18",
       "url": null
     },
@@ -74,8 +99,12 @@
       "tipo_afirmacion": "afirmacion_empresa",
       "puntuacion": 3,
       "puntuacion_100": 63,
+      "novedad": 3,
+      "evidencia": 2,
+      "vigilar": null,
       "confianza": "media",
       "medio": "Diario Muestra de Economía",
+      "tipo_fuente": "medio_economico",
       "fecha_publicacion": "2026-10-18",
       "url": null
     }
@@ -98,8 +127,12 @@
           "tipo_afirmacion": "hecho_confirmado",
           "puntuacion": 4,
           "puntuacion_100": 81,
+          "novedad": 4,
+          "evidencia": 4,
+          "vigilar": null,
           "confianza": "alta",
           "medio": "Diario Muestra de Economía",
+          "tipo_fuente": "medio_economico",
           "fecha_publicacion": "2026-10-18",
           "url": null
         }
@@ -122,8 +155,12 @@
           "tipo_afirmacion": "hecho_confirmado",
           "puntuacion": 3,
           "puntuacion_100": 55,
+          "novedad": 3,
+          "evidencia": 4,
+          "vigilar": null,
           "confianza": "media",
           "medio": "Diario Muestra de Economía",
+          "tipo_fuente": "medio_economico",
           "fecha_publicacion": "2026-10-18",
           "url": null
         }
@@ -146,8 +183,12 @@
           "tipo_afirmacion": "hecho_confirmado",
           "puntuacion": 4,
           "puntuacion_100": 82,
+          "novedad": 4,
+          "evidencia": 4,
+          "vigilar": null,
           "confianza": "alta",
           "medio": "Revista Ejemplo Tech",
+          "tipo_fuente": "revista",
           "fecha_publicacion": "2026-10-18",
           "url": null
         }
@@ -170,8 +211,12 @@
           "tipo_afirmacion": "hecho_confirmado",
           "puntuacion": 4,
           "puntuacion_100": 85,
+          "novedad": 4,
+          "evidencia": 4,
+          "vigilar": null,
           "confianza": "alta",
           "medio": "Gaceta Ficticia de Innovación",
+          "tipo_fuente": "revista",
           "fecha_publicacion": "2026-10-18",
           "url": null
         }
@@ -194,8 +239,12 @@
           "tipo_afirmacion": "hecho_confirmado",
           "puntuacion": 4,
           "puntuacion_100": 84,
+          "novedad": 4,
+          "evidencia": 4,
+          "vigilar": null,
           "confianza": "alta",
           "medio": "Revista Ejemplo Tech",
+          "tipo_fuente": "revista",
           "fecha_publicacion": "2026-10-18",
           "url": null
         }
@@ -218,8 +267,12 @@
           "tipo_afirmacion": "afirmacion_empresa",
           "puntuacion": 4,
           "puntuacion_100": 77,
+          "novedad": 3,
+          "evidencia": 3,
+          "vigilar": null,
           "confianza": "media",
           "medio": "Revista Ejemplo Tech",
+          "tipo_fuente": "revista",
           "fecha_publicacion": "2026-10-18",
           "url": null
         }
@@ -229,6 +282,9 @@
   "cifras": {
     "casos_totales": 12,
     "puntuacion_media": 3.5,
+    "puntuacion_media_100": 69,
+    "medios_distintos": 3,
+    "paises_distintos": 8,
     "por_sector": [
       {
         "sector": "construccion_inmobiliario",
@@ -310,6 +366,24 @@
         "tipo_afirmacion": "opinion",
         "casos": 2
       }
+    ],
+    "por_madurez": [
+      {
+        "madurez": "anuncio",
+        "casos": 2
+      },
+      {
+        "madurez": "piloto",
+        "casos": 3
+      },
+      {
+        "madurez": "produccion",
+        "casos": 3
+      },
+      {
+        "madurez": "escalado",
+        "casos": 4
+      }
     ]
   },
   "senales_debiles": [
@@ -327,8 +401,12 @@
       "tipo_afirmacion": "opinion",
       "puntuacion": 2,
       "puntuacion_100": 38,
+      "novedad": 4,
+      "evidencia": 2,
+      "vigilar": "Si publican resultados medidos o un cliente real que lo confirme (ejemplo ficticio).",
       "confianza": "baja",
       "medio": "Revista Ejemplo Tech",
+      "tipo_fuente": "revista",
       "fecha_publicacion": "2026-10-18",
       "url": null
     },
@@ -346,8 +424,12 @@
       "tipo_afirmacion": "opinion",
       "puntuacion": 2,
       "puntuacion_100": 41,
+      "novedad": 4,
+      "evidencia": 2,
+      "vigilar": "Si publican resultados medidos o un cliente real que lo confirme (ejemplo ficticio).",
       "confianza": "baja",
       "medio": "Gaceta Ficticia de Innovación",
+      "tipo_fuente": "revista",
       "fecha_publicacion": "2026-10-18",
       "url": null
     }

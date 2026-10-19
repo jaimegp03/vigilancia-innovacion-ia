@@ -41,6 +41,10 @@
         "medios_marketing",
         "agricultura",
         "tecnologia_software",
+        "aeroespacial_defensa",
+        "ciencia_id",
+        "deporte_ocio",
+        "servicios_profesionales",
         "otros"
       ]
     },

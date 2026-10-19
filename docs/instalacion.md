@@ -59,7 +59,10 @@ Por la interfaz: **Workflows → Import from file** y elige los archivos de `wor
 ```bash
 docker exec n8n-vigilancia-ia n8n import:workflow --input=/data/proyecto/workflows/01_ingesta_diaria.json
 docker exec n8n-vigilancia-ia n8n import:workflow --input=/data/proyecto/workflows/02_informe_semanal.json
+docker exec n8n-vigilancia-ia n8n import:workflow --input=/data/proyecto/workflows/04_edicion_diaria.json
 ```
+
+El workflow **04** (edición diaria y web) necesita que `docker-compose.yml` esté actualizado: activa el nodo *Execute Command* (`NODES_EXCLUDE=[]`) y monta `data/` y `web/` con escritura y `scripts/` en solo lectura. Si vienes de una versión anterior, ejecuta `docker compose up -d` para recrear el contenedor (los datos de n8n se conservan). Sus únicas credenciales son las de Gemini, Google Sheets y Telegram; la de GitHub solo hace falta si decides publicar la web (ver [la web](web.md)).
 
 Después, en cada workflow (también puedes asignar las credenciales por script con `scripts/asignar_credenciales.js`, que escribe una copia con tus IDs sin tocar los archivos del repositorio):
 1. Abre los nodos con credencial (**IA · …** con la de Gemini, **Leer/Guardar … (Google Sheets)** con la cuenta de servicio y **Enviar a Telegram**) y selecciona la credencial que creaste.

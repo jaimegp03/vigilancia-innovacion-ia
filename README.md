@@ -7,7 +7,7 @@
 
 Sistema en **n8n** que cada día lee revistas y medios de IA e innovación, descarta lo irrelevante y lo ya visto, extrae **casos concretos** de empresas que usan IA, los clasifica y puntúa, y cada semana genera un **informe de tendencias** y **borradores para redes sociales** que llegan por **Telegram** para revisarlos. Nada se publica solo.
 
-> **English summary.** n8n workflows that monitor ~45 RSS sources daily, extract and score real-world enterprise AI use cases with an LLM (Gemini free tier by default, Claude optional), store them in Google Sheets, and send a weekly trends report plus social-media drafts via Telegram. Config-driven (sources, prompts, models, sector focus), Spanish-first, runs locally with Docker. Documentation is mainly in Spanish.
+> **English summary.** n8n workflows that monitor ~67 RSS sources across 7 regions daily, extract and score real-world enterprise AI use cases with an LLM (Gemini free tier by default, Claude optional), store them in Google Sheets, publish a daily newspaper-style web edition (a single self-contained HTML file) and send a weekly trends report plus social-media drafts via Telegram. Config-driven (sources, prompts, models, sector focus), Spanish-first, runs locally with Docker. Documentation is mainly in Spanish.
 
 > 👋 **¿No eres técnico?** Empieza por la [**Guía sencilla**](docs/guia-sencilla.md).
 
@@ -15,7 +15,7 @@ Sistema en **n8n** que cada día lee revistas y medios de IA e innovación, desc
 
 ```mermaid
 flowchart LR
-    A[45 feeds RSS] --> B[Filtrar y deduplicar]
+    A[67 feeds RSS] --> B[Filtrar y deduplicar]
     B --> C[Descargar artículo]
     C --> D[IA: extraer caso]
     D --> E[IA: clasificar y puntuar]
@@ -36,6 +36,20 @@ flowchart LR
 | [`03_descubrimiento_semanal`](workflows/variante_claude/03_descubrimiento_semanal.json) | Miércoles *(opcional, solo con Claude)* | Búsqueda web de casos fuera de las fuentes fijas. |
 
 Detalles de diseño en [docs/arquitectura.md](docs/arquitectura.md).
+
+## Calidad de la información
+
+La web diaria está diseñada para que cada dato sea comprobable y cada límite, visible:
+
+- **Enlace real a cada noticia** y medio y fecha de la fuente. La IA nunca escribe URLs, medios, fechas ni puntuaciones: las copia el sistema del caso original.
+- **Una noticia por historia:** si varios medios cuentan lo mismo, se agrupan con todas sus fuentes («También en: …»).
+- **Relevancia en tres niveles con palabras** (*Muy relevante*, *Relevante*, *De interés*), calculada a partir de impacto, novedad, replicabilidad y evidencia, con el índice 0-100 al pasar el ratón.
+- **Etiquetas de rigor:** *hecho confirmado* (verificado por un tercero), *afirmación de la empresa* y *opinión*; las notas de prensa se marcan como *comunicado*.
+- **Señales débiles bien definidas:** lo muy novedoso con poca evidencia, con una línea «qué vigilar». Las decide el código, no la IA.
+- **Textos prudentes y transparencia:** «según la empresa…», apartado de **Metodología**, cobertura (fuentes, regiones y medios) y modelo de IA usado a la vista.
+- **Cifras calculadas por código**, no escritas por la IA.
+
+Más detalle en [docs/web.md](docs/web.md). Historial de cambios en [CHANGELOG.md](CHANGELOG.md).
 
 ## Características
 

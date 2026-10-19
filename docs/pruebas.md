@@ -32,3 +32,5 @@ Los datos de ejemplo del paso a paso del informe semanal (ficticios) están en `
 **Web.** `node scripts/web/revisar_web.mjs [carpeta]` abre `web/index.html` en un Chrome o Edge real (sin dependencias, por CDP), lo prueba en escritorio y móvil —cabecera con distintos nombres, efectos de scroll, hover y toque, filtros, modo oscuro, `prefers-reduced-motion`, consola sin errores, sin scroll horizontal— y guarda capturas.
 
 El workflow 04 se prueba como los demás con IA, hojas, escritura y Telegram simulados: `scripts/probar_workflow.sh tests/04_edicion_diaria.test.json vigilancia-04-test salida.txt` (también `.vacio.test.json` y la variante Claude).
+
+**Qué cubre la edición diaria:** ensamblado (portada, destacadas, secciones, cifras), agrupación de historias, señales débiles por regla, copia de enlaces desde los casos, esquema de las ediciones de ejemplo, y construcción de `web/index.html` (autocontenido, sin recursos externos, con `noindex` y con error claro si una edición real no trae enlaces).

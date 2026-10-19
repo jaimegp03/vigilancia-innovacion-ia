@@ -2,6 +2,12 @@
   "fecha": "2026-10-15",
   "numero_edicion": 4,
   "es_ejemplo": true,
+  "generada_en": "2026-10-15T07:40:00.000Z",
+  "claves": [
+    "La atención al cliente es el terreno más maduro: banca, telecomunicaciones y turismo ya resuelven consultas reales.",
+    "La clave es quién garantiza el traspaso a una persona cuando el asistente no sabe.",
+    "Varios casos son afirmaciones de la empresa sin estudio independiente."
+  ],
   "portada": {
     "id": "ej-17-2026-10-15",
     "titular": "Una operadora ficticia reduce llamadas al soporte con un asistente que diagnostica fallos de red",
@@ -16,10 +22,21 @@
     "tipo_afirmacion": "afirmacion_empresa",
     "puntuacion": 4,
     "puntuacion_100": 77,
+    "novedad": 3,
+    "evidencia": 3,
+    "vigilar": null,
     "confianza": "media",
     "medio": "Revista Ejemplo Tech",
+    "tipo_fuente": "revista",
     "fecha_publicacion": "2026-10-15",
-    "url": null
+    "url": null,
+    "otras_fuentes": [
+      {
+        "medio": "Gaceta Ficticia de Innovación",
+        "url": null,
+        "fecha_publicacion": "2026-10-15"
+      }
+    ]
   },
   "destacadas": [
     {
@@ -36,8 +53,12 @@
       "tipo_afirmacion": "afirmacion_empresa",
       "puntuacion": 4,
       "puntuacion_100": 72,
+      "novedad": 3,
+      "evidencia": 3,
+      "vigilar": null,
       "confianza": "media",
       "medio": "Revista Ejemplo Tech",
+      "tipo_fuente": "revista",
       "fecha_publicacion": "2026-10-15",
       "url": null
     },
@@ -55,8 +76,12 @@
       "tipo_afirmacion": "afirmacion_empresa",
       "puntuacion": 3,
       "puntuacion_100": 66,
+      "novedad": 3,
+      "evidencia": 2,
+      "vigilar": null,
       "confianza": "media",
       "medio": "Gaceta Ficticia de Innovación",
+      "tipo_fuente": "revista",
       "fecha_publicacion": "2026-10-15",
       "url": null
     },
@@ -74,8 +99,12 @@
       "tipo_afirmacion": "hecho_confirmado",
       "puntuacion": 4,
       "puntuacion_100": 73,
+      "novedad": 3,
+      "evidencia": 4,
+      "vigilar": null,
       "confianza": "alta",
       "medio": "Diario Muestra de Economía",
+      "tipo_fuente": "medio_economico",
       "fecha_publicacion": "2026-10-15",
       "url": null
     }
@@ -98,8 +127,12 @@
           "tipo_afirmacion": "afirmacion_empresa",
           "puntuacion": 3,
           "puntuacion_100": 61,
+          "novedad": 3,
+          "evidencia": 2,
+          "vigilar": null,
           "confianza": "media",
           "medio": "Cuaderno de Demostración",
+          "tipo_fuente": "revista",
           "fecha_publicacion": "2026-10-15",
           "url": null
         }
@@ -122,8 +155,12 @@
           "tipo_afirmacion": "afirmacion_empresa",
           "puntuacion": 4,
           "puntuacion_100": 78,
+          "novedad": 3,
+          "evidencia": 3,
+          "vigilar": null,
           "confianza": "media",
           "medio": "Revista Ejemplo Tech",
+          "tipo_fuente": "revista",
           "fecha_publicacion": "2026-10-15",
           "url": null
         }
@@ -146,8 +183,12 @@
           "tipo_afirmacion": "afirmacion_empresa",
           "puntuacion": 3,
           "puntuacion_100": 52,
+          "novedad": 3,
+          "evidencia": 2,
+          "vigilar": null,
           "confianza": "media",
           "medio": "Cuaderno de Demostración",
+          "tipo_fuente": "revista",
           "fecha_publicacion": "2026-10-15",
           "url": null
         }
@@ -170,8 +211,12 @@
           "tipo_afirmacion": "hecho_confirmado",
           "puntuacion": 4,
           "puntuacion_100": 82,
+          "novedad": 4,
+          "evidencia": 4,
+          "vigilar": null,
           "confianza": "alta",
           "medio": "Revista Ejemplo Tech",
+          "tipo_fuente": "revista",
           "fecha_publicacion": "2026-10-15",
           "url": null
         }
@@ -194,8 +239,12 @@
           "tipo_afirmacion": "afirmacion_empresa",
           "puntuacion": 3,
           "puntuacion_100": 64,
+          "novedad": 3,
+          "evidencia": 2,
+          "vigilar": null,
           "confianza": "media",
           "medio": "Cuaderno de Demostración",
+          "tipo_fuente": "revista",
           "fecha_publicacion": "2026-10-15",
           "url": null
         }
@@ -218,8 +267,12 @@
           "tipo_afirmacion": "afirmacion_empresa",
           "puntuacion": 3,
           "puntuacion_100": 56,
+          "novedad": 3,
+          "evidencia": 2,
+          "vigilar": null,
           "confianza": "media",
           "medio": "Cuaderno de Demostración",
+          "tipo_fuente": "revista",
           "fecha_publicacion": "2026-10-15",
           "url": null
         }
@@ -229,6 +282,9 @@
   "cifras": {
     "casos_totales": 11,
     "puntuacion_media": 3.2,
+    "puntuacion_media_100": 65,
+    "medios_distintos": 4,
+    "paises_distintos": 7,
     "por_sector": [
       {
         "sector": "salud_farma",
@@ -314,6 +370,24 @@
         "tipo_afirmacion": "opinion",
         "casos": 1
       }
+    ],
+    "por_madurez": [
+      {
+        "madurez": "anuncio",
+        "casos": 1
+      },
+      {
+        "madurez": "piloto",
+        "casos": 4
+      },
+      {
+        "madurez": "produccion",
+        "casos": 5
+      },
+      {
+        "madurez": "escalado",
+        "casos": 1
+      }
     ]
   },
   "senales_debiles": [
@@ -331,8 +405,12 @@
       "tipo_afirmacion": "opinion",
       "puntuacion": 2,
       "puntuacion_100": 33,
+      "novedad": 4,
+      "evidencia": 2,
+      "vigilar": "Si publican resultados medidos o un cliente real que lo confirme (ejemplo ficticio).",
       "confianza": "baja",
       "medio": "Gaceta Ficticia de Innovación",
+      "tipo_fuente": "revista",
       "fecha_publicacion": "2026-10-15",
       "url": null
     }

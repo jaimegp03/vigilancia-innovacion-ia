@@ -16,6 +16,11 @@
 
 | Síntoma | Causa probable |
 |---|---|
+| No hay edición nueva en la web | Revisa el aviso de Telegram del workflow 04: «Sin edición hoy» (el 01 no guardó casos) o «No se pudo preparar la edición» (la IA no devolvió una edición válida tras reintentar, o falló la construcción de la web). Puedes relanzar el 04 a mano. |
+| El 04 falla con «Service unavailable» o «quota» | Cuota o sobrecarga de Gemini: el modelo del editor (`modelos.editor.gemini`) tiene un límite diario. Cambia a otro modelo con cuota disponible. |
+| El nodo «Construir web» no existe o falla | Falta actualizar el contenedor: `docker compose up -d` (activa *Execute Command* y monta `data/` y `web/`). |
+| `web/index.html` no cambia | Se regenera cada día con las ediciones de `data/ediciones/`; recarga la pestaña. Con `node web/build.mjs --con-ejemplos` ves también las de ejemplo. |
+| Un enlace de fuente da error 403 al descargar | Algunos medios bloquean las descargas automáticas: el caso se analiza solo con titular y resumen (confianza baja). Si es habitual, desactiva esa fuente en `config/fuentes.json`. |
 | `Node does not have any credentials set` | Falta seleccionar la credencial en ese nodo. |
 | `access to env vars denied` / expresiones con `$env` vacías | Comprueba que `docker-compose.yml` tiene `N8N_BLOCK_ENV_ACCESS_IN_NODE=false` y que `.env` tiene `GOOGLE_SHEET_ID` y `TELEGRAM_CHAT_ID`. |
 | `Falta el archivo … en /data/proyecto` | Los volúmenes del compose no se montaron: ejecuta `docker compose up -d` desde la carpeta del proyecto. |

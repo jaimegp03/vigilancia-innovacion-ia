@@ -153,6 +153,22 @@
     "tecnologia_software": {
       "es": "tecnología y software",
       "en": "technology and software"
+    },
+    "aeroespacial_defensa": {
+      "es": "aeroespacial y defensa",
+      "en": "aerospace and defense"
+    },
+    "ciencia_id": {
+      "es": "ciencia e I+D",
+      "en": "science and R&D"
+    },
+    "deporte_ocio": {
+      "es": "deporte y ocio",
+      "en": "sports and entertainment"
+    },
+    "servicios_profesionales": {
+      "es": "servicios profesionales (legal, recursos humanos, consultoría)",
+      "en": "professional services (legal, HR, consulting)"
     }
   },
   "plantillas": {

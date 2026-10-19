@@ -8,7 +8,7 @@
 
 Imagina que contratas a un **ayudante** que hace tres cosas por ti:
 
-1. **Cada día lee la prensa** de tecnología y negocios (unos 45 medios, en español e inglés).
+1. **Cada día lee la prensa** de tecnología y negocios (unos 65 medios de varias regiones, en español e inglés, también de sectores como banca, salud, energía o industria).
 2. **Apunta en una hoja de cálculo** solo las noticias donde una empresa real usa inteligencia artificial (los llamamos *casos*), con un resumen y una nota de 0 a 100.
 3. **Cada lunes te manda un informe por Telegram**: qué tendencias hay, cuáles son los 5 mejores casos y un **borrador de publicación** para LinkedIn y para X de cada uno.
 
@@ -71,8 +71,9 @@ Todo se guarda en una hoja de Google llamada **"Vigilancia IA"**, con 5 pestaña
 
 Cada mañana, después de leer la prensa, el sistema monta una **edición** como la de un periódico con las noticias del día y la guarda en un único archivo: **`web/index.html`** (dentro de la carpeta del proyecto). **Ábrelo con doble clic**: no necesita internet.
 
-- Arriba verás la **portada** y las noticias destacadas; más abajo, las **cifras del día**, las noticias **por sectores** (pasa el ratón por una para ampliarla) y las **señales débiles** (noticias poco fiables, a vigilar).
-- Cada noticia tiene su **nota de 1 a 5**, una etiqueta que dice si es un **hecho confirmado**, una **afirmación de la empresa** o una **opinión**, y el **enlace a la fuente**.
+- Arriba verás la **portada** y las noticias destacadas; más abajo, las **cifras del día**, las noticias **por sectores** (pasa el ratón por una para ampliarla) y las **señales débiles** (novedades muy llamativas que todavía no están comprobadas: se vigilan, pero no se dan por hechas).
+- Cada noticia dice **cuánto pesa** con tres niveles (**Muy relevante**, **Relevante** o **De interés**), lleva una etiqueta que indica si es un **hecho confirmado**, una **afirmación de la empresa** o una **opinión**, y el **enlace a la noticia original**. Al pasar el ratón por el nivel verás el detalle.
+- Arriba hay **tres frases con lo esencial del día** y, al final, un apartado de **Metodología** que explica cómo se elige y se puntúa cada noticia.
 - En **Archivo** puedes abrir cualquier edición anterior y buscar por empresa, país o sector.
 - También te llega un aviso por Telegram cuando la edición está lista.
 
@@ -118,7 +119,7 @@ No hace falta saber programar: **pídeselo a Claude** con frases como estas.
 
 - **No publica** en tus redes. Siempre lo haces tú.
 - **No garantiza** que cada cifra sea correcta: revísalas antes de publicar.
-- **No lee todo internet**: solo los ~45 medios configurados.
+- **No lee todo internet**: solo los ~65 medios configurados.
 - **No funciona con el ordenador apagado.**
 - **No tiene acceso** a tu correo, tus fotos ni otras cosas de tu cuenta de Google: solo ve la hoja "Vigilancia IA".
 

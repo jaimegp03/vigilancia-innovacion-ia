@@ -25,7 +25,7 @@ ok('la nota 1-5 es la puntuación total ÷ 20 redondeada', () => {
   assert.deepStrictEqual([0, 10, 30, 70, 88, 100].map(nota5), [1, 1, 2, 4, 4, 5]);
 });
 ok('ensambla portada, destacadas, señales y secciones sin repetir noticias', () => {
-  const casos = [caso('a', 90), caso('b', 80), caso('c', 75), caso('d', 60, { sector: 'salud_farma' }), caso('e', 30)];
+  const casos = [caso('a', 90), caso('b', 80), caso('c', 75), caso('d', 60, { sector: 'salud_farma' }), caso('e', 30, { novedad: 5, evidencia: 1 })];
   const ed = ensamblarEdicion({ casos, salida: salida(), fecha: '2026-10-17', numero: 1 });
   assert.strictEqual(ed.portada.id, 'a');
   assert.deepStrictEqual(ed.destacadas.map(x => x.id), ['b', 'c']);
@@ -47,6 +47,41 @@ ok('las URL, el medio y la puntuación salen del caso, no del editor', () => {
   assert.strictEqual(ed.portada.url, 'https://ejemplo.invalid/a');
   assert.strictEqual(ed.portada.puntuacion, 4);
   assert.strictEqual(ed.portada.tipo_afirmacion, 'hecho_confirmado');
+});
+ok('agrupa la misma historia contada por varios medios en una sola noticia con otras fuentes', () => {
+  const casos = [
+    caso('a', 80, { empresa: 'Amazon', titulo_caso: 'Amazon lanza dispositivos corporales Bee', fuente: 'Medio A' }),
+    caso('b', 70, { empresa: 'Amazon', titulo_caso: 'Amazon presenta los accesorios Bee corporales', fuente: 'Medio B' }),
+    caso('c', 75, { empresa: 'Otra', titulo_caso: 'Otra empresa distinta', fuente: 'Medio C' }),
+    caso('d', 60, { empresa: 'Uno', titulo_caso: 'Caso del editor uno', fuente: 'Medio D' }),
+    caso('e', 62, { empresa: 'Dos', titulo_caso: 'Caso del editor dos', fuente: 'Medio E' }),
+  ];
+  const ed = ensamblarEdicion({ casos, salida: salida({ portada_id: 'a', destacadas_ids: ['c'], historias_repetidas: [['d', 'e']] }), fecha: '2026-10-17', numero: 1 });
+  const todas = [ed.portada, ...ed.destacadas, ...ed.secciones_por_sector.flatMap(x => x.noticias), ...ed.senales_debiles];
+  assert.strictEqual(todas.length, 3, 'a+b se fusionan por empresa y título; d+e por indicación del editor');
+  assert.deepStrictEqual(ed.portada.otras_fuentes.map(o => o.medio), ['Medio B']);
+  assert.strictEqual(ed.cifras.medios_distintos, 5, 'cuenta también los medios de las otras fuentes');
+  assert.strictEqual(validarContraDef(esquema, 'edicion', ed).ok, true);
+});
+ok('las señales débiles las decide el código: novedad alta con poca evidencia o solo un anuncio', () => {
+  const casos = [
+    caso('a', 90, { novedad: 4, evidencia: 5 }), caso('b', 80, { novedad: 3, evidencia: 4 }), caso('c', 78, { novedad: 3, evidencia: 4 }),
+    caso('x', 50, { novedad: 5, evidencia: 2 }), caso('y', 70, { novedad: 4, evidencia: 4, madurez: 'anuncio' }),
+    caso('z', 68, { novedad: 2, evidencia: 1 }), caso('w', 66, { novedad: 4, evidencia: 5 }),
+  ];
+  const ed = ensamblarEdicion({ casos, salida: salida({ destacadas_ids: ['b', 'c'], senales_debiles_ids: ['w'] }), fecha: '2026-10-17', numero: 1 });
+  assert.deepStrictEqual(ed.senales_debiles.map(n => n.id), ['x', 'y'], 'z (poco novedoso y poco probado) es ruido y w (novedoso y sólido) no es débil');
+});
+ok('el «qué vigilar» del editor se guarda en la noticia', () => {
+  const sal = salida({ destacadas_ids: [], noticias: [{ caso_id: 'a', titular: 'T', entradilla: 'E', impacto: 'I', tipo_afirmacion: 'afirmacion_empresa', vigilar: 'Si publican resultados' }] });
+  const ed = ensamblarEdicion({ casos: [caso('a', 80, { novedad: 4, evidencia: 2 })], salida: sal, fecha: '2026-10-17', numero: 1 });
+  assert.strictEqual(ed.portada.vigilar, 'Si publican resultados');
+  assert.strictEqual(ed.portada.novedad, 4);
+});
+ok('las claves del editor se guardan (máximo tres) y la edición incluye la fecha de generación', () => {
+  const ed = ensamblarEdicion({ casos: [caso('a', 80)], salida: salida({ destacadas_ids: [], claves: ['uno', 'dos', 'tres', 'cuatro'] }), fecha: '2026-10-17', numero: 1, generadaEn: '2026-10-17T07:40:00.000Z' });
+  assert.deepStrictEqual(ed.claves, ['uno', 'dos', 'tres']);
+  assert.strictEqual(ed.generada_en, '2026-10-17T07:40:00.000Z');
 });
 ok('rechaza una edición con campos fuera del esquema', () => {
   const ed = ensamblarEdicion({ casos: [caso('a', 80)], salida: salida({ destacadas_ids: [], senales_debiles_ids: [] }), fecha: '2026-10-17', numero: 1 });

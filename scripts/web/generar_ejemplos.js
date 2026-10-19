@@ -43,6 +43,15 @@ const POOL = [
   ['ej-30', 'Centro Ágora', 'Colombia', 'sector_publico', 'analitica_prediccion', 'piloto', 'afirmacion_empresa', 49, 'baja', G, 'Un centro público ficticio promete reducir listas de espera con IA, sin resultados aún', 'Se presenta el proyecto, pero todavía no hay datos.', 'El Centro Ágora, organismo de ficción, ha presentado un proyecto de predicción de citas perdidas para llenar mejor la agenda. Por ahora solo hay una presentación del plan, sin resultados.', 'Señal débil: el objetivo es útil, pero aún no se puede valorar.'],
 ];
 
+const CLAVES = [
+  ['Un caso de seguros con resolución automática de siniestros abre la jornada, aunque la cifra es de la propia empresa.', 'Se repite el patrón: IA en segundo plano (demanda, mantenimiento, rutas) con ahorros todavía por verificar.', 'Cautela con los anuncios sin datos, como la agencia que promete campañas «solo con IA».'],
+  ['La logística lidera con un caso de rutas con resultados revisados por un tercero.', 'Salud y educación aportan pilotos con evidencia aún modesta.', 'Un anuncio de agencia creativa sin métricas queda como señal a vigilar.'],
+  ['Edición corta: solo dos casos con evidencia suficiente.', 'La banca aporta el caso mejor documentado, con resultados auditados.', 'Una opinión sin caso concreto queda fuera de las destacadas.'],
+  ['La atención al cliente es el terreno más maduro: banca, telecomunicaciones y turismo ya resuelven consultas reales.', 'La clave es quién garantiza el traspaso a una persona cuando el asistente no sabe.', 'Varios casos son afirmaciones de la empresa sin estudio independiente.'],
+  ['Energía y logística marcan el día con casos a escala y resultados medibles.', 'La previsión solar mejora el equilibrio de la red con datos regulatorios.', 'Hay un puerto y una granja con pilotos sin evaluación externa.'],
+  ['Más pilotos que despliegues y varios con evidencia modesta.', 'Los centros educativos empiezan a medir con grupos de comparación.', 'Dos anuncios sin datos se publican como señales débiles.'],
+  ['Industria y sector público ocupan la portada.', 'Los mejores casos combinan datos propios, un proceso concreto y revisión humana.', 'Un fabricante de coches reduce prototipos con simulación asistida por IA.'],
+];
 const ANALISIS = [
   'La jornada gira en torno a la IA que trabaja en segundo plano: predicción de demanda, mantenimiento y logística. Lo llamativo no es la tecnología, sino que varios casos ya reportan resultados verificados. Aun así, la mayoría de las cifras de ahorro vienen de las propias empresas, y conviene leerlas con prudencia.',
   'Hoy dominan los pilotos: mucho ensayo y poca producción. Los casos más sólidos son los que miden contra un grupo de control. Los anuncios sin datos, como los de las agencias creativas, quedan como señales a vigilar.',
@@ -67,8 +76,13 @@ const DIAS = [
 const casosPorId = new Map(POOL.map(([id, empresa, pais, sector, tipo, madurez, afirmacion, total, confianza, medio, titular, entradilla, resumen, impacto]) => [id, {
   id, empresa, pais, sector, tipo_innovacion: tipo, madurez, puntuacion_total: total, confianza, fuente: medio,
   titulo_caso: titular, resumen, resultado: impacto, url: null, fecha_publicacion: null,
+  novedad: madurez === 'anuncio' || total >= 80 ? 4 : 3, evidencia: afirmacion === 'hecho_confirmado' ? 4 : (total >= 70 ? 3 : 2),
   _texto: { titular, entradilla, impacto, tipo_afirmacion: afirmacion },
 }]));
+// Señales débiles de ejemplo: novedad alta y poca evidencia (o solo un anuncio) → se les añade «qué vigilar» ficticio.
+for (const c of casosPorId.values()) {
+  if (c.novedad >= 4 && (c.evidencia <= 3 || c.madurez === 'anuncio')) c._texto.vigilar = 'Si publican resultados medidos o un cliente real que lo confirme (ejemplo ficticio).';
+}
 
 fs.mkdirSync(DESTINO, { recursive: true });
 for (const f of fs.readdirSync(DESTINO)) if (f.startsWith('ejemplo-')) fs.unlinkSync(path.join(DESTINO, f));
@@ -81,15 +95,20 @@ DIAS.forEach((dia, k) => {
     c.fecha_publicacion = dia.fecha;
     return c;
   });
+  const tf = { [M]: 'medio_economico', [R]: 'revista', [G]: 'revista', [C]: 'revista' };
+  casos.forEach(c => { c.tipo_fuente = tf[c.fuente] || 'revista'; });
   const salida = {
     portada_id: casos[0].id,
     destacadas_ids: casos.slice(1, 4).filter(c => c.puntuacion_total >= 60).map(c => c.id),
-    senales_debiles_ids: casos.filter(c => c.puntuacion_total < 50).map(c => c.id),
+    historias_repetidas: [],
+    claves: CLAVES[k],
     analisis: ANALISIS[k],
     noticias: casos.map(c => ({ caso_id: c.id, ...c._texto })),
   };
   casos.forEach(c => delete c._texto);
-  const edicion = ensamblarEdicion({ casos, salida, fecha: dia.fecha, numero: k + 1, esEjemplo: true, modelo: 'ejemplo' });
+  const edicion = ensamblarEdicion({ casos, salida, fecha: dia.fecha, numero: k + 1, esEjemplo: true, modelo: 'ejemplo', generadaEn: dia.fecha + 'T07:40:00.000Z' });
+  // Ejemplo de «misma historia contada por varios medios» (ficticio, sin URL).
+  if ([0, 3, 4, 6].includes(k)) edicion.portada.otras_fuentes = [{ medio: G, url: null, fecha_publicacion: dia.fecha }, { medio: R, url: null, fecha_publicacion: dia.fecha }].filter(o => o.medio !== edicion.portada.medio);
   fs.writeFileSync(path.join(DESTINO, `ejemplo-${dia.fecha}.json`), JSON.stringify(edicion, null, 2) + '\n');
   console.log(`ejemplo-${dia.fecha}.json: ${edicion.cifras.casos_totales} casos`);
 });

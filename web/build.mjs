@@ -63,7 +63,7 @@ for (const x of elegidas) {
   if (porFecha.has(x.ed.fecha)) fallar(`Hay dos ediciones con la fecha ${x.ed.fecha} (${porFecha.get(x.ed.fecha)} y ${x.archivo}). Usa --sin-ejemplos o cambia una fecha.`);
   porFecha.set(x.ed.fecha, x.archivo);
 }
-const ediciones = elegidas.map(x => x.ed).sort((a, b) => (a.fecha < b.fecha ? -1 : 1)).slice(-N);
+let ediciones = elegidas.map(x => x.ed).sort((a, b) => (a.fecha < b.fecha ? -1 : 1)).slice(-N);
 
 // 3) Incrustar en la plantilla
 const LS = String.fromCharCode(0x2028), PS = String.fromCharCode(0x2029);
@@ -72,18 +72,27 @@ const attr = s => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').repla
 const plantilla = fs.readFileSync(path.join(RAIZ, 'web', 'plantilla.html'), 'utf8');
 const indexable = web.indexable === true;
 const descripcion = `${pub.nombre}. ${pub.eslogan || ''}`.trim();
-const html = plantilla
+const fuentesActivas = (leerJson(path.join(RAIZ, 'config', 'fuentes.json')).fuentes || []).filter(f => f.activa);
+const datosPublicacion = {
+  nombre: pub.nombre, nombre_corto: pub.nombre_corto, slug: pub.slug, eslogan: pub.eslogan || '', contacto: pub.contacto || null,
+  fuentes_activas: fuentesActivas.length, regiones: new Set(fuentesActivas.map(f => f.region)).size, pesos: params.pesos_puntuacion || null,
+};
+const construir = eds => plantilla
   .replace('__TITLE__', () => attr(pub.nombre))
   .replace('__DESCRIPCION__', () => attr(descripcion))
   .replace('<!--__ROBOTS__-->', () => (indexable ? '' : '<meta name="robots" content="noindex, nofollow">'))
-  .replace('__PUBLICACION__', () => aJsonSeguro({ nombre: pub.nombre, nombre_corto: pub.nombre_corto, slug: pub.slug, eslogan: pub.eslogan || '' }))
-  .replace('__EDICIONES__', () => aJsonSeguro(ediciones));
+  .replace('__PUBLICACION__', () => aJsonSeguro(datosPublicacion))
+  .replace('__EDICIONES__', () => aJsonSeguro(eds));
+let html = construir(ediciones);
+let recortadas = 0;
+// Si el HTML supera el límite, se quitan las ediciones más antiguas (siguen en data/ediciones/) en lugar de fallar.
+while (Buffer.byteLength(html, 'utf8') > LIMITE_BYTES && ediciones.length > 1) { ediciones = ediciones.slice(1); recortadas++; html = construir(ediciones); }
 
 for (const marca of ['__TITLE__', '__DESCRIPCION__', '__PUBLICACION__', '__EDICIONES__', '__ROBOTS__']) {
   if (html.includes(marca)) fallar(`La plantilla conserva la marca ${marca} sin sustituir.`);
 }
 const bytes = Buffer.byteLength(html, 'utf8');
-if (bytes > LIMITE_BYTES) fallar(`web/index.html pesa ${(bytes / 1048576).toFixed(1)} MB y el límite es 5 MB. Reduce web.ediciones_embebidas en config/parametros.json (hoy ${N}).`);
+if (bytes > LIMITE_BYTES) fallar(`Una sola edición ya supera el límite de 5 MB (${(bytes / 1048576).toFixed(1)} MB).`);
 
 fs.mkdirSync(path.dirname(salida), { recursive: true });
 fs.writeFileSync(salida, html);
@@ -95,4 +104,5 @@ if (web.destino === 'github_pages') fs.writeFileSync(path.join(dirSalida, '.noje
 const hayEjemplo = ediciones.some(e => e.es_ejemplo);
 console.log(`✓ ${path.relative(RAIZ, salida)} · ${ediciones.length} ediciones (${ediciones[0].fecha} → ${ediciones[ediciones.length - 1].fecha}) · ${(bytes / 1024).toFixed(0)} KB`);
 console.log(`  Publicación: ${pub.nombre} (${pub.nombre_corto}) · indexable: ${indexable ? 'sí' : 'no'}`);
+if (recortadas) console.log(`  ⚠ Para no pasar de 5 MB se han dejado fuera las ${recortadas} ediciones más antiguas (siguen en data/ediciones/). Reduce web.ediciones_embebidas para evitar este aviso.`);
 if (hayEjemplo) console.log('  ⚠ Contiene ediciones de EJEMPLO (ficticias): no se publicarán.');

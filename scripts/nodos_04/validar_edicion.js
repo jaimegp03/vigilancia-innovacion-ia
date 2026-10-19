@@ -22,6 +22,12 @@ if (texto) {
   try { obj = JSON.parse(extraerJson(texto)); } catch (e) { errores.push('JSON no parseable: ' + e.message); }
 }
 
+// Los modelos a veces añaden campos que no se piden (p. ej. titulo_caso): se quitan antes de validar.
+function podar(o, def) { const ok = Object.keys(cfg.schema_edicion.$defs[def].properties); Object.keys(o).forEach(k => { if (!ok.includes(k)) delete o[k]; }); }
+if (obj && typeof obj === 'object') {
+  podar(obj, 'editor_salida');
+  if (Array.isArray(obj.noticias)) obj.noticias.forEach(n => { if (n && typeof n === 'object') { const ok = ['caso_id', 'titular', 'entradilla', 'impacto', 'tipo_afirmacion', 'vigilar']; Object.keys(n).forEach(k => { if (!ok.includes(k)) delete n[k]; }); } });
+}
 if (obj) {
   errores.push(...validarContraDef(cfg.schema_edicion, 'editor_salida', obj).errores);
   if (errores.length === 0) {
@@ -29,7 +35,7 @@ if (obj) {
     if (!validos.has(obj.portada_id)) errores.push(`portada_id "${obj.portada_id}" no es un id de los casos recibidos`);
     const filtra = (lista, nombre) => lista.filter(id => { const ok = validos.has(id); if (!ok) ajustes.push(`${nombre}: se quitó el id inexistente "${id}"`); return ok; });
     obj.destacadas_ids = filtra(obj.destacadas_ids, 'destacadas_ids');
-    obj.senales_debiles_ids = filtra(obj.senales_debiles_ids, 'senales_debiles_ids');
+    obj.historias_repetidas = (obj.historias_repetidas || []).map(g => filtra(g, 'historias_repetidas')).filter(g => g.length > 1);
     obj.noticias = obj.noticias.filter(n => { const ok = validos.has(n.caso_id); if (!ok) ajustes.push(`noticias: se quitó el caso inexistente "${n.caso_id}"`); return ok; });
   }
 }

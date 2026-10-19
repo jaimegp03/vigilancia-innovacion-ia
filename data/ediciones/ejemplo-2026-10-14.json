@@ -2,6 +2,12 @@
   "fecha": "2026-10-14",
   "numero_edicion": 3,
   "es_ejemplo": true,
+  "generada_en": "2026-10-14T07:40:00.000Z",
+  "claves": [
+    "Edición corta: solo dos casos con evidencia suficiente.",
+    "La banca aporta el caso mejor documentado, con resultados auditados.",
+    "Una opinión sin caso concreto queda fuera de las destacadas."
+  ],
   "portada": {
     "id": "ej-20-2026-10-14",
     "titular": "Un banco ficticio anticipa impagos con meses de antelación y ofrece soluciones al cliente",
@@ -16,8 +22,12 @@
     "tipo_afirmacion": "hecho_confirmado",
     "puntuacion": 4,
     "puntuacion_100": 81,
+    "novedad": 4,
+    "evidencia": 4,
+    "vigilar": null,
     "confianza": "alta",
     "medio": "Diario Muestra de Economía",
+    "tipo_fuente": "medio_economico",
     "fecha_publicacion": "2026-10-14",
     "url": null
   },
@@ -36,8 +46,12 @@
       "tipo_afirmacion": "hecho_confirmado",
       "puntuacion": 4,
       "puntuacion_100": 74,
+      "novedad": 3,
+      "evidencia": 4,
+      "vigilar": null,
       "confianza": "alta",
       "medio": "Diario Muestra de Economía",
+      "tipo_fuente": "medio_economico",
       "fecha_publicacion": "2026-10-14",
       "url": null
     }
@@ -46,6 +60,9 @@
   "cifras": {
     "casos_totales": 3,
     "puntuacion_media": 3.3,
+    "puntuacion_media_100": 65,
+    "medios_distintos": 2,
+    "paises_distintos": 3,
     "por_sector": [
       {
         "sector": "banca_seguros",
@@ -79,6 +96,20 @@
         "tipo_afirmacion": "opinion",
         "casos": 1
       }
+    ],
+    "por_madurez": [
+      {
+        "madurez": "anuncio",
+        "casos": 1
+      },
+      {
+        "madurez": "piloto",
+        "casos": 1
+      },
+      {
+        "madurez": "produccion",
+        "casos": 1
+      }
     ]
   },
   "senales_debiles": [
@@ -96,8 +127,12 @@
       "tipo_afirmacion": "opinion",
       "puntuacion": 2,
       "puntuacion_100": 41,
+      "novedad": 4,
+      "evidencia": 2,
+      "vigilar": "Si publican resultados medidos o un cliente real que lo confirme (ejemplo ficticio).",
       "confianza": "baja",
       "medio": "Gaceta Ficticia de Innovación",
+      "tipo_fuente": "revista",
       "fecha_publicacion": "2026-10-14",
       "url": null
     }

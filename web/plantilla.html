@@ -47,7 +47,7 @@ button,select,input{font:inherit;color:inherit}
 .mast{border-bottom:4px double var(--rule);padding-bottom:1rem}
 .top{display:flex;flex-wrap:wrap;gap:.6rem 1.2rem;align-items:center;justify-content:space-between;border-bottom:1px solid var(--rule);padding:.6rem 0;font-size:.82rem}
 .top .izq{display:flex;flex-wrap:wrap;gap:.2rem 1rem;align-items:center}
-.top .der{display:flex;gap:.5rem;align-items:center}
+.top .der{display:flex;flex-wrap:wrap;gap:.4rem;align-items:center;justify-content:flex-end;max-width:100%}
 .top select{border:1px solid var(--rule);background:var(--paper);padding:.35rem .5rem;border-radius:2px;max-width:60vw}
 .logo{text-align:center;padding:1.6rem 0 .6rem}
 .logo h1{font-size:clamp(2.1rem,6.6vw,4.6rem);display:flex;flex-wrap:wrap;justify-content:center;align-items:baseline;gap:0 .28em;overflow-wrap:anywhere}
@@ -58,6 +58,9 @@ button,select,input{font:inherit;color:inherit}
 .nav{display:flex;flex-wrap:wrap;justify-content:center;gap:.3rem 1.4rem;margin-top:1rem;padding-top:.7rem;border-top:1px solid var(--rule);font:600 .76rem/1 var(--sans);letter-spacing:.14em;text-transform:uppercase}
 .nav a{text-decoration:none;padding:.4rem 0}
 @media (max-width:640px){
+  .top .der{width:100%;justify-content:flex-start}
+  .top .der .btn{padding:.35rem .6rem;font-size:.78rem}
+  .top select{max-width:100%;flex:1 1 100%}
   .logo h1{flex-direction:column;align-items:center;gap:0}
   .logo .p2{font-size:.5em}
 }
@@ -76,12 +79,47 @@ button,select,input{font:inherit;color:inherit}
 .tag.hecho{background:var(--ink);color:var(--paper)}
 .tag.empresa{background:transparent}
 .tag.opinion{border-style:dashed;font-style:italic}
-.nota{display:inline-flex;gap:2px;vertical-align:middle}
-.nota i{width:9px;height:9px;background:var(--rule-soft);display:block}
-.nota i.on{background:var(--accent)}
+.rel{display:inline-flex;align-items:center;gap:.4rem;font:700 .72rem/1 var(--sans);letter-spacing:.02em;padding:.28rem .55rem .28rem .45rem;border:1px solid var(--rule-soft);border-radius:99px;background:var(--paper);white-space:nowrap;cursor:help}
+.rel .barras{display:inline-flex;align-items:flex-end;gap:2px;height:.8rem}
+.rel .barras i{width:4px;background:var(--rule-soft);display:block;border-radius:1px}
+.rel .barras i:nth-child(1){height:40%}.rel .barras i:nth-child(2){height:70%}.rel .barras i:nth-child(3){height:100%}
+.rel-alta{border-color:var(--accent);color:var(--accent)}
+.rel-alta .barras i{background:var(--accent)}
+.rel-media{border-color:var(--ink-3);color:var(--ink-2)}
+.rel-media .barras i:nth-child(-n+2){background:var(--ink-2)}
+.rel-baja{color:var(--ink-3)}
+.rel-baja .barras i:nth-child(1){background:var(--ink-3)}
 .ico{width:1.15em;height:1.15em;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.2em}
 .ficha{display:flex;flex-wrap:wrap;gap:.35rem .5rem;align-items:center;margin:.7rem 0 0}
 .chip{font-size:.78rem;border:1px solid var(--rule-soft);padding:.2rem .5rem;border-radius:99px;color:var(--ink-2);background:var(--paper-2)}
+
+/* Cobertura, claves, fuentes, metodología */
+.cobertura{margin:.9rem 0 0;text-align:center;font-size:.8rem;color:var(--ink-3);letter-spacing:.02em}
+.cobertura b{color:var(--ink-2);font-weight:700}
+.claves{border:1px solid var(--rule);border-top:4px solid var(--accent);background:var(--paper-2);padding:1.1rem 1.3rem;margin-top:1.8rem}
+.claves h2{font:700 .72rem/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:.7rem}
+.claves ol{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem 1.6rem;counter-reset:k}
+.claves li{counter-increment:k;font:1.05rem/1.45 var(--serif);padding-left:2.2rem;position:relative}
+.claves li::before{content:counter(k);position:absolute;left:0;top:-.1rem;font:800 1.7rem/1 var(--serif);color:var(--accent)}
+.leer{display:inline-block;font:700 .85rem/1.2 var(--sans);color:var(--accent);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:2px}
+.leer:hover{color:var(--ink)}
+.enlace-fila{margin:.45rem 0 0}
+.fuentes{margin:.55rem 0 0;font-size:.85rem;color:var(--ink-3)}
+.fuentes a{color:var(--ink-2)}
+.fuentes .mas-fuentes{display:inline-block;margin-left:.2rem;font-weight:600;color:var(--ink-2)}
+.tag.comunicado{border-color:var(--ink-3);color:var(--ink-2);background:transparent;font-weight:600}
+.vigilar{margin:.5rem 0 0;font-size:.88rem;color:var(--ink-2);border-left:3px dashed var(--ink-3);padding-left:.6rem}
+.motivo{font:600 .7rem/1 var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);margin-top:.4rem}
+.metodo-g{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.6rem 2.4rem}
+.metodo-g h3{font:700 1.1rem/1.2 var(--serif);margin-bottom:.4rem}
+.metodo-g p,.metodo-g li{font-size:.92rem;color:var(--ink-2);margin:.3rem 0}
+.metodo-g ul{padding-left:1.1rem;margin:.3rem 0}
+.metodo-g dl{margin:.3rem 0;font-size:.9rem}
+.metodo-g dt{font-weight:700;margin-top:.5rem}
+.metodo-g dd{margin:0;color:var(--ink-2)}
+.pesos{display:flex;flex-wrap:wrap;gap:.4rem;margin:.4rem 0}
+.pie-meta{font-size:.78rem;color:var(--ink-3)}
+.acciones{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.6rem}
 
 /* Secciones */
 section{padding:2.4rem 0 0}
@@ -157,6 +195,7 @@ section{padding:2.4rem 0 0}
 .fila:hover,.fila.activa{background:var(--paper-2)}
 .fila .cab{display:flex;gap:.8rem;align-items:flex-start;justify-content:space-between}
 .fila h4{font-size:1.12rem}
+.fila .cab>span{flex:none;white-space:nowrap}
 .fila .mas{display:grid;grid-template-rows:0fr;transition:grid-template-rows .3s ease-out}
 .fila .mas>div{overflow:hidden}
 .fila.activa .mas{grid-template-rows:1fr}
@@ -206,7 +245,7 @@ footer b{font-family:var(--serif)}
   html{scroll-behavior:auto}
   *,*::before,*::after{transition:none!important;animation:none!important}
 }
-@media print{.compacta,.ejemplo,.nav,.filtros{display:none}.escena{height:auto}.escena .stage{position:static;height:auto;display:block}.panel{position:static;opacity:1;transform:none}.caps,.prog{display:none}}
+@media print{.compacta,.ejemplo,.nav,.filtros,.acciones,#btn-imprimir,#btn-descargar,#btn-tema,#sel-edicion,.vista{display:none}.claves,.senales{break-inside:avoid}.fila .mas{grid-template-rows:1fr}.fila .det{display:block}.escena{height:auto}.escena .stage{position:static;height:auto;display:block}.panel{position:static;opacity:1;transform:none}.caps,.prog{display:none}}
 </style>
 </head>
 <body>
@@ -222,16 +261,20 @@ footer b{font-family:var(--serif)}
     <div class="der">
       <label class="sr" for="sel-edicion">Elegir edición</label>
       <select id="sel-edicion"></select>
+      <button class="btn" id="btn-imprimir" type="button" aria-label="Imprimir o guardar esta edición como PDF">Imprimir / PDF</button>
+      <button class="btn" id="btn-descargar" type="button" aria-label="Descargar esta edición en formato JSON">Descargar</button>
       <button class="btn" id="btn-tema" type="button" aria-label="Cambiar entre modo claro y oscuro">◐ Tema</button>
     </div>
   </div>
   <div class="logo"><h1 id="logo"></h1></div>
   <p class="eslogan" id="eslogan"></p>
-  <nav class="nav" aria-label="Secciones"><a href="#portada">Portada</a><a href="#escena">Lo más importante</a><a href="#cifras">Cifras</a><a href="#sectores">Sectores</a><a href="#senales">Señales débiles</a><a href="#archivo">Archivo</a></nav>
+  <p class="cobertura" id="cobertura"></p>
+  <nav class="nav" aria-label="Secciones"><a href="#portada">Portada</a><a href="#escena">Lo más importante</a><a href="#cifras">Cifras</a><a href="#sectores">Sectores</a><a href="#senales">Señales débiles</a><a href="#archivo">Archivo</a><a href="#metodologia">Metodología</a></nav>
 </header>
 
 <main id="contenido" class="wrap" tabindex="-1">
   <div id="aviso-vivo" class="sr" aria-live="polite"></div>
+  <section id="claves" class="claves" aria-labelledby="h-claves" style="display:none"></section>
   <section id="portada" aria-label="Portada"></section>
   <section id="escena" aria-label="Lo más importante de hoy"></section>
   <section id="cifras" aria-labelledby="h-cifras"></section>
@@ -239,11 +282,13 @@ footer b{font-family:var(--serif)}
   <section id="senales" aria-labelledby="h-senales"></section>
   <section id="analisis" class="analisis" aria-labelledby="h-analisis"></section>
   <section id="archivo" aria-labelledby="h-archivo"></section>
+  <section id="metodologia" aria-labelledby="h-metodologia"></section>
 </main>
 
 <footer class="wrap">
   <p><b id="pie-nombre"></b> · <span id="pie-eds"></span></p>
-  <p>Resúmenes generados con IA a partir de fuentes enlazadas; verifica en la fuente original.</p>
+  <p>Resúmenes generados con IA a partir de fuentes enlazadas; verifica en la fuente original. <a href="#metodologia">Cómo trabajamos</a>.</p>
+  <p class="pie-meta" id="pie-meta"></p>
 </footer>
 
 <script type="application/json" id="datos-publicacion">__PUBLICACION__</script>
@@ -255,7 +300,7 @@ var PUB = JSON.parse(document.getElementById('datos-publicacion').textContent);
 var EDS = JSON.parse(document.getElementById('datos-ediciones').textContent);
 EDS.sort(function(a,b){ return a.fecha < b.fecha ? 1 : -1; }); // más reciente primero
 
-var SECTORES = {banca_seguros:'Banca y seguros',automocion:'Automoción',turismo_hosteleria:'Turismo y hostelería',construccion_inmobiliario:'Construcción e inmobiliario',gran_consumo_alimentacion:'Gran consumo y alimentación',retail_comercio:'Retail y comercio',salud_farma:'Salud y farma',energia_utilities:'Energía y utilities',industria_manufactura:'Industria y manufactura',logistica_transporte:'Logística y transporte',telecomunicaciones:'Telecomunicaciones',educacion:'Educación',sector_publico:'Sector público',medios_marketing:'Medios y marketing',agricultura:'Agricultura',tecnologia_software:'Tecnología y software',otros:'Otros'};
+var SECTORES = {banca_seguros:'Banca y seguros',automocion:'Automoción',turismo_hosteleria:'Turismo y hostelería',construccion_inmobiliario:'Construcción e inmobiliario',gran_consumo_alimentacion:'Gran consumo y alimentación',retail_comercio:'Retail y comercio',salud_farma:'Salud y farma',energia_utilities:'Energía y utilities',industria_manufactura:'Industria y manufactura',logistica_transporte:'Logística y transporte',telecomunicaciones:'Telecomunicaciones',educacion:'Educación',sector_publico:'Sector público',medios_marketing:'Medios y marketing',agricultura:'Agricultura',tecnologia_software:'Tecnología y software',aeroespacial_defensa:'Aeroespacial y defensa',ciencia_id:'Ciencia e I+D',deporte_ocio:'Deporte y ocio',servicios_profesionales:'Servicios profesionales',otros:'Otros'};
 var TIPOS = {producto_servicio:'Producto o servicio',proceso_operaciones:'Procesos y operaciones',atencion_cliente:'Atención al cliente',marketing_ventas:'Marketing y ventas',analitica_prediccion:'Analítica y predicción',generacion_contenido:'Generación de contenido',investigacion_desarrollo:'I+D',seguridad_riesgo:'Seguridad y riesgo',otros:'Otros'};
 var MADUREZ = {anuncio:'Anuncio',piloto:'Piloto',produccion:'En producción',escalado:'A escala',no_indicado:'Madurez no indicada'};
 var AFIRM = {hecho_confirmado:'Hecho confirmado',afirmacion_empresa:'Afirmación de la empresa',opinion:'Opinión'};
@@ -277,6 +322,10 @@ var ICONOS = {
  medios_marketing:'M4 10v4l12 5V5z M16 9a3 3 0 0 1 0 6 M7 14l1 5',
  agricultura:'M12 21V11 M12 11c0-4-3-6-7-6 0 4 3 6 7 6z M12 14c0-3 2-5 6-5 0 3-2 5-6 5z',
  tecnologia_software:'M8 8l-4 4 4 4 M16 8l4 4-4 4 M13.5 6l-3 12',
+ aeroespacial_defensa:'M12 3c3 2 5 5 5 9l-2 3h-6l-2-3c0-4 2-7 5-9z M9 15l-2 4 M15 15l2 4 M12 9h.01',
+ ciencia_id:'M9 3h6 M10 3v6l-5 9a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3 M8 15h8',
+ deporte_ocio:'M8 4h8v5a4 4 0 0 1-8 0z M8 6H5v2a3 3 0 0 0 3 3 M16 6h3v2a3 3 0 0 1-3 3 M12 13v4 M9 21h6',
+ servicios_profesionales:'M4 8h16v11H4z M9 8V6h6v2 M4 13h16',
  otros:'M12 5v14 M5 12h14 M7 7l10 10 M17 7L7 17'
 };
 var $ = function(s,r){ return (r||document).querySelector(s); };
@@ -286,17 +335,25 @@ function urlOk(u){ return typeof u==='string' && /^https?:\/\//i.test(u) ? u : '
 function fechaLarga(f){ var d=new Date(f+'T12:00:00'); return d.toLocaleDateString('es-ES',{weekday:'long',day:'numeric',month:'long',year:'numeric'}); }
 function fechaCorta(f){ var d=new Date(f+'T12:00:00'); return d.toLocaleDateString('es-ES',{day:'numeric',month:'short',year:'numeric'}); }
 function icono(s){ return '<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="'+(ICONOS[s]||ICONOS.otros)+'"/></svg>'; }
-function nota(n){ var h=''; for(var i=1;i<=5;i++) h+='<i class="'+(i<=n?'on':'')+'"></i>'; return '<span class="nota" role="img" aria-label="Nota '+n+' de 5">'+h+'</span>'; }
-function etiqueta(n){ return '<span class="tag '+AFCLS[n.tipo_afirmacion]+'">'+esc(AFIRM[n.tipo_afirmacion]||n.tipo_afirmacion)+'</span>'; }
+function nivel(p100){ return p100>=75?{k:'alta',t:'Muy relevante',b:3}:p100>=60?{k:'media',t:'Relevante',b:2}:{k:'baja',t:'De interés',b:1}; }
+function nota(n,p100){ var p=(p100==null?n*20:p100), v=nivel(p); var h=''; for(var i=1;i<=3;i++) h+='<i></i>'; return '<span class="rel rel-'+v.k+'" role="img" aria-label="Relevancia: '+v.t.toLowerCase()+'" title="'+v.t+' (índice '+p+' sobre 100). Mide el impacto, la novedad, lo replicable que es y cuánta evidencia tiene."><span class="barras">'+h+'</span>'+v.t+'</span>'; }
+function etiqueta(n){ var t='<span class="tag '+AFCLS[n.tipo_afirmacion]+'">'+esc(AFIRM[n.tipo_afirmacion]||n.tipo_afirmacion)+'</span>'; if(n.tipo_fuente==='nota_prensa') t+=' <span class="tag comunicado" title="La fuente es un comunicado o blog de la propia empresa">Comunicado</span>'; return t; }
+function motivoDebil(n){ var m=[]; if(n.novedad!=null&&n.novedad>=4) m.push('Muy novedoso'); if(n.madurez==='anuncio') m.push('solo un anuncio'); else if(n.evidencia!=null&&n.evidencia<=3) m.push('aún con poca evidencia'); return m.join(', ').replace(/^./,function(c){return c.toUpperCase();}); }
+function dominio(u){ var m=/^https?:\/\/(?:www\.)?([^\/?#]+)/i.exec(u||''); return m?m[1]:''; }
+function enlaceLeer(n){ var u=urlOk(n.url); return u?'<a class="leer" href="'+esc(u)+'" target="_blank" rel="noopener noreferrer" title="'+esc(u)+'">Leer la noticia original en '+esc(dominio(u))+' ↗</a>':'<span class="meta">Enlace de ejemplo (sin URL)</span>'; }
+function bloqueFuentes(n){
+  var h='<span>Fuente: '+esc(n.medio)+(n.fecha_publicacion?' · '+esc(fechaCorta(n.fecha_publicacion.slice(0,10))):'')+'</span>';
+  var o=n.otras_fuentes||[]; if(o.length){ h+='<span class="mas-fuentes"> · También en: '+o.map(function(x){ var xu=urlOk(x.url); return xu?'<a href="'+esc(xu)+'" target="_blank" rel="noopener noreferrer" title="'+esc(xu)+'">'+esc(x.medio)+' ↗</a>':esc(x.medio); }).join(', ')+'</span>'; }
+  return '<p class="fuentes">'+enlaceLeer(n)+'<br>'+h+'</p>';
+}
+function tit(n){ return urlOk(n.url)?'<a href="'+esc(n.url)+'" target="_blank" rel="noopener noreferrer" style="text-decoration:none">'+esc(n.titular)+'</a>':esc(n.titular); }
 function lugar(n){ return [n.empresa,n.pais].filter(Boolean).map(esc).join(' · '); }
 function origen(n){ return esc(n.medio)+(n.fecha_publicacion?' · '+esc(fechaCorta(n.fecha_publicacion.slice(0,10))):''); }
-function enlace(n,txt){ var u=urlOk(n.url); return u ? '<a class="fuente" href="'+esc(u)+'" target="_blank" rel="noopener noreferrer">'+(txt||'Leer en la fuente')+' ↗</a>' : '<span class="meta">Fuente de ejemplo sin enlace</span>'; }
-function fichaChips(n){
+function fichaChips(n,completa){
   var c=[]; c.push('<span class="chip">'+icono(n.sector)+' '+esc(SECTORES[n.sector]||n.sector)+'</span>');
-  if(n.pais) c.push('<span class="chip">'+esc(n.pais)+'</span>');
-  if(n.madurez) c.push('<span class="chip">'+esc(MADUREZ[n.madurez])+'</span>');
-  if(n.tipo_innovacion) c.push('<span class="chip">'+esc(TIPOS[n.tipo_innovacion])+'</span>');
-  return '<div class="ficha">'+etiqueta(n)+' '+nota(n.puntuacion)+' '+c.join('')+'</div>';
+  if(n.madurez && n.madurez!=='no_indicado') c.push('<span class="chip">'+esc(MADUREZ[n.madurez])+'</span>');
+  if(completa && n.tipo_innovacion) c.push('<span class="chip">'+esc(TIPOS[n.tipo_innovacion])+'</span>');
+  return '<div class="ficha">'+etiqueta(n)+' '+nota(n.puntuacion,n.puntuacion_100)+' '+c.join('')+'</div>';
 }
 function todas(e){
   var l=[e.portada].concat(e.destacadas||[]);
@@ -330,15 +387,18 @@ function render(fecha){
   $('#fecha-corta').textContent=fechaCorta(e.fecha)+' · nº '+e.numero_edicion;
   $('#sel-edicion').value=e.fecha;
   $('#banner-ejemplo').classList.toggle('on',!!e.es_ejemplo);
+  var cob=[]; if(PUB.fuentes_activas) cob.push('<b>'+PUB.fuentes_activas+'</b> fuentes monitorizadas en <b>'+PUB.regiones+'</b> regiones'); cob.push('<b>'+e.cifras.casos_totales+'</b> noticias'+(e.cifras.medios_distintos?' de <b>'+e.cifras.medios_distintos+'</b> medios':'')+' en esta edición'); if(e.generada_en){ var g=new Date(e.generada_en); if(!isNaN(g)) cob.push('generada el '+g.toLocaleString('es-ES',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'})); }
+  $('#cobertura').innerHTML=cob.join(' · ');
+  $('#pie-meta').textContent=(e.modelo_editor&&e.modelo_editor!=='ejemplo')?'Redacción asistida por IA (modelo '+e.modelo_editor+'). Fuentes, fechas y puntuaciones copiadas de los casos originales.':'';
   $('#aviso-vivo').textContent='Mostrando la edición del '+fechaLarga(e.fecha);
-  pintarPortada(e); pintarEscena(e); pintarCifras(e); pintarSectores(e); pintarSenales(e); pintarAnalisis(e); pintarArchivo();
+  pintarClaves(e); pintarPortada(e); pintarEscena(e); pintarCifras(e); pintarSectores(e); pintarSenales(e); pintarAnalisis(e); pintarArchivo();
 }
 
 function pintarPortada(e){
   var p=e.portada, d=(e.destacadas||[]);
-  var h='<div class="portada"><article class="lead"><span class="kicker">Lo más destacado</span><h2>'+(urlOk(p.url)?'<a href="'+esc(p.url)+'" target="_blank" rel="noopener noreferrer">'+esc(p.titular)+'</a>':esc(p.titular))+'</h2><p class="entrada">'+esc(p.entradilla)+'</p>'+fichaChips(p)+'<p class="meta" style="margin-top:.8rem">'+lugar(p)+(lugar(p)?' · ':'')+origen(p)+'</p>'+(p.impacto?'<p class="imp">'+esc(p.impacto)+'</p>':'')+'</article>';
+  var h='<div class="portada"><article class="lead"><span class="kicker">Lo más destacado</span><h2>'+tit(p)+'</h2><p class="entrada">'+esc(p.entradilla)+'</p>'+fichaChips(p)+(lugar(p)?'<p class="meta" style="margin-top:.8rem">'+lugar(p)+'</p>':'')+(p.impacto?'<p class="imp">'+esc(p.impacto)+'</p>':'')+bloqueFuentes(p)+'</article>';
   h+='<div class="destacadas" aria-label="Destacadas">';
-  d.forEach(function(n){ h+='<article class="dest"><span class="kicker">'+icono(n.sector)+' '+esc(SECTORES[n.sector]||n.sector)+'</span><h3>'+(urlOk(n.url)?'<a href="'+esc(n.url)+'" target="_blank" rel="noopener noreferrer" style="text-decoration:none">'+esc(n.titular)+'</a>':esc(n.titular))+'</h3><p>'+esc(n.entradilla)+'</p><div class="ficha">'+etiqueta(n)+' '+nota(n.puntuacion)+'</div><p class="meta" style="margin-top:.4rem">'+origen(n)+'</p></article>'; });
+  d.forEach(function(n){ h+='<article class="dest"><span class="kicker">'+icono(n.sector)+' '+esc(SECTORES[n.sector]||n.sector)+'</span><h3>'+tit(n)+'</h3><p>'+esc(n.entradilla)+'</p><div class="ficha">'+etiqueta(n)+' '+nota(n.puntuacion,n.puntuacion_100)+'</div>'+bloqueFuentes(n)+'</article>'; });
   if(!d.length) h+='<p class="vacio">Hoy no hay más noticias destacadas: es una edición corta.</p>';
   $('#portada').innerHTML=h+'</div></div>';
 }
@@ -354,7 +414,7 @@ function pintarEscena(e){
   items.forEach(function(n,i){
     var num=('0'+(i+1)).slice(-2);
     caps+='<li data-e="'+(i===0?'activo':'pendiente')+'"><button type="button" data-i="'+i+'"><span class="n">'+num+'</span><span class="t">'+esc(n.titular)+'</span></button></li>';
-    panels+='<article class="panel" data-e="'+(i===0?'activo':'pendiente')+'" aria-label="Capítulo '+num+'"><div class="num" aria-hidden="true">'+num+'</div><span class="kicker">'+icono(n.sector)+' '+esc(SECTORES[n.sector]||n.sector)+(n.pais?' · '+esc(n.pais):'')+'</span><h3>'+esc(n.titular)+'</h3><p>'+esc(n.resumen)+'</p>'+(n.impacto?'<div class="box"><b>Por qué importa</b>'+esc(n.impacto)+'</div>':'')+fichaChips(n)+'<p class="meta" style="margin:.6rem 0 0">'+lugar(n)+(lugar(n)?' · ':'')+origen(n)+'</p>'+enlace(n)+'</article>';
+    panels+='<article class="panel" data-e="'+(i===0?'activo':'pendiente')+'" aria-label="Capítulo '+num+'"><div class="num" aria-hidden="true">'+num+'</div><span class="kicker">'+icono(n.sector)+' '+esc(SECTORES[n.sector]||n.sector)+(n.pais?' · '+esc(n.pais):'')+'</span><h3>'+esc(n.titular)+'</h3><p>'+esc(n.resumen)+'</p>'+(n.impacto?'<div class="box"><b>Por qué importa</b>'+esc(n.impacto)+'</div>':'')+fichaChips(n,true)+(lugar(n)?'<p class="meta" style="margin:.6rem 0 0">'+lugar(n)+'</p>':'')+bloqueFuentes(n)+'</article>';
   });
   cont.style.setProperty('--n',items.length);
   cont.innerHTML='<div class="escena" id="escena-in" style="--n:'+items.length+'"><div class="stage"><div><span class="cap-h">Lo más importante de hoy</span><ol class="caps">'+caps+'</ol><div class="prog" aria-hidden="true"><i></i></div></div><div class="panels">'+panels+'</div></div></div>';
@@ -389,7 +449,7 @@ function barras(arr,clave,mapa){
   return arr.map(function(x){ return '<div class="barra"><span>'+esc(mapa[x[clave]]||x[clave])+'</span><span class="b"><i style="width:'+(x.casos/max*100)+'%"></i></span><b>'+x.casos+'</b></div>'; }).join('');
 }
 function pintarCifras(e){
-  var c=e.cifras, ns=todas(e), dist=[0,0,0,0,0]; ns.forEach(function(n){ dist[n.puntuacion-1]++; });
+  var c=e.cifras;
   var tot=c.por_afirmacion.reduce(function(a,x){return a+x.casos;},0)||1, ang=-90, arcos='', ley='';
   var col={hecho_confirmado:'var(--ink)',afirmacion_empresa:'var(--accent)',opinion:'var(--ink-3)'};
   c.por_afirmacion.forEach(function(x){
@@ -398,18 +458,18 @@ function pintarCifras(e){
     arcos+='<path d="'+d+'" fill="none" stroke="'+col[x.tipo_afirmacion]+'" stroke-width="18"/>'; ang+=a;
     ley+='<li><i style="background:'+col[x.tipo_afirmacion]+'"></i>'+esc(AFIRM[x.tipo_afirmacion])+' · <b>'+x.casos+'</b></li>';
   });
-  var maxd=Math.max.apply(null,dist.concat([1])), hist='';
-  dist.forEach(function(v,i){ var h=v/maxd*62; hist+='<rect x="'+(i*34+6)+'" y="'+(80-h)+'" width="26" height="'+h+'" fill="'+(i>=3?'var(--accent)':'var(--ink)')+'"/><text x="'+(i*34+19)+'" y="94" text-anchor="middle" font-size="11" fill="currentColor">'+(i+1)+'</text><text x="'+(i*34+19)+'" y="'+(76-h)+'" text-anchor="middle" font-size="11" font-weight="700" fill="currentColor">'+(v||'')+'</text>'; });
+  var ns=todas(e), rel={alta:0,media:0,baja:0}; ns.forEach(function(n){ rel[nivel(n.puntuacion_100!=null?n.puntuacion_100:n.puntuacion*20).k]++; });
+  var bloqueRel='<div><h3>Relevancia de las noticias</h3>'+barras([{n:'alta',casos:rel.alta},{n:'media',casos:rel.media},{n:'baja',casos:rel.baja}],'n',{alta:'Muy relevante',media:'Relevante',baja:'De interés'})+'<p class="meta" style="margin:.5rem 0 0">Cuántas noticias tienen más o menos peso por su impacto, novedad y evidencia.</p></div>';
+  var mad=(c.por_madurez||[]), bloqueMad=mad.length?'<div><h3>Madurez de los casos</h3>'+barras(mad,'madurez',MADUREZ)+'<p class="meta" style="margin:.5rem 0 0">Cuántos están anunciados, en piloto, en producción o a escala.</p></div>':'';
   $('#cifras').innerHTML='<div class="sec-h"><h2 id="h-cifras">Cifras del día</h2><span>'+esc(fechaCorta(e.fecha))+'</span></div>'+
-   '<div class="kpis"><div class="kpi"><b>'+c.casos_totales+'</b><span>casos publicados</span></div><div class="kpi"><b>'+String(c.puntuacion_media).replace('.',',')+'<small style="font-size:.4em"> / 5</small></b><span>puntuación media</span></div><div class="kpi"><b>'+c.por_sector.length+'</b><span>sectores representados</span></div><div class="kpi"><b>'+((e.senales_debiles||[]).length)+'</b><span>señales débiles</span></div></div>'+
-   '<div class="graf"><div><h3>Casos por sector</h3>'+barras(c.por_sector,'sector',SECTORES)+'</div><div><h3>Por tipo de innovación</h3>'+barras(c.por_tipo,'tipo_innovacion',TIPOS)+'</div>'+
-   '<div><h3>Tipo de afirmación</h3><div class="donut"><svg viewBox="0 0 132 132" role="img" aria-label="Reparto por tipo de afirmación">'+arcos+'<text x="66" y="72" text-anchor="middle" font-size="24" font-weight="800" font-family="Georgia,serif" fill="currentColor">'+tot+'</text></svg><ul class="leyenda">'+ley+'</ul></div></div>'+
-   '<div><h3>Distribución de notas</h3><svg viewBox="0 -4 176 104" width="100%" style="max-width:280px" role="img" aria-label="Número de noticias por nota de 1 a 5">'+hist+'</svg></div></div>';
+   '<div class="kpis"><div class="kpi"><b>'+c.casos_totales+'</b><span>noticias publicadas</span></div><div class="kpi"><b>'+(c.medios_distintos||'–')+'</b><span>medios distintos</span></div><div class="kpi"><b>'+rel.alta+'</b><span>noticias muy relevantes</span></div><div class="kpi"><b>'+c.por_sector.length+'</b><span>sectores representados</span></div></div>'+
+   '<div class="graf"><div><h3>Noticias por sector</h3>'+barras(c.por_sector,'sector',SECTORES)+'</div><div><h3>Por tipo de innovación</h3>'+barras(c.por_tipo,'tipo_innovacion',TIPOS)+'</div>'+bloqueRel+bloqueMad+
+   '<div><h3>Tipo de afirmación</h3><div class="donut"><svg viewBox="0 0 132 132" role="img" aria-label="Reparto por tipo de afirmación">'+arcos+'<text x="66" y="72" text-anchor="middle" font-size="24" font-weight="800" font-family="Georgia,serif" fill="currentColor">'+tot+'</text></svg><ul class="leyenda">'+ley+'</ul></div><p class="meta" style="margin:.5rem 0 0">Qué parte son hechos verificados y qué parte lo afirma la propia empresa.</p></div></div>';
 }
 
 /* Sectores: lista con vista previa */
 function vistaHTML(n){
-  return '<span class="kicker">'+icono(n.sector)+' '+esc(SECTORES[n.sector]||n.sector)+'</span><h3>'+esc(n.titular)+'</h3><p>'+esc(n.resumen)+'</p>'+(n.impacto?'<div class="box" style="background:var(--paper);border-left:4px solid var(--accent);padding:.7rem .9rem;font-family:var(--serif)"><b class="kicker" style="display:block;margin-bottom:.3rem">Por qué importa</b>'+esc(n.impacto)+'</div>':'')+fichaChips(n)+'<p class="meta" style="margin:.7rem 0 0">'+lugar(n)+(lugar(n)?' · ':'')+origen(n)+'</p>'+enlace(n);
+  return '<span class="kicker">'+icono(n.sector)+' '+esc(SECTORES[n.sector]||n.sector)+'</span><h3>'+esc(n.titular)+'</h3><p>'+esc(n.resumen)+'</p>'+(n.impacto?'<div class="box" style="background:var(--paper);border-left:4px solid var(--accent);padding:.7rem .9rem;font-family:var(--serif)"><b class="kicker" style="display:block;margin-bottom:.3rem">Por qué importa</b>'+esc(n.impacto)+'</div>':'')+fichaChips(n,true)+(lugar(n)?'<p class="meta" style="margin:.7rem 0 0">'+lugar(n)+'</p>':'')+bloqueFuentes(n);
 }
 function pintarSectores(e){
   var sec=e.secciones_por_sector||[], cont=$('#sectores');
@@ -417,7 +477,7 @@ function pintarSectores(e){
   cont.style.display=''; var mapa={}, h='';
   sec.forEach(function(s){
     h+='<li class="grupo" style="list-style:none"><h3>'+icono(s.sector)+' '+esc(SECTORES[s.sector]||s.sector)+' <span class="meta">('+s.noticias.length+')</span></h3><ul style="margin:0;padding:0">';
-    s.noticias.forEach(function(n){ mapa[n.id]=n; h+='<li class="fila" tabindex="0" data-id="'+esc(n.id)+'"><div class="cab"><h4>'+esc(n.titular)+'</h4>'+nota(n.puntuacion)+'</div><div class="meta">'+lugar(n)+(lugar(n)?' · ':'')+origen(n)+'</div><div class="mas"><div><p>'+esc(n.entradilla)+'</p><div class="det">'+'<p>'+esc(n.resumen)+'</p>'+(n.impacto?'<p><b>Por qué importa:</b> '+esc(n.impacto)+'</p>':'')+fichaChips(n)+enlace(n)+'</div></div></div></li>'; });
+    s.noticias.forEach(function(n){ mapa[n.id]=n; h+='<li class="fila" tabindex="0" data-id="'+esc(n.id)+'"><div class="cab"><h4>'+esc(n.titular)+'</h4><span>'+nota(n.puntuacion,n.puntuacion_100)+'</span></div><div class="meta">'+lugar(n)+(lugar(n)?' · ':'')+origen(n)+((n.otras_fuentes||[]).length?' · +'+n.otras_fuentes.length+' medios':'')+'</div><div class="enlace-fila">'+enlaceLeer(n)+'</div><div class="mas"><div><p>'+esc(n.entradilla)+'</p><div class="det">'+'<p>'+esc(n.resumen)+'</p>'+(n.impacto?'<p><b>Por qué importa:</b> '+esc(n.impacto)+'</p>':'')+fichaChips(n,true)+'</div></div></div></li>'; });
     h+='</ul></li>';
   });
   cont.innerHTML='<div class="sec-h"><h2 id="h-sectores">Por sectores</h2><span>pasa el ratón o toca una noticia para ampliarla</span></div><div class="dosc"><ul class="lista" style="margin:0;padding:0">'+h+'</ul><aside class="vista" id="vista" aria-live="polite"></aside></div>';
@@ -436,8 +496,26 @@ function pintarSenales(e){
   var s=e.senales_debiles||[], c=$('#senales');
   if(!s.length){ c.innerHTML=''; c.style.display='none'; return; }
   c.style.display='';
-  c.innerHTML='<div class="senales"><div class="sec-h"><h2 id="h-senales">Señales débiles</h2><span>puntuación baja o evidencia floja: a vigilar, no a creer</span></div><div class="grid">'+s.map(function(n){ return '<article class="senal"><span class="kicker">'+icono(n.sector)+' '+esc(SECTORES[n.sector]||n.sector)+'</span><h3>'+esc(n.titular)+'</h3><p>'+esc(n.entradilla)+'</p><div class="ficha">'+etiqueta(n)+' '+nota(n.puntuacion)+'</div><p class="meta">'+origen(n)+'</p>'+enlace(n,'Fuente')+'</article>'; }).join('')+'</div></div>';
+  c.innerHTML='<div class="senales"><div class="sec-h"><h2 id="h-senales">Señales débiles</h2><span>lo muy novedoso que aún tiene poca evidencia: a vigilar, no a dar por hecho</span></div><div class="grid">'+s.map(function(n){ return '<article class="senal"><span class="kicker">'+icono(n.sector)+' '+esc(SECTORES[n.sector]||n.sector)+'</span><h3>'+tit(n)+'</h3><p>'+esc(n.entradilla)+'</p><div class="ficha">'+etiqueta(n)+' '+nota(n.puntuacion,n.puntuacion_100)+'</div><div class="motivo">'+esc(motivoDebil(n))+'</div>'+(n.vigilar?'<p class="vigilar"><b>Qué vigilar:</b> '+esc(n.vigilar)+'</p>':'')+bloqueFuentes(n)+'</article>'; }).join('')+'</div></div>';
 }
+function pintarClaves(e){
+  var c=$('#claves'), k=e.claves||[];
+  if(!k.length){ c.style.display='none'; c.innerHTML=''; return; }
+  c.style.display=''; c.innerHTML='<h2 id="h-claves">Lo esencial de hoy</h2><ol>'+k.map(function(x){ return '<li>'+esc(x)+'</li>'; }).join('')+'</ol>';
+}
+function pintarMetodologia(){
+  var p=PUB.pesos||{}, pct=function(v){ return Math.round((v||0)*100)+' %'; };
+  $('#metodologia').innerHTML='<div class="sec-h"><h2 id="h-metodologia">Metodología</h2><span>cómo se elige, se puntúa y se redacta cada noticia</span></div><div class="metodo-g">'+
+   '<div><h3>Qué publicamos</h3><p>Casos concretos en los que una organización usa la inteligencia artificial para algo medible o verificable. No publicamos opiniones como si fueran hechos ni noticias sin un caso detrás.</p></div>'+
+   '<div><h3>De dónde sale</h3><p>Monitorizamos <b>'+(PUB.fuentes_activas||'—')+' fuentes</b> (revistas, medios económicos, consultoras y notas de prensa) de <b>'+(PUB.regiones||'—')+' regiones</b>, en español e inglés. Cada artículo se lee, se descarta si no describe un caso real y se resume con palabras propias, siempre con medio, fecha y enlace a la fuente.</p></div>'+
+   '<div><h3>Cómo leer la relevancia</h3><p>Cada noticia lleva un indicador de tres niveles:</p><dl><dt><span class="rel rel-alta"><span class="barras"><i></i><i></i><i></i></span>Muy relevante</span></dt><dd>Mucho peso: una novedad con impacto claro y bien comprobada.</dd><dt><span class="rel rel-media"><span class="barras"><i></i><i></i><i></i></span>Relevante</span></dt><dd>Un caso sólido, útil para tomar nota.</dd><dt><span class="rel rel-baja"><span class="barras"><i></i><i></i><i></i></span>De interés</span></dt><dd>Informativo, pero con menos peso o menos comprobado.</dd></dl><p>Se calcula combinando cuatro cosas, con estos pesos: <b>impacto</b> '+pct(p.impacto)+' (cuánto cambia las cosas), <b>novedad</b> '+pct(p.novedad)+' (cuánto se había visto ya), <b>replicabilidad</b> '+pct(p.replicabilidad)+' (si otra empresa podría copiarlo) y <b>evidencia</b> '+pct(p.evidencia)+' (cuánto está comprobado). Si pasas el ratón por el indicador verás el valor exacto (0-100). La portada solo puede ser una noticia muy relevante con evidencia sólida.</p></div>'+
+   '<div><h3>Cómo leer las etiquetas</h3><dl><dt><span class="tag hecho">Hecho confirmado</span></dt><dd>Hay datos verificables o confirmados por un tercero independiente (regulador, revista científica, informe auditado).</dd><dt><span class="tag empresa">Afirmación de la empresa</span></dt><dd>Lo dice la propia organización, sin verificación independiente. Es lo más habitual.</dd><dt><span class="tag opinion">Opinión</span></dt><dd>Valoración o análisis del medio, sin un caso concreto.</dd><dt><span class="tag comunicado">Comunicado</span></dt><dd>La fuente es un comunicado o blog de la propia empresa.</dd></dl></div>'+
+   '<div><h3>Señales débiles</h3><p>Casos <b>muy novedosos</b> (novedad 4 o 5) que todavía tienen <b>poca evidencia</b> o son solo un anuncio. Pueden acabar siendo importantes o quedarse en nada, por eso se vigilan, pero no se dan por hechos. Lo poco novedoso y poco probado no se destaca.</p><h3 style="margin-top:1rem">Madurez</h3><p>Anuncio, piloto, en producción, a escala: cuánto ha avanzado el caso más allá de la nota de prensa.</p></div>'+
+   '<div><h3>Qué hace la IA y qué no</h3><ul><li>La IA lee los artículos, extrae los datos, puntúa y redacta titulares, entradillas y el análisis.</li><li>Los enlaces, medios, fechas y puntuaciones los copia el sistema del caso original: la IA no los escribe.</li><li>Cuando varios medios cuentan la misma historia, se agrupan en una sola noticia con todas sus fuentes.</li><li>Los textos pueden contener errores: <b>verifica siempre en la fuente original</b>, sobre todo las cifras.</li></ul></div>'+
+   '<div><h3>Limitaciones</h3><p>Solo cubrimos las fuentes monitorizadas; los medios de pago pueden dar acceso parcial. El índice es una guía orientativa, no una valoración financiera ni asesoramiento. Una noticia no implica que la tecnología funcione tan bien como cuenta la empresa.</p>'+(PUB.contacto?'<p>¿Ves un error? Escríbenos a <a href="mailto:'+esc(PUB.contacto)+'">'+esc(PUB.contacto)+'</a>.</p>':'')+'</div>'+
+  '</div>';
+}
+
 function pintarAnalisis(e){
   var c=$('#analisis');
   if(!e.analisis){ c.innerHTML=''; c.style.display='none'; return; }
@@ -450,7 +528,7 @@ function pintarArchivo(){
   var c=$('#archivo');
   if(!montadoArchivo){
     montadoArchivo=true;
-    c.innerHTML='<div class="sec-h"><h2 id="h-archivo">Archivo</h2><span id="arch-n"></span></div><div class="filtros" role="search"><label class="sr" for="f-q">Buscar</label><input id="f-q" type="search" placeholder="Buscar por empresa, país, tecnología…"><label class="sr" for="f-s">Sector</label><select id="f-s"><option value="">Todos los sectores</option></select><label class="sr" for="f-t">Tipo de innovación</label><select id="f-t"><option value="">Todos los tipos</option></select><label class="sr" for="f-m">Puntuación mínima</label><select id="f-m"><option value="0">Cualquier nota</option><option value="2">Nota 2 o más</option><option value="3">Nota 3 o más</option><option value="4">Nota 4 o más</option><option value="5">Solo nota 5</option></select></div><div id="arch-cont"></div>';
+    c.innerHTML='<div class="sec-h"><h2 id="h-archivo">Archivo</h2><span id="arch-n"></span></div><div class="filtros" role="search"><label class="sr" for="f-q">Buscar</label><input id="f-q" type="search" placeholder="Buscar por empresa, país, tecnología…"><label class="sr" for="f-s">Sector</label><select id="f-s"><option value="">Todos los sectores</option></select><label class="sr" for="f-t">Tipo de innovación</label><select id="f-t"><option value="">Todos los tipos</option></select><label class="sr" for="f-m">Relevancia mínima</label><select id="f-m"><option value="0">Cualquier relevancia</option><option value="60">Relevante o más</option><option value="75">Solo muy relevantes</option></select></div><div id="arch-cont"></div>';
     Object.keys(SECTORES).forEach(function(k){ $('#f-s').insertAdjacentHTML('beforeend','<option value="'+k+'">'+esc(SECTORES[k])+'</option>'); });
     Object.keys(TIPOS).forEach(function(k){ $('#f-t').insertAdjacentHTML('beforeend','<option value="'+k+'">'+esc(TIPOS[k])+'</option>'); });
     $('#f-q').addEventListener('input',function(){ estadoArchivo.q=this.value; listarArchivo(); });
@@ -475,11 +553,11 @@ function listarArchivo(){
   EDS.forEach(function(e){ todas(e).forEach(function(x){
     if(s.sector && x.sector!==s.sector) return;
     if(s.tipo && (x.tipo_innovacion||'otros')!==s.tipo) return;
-    if(x.puntuacion<s.min) return;
+    if((x.puntuacion_100!=null?x.puntuacion_100:x.puntuacion*20)<s.min) return;
     if(q){ var t=[x.titular,x.entradilla,x.resumen,x.empresa,x.pais,x.medio,SECTORES[x.sector],TIPOS[x.tipo_innovacion]].join(' ').toLowerCase(); if(t.indexOf(q)<0) return; }
     res.push({e:e,n:x});
   }); });
-  cont.innerHTML=res.length?'<p class="meta">'+res.length+' resultados</p><ul class="res">'+res.slice(0,60).map(function(r){ return '<li><button type="button" data-f="'+r.e.fecha+'" data-id="'+esc(r.n.id)+'"><b>'+esc(r.n.titular)+'</b><br><span class="meta">'+esc(fechaCorta(r.e.fecha))+' · '+esc(SECTORES[r.n.sector]||r.n.sector)+' · '+lugar(r.n)+' · </span>'+nota(r.n.puntuacion)+'</button></li>'; }).join('')+'</ul>'+(res.length>60?'<p class="meta">Se muestran los 60 primeros: afina la búsqueda.</p>':''):'<p class="vacio">Ninguna noticia coincide con la búsqueda.</p>';
+  cont.innerHTML=res.length?'<p class="meta">'+res.length+' resultados</p><ul class="res">'+res.slice(0,60).map(function(r){ return '<li><button type="button" data-f="'+r.e.fecha+'" data-id="'+esc(r.n.id)+'"><b>'+esc(r.n.titular)+'</b><br><span class="meta">'+esc(fechaCorta(r.e.fecha))+' · '+esc(SECTORES[r.n.sector]||r.n.sector)+' · '+lugar(r.n)+' · </span>'+nota(r.n.puntuacion,r.n.puntuacion_100)+'</button></li>'; }).join('')+'</ul>'+(res.length>60?'<p class="meta">Se muestran los 60 primeros: afina la búsqueda.</p>':''):'<p class="vacio">Ninguna noticia coincide con la búsqueda.</p>';
 }
 function abrir(fecha,id){
   if(!actual||actual.fecha!==fecha){ location.hash=fecha; render(fecha); }
@@ -492,7 +570,9 @@ function abrir(fecha,id){
 
 /* ---------- Arranque ---------- */
 function init(){
-  pintarLogo();
+  pintarLogo(); pintarMetodologia();
+  $('#btn-imprimir').addEventListener('click',function(){ window.print(); });
+  $('#btn-descargar').addEventListener('click',function(){ if(!actual) return; var b=new Blob([JSON.stringify(actual,null,2)],{type:'application/json'}), a=document.createElement('a'); a.href=URL.createObjectURL(b); a.download=(PUB.slug||'edicion')+'-'+actual.fecha+'.json'; document.body.appendChild(a); a.click(); a.remove(); setTimeout(function(){ URL.revokeObjectURL(a.href); },1000); });
   $('#pie-eds').textContent=EDS.length+' '+(EDS.length===1?'edición incluida':'ediciones incluidas')+' en esta página';
   $('#sel-edicion').innerHTML=EDS.map(function(e){ return '<option value="'+e.fecha+'">'+esc(fechaCorta(e.fecha))+' · nº '+e.numero_edicion+(e.es_ejemplo?' (ejemplo)':'')+'</option>'; }).join('');
   $('#sel-edicion').addEventListener('change',function(){ location.hash=this.value; });

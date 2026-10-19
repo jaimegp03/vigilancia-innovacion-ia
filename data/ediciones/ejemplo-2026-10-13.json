@@ -2,6 +2,12 @@
   "fecha": "2026-10-13",
   "numero_edicion": 2,
   "es_ejemplo": true,
+  "generada_en": "2026-10-13T07:40:00.000Z",
+  "claves": [
+    "La logística lidera con un caso de rutas con resultados revisados por un tercero.",
+    "Salud y educación aportan pilotos con evidencia aún modesta.",
+    "Un anuncio de agencia creativa sin métricas queda como señal a vigilar."
+  ],
   "portada": {
     "id": "ej-13-2026-10-13",
     "titular": "Un operador logístico ficticio recorta kilómetros en vacío con optimización de rutas",
@@ -16,8 +22,12 @@
     "tipo_afirmacion": "hecho_confirmado",
     "puntuacion": 4,
     "puntuacion_100": 84,
+    "novedad": 4,
+    "evidencia": 4,
+    "vigilar": null,
     "confianza": "alta",
     "medio": "Revista Ejemplo Tech",
+    "tipo_fuente": "revista",
     "fecha_publicacion": "2026-10-13",
     "url": null
   },
@@ -36,8 +46,12 @@
       "tipo_afirmacion": "hecho_confirmado",
       "puntuacion": 4,
       "puntuacion_100": 82,
+      "novedad": 4,
+      "evidencia": 4,
+      "vigilar": null,
       "confianza": "alta",
       "medio": "Revista Ejemplo Tech",
+      "tipo_fuente": "revista",
       "fecha_publicacion": "2026-10-13",
       "url": null
     },
@@ -55,8 +69,12 @@
       "tipo_afirmacion": "afirmacion_empresa",
       "puntuacion": 4,
       "puntuacion_100": 71,
+      "novedad": 3,
+      "evidencia": 3,
+      "vigilar": null,
       "confianza": "media",
       "medio": "Gaceta Ficticia de Innovación",
+      "tipo_fuente": "revista",
       "fecha_publicacion": "2026-10-13",
       "url": null
     }
@@ -79,8 +97,12 @@
           "tipo_afirmacion": "hecho_confirmado",
           "puntuacion": 4,
           "puntuacion_100": 81,
+          "novedad": 4,
+          "evidencia": 4,
+          "vigilar": null,
           "confianza": "alta",
           "medio": "Diario Muestra de Economía",
+          "tipo_fuente": "medio_economico",
           "fecha_publicacion": "2026-10-13",
           "url": null
         }
@@ -103,8 +125,40 @@
           "tipo_afirmacion": "hecho_confirmado",
           "puntuacion": 3,
           "puntuacion_100": 55,
+          "novedad": 3,
+          "evidencia": 4,
+          "vigilar": null,
           "confianza": "media",
           "medio": "Diario Muestra de Economía",
+          "tipo_fuente": "medio_economico",
+          "fecha_publicacion": "2026-10-13",
+          "url": null
+        }
+      ]
+    },
+    {
+      "sector": "retail_comercio",
+      "noticias": [
+        {
+          "id": "ej-18-2026-10-13",
+          "titular": "Una cadena ficticia dice que la IA reducirá sus mermas, pero aún sin datos",
+          "entradilla": "La compañía presenta un piloto de previsión de demanda en tres tiendas.",
+          "resumen": "Colmena Retail, marca imaginaria, anuncia un piloto en tres tiendas para ajustar pedidos de frescos. No ha publicado resultados y solo se conoce el comunicado de lanzamiento.",
+          "impacto": "Idea razonable, pero por ahora es una señal débil sin evidencia.",
+          "sector": "retail_comercio",
+          "tipo_innovacion": "proceso_operaciones",
+          "empresa": "Colmena Retail",
+          "pais": "Colombia",
+          "madurez": "piloto",
+          "tipo_afirmacion": "afirmacion_empresa",
+          "puntuacion": 2,
+          "puntuacion_100": 47,
+          "novedad": 3,
+          "evidencia": 2,
+          "vigilar": null,
+          "confianza": "baja",
+          "medio": "Cuaderno de Demostración",
+          "tipo_fuente": "revista",
           "fecha_publicacion": "2026-10-13",
           "url": null
         }
@@ -127,8 +181,12 @@
           "tipo_afirmacion": "afirmacion_empresa",
           "puntuacion": 4,
           "puntuacion_100": 77,
+          "novedad": 3,
+          "evidencia": 3,
+          "vigilar": null,
           "confianza": "media",
           "medio": "Revista Ejemplo Tech",
+          "tipo_fuente": "revista",
           "fecha_publicacion": "2026-10-13",
           "url": null
         }
@@ -151,8 +209,12 @@
           "tipo_afirmacion": "hecho_confirmado",
           "puntuacion": 3,
           "puntuacion_100": 59,
+          "novedad": 3,
+          "evidencia": 4,
+          "vigilar": null,
           "confianza": "media",
           "medio": "Cuaderno de Demostración",
+          "tipo_fuente": "revista",
           "fecha_publicacion": "2026-10-13",
           "url": null
         }
@@ -175,8 +237,12 @@
           "tipo_afirmacion": "afirmacion_empresa",
           "puntuacion": 3,
           "puntuacion_100": 58,
+          "novedad": 3,
+          "evidencia": 2,
+          "vigilar": null,
           "confianza": "media",
           "medio": "Revista Ejemplo Tech",
+          "tipo_fuente": "revista",
           "fecha_publicacion": "2026-10-13",
           "url": null
         }
@@ -186,6 +252,9 @@
   "cifras": {
     "casos_totales": 9,
     "puntuacion_media": 3.4,
+    "puntuacion_media_100": 68,
+    "medios_distintos": 4,
+    "paises_distintos": 6,
     "por_sector": [
       {
         "sector": "educacion",
@@ -247,29 +316,23 @@
         "tipo_afirmacion": "afirmacion_empresa",
         "casos": 4
       }
+    ],
+    "por_madurez": [
+      {
+        "madurez": "piloto",
+        "casos": 5
+      },
+      {
+        "madurez": "produccion",
+        "casos": 2
+      },
+      {
+        "madurez": "escalado",
+        "casos": 2
+      }
     ]
   },
-  "senales_debiles": [
-    {
-      "id": "ej-18-2026-10-13",
-      "titular": "Una cadena ficticia dice que la IA reducirá sus mermas, pero aún sin datos",
-      "entradilla": "La compañía presenta un piloto de previsión de demanda en tres tiendas.",
-      "resumen": "Colmena Retail, marca imaginaria, anuncia un piloto en tres tiendas para ajustar pedidos de frescos. No ha publicado resultados y solo se conoce el comunicado de lanzamiento.",
-      "impacto": "Idea razonable, pero por ahora es una señal débil sin evidencia.",
-      "sector": "retail_comercio",
-      "tipo_innovacion": "proceso_operaciones",
-      "empresa": "Colmena Retail",
-      "pais": "Colombia",
-      "madurez": "piloto",
-      "tipo_afirmacion": "afirmacion_empresa",
-      "puntuacion": 2,
-      "puntuacion_100": 47,
-      "confianza": "baja",
-      "medio": "Cuaderno de Demostración",
-      "fecha_publicacion": "2026-10-13",
-      "url": null
-    }
-  ],
+  "senales_debiles": [],
   "analisis": "Hoy dominan los pilotos: mucho ensayo y poca producción. Los casos más sólidos son los que miden contra un grupo de control. Los anuncios sin datos, como los de las agencias creativas, quedan como señales a vigilar.",
   "modelo_editor": "ejemplo"
 }

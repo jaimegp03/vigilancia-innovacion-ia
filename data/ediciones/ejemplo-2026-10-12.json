@@ -2,6 +2,12 @@
   "fecha": "2026-10-12",
   "numero_edicion": 1,
   "es_ejemplo": true,
+  "generada_en": "2026-10-12T07:40:00.000Z",
+  "claves": [
+    "Un caso de seguros con resolución automática de siniestros abre la jornada, aunque la cifra es de la propia empresa.",
+    "Se repite el patrón: IA en segundo plano (demanda, mantenimiento, rutas) con ahorros todavía por verificar.",
+    "Cautela con los anuncios sin datos, como la agencia que promete campañas «solo con IA»."
+  ],
   "portada": {
     "id": "ej-01-2026-10-12",
     "titular": "Una aseguradora ficticia resuelve el 60 % de los partes de siniestro sin intervención humana",
@@ -16,10 +22,26 @@
     "tipo_afirmacion": "afirmacion_empresa",
     "puntuacion": 4,
     "puntuacion_100": 88,
+    "novedad": 4,
+    "evidencia": 3,
+    "vigilar": "Si publican resultados medidos o un cliente real que lo confirme (ejemplo ficticio).",
     "confianza": "alta",
     "medio": "Diario Muestra de Economía",
+    "tipo_fuente": "medio_economico",
     "fecha_publicacion": "2026-10-12",
-    "url": null
+    "url": null,
+    "otras_fuentes": [
+      {
+        "medio": "Gaceta Ficticia de Innovación",
+        "url": null,
+        "fecha_publicacion": "2026-10-12"
+      },
+      {
+        "medio": "Revista Ejemplo Tech",
+        "url": null,
+        "fecha_publicacion": "2026-10-12"
+      }
+    ]
   },
   "destacadas": [
     {
@@ -36,8 +58,12 @@
       "tipo_afirmacion": "hecho_confirmado",
       "puntuacion": 4,
       "puntuacion_100": 79,
+      "novedad": 3,
+      "evidencia": 4,
+      "vigilar": null,
       "confianza": "alta",
       "medio": "Diario Muestra de Economía",
+      "tipo_fuente": "medio_economico",
       "fecha_publicacion": "2026-10-12",
       "url": null
     },
@@ -55,8 +81,12 @@
       "tipo_afirmacion": "hecho_confirmado",
       "puntuacion": 4,
       "puntuacion_100": 76,
+      "novedad": 3,
+      "evidencia": 4,
+      "vigilar": null,
       "confianza": "media",
       "medio": "Gaceta Ficticia de Innovación",
+      "tipo_fuente": "revista",
       "fecha_publicacion": "2026-10-12",
       "url": null
     },
@@ -74,8 +104,12 @@
       "tipo_afirmacion": "afirmacion_empresa",
       "puntuacion": 3,
       "puntuacion_100": 61,
+      "novedad": 3,
+      "evidencia": 2,
+      "vigilar": null,
       "confianza": "media",
       "medio": "Cuaderno de Demostración",
+      "tipo_fuente": "revista",
       "fecha_publicacion": "2026-10-12",
       "url": null
     }
@@ -98,8 +132,12 @@
           "tipo_afirmacion": "hecho_confirmado",
           "puntuacion": 4,
           "puntuacion_100": 74,
+          "novedad": 3,
+          "evidencia": 4,
+          "vigilar": null,
           "confianza": "alta",
           "medio": "Diario Muestra de Economía",
+          "tipo_fuente": "medio_economico",
           "fecha_publicacion": "2026-10-12",
           "url": null
         },
@@ -117,8 +155,12 @@
           "tipo_afirmacion": "afirmacion_empresa",
           "puntuacion": 3,
           "puntuacion_100": 64,
+          "novedad": 3,
+          "evidencia": 2,
+          "vigilar": null,
           "confianza": "media",
           "medio": "Cuaderno de Demostración",
+          "tipo_fuente": "revista",
           "fecha_publicacion": "2026-10-12",
           "url": null
         }
@@ -141,8 +183,12 @@
           "tipo_afirmacion": "hecho_confirmado",
           "puntuacion": 3,
           "puntuacion_100": 55,
+          "novedad": 3,
+          "evidencia": 4,
+          "vigilar": null,
           "confianza": "media",
           "medio": "Diario Muestra de Economía",
+          "tipo_fuente": "medio_economico",
           "fecha_publicacion": "2026-10-12",
           "url": null
         }
@@ -165,8 +211,12 @@
           "tipo_afirmacion": "afirmacion_empresa",
           "puntuacion": 4,
           "puntuacion_100": 72,
+          "novedad": 3,
+          "evidencia": 3,
+          "vigilar": null,
           "confianza": "media",
           "medio": "Revista Ejemplo Tech",
+          "tipo_fuente": "revista",
           "fecha_publicacion": "2026-10-12",
           "url": null
         }
@@ -189,8 +239,12 @@
           "tipo_afirmacion": "hecho_confirmado",
           "puntuacion": 4,
           "puntuacion_100": 84,
+          "novedad": 4,
+          "evidencia": 4,
+          "vigilar": null,
           "confianza": "alta",
           "medio": "Revista Ejemplo Tech",
+          "tipo_fuente": "revista",
           "fecha_publicacion": "2026-10-12",
           "url": null
         }
@@ -213,8 +267,12 @@
           "tipo_afirmacion": "hecho_confirmado",
           "puntuacion": 3,
           "puntuacion_100": 68,
+          "novedad": 3,
+          "evidencia": 4,
+          "vigilar": null,
           "confianza": "alta",
           "medio": "Diario Muestra de Economía",
+          "tipo_fuente": "medio_economico",
           "fecha_publicacion": "2026-10-12",
           "url": null
         }
@@ -224,6 +282,9 @@
   "cifras": {
     "casos_totales": 11,
     "puntuacion_media": 3.5,
+    "puntuacion_media_100": 69,
+    "medios_distintos": 4,
+    "paises_distintos": 7,
     "por_sector": [
       {
         "sector": "banca_seguros",
@@ -289,6 +350,24 @@
         "tipo_afirmacion": "opinion",
         "casos": 1
       }
+    ],
+    "por_madurez": [
+      {
+        "madurez": "anuncio",
+        "casos": 1
+      },
+      {
+        "madurez": "piloto",
+        "casos": 4
+      },
+      {
+        "madurez": "produccion",
+        "casos": 4
+      },
+      {
+        "madurez": "escalado",
+        "casos": 2
+      }
     ]
   },
   "senales_debiles": [
@@ -306,8 +385,12 @@
       "tipo_afirmacion": "opinion",
       "puntuacion": 2,
       "puntuacion_100": 38,
+      "novedad": 4,
+      "evidencia": 2,
+      "vigilar": "Si publican resultados medidos o un cliente real que lo confirme (ejemplo ficticio).",
       "confianza": "baja",
       "medio": "Revista Ejemplo Tech",
+      "tipo_fuente": "revista",
       "fecha_publicacion": "2026-10-12",
       "url": null
     }

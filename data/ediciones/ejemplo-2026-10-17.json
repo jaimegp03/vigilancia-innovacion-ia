@@ -2,6 +2,12 @@
   "fecha": "2026-10-17",
   "numero_edicion": 6,
   "es_ejemplo": true,
+  "generada_en": "2026-10-17T07:40:00.000Z",
+  "claves": [
+    "Más pilotos que despliegues y varios con evidencia modesta.",
+    "Los centros educativos empiezan a medir con grupos de comparación.",
+    "Dos anuncios sin datos se publican como señales débiles."
+  ],
   "portada": {
     "id": "ej-24-2026-10-17",
     "titular": "Una escuela ficticia prueba un asistente de lectura que adapta textos al nivel del alumno",
@@ -16,8 +22,12 @@
     "tipo_afirmacion": "hecho_confirmado",
     "puntuacion": 3,
     "puntuacion_100": 59,
+    "novedad": 3,
+    "evidencia": 4,
+    "vigilar": null,
     "confianza": "media",
     "medio": "Cuaderno de Demostración",
+    "tipo_fuente": "revista",
     "fecha_publicacion": "2026-10-17",
     "url": null
   },
@@ -36,13 +46,68 @@
       "tipo_afirmacion": "hecho_confirmado",
       "puntuacion": 3,
       "puntuacion_100": 68,
+      "novedad": 3,
+      "evidencia": 4,
+      "vigilar": null,
       "confianza": "alta",
       "medio": "Diario Muestra de Economía",
+      "tipo_fuente": "medio_economico",
       "fecha_publicacion": "2026-10-17",
       "url": null
     }
   ],
   "secciones_por_sector": [
+    {
+      "sector": "retail_comercio",
+      "noticias": [
+        {
+          "id": "ej-14-2026-10-17",
+          "titular": "Una cadena de farmacias ficticia personaliza recomendaciones con IA en su app",
+          "entradilla": "La aplicación sugiere productos según el historial, sin datos de salud sensibles.",
+          "resumen": "Farmacias Candil, marca inventada, incorpora recomendaciones personalizadas en su aplicación. La empresa afirma que aumentan la venta cruzada, y asegura que no utiliza datos de salud, aunque no detalla cómo lo garantiza.",
+          "impacto": "La personalización comercial en un sector sensible exige transparencia sobre los datos usados.",
+          "sector": "retail_comercio",
+          "tipo_innovacion": "marketing_ventas",
+          "empresa": "Farmacias Candil",
+          "pais": "España",
+          "madurez": "produccion",
+          "tipo_afirmacion": "afirmacion_empresa",
+          "puntuacion": 3,
+          "puntuacion_100": 52,
+          "novedad": 3,
+          "evidencia": 2,
+          "vigilar": null,
+          "confianza": "media",
+          "medio": "Cuaderno de Demostración",
+          "tipo_fuente": "revista",
+          "fecha_publicacion": "2026-10-17",
+          "url": null
+        },
+        {
+          "id": "ej-18-2026-10-17",
+          "titular": "Una cadena ficticia dice que la IA reducirá sus mermas, pero aún sin datos",
+          "entradilla": "La compañía presenta un piloto de previsión de demanda en tres tiendas.",
+          "resumen": "Colmena Retail, marca imaginaria, anuncia un piloto en tres tiendas para ajustar pedidos de frescos. No ha publicado resultados y solo se conoce el comunicado de lanzamiento.",
+          "impacto": "Idea razonable, pero por ahora es una señal débil sin evidencia.",
+          "sector": "retail_comercio",
+          "tipo_innovacion": "proceso_operaciones",
+          "empresa": "Colmena Retail",
+          "pais": "Colombia",
+          "madurez": "piloto",
+          "tipo_afirmacion": "afirmacion_empresa",
+          "puntuacion": 2,
+          "puntuacion_100": 47,
+          "novedad": 3,
+          "evidencia": 2,
+          "vigilar": null,
+          "confianza": "baja",
+          "medio": "Cuaderno de Demostración",
+          "tipo_fuente": "revista",
+          "fecha_publicacion": "2026-10-17",
+          "url": null
+        }
+      ]
+    },
     {
       "sector": "agricultura",
       "noticias": [
@@ -60,8 +125,12 @@
           "tipo_afirmacion": "afirmacion_empresa",
           "puntuacion": 3,
           "puntuacion_100": 58,
+          "novedad": 3,
+          "evidencia": 2,
+          "vigilar": null,
           "confianza": "media",
           "medio": "Revista Ejemplo Tech",
+          "tipo_fuente": "revista",
           "fecha_publicacion": "2026-10-17",
           "url": null
         },
@@ -79,32 +148,12 @@
           "tipo_afirmacion": "afirmacion_empresa",
           "puntuacion": 3,
           "puntuacion_100": 56,
+          "novedad": 3,
+          "evidencia": 2,
+          "vigilar": null,
           "confianza": "media",
           "medio": "Cuaderno de Demostración",
-          "fecha_publicacion": "2026-10-17",
-          "url": null
-        }
-      ]
-    },
-    {
-      "sector": "banca_seguros",
-      "noticias": [
-        {
-          "id": "ej-01-2026-10-17",
-          "titular": "Una aseguradora ficticia resuelve el 60 % de los partes de siniestro sin intervención humana",
-          "entradilla": "Aurea Seguros usa un agente de IA que lee fotos y documentos y propone una resolución en minutos.",
-          "resumen": "La compañía inventada Aurea Seguros ha desplegado un agente que revisa fotografías del daño, contrasta la póliza y propone una indemnización. Un tramitador revisa solo los casos dudosos. Según la propia empresa, el tiempo medio de resolución bajó de cinco días a unas pocas horas.",
-          "impacto": "Si la cifra se confirma, reduce costes y mejora la experiencia del cliente, pero conviene esperar datos independientes.",
-          "sector": "banca_seguros",
-          "tipo_innovacion": "atencion_cliente",
-          "empresa": "Aurea Seguros",
-          "pais": "España",
-          "madurez": "produccion",
-          "tipo_afirmacion": "afirmacion_empresa",
-          "puntuacion": 4,
-          "puntuacion_100": 88,
-          "confianza": "alta",
-          "medio": "Diario Muestra de Economía",
+          "tipo_fuente": "revista",
           "fecha_publicacion": "2026-10-17",
           "url": null
         }
@@ -127,32 +176,12 @@
           "tipo_afirmacion": "afirmacion_empresa",
           "puntuacion": 3,
           "puntuacion_100": 66,
+          "novedad": 3,
+          "evidencia": 2,
+          "vigilar": null,
           "confianza": "media",
           "medio": "Gaceta Ficticia de Innovación",
-          "fecha_publicacion": "2026-10-17",
-          "url": null
-        }
-      ]
-    },
-    {
-      "sector": "retail_comercio",
-      "noticias": [
-        {
-          "id": "ej-14-2026-10-17",
-          "titular": "Una cadena de farmacias ficticia personaliza recomendaciones con IA en su app",
-          "entradilla": "La aplicación sugiere productos según el historial, sin datos de salud sensibles.",
-          "resumen": "Farmacias Candil, marca inventada, incorpora recomendaciones personalizadas en su aplicación. La empresa afirma que aumentan la venta cruzada, y asegura que no utiliza datos de salud, aunque no detalla cómo lo garantiza.",
-          "impacto": "La personalización comercial en un sector sensible exige transparencia sobre los datos usados.",
-          "sector": "retail_comercio",
-          "tipo_innovacion": "marketing_ventas",
-          "empresa": "Farmacias Candil",
-          "pais": "España",
-          "madurez": "produccion",
-          "tipo_afirmacion": "afirmacion_empresa",
-          "puntuacion": 3,
-          "puntuacion_100": 52,
-          "confianza": "media",
-          "medio": "Cuaderno de Demostración",
+          "tipo_fuente": "revista",
           "fecha_publicacion": "2026-10-17",
           "url": null
         }
@@ -175,8 +204,12 @@
           "tipo_afirmacion": "afirmacion_empresa",
           "puntuacion": 4,
           "puntuacion_100": 71,
+          "novedad": 3,
+          "evidencia": 3,
+          "vigilar": null,
           "confianza": "media",
           "medio": "Gaceta Ficticia de Innovación",
+          "tipo_fuente": "revista",
           "fecha_publicacion": "2026-10-17",
           "url": null
         }
@@ -186,6 +219,9 @@
   "cifras": {
     "casos_totales": 9,
     "puntuacion_media": 3.1,
+    "puntuacion_media_100": 63,
+    "medios_distintos": 4,
+    "paises_distintos": 6,
     "por_sector": [
       {
         "sector": "retail_comercio",
@@ -247,25 +283,39 @@
         "tipo_afirmacion": "afirmacion_empresa",
         "casos": 7
       }
+    ],
+    "por_madurez": [
+      {
+        "madurez": "piloto",
+        "casos": 4
+      },
+      {
+        "madurez": "produccion",
+        "casos": 5
+      }
     ]
   },
   "senales_debiles": [
     {
-      "id": "ej-18-2026-10-17",
-      "titular": "Una cadena ficticia dice que la IA reducirá sus mermas, pero aún sin datos",
-      "entradilla": "La compañía presenta un piloto de previsión de demanda en tres tiendas.",
-      "resumen": "Colmena Retail, marca imaginaria, anuncia un piloto en tres tiendas para ajustar pedidos de frescos. No ha publicado resultados y solo se conoce el comunicado de lanzamiento.",
-      "impacto": "Idea razonable, pero por ahora es una señal débil sin evidencia.",
-      "sector": "retail_comercio",
-      "tipo_innovacion": "proceso_operaciones",
-      "empresa": "Colmena Retail",
-      "pais": "Colombia",
-      "madurez": "piloto",
+      "id": "ej-01-2026-10-17",
+      "titular": "Una aseguradora ficticia resuelve el 60 % de los partes de siniestro sin intervención humana",
+      "entradilla": "Aurea Seguros usa un agente de IA que lee fotos y documentos y propone una resolución en minutos.",
+      "resumen": "La compañía inventada Aurea Seguros ha desplegado un agente que revisa fotografías del daño, contrasta la póliza y propone una indemnización. Un tramitador revisa solo los casos dudosos. Según la propia empresa, el tiempo medio de resolución bajó de cinco días a unas pocas horas.",
+      "impacto": "Si la cifra se confirma, reduce costes y mejora la experiencia del cliente, pero conviene esperar datos independientes.",
+      "sector": "banca_seguros",
+      "tipo_innovacion": "atencion_cliente",
+      "empresa": "Aurea Seguros",
+      "pais": "España",
+      "madurez": "produccion",
       "tipo_afirmacion": "afirmacion_empresa",
-      "puntuacion": 2,
-      "puntuacion_100": 47,
-      "confianza": "baja",
-      "medio": "Cuaderno de Demostración",
+      "puntuacion": 4,
+      "puntuacion_100": 88,
+      "novedad": 4,
+      "evidencia": 3,
+      "vigilar": "Si publican resultados medidos o un cliente real que lo confirme (ejemplo ficticio).",
+      "confianza": "alta",
+      "medio": "Diario Muestra de Economía",
+      "tipo_fuente": "medio_economico",
       "fecha_publicacion": "2026-10-17",
       "url": null
     }
